@@ -1,17 +1,18 @@
 header {
-    grid-area: a;
-    background-color: #522760
+  grid-area: a;
+  background-color: #522760;
 }
 
 main {
-    grid-area: b;
-    background-color: #219973
+  grid-area: b;
+  background-color: #219973;
 }
 
 footer {
-    grid-area: c;
-    background-color: #5a99c3
+  grid-area: c;
+  background-color: #5a99c3;
 }
+
 /*
 body {
     height: 100vh;
@@ -24,11 +25,8 @@ body {
     "b b b b"
     "c c c c";    
 }
-    */
+*/
 
-    main {
-        background-color: rgb(165, 225, 236); 
-    }
-
-
-    
+main {
+  background-color: rgb(165, 225, 236);
+}
