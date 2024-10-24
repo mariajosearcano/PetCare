@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
@@ -43,4 +43,17 @@ app.post('/submit-form', async (req, res) => {
 const port = 3000;
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+});*/
+
+import { app } from './app.js'
+import { sequelize } from './database/connection.js'
+try {
+  await sequelize.authenticate()
+  console.log('Connection has been established successfully')
+  const PORT = process.env.PORT || 3000
+  app.listen(PORT, () => {
+    console.log(`app running in port ${PORT}`)
+  })
+} catch (error) {
+  console.error('Error connecting to the database', error)
+}
