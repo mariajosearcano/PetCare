@@ -3,7 +3,7 @@ import { sequelize } from '../database/connection.js'
 import { MedicalHistory } from './medicalHistory.model.js'
 import { Vaccine } from './vaccine.model.js'
 
-const MedicalHistoryVaccine = sequelize.define('MedicalHistoryVaccine', {
+export const MedicalHistoryVaccine = sequelize.define('MedicalHistoryVaccine', {
     medicalHistoryId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,

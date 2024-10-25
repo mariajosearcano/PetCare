@@ -13,11 +13,17 @@ export const Veterinarian = sequelize.define('Veterinarian', {
 })
 
 Person.hasOne(Veterinarian, {
-  foreignKey: 'document',
+  foreignKey: {
+    name: 'document',
+    allowNull: false
+  }
 })
 
 Veterinarian.belongsTo(Person, {
-  foreignKey: 'document',
+  foreignKey: {
+    name: 'document',
+    allowNull: false
+  }
 })
 
 

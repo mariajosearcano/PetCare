@@ -7,8 +7,11 @@ export class MedicalHistoryVaccineController {
     try {
       const medicalHistoryVaccine = await MedicalHistoryVaccine.findAll({
         include: [{
-            model: MedicalHistory,
-            include: [{ model: Vaccine }]
+            model: MedicalHistoryVaccine,
+            include: [{ 
+              model: MedicalHistory,
+              include: [{ model: Vaccine }]
+            }]
         }]
       })
       res.status(200).json(medicalHistoryVaccine)
@@ -19,11 +22,15 @@ export class MedicalHistoryVaccineController {
 
   createMedicalHistoryVaccine = async (req, res) => {
     try {
-      const { medicalHistoryVaccineId, vaccineId } = req.body
-
-      const studentEnroll = await Enroll.findOne({ where: { studentId, status: 'ACTIVE' } })
-      if (studentEnroll) {
-        return res.status(404).json({ message: 'Student has already enroll' })
+      const { medicalHistoryId, vaccineId } = req.body
+      const medicalHistoryVaccine = await MedicalHistoryVaccine.findOne({ where: { medicalHistoryId, vaccineId } })
+      if (!medicalHistoryVaccine) {
+        const newMedicalHistory = await MedicalHistory.create(req.body, {
+          include: [{
+            model: Pet
+          }]
+        })
+        return res.status(201).json(newMedicalHistory)
       }
       const newEnroll = await Enroll.create({
         studentId

@@ -17,6 +17,44 @@ export class AppointmentController {
     }
   }
 
+  getAppointmentsByPet = async (req, res) => {
+    const { petId } = req.params;
+  
+    try {
+      const appointments = await Appointment.findAll({
+        include: [{
+          model: Veterinarian,
+          include: [{ 
+            model: Pet,
+            where: { petId: petId } // Filtrar por el ID de la mascota
+          }]
+        }]
+      });
+      res.status(200).json(appointments);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  };  
+
+  getAppointmentsByVeterinarian = async (req, res) => {
+    const { veterinarianId } = req.params;
+  
+    try {
+      const appointments = await Appointment.findAll({
+        include: [{
+          model: Pet,
+          include: [{ 
+            model: Veterinarian,
+            where: { veterinarianId: veterinarianId } // Filtrar por el ID de la mascota
+          }]
+        }]
+      });
+      res.status(200).json(appointments);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }; 
+
   createAppointment = async (req, res) => {
     try {
       const { appointmentId, date, startTime, endTime, veterinarianId, petId } = req.body
@@ -63,7 +101,7 @@ export class AppointmentController {
           appointmentId
         }
       })
-      res.json({ msg: 'Appointment  deleted' })
+      res.json({ message: 'Appointment  deleted' })
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }

@@ -22,7 +22,14 @@ export const MedicalHistory = sequelize.define('MedicalHistory', {
 
 Pet.hasOne(MedicalHistory, {
   foreignKey: {
-    name: 'petId'
+    name: 'petId',
+    allowNull: false
   }
 })
-MedicalHistory.belongsTo(Pet)
+MedicalHistory.belongsTo(Pet, {
+  foreignKey: {
+    name: 'petId',
+    allowNull: false
+  }
+}
+)

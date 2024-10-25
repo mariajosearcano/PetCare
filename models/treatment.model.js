@@ -24,13 +24,25 @@ export const Treatment = sequelize.define('Treatment', {
 Medicine.hasMany(Treatment,{
     foreignKey: {
         name: 'medicineId',
+        allowNull: false
     }
 })
-Treatment.belongsTo(Medicine)
+Treatment.belongsTo(Medicine, {
+  foreignKey: {
+    name: 'medicineId',
+    allowNull: false
+}
+})
 
 MedicalHistory.hasMany(Treatment,{
   foreignKey: {
       name: 'medicalHistoryId',
+      allowNull: false
   }
 })
-Treatment.belongsTo(MedicalHistory)
+Treatment.belongsTo(MedicalHistory, {
+  foreignKey: {
+    name: 'medicalHistoryId',
+    allowNull: false
+  }
+})

@@ -13,9 +13,15 @@ export const Administrator = sequelize.define('Administrator', {
 })
 
 Person.hasOne(Administrator, {
-  foreignKey: 'document',
+  foreignKey: {
+    name: 'document',
+    allowNull: false
+  }
 })
 
 Administrator.belongsTo(Person, {
-  foreignKey: 'document',
+  foreignKey: {
+    name: 'document',
+    allowNull: false
+  }
 })

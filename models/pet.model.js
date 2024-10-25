@@ -47,8 +47,14 @@ export const Pet = sequelize.define('Pet', {
 
 PetOwner.hasMany(Pet, {
   foreignKey: {
-    name: 'document'
+    name: 'document',
+    allowNull: false
   }
 })
-Pet.belongsTo(PetOwner)
+Pet.belongsTo(PetOwner, {
+  foreignKey: {
+    name: 'document',
+    allowNull: false
+  }
+})
 

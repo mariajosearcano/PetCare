@@ -14,8 +14,10 @@ export const PetOwner = sequelize.define('PetOwner', {
 
 Person.hasOne(PetOwner, {
   foreignKey: 'document',
+  allowNull: false
 })
 
 PetOwner.belongsTo(Person, {
   foreignKey: 'document',
+  allowNull: false
 })

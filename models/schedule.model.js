@@ -24,8 +24,14 @@ export const Schedule = sequelize.define('Schedule', {
 Veterinarian.hasMany(Schedule, {
   foreignKey: {
       name: 'veterinarianId',
+      allowNull: false
   }
 })
-Schedule.belongsTo(Veterinarian)
+Schedule.belongsTo(Veterinarian, {
+  foreignKey: {
+    name: 'veterinarianId',
+    allowNull: false
+  }
+})
 
 
