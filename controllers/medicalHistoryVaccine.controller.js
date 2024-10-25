@@ -7,11 +7,8 @@ export class MedicalHistoryVaccineController {
     try {
       const medicalHistoryVaccine = await MedicalHistoryVaccine.findAll({
         include: [{
-            model: MedicalHistoryVaccine,
-            include: [{ 
-              model: MedicalHistory,
-              include: [{ model: Vaccine }]
-            }]
+          model: MedicalHistory,
+          include: [{ model: Vaccine }]
         }]
       })
       res.status(200).json(medicalHistoryVaccine)
@@ -25,37 +22,22 @@ export class MedicalHistoryVaccineController {
       const { medicalHistoryId, vaccineId } = req.body
       const medicalHistoryVaccine = await MedicalHistoryVaccine.findOne({ where: { medicalHistoryId, vaccineId } })
       if (!medicalHistoryVaccine) {
-        const newMedicalHistory = await MedicalHistory.create(req.body, {
+        const newMedicalHistoryVaccine = await MedicalHistoryVaccine.create(req.body, {
           include: [{
-            model: Pet
+              model: MedicalHistory,
+              include: [{ model: Vaccine }]
           }]
         })
-        return res.status(201).json(newMedicalHistory)
+        return res.status(201).json(newMedicalHistoryVaccine)
       }
-      const newEnroll = await Enroll.create({
-        studentId
-      })
-
-      const enrollments = await Promise.all(
-        courses.map(async (courseId) => {
-          return await EnrollCourse.create({
-            enrollID: newEnroll.enrollID,
-            courseId,
-            approved: false
-          })
-        })
-      )
-
-      res.status(201).json(enrollments)
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
   }
 
-  getEnrolledCoursesWithSchedule = async (req, res) => {
+  getMedicalHistoryVaccines = async (req, res) => {
     try {
       const { studentId } = req.params
-
       const studentEnroll = await Enroll.findOne({
         where: { studentId, status: 'ACTIVE' }
       })
