@@ -30,3 +30,8 @@ body {
 main {
   background-color: rgb(165, 225, 236);
 }
+
+.custom-background {
+  background-color: #a2c9ec; /* Cambia este color al que desees */
+}
+
