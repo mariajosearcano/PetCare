@@ -116,7 +116,7 @@
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseRegisterPet" aria-expanded="false"
                             aria-controls="collapseRegisterPet">
-                            Register pet
+                            Create pet
                         </button>
                     </p>
 
@@ -126,6 +126,15 @@
                             data-bs-target="#collapseVisualizePet" aria-expanded="false"
                             aria-controls="collapseVisualizePet">
                             Visualize pet
+                        </button>
+                    </p>
+
+                    <!-- collapse button update pet info -->
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseUpdatePet" aria-expanded="false"
+                            aria-controls="collapseUpdatePet">
+                            Update pet info
                         </button>
                     </p>
 
@@ -172,7 +181,7 @@
                     <!-- collapse content visualize pet -->
                     <div class="collapse" id="collapseVisualizePet">
                         <div class="text-start bg-info-subtle p-5">
-                            <select class="form-select mb-3" aria-label="Default select example" id="selectSpecies">
+                            <select class="form-select mb-3" aria-label="Default select example" id="selectName">
                                 <option selected>Name</option>
                             </select>
                             <!-- table visualize pet -->
@@ -197,6 +206,45 @@
                         </div>
                     </div>
                     <!-- collapse content visualize pet -->
+
+                    <!-- collapse content update pet -->
+                    <div class="collapse" id="collapseUpdatePet">
+                        <div class="text-start bg-info-subtle p-5">
+                            <!-- form update pet -->
+                            <select class="form-select mb-3" aria-label="Default select example" id="selectUpdateName">
+                                <option selected>Name</option>
+                            </select>
+                            <select class="form-select mb-3" aria-label="Default select example" id="selectSpecies">
+                                <option selected>Species</option>
+                                <option value="1">Vertebrate</option>
+                                <option value="2">Arthropod</option>
+                                <option value="3">Annelid</option>
+                                <option value="4">Mollusk</option>
+                                <option value="5">Sponge</option>
+                                <option value="6">Cnidarian</option>
+                                <option value="7">Echinoderm</option>
+                                <option value="8">Nematode</option>
+                                <option value="9">Platyhelminth</option>
+                            </select>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floatingAge" placeholder="Age">
+                                <label for="floatingPassword">Age</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floatingWeight" placeholder="Weight">
+                                <label for="floatingPassword">Weight</label>
+                            </div>
+                            <div class="mb-5">
+                                <label for="formFile" class="form-label">Pet photo</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" class="btn btn-primary">Update</button>
+                            </div>
+                            <!-- form update pet -->
+                        </div>
+                    </div>
+                    <!-- collapse content update pet -->
 
                 </div>
             </div>
