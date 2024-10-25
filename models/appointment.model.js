@@ -5,17 +5,38 @@ import { Pet } from './pet.model.js'
 
 export const Appointment = sequelize.define('Appointment', {
   appointmentId: {
-    type: DataTypes.SERIAL,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     validate: {
       isNumeric: true
     }
   },
-  diagnosis: {
-    type: DataTypes.STRING,
+  date: {
+    type: DataTypes.DATE,
     allowNull: false,
-    validate: {
-      is: /^[a-zA-Z0-9\s!@#$%^&*()_-+=\[\]{}|;:'",.<>/?]+$/i
-    }
+  },
+  startTime: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
+  endTime: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
+})
+
+Veterinarian.hasMany(Appointment,{
+  foreignKey: {
+      name: 'veterinarianId',
   }
 })
+Appointment.belongsTo(Veterinarian)
+
+Pet.hasMany(Appointment,{
+foreignKey: {
+    name: 'petId',
+}
+})
+Appointment.belongsTo(Pet)
+

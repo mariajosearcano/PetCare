@@ -4,7 +4,8 @@ import { PetOwner } from './petOwner.model.js'
 
 export const Pet = sequelize.define('Pet', {
   petId: {
-    type: DataTypes.SERIAL,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     validate: {
       isNumeric: true
@@ -17,7 +18,7 @@ export const Pet = sequelize.define('Pet', {
       is: /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/i
     }
   },
-  specie: {
+  species: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {

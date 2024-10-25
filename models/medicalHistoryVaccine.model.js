@@ -5,7 +5,8 @@ import { Vaccine } from './vaccine.model.js'
 
 const MedicalHistoryVaccine = sequelize.define('MedicalHistoryVaccine', {
     medicalHistoryId: {
-      type: DataTypes.SERIAL,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       references: {
         model: MedicalHistory,
         key: 'medicalHistoryid',

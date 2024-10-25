@@ -2,21 +2,20 @@ import { DataTypes } from 'sequelize'
 import { sequelize } from '../database/connection.js'
 import { Person } from './person.model.js'
 
-// export const Administrator = sequelize.define('Administrator', {
-//   personDocument: {
-//     type: DataTypes.BIGINT,
-//     primaryKey: true
-//   }
-// })
+export const Administrator = sequelize.define('Administrator', {
+    document: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        validate: {
+          isNumeric: true
+        }
+    }
+})
 
-// Person.hasOne(Administrator, {
-//   foreignKey: 'personDocument',
-//   sourceKey: 'Document'
-// })
+Person.hasOne(Administrator, {
+  foreignKey: 'document',
+})
 
-// Administrator.belongsTo(Person, {
-//   foreignKey: 'personDocument',
-//   targetKey: 'Document'
-// })
-
-export const Administrator = Person.extend();
+Administrator.belongsTo(Person, {
+  foreignKey: 'document',
+})

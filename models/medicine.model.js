@@ -3,7 +3,8 @@ import { sequelize } from '../database/connection.js'
 
 export const Medicine = sequelize.define('Medicine', {
   medicineId: {
-    type: DataTypes.SERIAL,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     validate: {
       isNumeric: true

@@ -4,7 +4,8 @@ import { Pet } from './pet.model.js'
 
 export const MedicalHistory = sequelize.define('MedicalHistory', {
   medicalHistoryId: {
-    type: DataTypes.SERIAL,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     validate: {
       isNumeric: true

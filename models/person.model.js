@@ -25,9 +25,10 @@ export const Person = sequelize.define('Person', {
   },
   email: {
     type: DataTypes.STRING,
+    unique: true,
     allowNull: false,
     validate: {
-      is: /^[^\s@]+@[^\s@]+\.[^\s@]$/i
+      isEmail: true
     }
   },
   phoneNumber: {
