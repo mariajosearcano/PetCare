@@ -21,7 +21,7 @@ export const Schedule = sequelize.define('Schedule', {
   },
 })
 
-Veterinarian.hasMany(Schedule, {
+Veterinarian.hasOne(Schedule, {
   foreignKey: {
       name: 'veterinarianId',
       allowNull: false

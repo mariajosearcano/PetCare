@@ -2,7 +2,7 @@ import { Pet } from '../models/pet.model.js'
 import { PetOwner } from '../models/petOwner.model.js'
 
 export class PetController {
-  getAllPet = async (req, res) => {
+  getAllPets = async (req, res) => {
     try {
       const pets = await Pet.findAll({
         include: [{
@@ -17,63 +17,61 @@ export class PetController {
 
   createPet = async (req, res) => {
     try {
-      const { petId, name, species, age, weight, photo } = req.body
-      const appointment = await Appointment.findOne({ where: { appointmentId, date, startTime, endTime, veterinarianId, petId } })
-      if (!appointment) {
-        const newAppointment = await Appointment.create(req.body, {
+      const { petId, name, species, age, weight, photo, document } = req.body
+      const pet = await Pet.findOne({ where: { petId, name, species, age, weight, photo, document } })
+      if (!pet) {
+        const newPet = await Pet.create(req.body, {
           include: [{
-            model: Veterinarian,
-            include: [{ model: Pet }]
+            model: PetOwner
           }]
         })
-        return res.status(201).json(newAppointment)
+        return res.status(201).json(newPet)
       }
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
   }
 
-  getAppointment = async (req, res) => {
+  getPet = async (req, res) => {
     try {
-      const { appointmentId } = req.params
-      const appointment = await Appointment.findByPk(appointmentId, {
+      const { petId } = req.params
+      const pet = await Pet.findByPk(petId, {
         include: [{
-          model: Veterinarian,
-          include: [{ model: Pet }]
+          model: PetOwner
         }]
       })
-      if (appointment) {
-        res.json(appointment)
+      if (pet) {
+        res.json(pet)
       } else {
-        res.status(404).json({ err: 'Appointment not found' })
+        res.status(404).json({ err: 'Pet not found' })
       }
-      res.status(200).json(appointment)
+      res.status(200).json(pet)
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
   }
 
-  deleteAppointment = async (req, res) => {
+  deletePet = async (req, res) => {
     try {
-      const { appointmentId } = req.params
-      await Appointment.destroy({
+      const { petId } = req.params
+      await Pet.destroy({
         where: {
-          appointmentId
+          petId
         }
       })
-      res.json({ message: 'Appointment  deleted' })
+      res.json({ message: 'Pet deleted' })
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
   }
 
-  updateAppointment = async (req, res) => {
+  updatePet = async (req, res) => {
     try {
-      const { appointmentId } = req.params
-      const appointment = await Appointment.findByPk(appointmentId)
-      appointment.set(req.body)
-      await appointment.save()
-      res.status(202).json(appointment)
+      const { petId } = req.params
+      const pet = await Pet.findByPk(petId)
+      pet.set(req.body)
+      await pet.save()
+      res.status(202).json(pet)
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
