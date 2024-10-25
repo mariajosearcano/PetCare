@@ -12,25 +12,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const pool = new Pool({
   user: 'postgres',        
   host: 'localhost',         // Host donde corre PostgreSQL
-  database: 'bbd_owner', // Cambia por el nombre de tu base de datos
-  password: 'madiar2003',  // Cambia por tu contraseña de PostgreSQL
+  database: 'bbd_owner',     // Cambia por el nombre de tu base de datos
+  password: 'madiar2003',    // Cambia por tu contraseña de PostgreSQL
   port: 5432,                // Puerto por defecto de PostgreSQL
 });
 
 // Ruta para servir el formulario (index.html)
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + './src/html/formsPetOwner.html');  // Cambia esta ruta según la ubicación de tu HTML
+  res.sendFile(__dirname + '/src/html/formsPetOwner.html');  // Cambia esta ruta según la ubicación de tu HTML
 });
 
 // Ruta para manejar el envío del formulario
 app.post('/submit-form', async (req, res) => {
-  const { name, lastName, email, address, phone, password } = req.body;
+  const { name, lastName, document, email, address, phone, password } = req.body;
 
   try {
-    // Inserta los datos en la tabla 'usuarios'
+    // Inserta los datos en la tabla 'pet-owner'
     const result = await pool.query(
-      'INSERT INTO usuarios (name, last_name, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6)',
-      [name, lastName, email, address, phone, password]
+      'INSERT INTO "pet-owner" (name, last_name, id, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [name, lastName, document, email, address, phone, password]
     );
     res.send('Datos insertados correctamente');
   } catch (err) {
@@ -38,6 +38,7 @@ app.post('/submit-form', async (req, res) => {
     res.send('Error al insertar los datos');
   }
 });
+
 
 // Iniciar el servidor
 const port = 3000;
