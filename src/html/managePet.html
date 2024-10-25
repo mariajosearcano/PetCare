@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Register pet</title>
+    <title>Manage pet</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -27,7 +27,7 @@
                             <a class="nav-link" aria-current="page" href="/src/html/petOwner.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/src/html/registerPet.html">Register pet</a>
+                            <a class="nav-link" href="/src/html/managePet.html">Register pet</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Schedule appointment</a>
@@ -53,68 +53,124 @@
     </header>
 
     <main>
-        <br>
 
-        <!-- Formulario de registro de mascota -->
-        <div class="container text-start bg-info-subtle">
+        <!-- collapse -->
+        <div class="container text-center">
             <div class="row">
-                <div class="col p-5">
+                <div class="col mt-4">
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingName" placeholder="Name">
-                        <label for="floatingInput">Name</label>
+                    <!-- collapse button register pet -->
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseRegisterPet" aria-expanded="false"
+                            aria-controls="collapseRegisterPet">
+                            Register pet
+                        </button>
+                    </p>
+
+                    <!-- collapse button visualize pet -->
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseVisualizePet" aria-expanded="false"
+                            aria-controls="collapseVisualizePet">
+                            Visualize pet
+                        </button>
+                    </p>
+
+                    <!-- collapse content register pet -->
+                    <div class="collapse" id="collapseRegisterPet">
+                        <div class="text-start bg-info-subtle p-5">
+                            <!-- form register pet -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingName" placeholder="Name">
+                                <label for="floatingInput">Name</label>
+                            </div>
+                            <select class="form-select mb-3" aria-label="Default select example" id="selectSpecies">
+                                <option selected>Species</option>
+                                <option value="1">Vertebrate</option>
+                                <option value="2">Arthropod</option>
+                                <option value="3">Annelid</option>
+                                <option value="4">Mollusk</option>
+                                <option value="5">Sponge</option>
+                                <option value="6">Cnidarian</option>
+                                <option value="7">Echinoderm</option>
+                                <option value="8">Nematode</option>
+                                <option value="9">Platyhelminth</option>
+                            </select>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floatingAge" placeholder="Age">
+                                <label for="floatingPassword">Age</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floatingWeight" placeholder="Weight">
+                                <label for="floatingPassword">Weight</label>
+                            </div>
+                            <div class="mb-5">
+                                <label for="formFile" class="form-label">Pet photo</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" class="btn btn-primary">Register</button>
+                            </div>
+                            <!-- form register pet -->
+                        </div>
                     </div>
-                    <select class="form-select mb-3" aria-label="Default select example" id="selectSpecies">
-                        <option selected>Species</option>
-                        <option value="1">Vertebrate</option>
-                        <option value="2">Arthropod</option>
-                        <option value="3">Annelid</option>
-                        <option value="4">Mollusk</option>
-                        <option value="5">Sponge</option>
-                        <option value="6">Cnidarian</option>
-                        <option value="7">Echinoderm</option>
-                        <option value="8">Nematode</option>
-                        <option value="9">Platyhelminth</option>
-                    </select>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingAge" placeholder="Age">
-                        <label for="floatingPassword">Age</label>
+                    <!-- collapse content register pet -->
+
+                    <!-- collapse content visualize pet -->
+                    <div class="collapse" id="collapseVisualizePet">
+                        <div class="text-start bg-info-subtle p-5">
+                            <select class="form-select mb-3" aria-label="Default select example" id="selectSpecies">
+                                <option selected>Name</option>
+                            </select>
+                            <!-- table visualize pet -->
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Species</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Photo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <!-- here will be insert the fetch info -->
+                                </tbody>
+                            </table>
+                            <!-- table visualize pet -->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" class="btn btn-primary">Delete pet</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingWeight" placeholder="Weight">
-                        <label for="floatingPassword">Weight</label>
-                    </div>
-                    <div>
-                        <label for="formFile" class="form-label">Pet photo</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
+                    <!-- collapse content visualize pet -->
 
                 </div>
             </div>
         </div>
+        <!-- collapse -->
 
-        <br>
     </main>
 
     <!-- footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">
-        <br>
         <!-- Section: Links  -->
         <section class="">
-            <div class="container text-center text-md-start mt-5">
+            <div class="container text-center text-md-start">
                 <!-- Grid row -->
                 <div class="row mt-3">
                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-5">
                         <!-- Content -->
                         <img src="/assets/logo.png" class="img-fluid h-50" alt="...">
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-5">
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
+                        <h6 class="text-uppercase fw-bold">
                             Social media
                         </h6>
                         <p>
@@ -153,9 +209,9 @@
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-5">
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <h6 class="text-uppercase fw-bold">Contact</h6>
                         <p><i class="fas fa-home me-3"></i> Medellin, carrera 10 # 20-40</p>
                         <p>
                             <i class="fas fa-envelope me-3"></i>
