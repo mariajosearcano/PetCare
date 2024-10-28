@@ -23,13 +23,36 @@ const pool = new Pool({
   port: 5432,                // Puerto por defecto de PostgreSQL
 });
 
-app.get('/reset', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src/html/password.html'));
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Consultar la tabla 'pet_owner' para verificar si el email y la contraseña son correctos
+    const result = await pool.query(
+      'SELECT * FROM "pet_owner" WHERE email = $1 AND password = $2',
+      [email, password]
+    );
+
+    // Si se encuentra un registro, se redirige a petOwner.html
+    if (result.rows.length > 0) {
+      res.sendFile(__dirname + '/src/html/petOwner.html');
+    } else {
+      res.send('Correo o contraseña incorrectos');
+    }
+  } catch (err) {
+    console.error(err);
+    res.send('Error al procesar la solicitud');
+  }
 });
 
 // Ruta para la página principal (base.html)
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/src/html/base.html');
+});
+
+// Ruta para la página principal (login.html)
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/src/html/login.html');
 });
 
 // Ruta para admin.html
@@ -42,10 +65,7 @@ app.get('/form', (req, res) => {
   res.sendFile(__dirname + '/src/html/formsPetOwner.html');
 });
 
-// Ruta para login.html
-app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/src/html/login.html');
-});
+
 
 // Ruta para managePet.html
 app.get('/manage-pet', (req, res) => {
