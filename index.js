@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Servir archivos estáticos desde la carpeta assets
 app.use('/assets', express.static('assets'));
-
 app.use('/src/css', express.static(__dirname + '/src/css'));
 
 
@@ -27,18 +26,38 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Consultar la tabla 'pet_owner' para verificar si el email y la contraseña son correctos
-    const result = await pool.query(
+    // Consultar la tabla 'pet_owner'
+    let result = await pool.query(
       'SELECT * FROM "pet_owner" WHERE email = $1 AND password = $2',
       [email, password]
     );
 
-    // Si se encuentra un registro, se redirige a petOwner.html
     if (result.rows.length > 0) {
-      res.sendFile(__dirname + '/src/html/petOwner.html');
-    } else {
-      res.send('Correo o contraseña incorrectos');
+      return res.sendFile(__dirname + '/src/html/petOwner.html');
     }
+
+    // Consultar la tabla 'veterinarians' si no está en 'pet_owner'
+    result = await pool.query(
+      'SELECT * FROM "veterinarians" WHERE email = $1 AND password = $2',
+      [email, password]
+    );
+
+    if (result.rows.length > 0) {
+      return res.sendFile(__dirname + '/src/html/manageUsers.html');
+    }
+
+    // Consultar la tabla 'clinic_administrator' si no está en 'veterinarians'
+    result = await pool.query(
+      'SELECT * FROM "clinic_administrator" WHERE email = $1 AND password = $2',
+      [email, password]
+    );
+
+    if (result.rows.length > 0) {
+      return res.sendFile(__dirname + '/src/html/admin.html');
+    }
+
+    // Si no se encuentra en ninguna tabla, enviar mensaje de error
+    res.send('Correo o contraseña incorrectos');
   } catch (err) {
     console.error(err);
     res.send('Error al procesar la solicitud');
