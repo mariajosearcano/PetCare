@@ -8,6 +8,9 @@ const app = express();
 // Middleware para procesar los datos enviados por el formulario (POST)
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Servir archivos estáticos desde la carpeta assets
+app.use('/assets', express.static('assets'));
+
 // Configuración de la conexión a PostgreSQL
 const pool = new Pool({
   user: 'postgres',        
@@ -17,9 +20,29 @@ const pool = new Pool({
   port: 5432,                // Puerto por defecto de PostgreSQL
 });
 
-// Ruta para servir el formulario (index.html)
+// Ruta para la página principal (base.html)
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/src/html/formsPetOwner.html');  // Cambia esta ruta según la ubicación de tu HTML
+  res.sendFile(__dirname + '/src/html/base.html');
+});
+
+// Ruta para admin.html
+app.get('/admin', (req, res) => {
+  res.sendFile(__dirname + '/src/html/admin.html');
+});
+
+// Ruta para formsPetOwner.html
+app.get('/form', (req, res) => {
+  res.sendFile(__dirname + '/src/html/formsPetOwner.html');
+});
+
+// Ruta para login.html
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/src/html/login.html');
+});
+
+// Ruta para managePet.html
+app.get('/manage-pet', (req, res) => {
+  res.sendFile(__dirname + '/src/html/managePet.html');
 });
 
 // Ruta para manejar el envío del formulario
@@ -28,8 +51,8 @@ app.post('/submit-form', async (req, res) => {
 
   try {
     // Inserta los datos en la tabla 'pet-owner'
-    const result = await pool.query(
-      'INSERT INTO "pet-owner" (name, last_name, id, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+    await pool.query(
+      'INSERT INTO "pet_owner" (name, last_name, id, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6, $7)',
       [name, lastName, document, email, address, phone, password]
     );
     res.send('Datos insertados correctamente');
@@ -38,7 +61,6 @@ app.post('/submit-form', async (req, res) => {
     res.send('Error al insertar los datos');
   }
 });
-
 
 // Iniciar el servidor
 const port = 3000;
