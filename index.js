@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Servir archivos estáticos desde la carpeta assets
 app.use('/assets', express.static('assets'));
 
+app.use('/src/css', express.static(__dirname + '/src/css'));
+
+
 // Configuración de la conexión a PostgreSQL
 const pool = new Pool({
   user: 'postgres',        
@@ -18,6 +21,10 @@ const pool = new Pool({
   database: 'bbd_owner',     // Cambia por el nombre de tu base de datos
   password: 'madiar2003',    // Cambia por tu contraseña de PostgreSQL
   port: 5432,                // Puerto por defecto de PostgreSQL
+});
+
+app.get('/reset', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/html/password.html'));
 });
 
 // Ruta para la página principal (base.html)
@@ -43,6 +50,10 @@ app.get('/login', (req, res) => {
 // Ruta para managePet.html
 app.get('/manage-pet', (req, res) => {
   res.sendFile(__dirname + '/src/html/managePet.html');
+});
+
+app.get('/password', (req, res) => {
+  res.sendFile(__dirname + '/src/html/password.html');
 });
 
 // Ruta para manejar el envío del formulario
