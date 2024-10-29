@@ -25,16 +25,16 @@ registerButton.addEventListener('click', insertarDatosEnBaseDeDatos);
 
 function insertarDatosEnBaseDeDatos() {
 
-    let pets = {
+    let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
         name: inputName.value,
         species: selectSpecies.options[selectSpecies.selectedIndex].text,
         age: inputAge.value,
         weight: inputWeight.value,
         photo: inputPhoto.value,
-        pod: inputPetOwnerDcoument.value
+        pet_owner_document: inputPetOwnerDcoument.value
     };
 
-    console.log("hello");
+    console.log(pets);
 
     fetch('http://localhost:3007/pet/post', {
         method: 'POST',
