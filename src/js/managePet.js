@@ -3,6 +3,7 @@ const selectSpecies = document.getElementById('selectSpecies');
 const inputAge = document.getElementById('floatingAge');
 const inputWeight = document.getElementById('floatingWeight');
 const inputPhoto = document.getElementById('pet-photo');
+const inputPetOwnerDcoument = document.getElementById('floating-pet-owner-document');
 
 const registerButton = document.getElementById('btnRegisterPet');
 
@@ -29,7 +30,8 @@ function insertarDatosEnBaseDeDatos() {
         species: selectSpecies.options[selectSpecies.selectedIndex].text,
         age: inputAge.value,
         weight: inputWeight.value,
-        photo: inputPhoto.value
+        photo: inputPhoto.value,
+        pod: inputPetOwnerDcoument.value
     };
 
     console.log("hello");
@@ -51,6 +53,7 @@ function insertarDatosEnBaseDeDatos() {
     inputAge.value = '';
     inputWeight.value = '';
     inputPhoto.value = '';
+    inputPetOwnerDcoument.value = '';
 }
 
 // document.addEventListener('DOMContentLoaded', function () {
