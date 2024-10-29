@@ -1,6 +1,8 @@
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const path = require('path');
 
 // Inicializa la aplicación Express
 const app = express();
@@ -56,13 +58,14 @@ app.post('/login', async (req, res) => {
       return res.sendFile(__dirname + '/src/html/admin.html');
     }
 
-    // Si no se encuentra en ninguna tabla, enviar mensaje de error
-    res.send('Correo o contraseña incorrectos');
+    // Si no se encuentra en ninguna tabla, redirigir con un mensaje de error
+    return res.redirect('/login?error=1'); 
   } catch (err) {
     console.error(err);
     res.send('Error al procesar la solicitud');
   }
 });
+
 
 // Ruta para la página principal (base.html)
 app.get('/', (req, res) => {
@@ -105,12 +108,113 @@ app.post('/submit-form', async (req, res) => {
       'INSERT INTO "pet_owner" (name, last_name, id, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6, $7)',
       [name, lastName, document, email, address, phone, password]
     );
-    res.send('Datos insertados correctamente');
+    res.redirect('/confirmation?message=Data%20inserted%20successfully'); // Redirigir a la página de confirmación con el mensaje
   } catch (err) {
     console.error(err);
-    res.send('Error al insertar los datos');
+    res.redirect('/confirmation?message=Error%20inserting%20data'); // Redirigir a la página de confirmación con el mensaje de error
   }
 });
+
+// Ruta para la página de confirmación
+app.get('/confirmation', (req, res) => {
+  const { message } = req.query; // Obtener el mensaje de la consulta
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en"> <!-- Cambiado a inglés -->
+    <head>
+        <meta charset="UTF-8">
+        <title>Confirmation</title> <!-- Cambiado a inglés -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center">${message}</h1>
+            <div class="text-center">
+                <a href="/" class="btn btn-primary">Return to form</a> <!-- Cambiado a inglés -->
+            </div>
+        </div>
+    </body>
+    </html>
+  `);
+});
+
+
+
+
+// Ruta para verificar si el correo existe en la base de datos
+app.post('/check-email', async (req, res) => {
+  const { email } = req.body;
+  try {
+      const result = await pool.query('SELECT * FROM pet_owner WHERE email = $1', [email]);
+
+      if (result.rowCount > 0) {
+          // Si el correo existe, redirige a changePassword.html
+          res.redirect('/changePassword');
+      } else {
+          // Si el correo no existe, redirige a una página de confirmación con un mensaje
+          res.redirect('/confirmation?message=The%20email%20is%20not%20registered.');
+      }
+  } catch (error) {
+      console.error('Error al verificar el correo:', error);
+      res.status(500).send('Error al verificar el correo.');
+  }
+});
+
+// Ruta para la página de confirmación
+app.get('/confirmation', (req, res) => {
+  const { message } = req.query; // Obtener el mensaje de la consulta
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Confirmation</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center">${message}</h1>
+            <div class="text-center">
+                <a href="/password" class="btn btn-primary">Return to password reset</a>
+            </div>
+        </div>
+    </body>
+    </html>
+  `);
+});
+
+
+// Ruta para cargar `changePassword.html`
+app.get('/changePassword', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/html/changePassword.html'));
+});
+
+// Ruta para actualizar la contraseña en la base de datos
+app.post('/update-password', async (req, res) => {
+  const { newPassword } = req.body;
+  const userId = 1; // ID del usuario encontrado, aquí podrías obtenerlo según la lógica de tu proyecto
+
+  try {
+      // Hashea la nueva contraseña
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Actualiza la contraseña en la base de datos
+      const result = await pool.query(
+          'UPDATE pet_owner SET password = $1 WHERE id = $2',
+          [hashedPassword, userId]
+      );
+
+      if (result.rowCount > 0) {
+          res.send('<script>alert("Contraseña actualizada exitosamente."); window.location.href="/changePassword";</script>');
+      } else {
+          res.send('<script>alert("No se encontró el usuario."); window.location.href="/changePassword";</script>');
+      }
+  } catch (error) {
+      console.error('Error al actualizar la contraseña:', error);
+      res.status(500).send('<script>alert("Error al actualizar la contraseña."); window.location.href="/changePassword";</script>');
+  }
+});
+
 
 // Iniciar el servidor
 const port = 3000;
