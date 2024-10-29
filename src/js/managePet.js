@@ -6,20 +6,7 @@ const inputPhoto = document.getElementById('pet-photo');
 const inputPetOwnerDcoument = document.getElementById('floating-pet-owner-document');
 
 const registerButton = document.getElementById('btnRegisterPet');
-
-// let pets = [];
-
-// registerButton.addEventListener('click', (e) => {
-//     let newPet = {
-//         name: inputName.value,
-//         species: selectSpecies.options[selectSpecies.selectedIndex].text,
-//         age: inputAge.value,
-//         weight: inputWeight.value,
-//         photo: inputPhoto.value
-//     };
-//     pets.push(newPet);
-//     console.log(pets);
-// });
+const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
 
 registerButton.addEventListener('click', insertarDatosEnBaseDeDatos);
 
@@ -33,8 +20,6 @@ function insertarDatosEnBaseDeDatos() {
         photo: inputPhoto.value,
         pet_owner_document: inputPetOwnerDcoument.value
     };
-
-    console.log(pets);
 
     fetch('http://localhost:3007/pet/post', {
         method: 'POST',
