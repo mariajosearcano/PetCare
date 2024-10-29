@@ -1,119 +1,31 @@
-const express = require('express');
-const { Pool } = require('pg');
-const bodyParser = require('body-parser');
+// Importa el paquete mysql2
+const mysql = require('mysql2');
 
-// Inicializa la aplicación Express
-const app = express();
-
-// Middleware para procesar los datos enviados por el formulario (POST)
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Servir archivos estáticos desde la carpeta assets
-app.use('/assets', express.static('assets'));
-app.use('/src/css', express.static(__dirname + '/src/css'));
-
-
-// Configuración de la conexión a PostgreSQL
-const pool = new Pool({
-  user: 'postgres',        
-  host: 'localhost',         // Host donde corre PostgreSQL
-  database: 'bbd_owner',     // Cambia por el nombre de tu base de datos
-  password: 'madiar2003',    // Cambia por tu contraseña de PostgreSQL
-  port: 5432,                // Puerto por defecto de PostgreSQL
+// Crea una conexión a la base de datos
+const connection = mysql.createConnection({
+  host: 'bcy5sx8g1vu3tp1vdxtm-mysql.services.clever-cloud.com',        // Dirección del servidor de MySQL
+  user: 'u4x7yjeirlpjgnln',      
+  password: 'y1MnwMiyPWppIjnVcYJW', 
+  database: 'bcy5sx8g1vu3tp1vdxtm' 
 });
 
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Consultar la tabla 'pet_owner'
-    let result = await pool.query(
-      'SELECT * FROM "pet_owner" WHERE email = $1 AND password = $2',
-      [email, password]
-    );
-
-    if (result.rows.length > 0) {
-      return res.sendFile(__dirname + '/src/html/petOwner.html');
-    }
-
-    // Consultar la tabla 'veterinarians' si no está en 'pet_owner'
-    result = await pool.query(
-      'SELECT * FROM "veterinarians" WHERE email = $1 AND password = $2',
-      [email, password]
-    );
-
-    if (result.rows.length > 0) {
-      return res.sendFile(__dirname + '/src/html/manageUsers.html');
-    }
-
-    // Consultar la tabla 'clinic_administrator' si no está en 'veterinarians'
-    result = await pool.query(
-      'SELECT * FROM "clinic_administrator" WHERE email = $1 AND password = $2',
-      [email, password]
-    );
-
-    if (result.rows.length > 0) {
-      return res.sendFile(__dirname + '/src/html/admin.html');
-    }
-
-    // Si no se encuentra en ninguna tabla, enviar mensaje de error
-    res.send('Correo o contraseña incorrectos');
-  } catch (err) {
-    console.error(err);
-    res.send('Error al procesar la solicitud');
+// Conectar a la base de datos
+connection.connect((err) => {
+  if (err) {
+    console.error('Error al conectar a la base de datos:', err);
+    return;
   }
+  console.log('Conexión exitosa a la base de datos');
 });
 
-// Ruta para la página principal (base.html)
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/src/html/base.html');
-});
-
-// Ruta para la página principal (login.html)
-app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/src/html/login.html');
-});
-
-// Ruta para admin.html
-app.get('/admin', (req, res) => {
-  res.sendFile(__dirname + '/src/html/admin.html');
-});
-
-// Ruta para formsPetOwner.html
-app.get('/form', (req, res) => {
-  res.sendFile(__dirname + '/src/html/formsPetOwner.html');
-});
-
-
-
-// Ruta para managePet.html
-app.get('/manage-pet', (req, res) => {
-  res.sendFile(__dirname + '/src/html/managePet.html');
-});
-
-app.get('/password', (req, res) => {
-  res.sendFile(__dirname + '/src/html/password.html');
-});
-
-// Ruta para manejar el envío del formulario
-app.post('/submit-form', async (req, res) => {
-  const { name, lastName, document, email, address, phone, password } = req.body;
-
-  try {
-    // Inserta los datos en la tabla 'pet-owner'
-    await pool.query(
-      'INSERT INTO "pet_owner" (name, last_name, id, email, address, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-      [name, lastName, document, email, address, phone, password]
-    );
-    res.send('Datos insertados correctamente');
-  } catch (err) {
-    console.error(err);
-    res.send('Error al insertar los datos');
+// Ejecutar una consulta
+connection.query('SELECT * FROM person', (err, results, fields) => {
+  if (err) {
+    console.error('Error al ejecutar la consulta:', err);
+    return;
   }
+  console.log('Resultados de la consulta:', results);
 });
 
-// Iniciar el servidor
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+// Cierra la conexión después de la consulta
+// connection.end();
