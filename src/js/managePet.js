@@ -7,20 +7,6 @@ const inputPetOwnerDcoument = document.getElementById('floating-pet-owner-docume
 
 const registerButton = document.getElementById('btnRegisterPet');
 
-// let pets = [];
-
-// registerButton.addEventListener('click', (e) => {
-//     let newPet = {
-//         name: inputName.value,
-//         species: selectSpecies.options[selectSpecies.selectedIndex].text,
-//         age: inputAge.value,
-//         weight: inputWeight.value,
-//         photo: inputPhoto.value
-//     };
-//     pets.push(newPet);
-//     console.log(pets);
-// });
-
 registerButton.addEventListener('click', insertarDatosEnBaseDeDatos);
 
 function insertarDatosEnBaseDeDatos() {
