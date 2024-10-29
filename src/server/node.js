@@ -5,6 +5,8 @@ const conexion = require('./db');   // modulo local db
 
 // Inicializar la app de Express 
 const app = express();
+
+// Middleware 
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -13,8 +15,8 @@ app.use(express.static('src'));
 
 // Rutas de la API
 
-// Obtener todas las personas 
-app.get('/pet', (req, res) => {
+// Obtener todas las mascotas
+app.get('/pet/read', (req, res) => {
     conexion.query('SELECT * FROM pet', (err, results) => {
         if (err) {
             return res.status(500).send(err);
@@ -23,8 +25,8 @@ app.get('/pet', (req, res) => {
     });
 });
 
-// Crear una nueva persona 
-app.post('/pet', (req, res) => {
+// Crear mascota 
+app.post('/pet/post', (req, res) => {
     const { nombre, apellido, correo, telefono } = req.body;
     const sql = 'INSERT INTO pet (nombre, apellido, correo, telefono) VALUES (?, ?, ?, ?)';
     conexion.query(sql, [nombre, apellido, correo, telefono], (err, result) => {
@@ -35,20 +37,20 @@ app.post('/pet', (req, res) => {
     });
 });
 
-// Eliminar una persona 
-app.delete('/pet/:id', (req, res) => {
+// Eliminar mascota
+app.delete('/pet/delete', (req, res) => {
     const { id } = req.params;
     const sql = 'DELETE FROM pet WHERE id = ?';
     conexion.query(sql, [id], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ message: 'mascota eliminada' });
+        res.json({ message: 'pet deleted' });
     });
 });
 
-// Actualizar una persona 
-app.put('/pet/:id', (req, res) => {
+// Actualizar mascota
+app.put('/pet/put', (req, res) => {
     const { id } = req.params;
     const { nombre, apellido, correo, telefono } = req.body;
     const sql = 'UPDATE person SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE id = ?';
@@ -58,11 +60,11 @@ app.put('/pet/:id', (req, res) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ message: 'mascota actualizada' });
+        res.json({ message: 'pet updated' });
     });
 });
 
 // Iniciar el servidor
 app.listen(3007, () => {
-    console.log('Servidor escuchando en http://localhost:3007');
+    console.log('Server listening on http://localhost:3007');
 });

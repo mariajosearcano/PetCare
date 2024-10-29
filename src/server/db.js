@@ -11,10 +11,10 @@ const connection = mysql.createConnection({
 // establecer la conexión
 connection.connect((err) => {
     if (err) {
-        console.error('Error conectando a la base de datos: ', err); 
+        console.error('Error connecting to database', err); 
         return;
     }
-    console.log('Conexión a la base de datos MySQL establecida');
+    console.log('MySQL database connection established');
 });
 
 // Exporta la conexión para que pueda ser utilizada por otros archivos
