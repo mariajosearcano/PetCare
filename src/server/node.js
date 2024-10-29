@@ -15,6 +15,119 @@ app.use(bodyParser.json());
 // usar los archivos estáticos (HTML, CSS, JS) 
 app.use(express.static('src'));
 
+
+// rutas api para usuarios
+
+// obtener todas las personas
+app.get('/person/read', (req, res) => {
+    conexion.query('SELECT * FROM person', (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json(results);
+    });
+});
+
+// crear una persona
+app.post('/person/create', (req, res) => {
+    const { document,name,last_name,email,password,phone_number } = req.body;
+    const sql = 'INSERT INTO person (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';    // el id se genera automaticamente
+    conexion.query(sql, [document,name,last_name,email,password,phone_number], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ id: result.insertId, document,name,last_name,email,password,phone_number });
+    });
+});
+
+// obtener una persona
+app.get('/person/read/:document', (req, res) => {
+    const document = req.params.document;
+    const sql = 'SELECT * FROM person WHERE document = ?';
+    
+    conexion.query(sql, [document], (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Persona no encontrada' });
+        }
+        
+        res.json(results[0]);
+    });
+});
+
+// actualizar una persona
+app.put('/person/update/:document', (req, res) => {
+    const { document, name, last_name, email, password, phone_number } = req.body;
+    
+    const sql = `
+        UPDATE person 
+        SET document = ?,
+            name = ?,
+            last_name = ?,
+            email = ?,
+            password = ?,
+            phone_number = ?
+        WHERE document = ?
+    `;
+    
+    conexion.query(sql, [document, name, last_name, email, password, phone_number], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Persona no encontrada' });
+        }
+        
+        res.json({ 
+            message: 'Persona actualizada correctamente',
+            document,
+            name,
+            last_name,
+            email,
+            password,
+            phone_number
+        });
+    });
+});
+
+// eliminar una persona
+app.delete('/person/delete/:document', async (req, res) => {
+    const document = req.params.document;
+
+    // Primero verificamos si la persona existe
+    conexion.query('SELECT document FROM person WHERE document = ?', [document], (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ 
+                message: 'Persona no encontrada' 
+            });
+        }
+
+        // Si la persona existe, procedemos a eliminarla
+        const sql = 'DELETE FROM person WHERE document = ?';
+        
+        conexion.query(sql, [document], (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            
+            res.json({ 
+                message: 'Persona eliminada correctamente',
+                document
+            });
+        });
+    });
+});
+
+
+
 // Rutas de la API para pet
 
 // Obtener todas las mascotas

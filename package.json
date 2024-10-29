@@ -2,7 +2,7 @@
   "name": "petcare",
   "version": "1.0.0",
   "description": "Pet Health and Appointment Management System",
-  "main": "index.js",
+  "main": "src/server/node.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
