@@ -1,3 +1,5 @@
+// api
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,7 +15,7 @@ app.use(bodyParser.json());
 // usar los archivos estáticos (HTML, CSS, JS) 
 app.use(express.static('src'));
 
-// Rutas de la API
+// Rutas de la API para pet
 
 // Obtener todas las mascotas
 app.get('/pet/read', (req, res) => {
@@ -27,13 +29,13 @@ app.get('/pet/read', (req, res) => {
 
 // Crear mascota 
 app.post('/pet/post', (req, res) => {
-    const { nombre, apellido, correo, telefono } = req.body;
-    const sql = 'INSERT INTO pet (nombre, apellido, correo, telefono) VALUES (?, ?, ?, ?)';
-    conexion.query(sql, [nombre, apellido, correo, telefono], (err, result) => {
+    const { name, age, photo, species, weight } = req.body;
+    const sql = 'INSERT INTO pet (name, age, photo, species, weight) VALUES (?, ?, ?, ?, ?)';
+    conexion.query(sql, [name, age, photo, species, weight], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ id: result.insertId, nombre, apellido, correo, telefono });
+        res.json({ id: result.insertId, name, age, photo, species });
     });
 });
 
@@ -52,10 +54,10 @@ app.delete('/pet/delete', (req, res) => {
 // Actualizar mascota
 app.put('/pet/put', (req, res) => {
     const { id } = req.params;
-    const { nombre, apellido, correo, telefono } = req.body;
-    const sql = 'UPDATE person SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE id = ?';
+    const { name, age, photo, species, weight } = req.body;
+    const sql = 'UPDATE person SET name = ?, age = ?, photo = ?, species = ?, weight = ? WHERE id = ?';
 
-    conexion.query(sql, [nombre, apellido, correo, telefono, id], (err,
+    conexion.query(sql, [name, age, photo, species, weight, id], (err,
         result) => {
         if (err) {
             return res.status(500).send(err);
