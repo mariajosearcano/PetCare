@@ -7,10 +7,14 @@ const inputPetOwnerDcoument = document.getElementById('floating-pet-owner-docume
 
 const registerButton = document.getElementById('btnRegisterPet');
 const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
+const deleteButton = document.getElementById('btn-delete-pet');
 
-registerButton.addEventListener('click', insertarDatosEnBaseDeDatos);
+const tableBody = document.querySelector('#tbody-visualize-pet');
 
-function insertarDatosEnBaseDeDatos() {
+registerButton.addEventListener('click', InsertPet);
+
+// INSERT
+function InsertPet() {
 
     let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
         name: inputName.value,
@@ -39,6 +43,52 @@ function insertarDatosEnBaseDeDatos() {
     inputWeight.value = '';
     inputPhoto.value = '';
     inputPetOwnerDcoument.value = '';
+}
+
+// READ
+collapseButtonVisualize.addEventListener('click', VisualizeData);
+
+function VisualizeData() {
+    fetch('http://localhost:3007/pet/read')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        data.forEach(pet => {
+            AddPetRow(pet);
+        });
+        AddPetRow(data);
+    });
+}
+
+function AddPetRow(pet) {
+    const row = document.createElement('tr'); row.innerHTML = `
+    <td>${pet.name}</td> 
+    <td>${pet.species}</td> 
+    <td>${pet.age}</td> 
+    <td>${pet.weight}</td> 
+    <td>${pet.photo}</td>
+    <td>${pet.pet_owner_document}</td>
+    `;
+    tableBody.appendChild(row);
+}
+
+// DELETE
+deleteButton.addEventListener('click', DeletePet);
+
+function DeletePet() {
+    let petName = inputName.value;
+
+    fetch(`http://localhost:3007/pet/delete/${petName}`, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        const row = document.querySelector(`
+        #personasTable tr td:first-child:contains(${petName})`
+        ).parentNode; 
+        row.remove();
+    });
 }
 
 // document.addEventListener('DOMContentLoaded', function () {
