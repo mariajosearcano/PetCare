@@ -1,6 +1,23 @@
-// Importa el paquete mysql2
-const mysql = require('mysql2');
 const express = require('express');
+const mysql = require('mysql2');
+const path = require('path');
+
+// Crea una conexión a la base de datos
+const pool = mysql.createConnection({
+    host: 'bcy5sx8g1vu3tp1vdxtm-mysql.services.clever-cloud.com',
+    user: 'u4x7yjeirlpjgnln',
+    password: 'y1MnwMiyPWppIjnVcYJW',
+    database: 'bcy5sx8g1vu3tp1vdxtm'
+});
+
+// Conectar a la base de datos
+pool.connect((err) => {
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+        return;
+    }
+    console.log('Conexión exitosa a la base de datos');
+});
 
 // Inicializa la aplicación Express
 const app = express();
@@ -15,17 +32,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static('assets'));
 app.use('/src/css', express.static(__dirname + '/src/css'));
 
-// Crea una conexión a la base de datos
-const pool = mysql.createPool({
-    host: 'bcy5sx8g1vu3tp1vdxtm-mysql.services.clever-cloud.com',
-    user: 'u4x7yjeirlpjgnln',
-    password: 'y1MnwMiyPWppIjnVcYJW',
-    database: 'bcy5sx8g1vu3tp1vdxtm'
-});
-
 // Ruta para la página principal (base.html)
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/src/html/base.html');
+});
+
+app.get('/manageUsers', (req, res) => {
+  res.sendFile(__dirname + '/src/html/manageUsers.html');
 });
 
 // get all users
@@ -41,14 +54,17 @@ app.get('/users', async (req, res) => {
 
 // create a new user
 app.post('/create', async (req, res) => {
-  const { name, age } = req.body;
+  const { document, name, last_name, rol, email, password, phone_number } = req.body;
 
   try {
-    const [result] = await pool.execute('INSERT INTO person (name, age) VALUES (?, ?)', [name, age]);
-    res.send(`New user inserted with ID: ${result.insertId}`);
+    const [result] = await pool.execute(
+        `INSERT INTO person (document, name, last_name, rol, email, password, phone_number) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)`, [document, name, last_name, rol, email, password, phone_number]
+    );
+    res.send(`New user inserted with ID: ${result}`);
   } catch (err) {
-    console.error('Error inserting user:', err);
-    res.status(500).send('Error inserting user');
+      console.error('Error inserting user:', err);
+      res.status(500).send('Error inserting user');
   }
 });
 
@@ -196,6 +212,15 @@ app.post('/submit-form', async (req, res) => {
     res.send('Error al insertar los datos');
   }
 });
+
+// En tu archivo principal de servidor (app.js o server.js)
+app.use('/src/js', express.static('js', {
+  setHeaders: (res, path) => {
+      if (path.endsWith('.js')) {
+          res.setHeader('Content-Type', 'application/javascript');
+      }
+  }
+}));
 
 // Iniciar el servidor
 const port = 3008;
