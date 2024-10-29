@@ -2,14 +2,6 @@
 const mysql = require('mysql2');
 const express = require('express');
 
-// Crea una conexión a la base de datos
-const connection = mysql.createConnection({
-  host: 'bcy5sx8g1vu3tp1vdxtm-mysql.services.clever-cloud.com',        // Dirección del servidor de MySQL
-  user: 'u4x7yjeirlpjgnln',      
-  password: 'y1MnwMiyPWppIjnVcYJW', 
-  database: 'bcy5sx8g1vu3tp1vdxtm' 
-});
-
 // Inicializa la aplicación Express
 const app = express();
 
@@ -23,7 +15,103 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static('assets'));
 app.use('/src/css', express.static(__dirname + '/src/css'));
 
+// Crea una conexión a la base de datos
+const pool = mysql.createPool({
+    host: 'bcy5sx8g1vu3tp1vdxtm-mysql.services.clever-cloud.com',
+    user: 'u4x7yjeirlpjgnln',
+    password: 'y1MnwMiyPWppIjnVcYJW',
+    database: 'bcy5sx8g1vu3tp1vdxtm'
+});
 
+// Ruta para la página principal (base.html)
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/src/html/base.html');
+});
+
+// get all users
+app.get('/users', async (req, res) => {
+  try {
+    const [rows] = await pool.execute('SELECT * FROM person');
+    res.json(rows);
+  } catch (err) {
+    console.error('Error getting users:', err);
+    res.status(500).send('Error getting users');
+  }
+});
+
+// create a new user
+app.post('/create', async (req, res) => {
+  const { name, age } = req.body;
+
+  try {
+    const [result] = await pool.execute('INSERT INTO person (name, age) VALUES (?, ?)', [name, age]);
+    res.send(`New user inserted with ID: ${result.insertId}`);
+  } catch (err) {
+    console.error('Error inserting user:', err);
+    res.status(500).send('Error inserting user');
+  }
+});
+
+// get a user by ID
+app.get('/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [rows] = await pool.execute('SELECT * FROM person WHERE id = ?', [id]);
+
+    if (rows.length) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).send('User not found');
+    }
+  } catch (err) {
+    console.error('Error getting user:', err);
+    res.status(500).send('Error getting user');
+  }
+});
+
+// update a user by ID
+app.put('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, age } = req.body;
+
+  try {
+    const [result] = await pool.execute('UPDATE person SET name = ?, age = ? WHERE id = ?', [name, age, id]);
+
+    if (result.affectedRows) {
+      res.send('User updated successfully');
+    } else {
+      res.status(404).send('User not found');
+    }
+  } catch (err) {
+    console.error('Error updating user:', err);
+    res.status(500).send('Error updating user');
+  }
+});
+
+// delete a user by ID
+app.delete('/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [result] = await pool.execute('DELETE FROM person WHERE id = ?', [id]);
+
+    if (result.affectedRows) {
+      res.send('User deleted successfully');
+    } else {
+      res.status(404).send('User not found');
+    }
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).send('Error deleting user');
+  }
+});
+
+
+
+
+
+////
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -64,11 +152,6 @@ app.post('/login', async (req, res) => {
     console.error(err);
     res.send('Error al procesar la solicitud');
   }
-});
-
-// Ruta para la página principal (base.html)
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/src/html/base.html');
 });
 
 // Ruta para la página principal (login.html)
