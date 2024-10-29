@@ -22,15 +22,15 @@ const registerButton = document.getElementById('btnRegisterPet');
 
 registerButton.addEventListener('click', insertarDatosEnBaseDeDatos);
 
-let pets = {
-    name: inputName.value,
-    species: selectSpecies.options[selectSpecies.selectedIndex].text,
-    age: inputAge.value,
-    weight: inputWeight.value,
-    photo: inputPhoto.value
-};
-
 function insertarDatosEnBaseDeDatos() {
+
+    let pets = {
+        name: inputName.value,
+        species: selectSpecies.options[selectSpecies.selectedIndex].text,
+        age: inputAge.value,
+        weight: inputWeight.value,
+        photo: inputPhoto.value
+    };
 
     console.log("hello");
 

@@ -29,13 +29,13 @@ app.get('/pet/read', (req, res) => {
 
 // Crear mascota 
 app.post('/pet/post', (req, res) => {
-    const { name, age, photo, species, weight } = req.body;
-    const sql = 'INSERT INTO pet (name, age, photo, species, weight) VALUES (?, ?, ?, ?, ?)';
-    conexion.query(sql, [name, age, photo, species, weight], (err, result) => {
+    const { age, name, photo, species, weight } = req.body;
+    const sql = 'INSERT INTO pet (age, name, photo, species, weight) VALUES (?, ?, ?, ?, ?)';
+    conexion.query(sql, [age, name, photo, species, weight], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ id: result.insertId, name, age, photo, species });
+        res.json({ id: result.insertId, age, name, photo, species });
     });
 });
 
@@ -54,10 +54,10 @@ app.delete('/pet/delete', (req, res) => {
 // Actualizar mascota
 app.put('/pet/put', (req, res) => {
     const { id } = req.params;
-    const { name, age, photo, species, weight } = req.body;
-    const sql = 'UPDATE person SET name = ?, age = ?, photo = ?, species = ?, weight = ? WHERE id = ?';
+    const { age, name, photo, species, weight } = req.body;
+    const sql = 'UPDATE person SET age = ?, name = ?, photo = ?, species = ?, weight = ? WHERE id = ?';
 
-    conexion.query(sql, [name, age, photo, species, weight, id], (err,
+    conexion.query(sql, [age, name, photo, species, weight, id], (err,
         result) => {
         if (err) {
             return res.status(500).send(err);
