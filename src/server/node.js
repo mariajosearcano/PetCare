@@ -1,5 +1,4 @@
 // api
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -14,6 +13,11 @@ app.use(bodyParser.json());
 
 // usar los archivos estáticos (HTML, CSS, JS) 
 app.use(express.static('src'));
+
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "default-src 'self';");
+    next();
+  });
 
 
 // rutas api para usuarios

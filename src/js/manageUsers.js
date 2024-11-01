@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-
 const create = document.getElementById('create-user');
-createUser.addEventListener('click', () => {
+
+create.addEventListener('click', () => {
     // Obtener los valores del formulario
     const document = document.getElementById('floatingDocument').value;
     const name = document.getElementById('floatingUserName').value;
@@ -16,8 +15,8 @@ createUser.addEventListener('click', () => {
 });
 
 async function createUser(document, name, lastName, rol, email, password, phoneNumber) {
-    const url = '/create'; // Replace with your actual endpoint URL
-  
+    const url = chooseUrl(rol);
+    
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -28,7 +27,6 @@ async function createUser(document, name, lastName, rol, email, password, phoneN
           document,
           name,
           lastName, // Use camelCase for consistency
-          rol,
           email,
           password,
           phoneNumber
@@ -45,7 +43,15 @@ async function createUser(document, name, lastName, rol, email, password, phoneN
       console.error('Error creating user:', error);
     }
   }
-=======
+
+async function chooseUrl(rol){
+    if (rol == 'Veterinarian'){
+        return '/veterinarian/create'; // Replace with your actual endpoint URL
+    } else {
+        return '/Pet Owner/create'; // Replace with your actual endpoint URL
+    }
+}
+
 const documentInput = document.getElementById('floatingDocument');
 const nameInput = document.getElementById('floatingUserName');
 const lastNameInput = document.getElementById('floatingUserlastName');
@@ -136,4 +142,3 @@ function displayPersons(persons) {
         tableBody.innerHTML += row;
     });
 }
->>>>>>> 4472b99077c3ae8dc7114ceb6303e80b27f8973b
