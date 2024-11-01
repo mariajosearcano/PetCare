@@ -1,9 +1,9 @@
 const inputName = document.getElementById('floatingName');
-const selectSpecies = document.getElementById('selectSpecies');
+const selectSpecies = document.getElementById('select-species');
 const inputAge = document.getElementById('floatingAge');
 const inputWeight = document.getElementById('floatingWeight');
 const inputPhoto = document.getElementById('pet-photo');
-const inputPetOwnerDcoument = document.getElementById('floating-pet-owner-document');
+const inputPetOwnerDocument = document.getElementById('floating-pet-owner-document');
 
 const registerButton = document.getElementById('btnRegisterPet');
 const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
@@ -22,7 +22,7 @@ function InsertPet() {
         age: inputAge.value,
         weight: inputWeight.value,
         photo: inputPhoto.value,
-        pet_owner_document: inputPetOwnerDcoument.value
+        pet_owner_document: inputPetOwnerDocument.value
     };
 
     fetch('http://localhost:3007/pet/post', {
@@ -32,9 +32,19 @@ function InsertPet() {
         },
         body: JSON.stringify(pets)
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Network error: ' + res.statusText);
+        }
+        return res.json();
+    })
     .then(data => {
         console.log(data);
+        alert('Pet registered successfully');
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('There was no possible to register the pet');
     });
 
     inputName.value = '';
@@ -42,7 +52,7 @@ function InsertPet() {
     inputAge.value = '';
     inputWeight.value = '';
     inputPhoto.value = '';
-    inputPetOwnerDcoument.value = '';
+    inputPetOwnerDocument.value = '';
 }
 
 // READ
@@ -50,18 +60,28 @@ collapseButtonVisualize.addEventListener('click', VisualizeData);
 
 function VisualizeData() {
     fetch('http://localhost:3007/pet/read')
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Network error: ' + res.statusText);
+        }
+        return res.json();
+    })
     .then(data => {
         console.log(data);
+        tableBody.innerHTML = ''; // Clear existing rows
         data.forEach(pet => {
             AddPetRow(pet);
         });
-        AddPetRow(data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('There was no possible to fetch the pets');
     });
 }
 
 function AddPetRow(pet) {
-    const row = document.createElement('tr'); row.innerHTML = `
+    const row = document.createElement('tr'); 
+    row.innerHTML = `
     <td>${pet.name}</td> 
     <td>${pet.species}</td> 
     <td>${pet.age}</td> 
@@ -81,13 +101,24 @@ function DeletePet() {
     fetch(`http://localhost:3007/pet/delete/${petName}`, {
         method: 'DELETE'
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Network response was not ok ' + res.statusText);
+        }
+        return res.json();
+    })
     .then(data => {
         console.log(data);
-        const row = document.querySelector(`
-        #personasTable tr td:first-child:contains(${petName})`
-        ).parentNode; 
-        row.remove();
+        const rows = document.querySelectorAll('#personasTable tr');
+        rows.forEach(row => {
+            if (row.cells[0].textContent === petName) {
+                row.remove();
+            }
+        });
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('There was a problem deleting the pet');
     });
 }
 
