@@ -40,20 +40,20 @@ function InsertPet() {
         },
         body: JSON.stringify(pets)
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network error: ' + res.statusText);
-        }
-        return res.json();
-    })
-    .then(data => {
-        console.log(data);
-        alert('Pet registered successfully');
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('There was no possible to register the pet');
-    });
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network error: ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert('Pet registered successfully');
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was no possible to register the pet');
+        });
 
     inputName.value = '';
     selectSpecies.selectedIndex = 0;
@@ -69,22 +69,22 @@ selectNameUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
 function GetNames(selectElement) {
     fetch('http://localhost:3007/pet/read')
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network error: ' + res.statusText);
-        }
-        return res.json();
-    })
-    .then(data => {
-        selectElement.innerHTML = ''; // Clear existing options
-        data.forEach(pet => {
-            AddPetOption(pet, selectElement);
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network error: ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            selectElement.innerHTML = ''; // Clear existing options
+            data.forEach(pet => {
+                AddPetOption(pet, selectElement);
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was no possible to fetch the names');
         });
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('There was no possible to fetch the names');
-    });
 }
 
 function AddPetOption(pet, selectElement) {
@@ -98,26 +98,26 @@ collapseButtonVisualize.addEventListener('click', VisualizeData);
 
 function VisualizeData() {
     fetch('http://localhost:3007/pet/read')
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network error: ' + res.statusText);
-        }
-        return res.json();
-    })
-    .then(data => {
-        tableBody.innerHTML = ''; // Clear existing rows
-        data.forEach(pet => {
-            AddPetRow(pet);
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network error: ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach(pet => {
+                AddPetRow(pet);
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was no possible to fetch the pets');
         });
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('There was no possible to fetch the pets');
-    });
 }
 
 function AddPetRow(pet) {
-    const row = document.createElement('tr'); 
+    const row = document.createElement('tr');
     row.innerHTML = `
     <td>${pet.name}</td> 
     <td>${pet.species}</td> 
@@ -127,6 +127,45 @@ function AddPetRow(pet) {
     <td>${pet.pet_owner_document}</td>
     `;
     tableBody.appendChild(row);
+}
+
+selectNameUpdate.addEventListener('click', updateForm);
+
+function updateForm() {
+    let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+
+    fetch(`http://localhost:3007/pet/read/${name}`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network error: ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+
+            console.log(data);
+            // update form
+            inputName.value = data.name;
+            inputAgeUpdate.value = data.age;
+            inputWeightUpdate.value = data.weight;
+
+
+            // Suponiendo que data.species contiene el valor que deseas seleccionar
+            const speciesValue = data.species;
+
+            // Encuentra la opción en el select que tiene el valor correspondiente
+            const options = selectSpeciesUpdate.options;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === speciesValue) {
+                    selectSpeciesUpdate.selectedIndex = i;
+                    break;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was no possible to fetch the pet');
+        });
 }
 
 // DELETE
@@ -141,26 +180,25 @@ function DeletePet() {
     }
 
     let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
-    console.log(name);
 
     fetch(`http://localhost:3007/pet/delete/${name}`, {
         method: 'DELETE'
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok ' + res.statusText);
-        }
-        return res.json();
-    })
-    .then(data => {
-        console.log(data);
-        alert('Pet deleted successfully');
-        GetNames(selectNames);
-        GetNames(selectNameUpdate);
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('There was a problem deleting the pet');
-    });
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert('Pet deleted successfully');
+            GetNames(selectNames);
+            GetNames(selectNameUpdate);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was a problem deleting the pet');
+        });
 }
 

@@ -138,6 +138,18 @@ app.get('/pet/read', (req, res) => {
     });
 });
 
+// Obtener mascota por nombre
+app.get('/pet/read/:name', (req, res) => {
+    const name = req.params.name;
+    const sql = 'SELECT * FROM pet WHERE name = ?';
+    conexion.query(sql, [name], (err, results) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json(results[0]);
+    });
+});
+
 // Crear mascota 
 app.post('/pet/post', (req, res) => {
     const { age, name, photo, species, weight, pet_owner_document } = req.body;
