@@ -19,6 +19,10 @@ app.use((req, res, next) => {
     next();
   });
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/src/html/base.html');
+});
+
 
 // rutas api para usuarios
 
