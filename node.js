@@ -1,5 +1,4 @@
 // api
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -11,9 +10,49 @@ const app = express();
 // Middleware 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// usar los archivos estáticos (HTML, CSS, JS) 
+//RUTAS
+
+app.use((req, res, next) => {
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
+    );
+    next();
+});
+
 app.use(express.static('src'));
+app.use('/assets', express.static('assets'));
+app.use('/src/css', express.static(__dirname + '/src/css'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/src/html/base.html');
+});
+  
+// Ruta para la página principal (login.html)
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/src/html/login.html');
+});
+
+// Ruta para admin.html
+app.get('/admin', (req, res) => {
+    res.sendFile(__dirname + '/src/html/admin.html');
+});
+
+// Ruta para formsPetOwner.html
+app.get('/form', (req, res) => {
+    res.sendFile(__dirname + '/src/html/formsPetOwner.html');
+});
+
+// Ruta para managePet.html
+app.get('/manage-pet', (req, res) => {
+    res.sendFile(__dirname + '/src/html/managePet.html');
+});
+
+app.get('/password', (req, res) => {
+    res.sendFile(__dirname + '/src/html/password.html');
+});
 
 // Ruta para la página inicial
 app.get('/', (req, res) => {
