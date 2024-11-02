@@ -24,13 +24,37 @@ app.use((req, res, next) => {
     next();
   });
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/src/html/base.html');
-});
-
 // Servir archivos estáticos desde la carpeta assets
 app.use('/assets', express.static('assets'));
 app.use('/src/css', express.static(__dirname + '/src/css'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/src/html/base.html');
+});
+  
+// Ruta para la página principal (login.html)
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/src/html/login.html');
+});
+
+// Ruta para admin.html
+app.get('/admin', (req, res) => {
+    res.sendFile(__dirname + '/src/html/admin.html');
+});
+
+// Ruta para formsPetOwner.html
+app.get('/form', (req, res) => {
+    res.sendFile(__dirname + '/src/html/formsPetOwner.html');
+});
+
+// Ruta para managePet.html
+app.get('/manage-pet', (req, res) => {
+    res.sendFile(__dirname + '/src/html/managePet.html');
+});
+
+app.get('/password', (req, res) => {
+    res.sendFile(__dirname + '/src/html/password.html');
+});
 
 
 // rutas api para usuarios
