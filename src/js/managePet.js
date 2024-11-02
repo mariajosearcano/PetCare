@@ -134,6 +134,13 @@ function AddPetRow(pet) {
 deleteButton.addEventListener('click', DeletePet);
 
 function DeletePet() {
+
+    const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
+
+    if (confirm !== 'yes') {
+        return;
+    }
+
     let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
     console.log(name);
 
