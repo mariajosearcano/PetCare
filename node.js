@@ -11,6 +11,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Middleware para procesar los datos enviados por el formulario (POST)
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//RUTAS
+
 // usar los archivos estáticos (HTML, CSS, JS) 
 app.use(express.static('src'));
 
@@ -22,6 +27,10 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/src/html/base.html');
 });
+
+// Servir archivos estáticos desde la carpeta assets
+app.use('/assets', express.static('assets'));
+app.use('/src/css', express.static(__dirname + '/src/css'));
 
 
 // rutas api para usuarios
