@@ -15,6 +15,10 @@ app.use(bodyParser.json());
 // usar los archivos estáticos (HTML, CSS, JS) 
 app.use(express.static('src'));
 
+// Ruta para la página inicial
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/../src/html/base.html');
+});
 
 // rutas api para usuarios
 
