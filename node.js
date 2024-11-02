@@ -35,6 +35,11 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/src/html/login.html');
 });
 
+//Ruta para manageUsers
+app.get('/manageUsers', (req, res) => {
+    res.sendFile(__dirname + '/src/html/manageUsers.html');
+})
+
 // Ruta para admin.html
 app.get('/admin', (req, res) => {
     res.sendFile(__dirname + '/src/html/admin.html');
@@ -52,11 +57,6 @@ app.get('/manage-pet', (req, res) => {
 
 app.get('/password', (req, res) => {
     res.sendFile(__dirname + '/src/html/password.html');
-});
-
-// Ruta para la página inicial
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/../src/html/base.html');
 });
 
 // rutas api para usuarios

@@ -1,4 +1,4 @@
-const create = document.getElementById('create-user');
+const create = document.getElementById('create');
 
 create.addEventListener('click', () => {
     // Obtener los valores del formulario
