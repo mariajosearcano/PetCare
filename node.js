@@ -10,21 +10,19 @@ const app = express();
 // Middleware 
 app.use(cors());
 app.use(bodyParser.json());
-
-// Middleware para procesar los datos enviados por el formulario (POST)
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //RUTAS
 
-// usar los archivos estáticos (HTML, CSS, JS) 
-app.use(express.static('src'));
-
 app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', "default-src 'self';");
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
+    );
     next();
-  });
+});
 
-// Servir archivos estáticos desde la carpeta assets
+app.use(express.static('src'));
 app.use('/assets', express.static('assets'));
 app.use('/src/css', express.static(__dirname + '/src/css'));
 
