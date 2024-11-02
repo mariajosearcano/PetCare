@@ -130,8 +130,6 @@ app.delete('/person/delete/:document', async (req, res) => {
     });
 });
 
-
-
 // Rutas de la API para pet
 
 // Obtener todas las mascotas
