@@ -151,10 +151,10 @@ app.post('/pet/post', (req, res) => {
 });
 
 // Eliminar mascota
-app.delete('/pet/delete', (req, res) => {
-    const { id } = req.params;
-    const sql = 'DELETE FROM pet WHERE id = ?';
-    conexion.query(sql, [id], (err, result) => {
+app.delete('/pet/delete/:name', (req, res) => {
+    const { name } = req.params;    // se obtiene el nombre de la mascota de
+    const sql = 'DELETE FROM pet WHERE name = ?';
+    conexion.query(sql, [name], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }

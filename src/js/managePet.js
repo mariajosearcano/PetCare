@@ -134,9 +134,10 @@ function AddPetRow(pet) {
 deleteButton.addEventListener('click', DeletePet);
 
 function DeletePet() {
-    let petName = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+    let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+    console.log(name);
 
-    fetch(`http://localhost:3007/pet/delete/${petName}`, {
+    fetch(`http://localhost:3007/pet/delete/${name}`, {
         method: 'DELETE'
     })
     .then(res => {
