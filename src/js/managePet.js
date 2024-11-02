@@ -16,6 +16,7 @@ const inputPhotoUpdate = document.getElementById('pet-photo-update');
 
 const registerButton = document.getElementById('btnRegisterPet');
 const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
+const collapseButtonUpdate = document.getElementById('btn-collapse-update');
 const deleteButton = document.getElementById('btn-delete-pet');
 
 const tableBody = document.querySelector('#tbody-visualize-pet');
@@ -65,9 +66,18 @@ function InsertPet() {
 
 // filter pet by name
 selectNames.addEventListener('click', GetNames(selectNames));
-selectNameUpdate.addEventListener('click', GetNames(selectNameUpdate));
+collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
 function GetNames(selectElement) {
+
+    // const existingOption = Array.from(selectElement.options).find(option => option.text === "Select a pet");
+    // if (!existingOption) {
+    //     const option = document.createElement('option');
+    //     option.textContent = "Select a pet";
+    //     option.value = ""; // También puedes establecer un valor vacío si es necesario
+    //     selectElement.appendChild(option);
+    // }
+
     fetch('http://localhost:3007/pet/read')
         .then(res => {
             if (!res.ok) {
@@ -83,7 +93,7 @@ function GetNames(selectElement) {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('There was no possible to fetch the names');
+            console.error('There was no possible to fetch the names');
         });
 }
 
@@ -112,7 +122,7 @@ function VisualizeData() {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('There was no possible to fetch the pets');
+            console.error('There was no possible to fetch the pets');
         });
 }
 
@@ -129,7 +139,7 @@ function AddPetRow(pet) {
     tableBody.appendChild(row);
 }
 
-selectNameUpdate.addEventListener('click', updateForm);
+selectNameUpdate.addEventListener('change', updateForm);
 
 function updateForm() {
     let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
@@ -164,7 +174,7 @@ function updateForm() {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('There was no possible to fetch the pet');
+            console.error('There was no possible to fetch the pet');
         });
 }
 
@@ -198,7 +208,7 @@ function DeletePet() {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('There was a problem deleting the pet');
+            alert('There was no possible to delete the pet');
         });
 }
 
