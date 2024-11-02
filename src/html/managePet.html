@@ -130,6 +130,14 @@
                         </button>
                     </p>
 
+                    <!-- collapse button update pet -->
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseUpdatePet" aria-expanded="false" aria-controls="collapseUpdatePet">
+                            Update pet
+                        </button>
+                    </p>
+
                     <!-- collapse content register pet -->
                     <div class="collapse" id="collapseRegisterPet">
                         <div class="text-start bg-info-subtle p-5">
@@ -198,12 +206,53 @@
                                 </tbody>
                             </table>
                             <!-- table visualize pet -->
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="btn-delete-pet">Delete pet</button>
-                            </div>
                         </div>
                     </div>
                     <!-- collapse content visualize pet -->
+
+                    <!-- collapse content update pet -->
+                    <div class="collapse" id="collapseUpdatePet">
+                        <div class="text-start bg-info-subtle p-5">
+                            <!-- form Update pet -->
+                            <select class="form-select mb-3" aria-label="Default select example" id="select-name-update">
+                                <option selected>Name</option>
+                            </select>
+                            <select class="form-select mb-3" aria-label="Default select example" id="select-species-update">
+                                <option selected>Species</option>
+                                <option value="1">Vertebrate</option>
+                                <option value="2">Arthropod</option>
+                                <option value="3">Annelid</option>
+                                <option value="4">Mollusk</option>
+                                <option value="5">Sponge</option>
+                                <option value="6">Cnidarian</option>
+                                <option value="7">Echinoderm</option>
+                                <option value="8">Nematode</option>
+                                <option value="9">Platyhelminth</option>
+                            </select>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floating-age-update" placeholder="Age">
+                                <label for="floating-age-update">Age</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floating-weight-update" placeholder="Weight">
+                                <label for="floating-weight-update">Weight (kg)</label>
+                            </div>
+                            <div class="mb-5">
+                                <label for="pet-photo-update" class="form-label">Pet photo</label>
+                                <input class="form-control" type="file" id="pet-photo-update">
+                            </div>
+                            <!-- <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floating-pet-owner-document"
+                                    placeholder="pet-owner-document">
+                                <label for="floating-pet-owner-document">Pet owner document</label>
+                            </div> -->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" class="btn btn-primary" id="btn-delete-pet">Delete</button>
+                            </div>
+                            <!-- form Update pet -->
+                        </div>
+                    </div>
+                    <!-- collapse content update pet -->
 
                 </div>
             </div>

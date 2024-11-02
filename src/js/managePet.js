@@ -1,3 +1,4 @@
+// insert
 const inputName = document.getElementById('floatingName');
 const selectSpecies = document.getElementById('select-species');
 const inputAge = document.getElementById('floatingAge');
@@ -5,6 +6,13 @@ const inputWeight = document.getElementById('floatingWeight');
 const inputPhoto = document.getElementById('pet-photo');
 const inputPetOwnerDocument = document.getElementById('floating-pet-owner-document');
 const selectNames = document.getElementById('select-name');
+
+// update and delete
+const selectNameUpdate = document.getElementById('select-name-update');
+const selectSpeciesUpdate = document.getElementById('select-species-update');
+const inputAgeUpdate = document.getElementById('floating-age-update');
+const inputWeightUpdate = document.getElementById('floating-weight-update');
+const inputPhotoUpdate = document.getElementById('pet-photo-update');
 
 const registerButton = document.getElementById('btnRegisterPet');
 const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
@@ -56,9 +64,10 @@ function InsertPet() {
 }
 
 // filter pet by name
-selectNames.addEventListener('click', GetNames);
+selectNames.addEventListener('click', GetNames(selectNames));
+selectNameUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
-function GetNames() {
+function GetNames(selectElement) {
     fetch('http://localhost:3007/pet/read')
     .then(res => {
         if (!res.ok) {
@@ -67,9 +76,9 @@ function GetNames() {
         return res.json();
     })
     .then(data => {
-        selectNames.innerHTML = ''; // Clear existing options
+        selectElement.innerHTML = ''; // Clear existing options
         data.forEach(pet => {
-            AddPetOption(pet);
+            AddPetOption(pet, selectElement);
         });
     })
     .catch(error => {
@@ -78,10 +87,10 @@ function GetNames() {
     });
 }
 
-function AddPetOption(pet) {
+function AddPetOption(pet, selectElement) {
     const option = document.createElement('option');
     option.textContent = pet.name;
-    selectNames.appendChild(option);
+    selectElement.appendChild(option);
 }
 
 // READ
@@ -125,7 +134,7 @@ function AddPetRow(pet) {
 deleteButton.addEventListener('click', DeletePet);
 
 function DeletePet() {
-    let petName = inputName.value;
+    let petName = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
 
     fetch(`http://localhost:3007/pet/delete/${petName}`, {
         method: 'DELETE'
@@ -138,12 +147,7 @@ function DeletePet() {
     })
     .then(data => {
         console.log(data);
-        const rows = document.querySelectorAll('#personasTable tr');
-        rows.forEach(row => {
-            if (row.cells[0].textContent === petName) {
-                row.remove();
-            }
-        });
+        alert('Pet deleted successfully');
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
