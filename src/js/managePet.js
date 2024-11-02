@@ -105,7 +105,6 @@ function VisualizeData() {
         return res.json();
     })
     .then(data => {
-        console.log(data);
         tableBody.innerHTML = ''; // Clear existing rows
         data.forEach(pet => {
             AddPetRow(pet);
@@ -156,6 +155,8 @@ function DeletePet() {
     .then(data => {
         console.log(data);
         alert('Pet deleted successfully');
+        GetNames(selectNames);
+        GetNames(selectNameUpdate);
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
