@@ -175,7 +175,7 @@ app.delete('/pet/delete/:name', (req, res) => {
 });
 
 // Actualizar mascota
-app.put('/pet/put:pet_id', (req, res) => {
+app.put('/pet/put/:pet_id', (req, res) => {
     const { pet_id } = req.params;
     const { age, name, photo, species, weight, pet_owner_document } = req.body;
     const sql = 'UPDATE pet SET age = ?, name = ?, photo = ?, species = ?, weight = ?, pet_owner_document = ? WHERE pet_id = ?';

@@ -156,6 +156,9 @@ function updateForm() {
             inputWeightUpdate.value = data.weight;
             inputPetOwnerDocumentUpdate.value = data.pet_owner_document;
 
+            // store pet_id de la mascota seleccionada
+            localStorage.setItem('pet_id', data.pet_id.toString());
+
             // update select
             const speciesValue = data.species;
 
@@ -189,7 +192,8 @@ function UpdatePet() {
 
     console.log(pets);
 
-    let pet_id 
+    let pet_id = parseInt(localStorage.getItem('pet_id'));
+    console.log(pet_id);
 
     fetch(`http://localhost:3007/pet/put/${pet_id}`, {
         method: 'PUT',
