@@ -65,18 +65,10 @@ function InsertPet() {
 }
 
 // filter pet by name
-selectNames.addEventListener('click', GetNames(selectNames));
+collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
 collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
 function GetNames(selectElement) {
-
-    // const existingOption = Array.from(selectElement.options).find(option => option.text === "Select a pet");
-    // if (!existingOption) {
-    //     const option = document.createElement('option');
-    //     option.textContent = "Select a pet";
-    //     option.value = ""; // También puedes establecer un valor vacío si es necesario
-    //     selectElement.appendChild(option);
-    // }
 
     fetch('http://localhost:3007/pet/read')
         .then(res => {
@@ -153,14 +145,12 @@ function updateForm() {
         })
         .then(data => {
 
-            console.log(data);
             // update form
             inputName.value = data.name;
             inputAgeUpdate.value = data.age;
             inputWeightUpdate.value = data.weight;
 
-
-            // Suponiendo que data.species contiene el valor que deseas seleccionar
+            // update select
             const speciesValue = data.species;
 
             // Encuentra la opción en el select que tiene el valor correspondiente
