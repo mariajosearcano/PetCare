@@ -9,21 +9,25 @@ const selectNames = document.getElementById('select-name');
 
 // update and delete
 const selectNameUpdate = document.getElementById('select-name-update');
+const inputNameUpdate = document.getElementById('floating-name-update');
 const selectSpeciesUpdate = document.getElementById('select-species-update');
 const inputAgeUpdate = document.getElementById('floating-age-update');
 const inputWeightUpdate = document.getElementById('floating-weight-update');
 const inputPhotoUpdate = document.getElementById('pet-photo-update');
+const inputPetOwnerDocumentUpdate = document.getElementById('floating-pet-owner-document-update');
 
-const registerButton = document.getElementById('btnRegisterPet');
+// buttons
 const collapseButtonVisualize = document.getElementById('btn-collapse-visualize');
 const collapseButtonUpdate = document.getElementById('btn-collapse-update');
+const registerButton = document.getElementById('btnRegisterPet');
 const deleteButton = document.getElementById('btn-delete-pet');
+const updateButton = document.getElementById('btn-update-pet');
 
 const tableBody = document.querySelector('#tbody-visualize-pet');
 
+// INSERT
 registerButton.addEventListener('click', InsertPet);
 
-// INSERT
 function InsertPet() {
     let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
         name: inputName.value,
@@ -121,6 +125,7 @@ function VisualizeData() {
 function AddPetRow(pet) {
     const row = document.createElement('tr');
     row.innerHTML = `
+    <td>${pet.pet_id}</td>
     <td>${pet.name}</td> 
     <td>${pet.species}</td> 
     <td>${pet.age}</td> 
@@ -146,9 +151,10 @@ function updateForm() {
         .then(data => {
 
             // update form
-            inputName.value = data.name;
+            inputNameUpdate.value = data.name;
             inputAgeUpdate.value = data.age;
             inputWeightUpdate.value = data.weight;
+            inputPetOwnerDocumentUpdate.value = data.pet_owner_document;
 
             // update select
             const speciesValue = data.species;
@@ -165,6 +171,47 @@ function updateForm() {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             console.error('There was no possible to fetch the pet');
+        });
+}
+
+// UPDATE
+updateButton.addEventListener('click', UpdatePet);
+
+function UpdatePet() {
+    let pets = {
+        name: inputNameUpdate.value,
+        species: selectSpeciesUpdate.options[selectSpeciesUpdate.selectedIndex].text,
+        age: inputAgeUpdate.value,
+        weight: inputWeightUpdate.value,
+        photo: inputPhotoUpdate.value,   // revisar
+        pet_owner_document: inputPetOwnerDocumentUpdate.value
+    };
+
+    console.log(pets);
+
+    let pet_id 
+
+    fetch(`http://localhost:3007/pet/put/${pet_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pets)
+    })
+        .then(res => {
+            console.log('Respuesta del servidor:', res);
+            if (!res.ok) {
+                throw new Error('Network error: ' + res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert('Pet updated successfully');
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('There was no possible to update the pet');
         });
 }
 

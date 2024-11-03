@@ -175,12 +175,12 @@ app.delete('/pet/delete/:name', (req, res) => {
 });
 
 // Actualizar mascota
-app.put('/pet/put', (req, res) => {
-    const { id } = req.params;
+app.put('/pet/put:pet_id', (req, res) => {
+    const { pet_id } = req.params;
     const { age, name, photo, species, weight, pet_owner_document } = req.body;
-    const sql = 'UPDATE person SET age = ?, name = ?, photo = ?, species = ?, weight = ?, pet_owner_document = ? WHERE id = ?';
+    const sql = 'UPDATE pet SET age = ?, name = ?, photo = ?, species = ?, weight = ?, pet_owner_document = ? WHERE pet_id = ?';
 
-    conexion.query(sql, [age, name, photo, species, weight, pet_owner_document, id], (err,
+    conexion.query(sql, [age, name, photo, species, weight, pet_owner_document, pet_id], (err,
         result) => {
         if (err) {
             return res.status(500).send(err);
