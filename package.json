@@ -4,7 +4,10 @@
   "description": "Pet Health and Appointment Management System",
   "main": "node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node node.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "node inspect node.js",
+    "dev": "nodemon node.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "mysql2": "^3.11.3",
+    "nodemon": "^3.1.7",
     "pg": "^8.13.0"
   }
 }

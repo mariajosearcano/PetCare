@@ -2,7 +2,7 @@ const create = document.getElementById('create');
 
 create.addEventListener('click', () => {
     // Obtener los valores del formulario
-    const document = document.getElementById('floatingDocument').value;
+    const doc = document.getElementById('floatingDocument').value;
     const name = document.getElementById('floatingUserName').value;
     const lastName = document.getElementById('floatingUserLastName').value;
     const rol = document.getElementById('selectRole').value;
@@ -11,7 +11,7 @@ create.addEventListener('click', () => {
     const phone = document.getElementById('floatingUserPhone').value;
 
     // Enviar una solicitud al servidor para crear un nuevo usuario
-    createUser(document, name, lastName, rol, email, password, phone);
+    createUser(doc, name, lastName, rol, email, password, phone);
 });
 
 async function createUser(document, name, lastName, rol, email, password, phoneNumber) {
@@ -43,62 +43,13 @@ async function createUser(document, name, lastName, rol, email, password, phoneN
       console.error('Error creating user:', error);
     }
   }
-
+//swal.fire
 async function chooseUrl(rol){
     if (rol == 'Veterinarian'){
         return '/veterinarian/create'; // Replace with your actual endpoint URL
     } else {
-        return '/Pet Owner/create'; // Replace with your actual endpoint URL
+        return '/petowner/create'; // Replace with your actual endpoint URL
     }
-}
-
-const documentInput = document.getElementById('floatingDocument');
-const nameInput = document.getElementById('floatingUserName');
-const lastNameInput = document.getElementById('floatingUserlastName');
-const roleSelect = document.getElementById('selectRole');
-const emailInput = document.getElementById('floatingUserEmail');
-const passwordInput = document.getElementById('floatingUserPassword');
-const phoneInput = document.getElementById('floatingUserPhone');
-
-const createButton = document.getElementById('create');
-const searchButton = document.getElementById('searchButton');
-
-createButton.addEventListener('click', createUser);
-searchButton.addEventListener('click', readUser);
-
-const BASE_URL = 'http://localhost:3007';
-
-function createUser() {
-
-    let person = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
-        document: documentInput.value,
-        name: nameInput.value,
-        last_name: lastNameInput.value,
-        //role: roleSelect.options[roleSelect.selectedIndex].text,
-        email: emailInput.value,
-        password: passwordInput.value,
-        phone_number: phoneInput.value
-    };
-
-    fetch(`${BASE_URL}/person/create`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(person)
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-    });
-
-    documentInput.value = '';
-    nameInput.value = '';
-    lastNameInput.value = '';
-    roleSelect.selectedIndex = 0;
-    emailInput.value = '';
-    passwordInput.value = '';
-    phoneInput.value = '';
 }
 
 // Función para obtener todas las personas

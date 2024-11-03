@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const conexion = require('./db');   // modulo local db
+const conexion = require('./db');  // modulo local db
 
 // Inicializar la app de Express 
 const app = express();
@@ -59,7 +59,7 @@ app.get('/password', (req, res) => {
     res.sendFile(__dirname + '/src/html/password.html');
 });
 
-// rutas api para usuarios
+// rutas API para usuarios
 
 // obtener todas las personas
 app.get('/person/read', (req, res) => {
@@ -72,9 +72,9 @@ app.get('/person/read', (req, res) => {
 });
 
 // crear una persona
-app.post('/person/create', (req, res) => {
+app.post('/petowner/create', (req, res) => {
     const { document,name,last_name,email,password,phone_number } = req.body;
-    const sql = 'INSERT INTO person (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';    // el id se genera automaticamente
+    const sql = 'INSERT INTO pet_owner (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';
     conexion.query(sql, [document,name,last_name,email,password,phone_number], (err, result) => {
         if (err) {
             return res.status(500).send(err);
