@@ -202,3 +202,26 @@ function DeletePet() {
         });
 }
 
+// control collapse
+document.addEventListener('DOMContentLoaded', function() {
+    const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+
+    collapseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Obtener el ID del colapso que se va a abrir
+            const targetId = this.getAttribute('data-bs-target');
+
+            // Cerrar otros colapsos
+            collapseButtons.forEach(btn => {
+                const otherTargetId = btn.getAttribute('data-bs-target');
+                if (otherTargetId !== targetId) {
+                    const collapseElement = document.querySelector(otherTargetId);
+                    const collapse = bootstrap.Collapse.getInstance(collapseElement);
+                    if (collapse) {
+                        collapse.hide(); // Cerrar el colapso
+                    }
+                }
+            });
+        });
+    });
+});
