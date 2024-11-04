@@ -11,6 +11,8 @@
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../css/manageUsers.css">
 </head>
 
 <body>
@@ -127,18 +129,18 @@
                     <!-- collapse button visualize Users -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseVisualizeUsers" aria-expanded="false"
-                            aria-controls="collapseVisualizeUsers">
-                            Visualize user
+                            data-bs-target="#collapseVisualizePetOwners" aria-expanded="false"
+                            aria-controls="collapseVisualizePetOwners" onclick="get('PetOwner')">
+                                Visualize Pet Owners
                         </button>
                     </p>
 
                     <!-- collapse button update Users info -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseUpdateUsers" aria-expanded="false"
-                            aria-controls="collapseUpdateUsers">
-                            Update user info
+                            data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+                            aria-controls="collapseVisualizeVeterinarians" onclick="get('Veterinarian')">
+                            Visualize Veterinarians
                         </button>
                     </p>
 
@@ -155,67 +157,96 @@
                     <div class="collapse" id="collapseRegisterUsers">
                         <div class="text-start bg-info-subtle p-5">
                             <!-- form register Users -->
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingDocument" placeholder="Document">
-                                <label for="floatingUserDocument">Document</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserName" placeholder="Name">
-                                <label for="floatingUserName">Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserlastName" placeholder="Last Name">
-                                <label for="floatingUserlastName">Last name</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" id="selectRole">
-                                <option selected>Role</option>
-                                <option value="1">Veterinarian</option>
-                                <option value="2">Pet owner</option>
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingUserEmail" placeholder="Email">
-                                <label for="floatingUserEmail">Email</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingUserPassword" placeholder="Password">
-                                <label for="floatingUserPassword">Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserPhone" placeholder="Phone">
-                                <label for="floatingUserPhone">Phone number</label>
-                            </div>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="create">Create</button>
-                            </div>
+                            <form action="/postUser" method="POST">
+                                <div class="mb-3">
+                                    <label for="inputNumber" class="form-label">Document</label>
+                                    <input type="number" class="form-control" id="inputNumber" aria-describedby="numberHelp">
+                                    <!-- <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputText" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="inputText" aria-describedby="textHelp">
+                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputText" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="inputText" aria-describedby="textHelp">
+                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                  <label for="inputEmail" class="form-label">Email address</label>
+                                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                  <label for="inputPassword" class="form-label">Password</label>
+                                  <input type="password" class="form-control" id="inputPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputNumber" class="form-label">Phone number</label>
+                                    <input type="number" class="form-control" id="inputNumber" aria-describedby="numberHelp">
+                                    <!-- <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div> -->
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio1">
+                                    <label class="form-check-label" for="flexRadio1">Pet Owner</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio2" checked>
+                                    <label class="form-check-label" for="flexRadio2">Veterinarian</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">
+                                        Accept our 
+                                        <a href="">Terms & Conditions</a>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                             <!-- form register Users -->
                         </div>
                     </div>
                     <!-- collapse content register Users -->
 
                     <!-- collapse content visualize Users -->
-                    <div class="collapse" id="collapseVisualizeUsers">
+                    <div class="collapse" id="collapseVisualizePetOwners">
                         <div class="text-start bg-info-subtle p-5">
-                            <label for="floatingUserDocument">Document to search for</label>
-                            <input type="number" class="form-control" id="searchDocument" placeholder="Document">
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="searchButton">Search</button>
-                            </div>
-                            <br>
-                                
-                            <!-- table visualize Users -->
-                            <table class="table table-striped">
+                            <table class="table">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">Document</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Last name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Phone number</th>
-                                    </tr>
+                                  <tr>
+                                    <th scope="col">Document</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Last name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone number</th>
+                                    <th></th>
+                                    <th></th>
+                                  </tr>
                                 </thead>
-                                <tbody id="personsTable">
-                                    
+                                <tbody id="petOwnerTableBody">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="collapseVisualizeVeterinarians">
+                        <div class="text-start bg-info-subtle p-5">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Document</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Last name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone number</th>
+                                    <th></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody id="veterinarianTableBody">
+                                  
                                 </tbody>
                             </table>
                         </div>
@@ -231,11 +262,11 @@
                                 <!-- here will be the options with each document -->
                             </select>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserName" placeholder="Name">
+                                <input type="text" class="form-control" id="floatingName" placeholder="Name">
                                 <label for="floatingUserName">Name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserlastName" placeholder="Last Name">
+                                <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name">
                                 <label for="floatingUserlastName">Last name</label>
                             </div>
                             <select class="form-select mb-3" aria-label="Default select example" id="selectRole">
@@ -244,15 +275,15 @@
                                 <option value="2">Pet owner</option>
                             </select>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingUserEmail" placeholder="Email">
+                                <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
                                 <label for="floatingUserEmail">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingUserPassword" placeholder="Password">
-                                <label for="floatingUserPassword">Password</label>
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserPhone" placeholder="Phone">
+                                <input type="text" class="form-control" id="floatingPhone" placeholder="Phone">
                                 <label for="floatingUserPhone">Phone number</label>
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
