@@ -13,10 +13,13 @@ const scheduleController = require('./src/controllers/scheduleController');
 const treatmentController = require('./src/controllers/treatmentController');
 const vaccineController = require('./src/controllers/vaccineController');
 const veterinarianController = require('./src/controllers/veterinarianController');
+const loginController = require('./src/controllers/loginController.js');
 //const userController = require('./src/controllers/userController');
 
 router.get('/home', pagesController.getHome);
 router.get('/manageUsers', pagesController.getManageUsers);
+router.get('/login', pagesController.getLogin);
+
 
 router.get('/getAllappointments', appointmentController.getAppointments);
 
@@ -39,6 +42,8 @@ router.get('/getAlltreatments', treatmentController.getTreatments);
 router.get('/getAllvaccines', vaccineController.getVaccines);
 
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
+
+router.post('/postLogin', loginController.login);
 
 //router.get('/postUser', userController.postUser);
 

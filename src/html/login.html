@@ -53,46 +53,43 @@
                     </div>
         
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form action="/login" method="POST"> <!-- Cambiamos a POST -->
+                        <form action="/postLogin" method="POST" id="loginForm">
+                            <div id="error-message" class="alert alert-danger d-none" role="alert">
+                              Incorrect email or password. Please try again.
+                            </div>
+                          
                             <div class="divider d-flex align-items-center my-4">
-                                <p class="text-center fw-bold mx-3 mb-0">Sign in</p>
+                              <p class="text-center fw-bold mx-3 mb-0">Sign in</p>
                             </div>
-                        
-                            <!-- Mostrar mensaje de error si existe -->
-                            <div>
-                                <script>
-                                    const params = new URLSearchParams(window.location.search);
-                                    if (params.has('error')) {
-                                        document.write('<p style="color:red;" class="text-center">Incorrect email or password.</p>');
-                                    }
-                                </script>
-                            </div>
-                        
-                            <!-- Email input -->
+                          
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
-                                    placeholder="Enter a valid email address" required />
-                                <label class="form-label" for="form3Example3">Email address</label>
+                              <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                     placeholder="Enter a valid email address" required />
+                              <label class="form-label" for="email">Email address</label>
+                              <div id="email-error" class="text-danger d-none">
+                                Please enter a valid email address.
+                              </div>
                             </div>
-                        
-                            <!-- Password input -->
+                          
                             <div data-mdb-input-init class="form-outline mb-3">
-                                <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
-                                    placeholder="Enter password" required />
-                                <label class="form-label" for="form3Example4">Password</label>
+                              <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                     placeholder="Enter password" required />
+                              <label class="form-label" for="password">Password</label>
+                              <div id="password-error" class="text-danger d-none">
+                                Please enter your password.
+                              </div>
                             </div>
-                        
+                          
                             <a href="/password" class="text-body">Forgot password?</a>
-                        
-                            <!-- Botones alineados a la derecha -->
+                          
                             <div class="text-end mt-4">
-                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                                <p class="small fw-bold mt-2 pt-1 mb-0 d-inline">Don't have an account? 
-                                    <a href="/form" class="link-danger">Register</a>
-                                </p>
+                              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                                      style="padding-left: 2.5rem; padding-right: 2.5rem;" id="submitButton">Login</button>
+                              <p class="small fw-bold mt-2 pt-1 mb-0 d-inline">Don't have an account?
+                                <a href="/form" class="link-danger">Register</a>
+                              </p>
                             </div>
-                        </form>
+                          </form>
                         
                     </div>
                 </div>
