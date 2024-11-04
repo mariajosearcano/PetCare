@@ -43,7 +43,7 @@
 //       console.error('Error creating user:', error);
 //     }
 //   }
-// //swal.fire
+
 // async function chooseUrl(rol){
 //     if (rol == 'Veterinarian'){
 //         return '/veterinarian/create'; // Replace with your actual endpoint URL
@@ -122,6 +122,48 @@ async function chooseUrl(rol){
         return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
     }
 }
+
+// async function createUser(document, name, lastName, rol, email, password, phoneNumber) {
+//     const url = chooseUrl(rol);
+    
+//     try {
+//       const response = await fetch(url, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json' // Set appropriate content type
+//         },
+//         body: JSON.stringify({ // Send data as JSON
+//           document,
+//           name,
+//           lastName, // Use camelCase for consistency
+//           email,
+//           password,
+//           phoneNumber
+//         })
+//       });
+  
+//       if (!response.ok) {
+//         throw new Error(`Error creating user: ${response.statusText}`);
+//       }
+  
+//       const data = await response.json(); // Parse response as JSON if applicable
+//       console.log(data.message); // Example: "New user inserted with ID: ..."
+//     } catch (error) {
+//       console.error('Error creating user:', error);
+//     }
+//   }
+
+// async function chooseUrl(rol){
+//     if (rol == 'Veterinarian'){
+//         return '/veterinarian/create'; // Replace with your actual endpoint URL
+//     } else {
+//         return '/petowner/create'; // Replace with your actual endpoint URL
+//     }
+// }
+
+// async function deconstruct(){
+
+// }
 
 // other functions
 

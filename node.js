@@ -78,17 +78,17 @@ app.listen(3007, () => {
 //     });
 // });
 
-// // crear una persona
-// app.post('/petowner/create', (req, res) => {
-//     const { document,name,last_name,email,password,phone_number } = req.body;
-//     const sql = 'INSERT INTO pet_owner (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';
-//     conexion.query(sql, [document,name,last_name,email,password,phone_number], (err, result) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.json({ id: result.insertId, document,name,last_name,email,password,phone_number });
-//     });
-// });
+// crear una persona
+app.post('/petowner/create', (req, res) => {
+    const { document,name,last_name,email,password,phone_number } = req.body;
+    const sql = 'INSERT INTO pet_owner (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';
+    conexion.query(sql, [document,name,last_name,email,password,phone_number], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ id: result.insertId, document,name,last_name,email,password,phone_number });
+    });
+});
 
 // // obtener una persona
 // app.get('/person/read/:document', (req, res) => {
