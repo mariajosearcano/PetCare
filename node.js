@@ -78,7 +78,7 @@ app.listen(3007, () => {
 //     });
 // });
 
-// crear una persona
+//crear una persona
 app.post('/petowner/create', (req, res) => {
     const { document,name,last_name,email,password,phone_number } = req.body;
     const sql = 'INSERT INTO pet_owner (document,name,last_name,email,password,phone_number) VALUES (?, ?, ?, ?, ?, ?)';
@@ -200,7 +200,7 @@ app.post('/petowner/create', (req, res) => {
 //     });
 // });
 
-// // Eliminar mascota
+// Eliminar mascota
 // app.delete('/pet/delete', (req, res) => {
 //     const { id } = req.params;
 //     const sql = 'DELETE FROM pet WHERE id = ?';
