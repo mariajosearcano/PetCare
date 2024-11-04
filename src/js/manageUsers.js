@@ -98,18 +98,28 @@
 
 // onclick functions
 
-async function getPetOwners() {
+async function get(rol) {
+    const url = await chooseUrl(rol);
+
     try {
-      const response = await fetch('/getPetOwners');
+      const response = await fetch(url);
       const data = await response.json();
   
       if (!response.ok) {
         throw new Error('Error to get Pet Owner data');
       }
   
-      populateTable(data);
+      populateTable(data, url);
     } catch (error) {
       console.error('Error:', error);
+    }
+}
+
+async function chooseUrl(rol){
+    if (rol == 'PetOwner'){
+        return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
+    } else {
+        return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
     }
 }
 
@@ -139,8 +149,11 @@ function createTableRow(data) {
 }
 
     // Function to populate the table
-function populateTable(data) {
-    const tableBody = document.getElementById('petOwnerTableBody');
+function populateTable(data, url) {
+    const id = chooseId(url);
+
+    const tableBody = document.getElementById(id);
+    tableBody.innerHTML = '';
     data.forEach((item, index) => {
         const row = createTableRow({
             document: item.document,
@@ -151,4 +164,12 @@ function populateTable(data) {
         });
         tableBody.appendChild(row);
     });
+}
+
+function chooseId(url){
+    if (url == '/getPetOwners'){
+        return ('petOwnerTableBody').toString();
+    } else {
+        return ('veterinarianTableBody').toString();
+    }
 }

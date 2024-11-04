@@ -1,5 +1,4 @@
 const connection = require('../../db');
-const manageUsers = require('../js/manageUsers');
 
 function getPetOwners(req, res) {
     connection.query('SELECT * FROM pet_owner', (err, results) => {

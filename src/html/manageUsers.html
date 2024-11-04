@@ -129,8 +129,8 @@
                     <!-- collapse button visualize Users -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseVisualizeUsers" aria-expanded="false"
-                            aria-controls="collapseVisualizeUsers" onclick="getPetOwners()">
+                            data-bs-target="#collapseVisualizePetOwners" aria-expanded="false"
+                            aria-controls="collapseVisualizePetOwners" onclick="get('PetOwner')">
                                 Visualize Pet Owners
                         </button>
                     </p>
@@ -138,9 +138,9 @@
                     <!-- collapse button update Users info -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseUpdateUsers" aria-expanded="false"
-                            aria-controls="collapseUpdateUsers" onclick="visualizeVeterinarians()">
-                            Visualize Veterinarian
+                            data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+                            aria-controls="collapseVisualizeVeterinarians" onclick="get('Veterinarian')">
+                            Visualize Veterinarians
                         </button>
                     </p>
 
@@ -157,45 +157,60 @@
                     <div class="collapse" id="collapseRegisterUsers">
                         <div class="text-start bg-info-subtle p-5">
                             <!-- form register Users -->
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingDocument" placeholder="Document">
-                                <label for="floatingUserDocument">Document</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserName" placeholder="Name">
-                                <label for="floatingUserName">Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserLastName" placeholder="Last Name">
-                                <label for="floatingUserlastName">Last name</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" id="selectRole">
-                                <option selected>Role</option>
-                                <option value="1">Veterinarian</option>
-                                <option value="2">Pet owner</option>
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingUserEmail" placeholder="Email">
-                                <label for="floatingUserEmail">Email</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingUserPassword" placeholder="Password">
-                                <label for="floatingUserPassword">Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingUserPhone" placeholder="Phone">
-                                <label for="floatingUserPhone">Phone number</label>
-                            </div>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="create">Create</button>
-                            </div>
+                            <form action="/postUser" method="POST">
+                                <div class="mb-3">
+                                    <label for="exampleInputNumber" class="form-label">Document</label>
+                                    <input type="number" class="form-control" id="exampleInputNumber" aria-describedby="numberHelp">
+                                    <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputText" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp">
+                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputText" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp">
+                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleInputEmail" class="form-label">Email address</label>
+                                  <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="exampleInputPassword" class="form-label">Password</label>
+                                  <input type="password" class="form-control" id="exampleInputPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputNumber" class="form-label">Phone number</label>
+                                    <input type="number" class="form-control" id="exampleInputNumber" aria-describedby="numberHelp">
+                                    <!-- <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div> -->
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault">
+                                    <label class="form-check-label" for="flexRadioDefault">Pet Owner</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">Veterinarian</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">
+                                        Accept our 
+                                        <a href="">Terms & Conditions</a>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                             <!-- form register Users -->
                         </div>
                     </div>
                     <!-- collapse content register Users -->
 
                     <!-- collapse content visualize Users -->
-                    <div class="collapse" id="collapseVisualizeUsers">
+                    <div class="collapse" id="collapseVisualizePetOwners">
                         <div class="text-start bg-info-subtle p-5">
                             <table class="table">
                                 <thead>
@@ -210,6 +225,27 @@
                                   </tr>
                                 </thead>
                                 <tbody id="petOwnerTableBody">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="collapseVisualizeVeterinarians">
+                        <div class="text-start bg-info-subtle p-5">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Document</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Last name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone number</th>
+                                    <th></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody id="veterinarianTableBody">
                                   
                                 </tbody>
                             </table>
