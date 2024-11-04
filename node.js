@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 //rutas
 app.use('/', router);
 app.use(express.static('src'));
-app.use('/assets', express.static('assets'));
+    app.use('/assets', express.static('assets'));
 app.use('/src/css', express.static(path.resolve(__dirname, 'src/css')));
 app.use('/src/html', express.static(path.resolve(__dirname, 'src/html')));
 
