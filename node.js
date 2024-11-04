@@ -1,4 +1,3 @@
-// api
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -219,6 +218,47 @@ app.put('/pet/put', (req, res) => {
         res.json({ message: 'pet updated' });
     });
 });
+
+//Ingresar dependiendo perfil
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const sql = `
+            SELECT 'pet_owner' AS table_name, * FROM "pet_owner" WHERE email = ? AND password = ?
+            UNION ALL
+            SELECT 'veterinarian' AS table_name, * FROM "veterinarian" WHERE email = ? AND password = ?
+            UNION ALL
+            SELECT 'clinic_administrator' AS table_name, * FROM "clinic_administrator" WHERE email = ? AND password = ?
+        `;
+
+        const result = await pool.query(sql, [email, password, email, password, email, password]);
+
+        if (result.length > 0) {
+            const userProfile = result[0].table_name;
+
+            // Redirige según el perfil
+            switch (userProfile) {
+                case 'pet_owner':
+                    return res.sendFile(__dirname + '/src/html/petOwner.html');
+                case 'veterinarian':
+                    return res.sendFile(__dirname + '/src/html/manageUsers.html');
+                case 'clinic_administrator':
+                    return res.sendFile(__dirname + '/src/html/admin.html');
+                default:
+                    console.error('Perfil de usuario inesperado:', userProfile);
+                    return res.redirect('/login?error=true');
+            }
+        } else {
+            // Usuario no encontrado
+            res.redirect('/login?error=true');
+        }
+    } catch (err) {
+        console.error('Error en la solicitud de inicio de sesión:', err);
+        res.status(500).send('Error al procesar la solicitud');
+    }
+});
+
 
 // Iniciar el servidor
 app.listen(3007, () => {
