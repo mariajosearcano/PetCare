@@ -1,6 +1,6 @@
 const connection = require('../../db');
 
-function getPetOwners(req, res) {
+async function getPetOwners(req, res) {
     connection.query('SELECT * FROM pet_owner', (err, results) => {
         if (err) {
             console.error(err);

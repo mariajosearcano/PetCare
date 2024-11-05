@@ -119,90 +119,85 @@
 
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseRegisterUsers" aria-expanded="false"
-                            aria-controls="collapseRegisterUsers">
+                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseCreateUsers" aria-expanded="false"
+                            aria-controls="collapseCreateUsers">
                             Create user
                         </button>
                     </p>
 
                     <!-- collapse button visualize Users -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseVisualizePetOwners" aria-expanded="false"
-                            aria-controls="collapseVisualizePetOwners" onclick="get('PetOwner')">
-                                Visualize Pet Owners
+                            aria-controls="collapseVisualizePetOwners" onclick="get('Pet Owner')">
+                            Visualize Pet Owners
                         </button>
                     </p>
 
                     <!-- collapse button update Users info -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
+                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
                             aria-controls="collapseVisualizeVeterinarians" onclick="get('Veterinarian')">
                             Visualize Veterinarians
                         </button>
                     </p>
 
-                    <!-- collapse button update Users info -->
-                    <p class="d-inline-flex gap-1">
-                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseUpdateUsers" aria-expanded="false"
-                            aria-controls="collapseUpdateUsers">
-                            Delete user
-                        </button>
-                    </p>
-
                     <!-- collapse content register Users -->
-                    <div class="collapse" id="collapseRegisterUsers">
+                    <div class="collapse" id="collapseCreateUsers">
                         <div class="text-start bg-info-subtle p-5">
                             <!-- form register Users -->
                             <form action="/postUser" method="POST">
                                 <div class="mb-3">
-                                    <label for="inputDocument" class="form-label">Document</label>
-                                    <input type="number" class="form-control" id="inputDocument" aria-describedby="documentHelp">
-                                    <!-- <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div> -->
+                                    <label for="postDocument" class="form-label">Document</label>
+                                    <input type="number" class="form-control" id="postDocument" aria-describedby="postDocumentHelp" name="document" required>
+                                    <div id="postDocumentHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="inputName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp">
-                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                    <label for="postName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="postName" aria-describedby="postNameHelp" name="name" required>
+                                    <div id="postNameHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="inputLastName" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" id="inputLastName" aria-describedby="lastNameHelp">
-                                    <!-- <div id="textHelp" class="form-text">We'll never share your name with anyone else.</div> -->
+                                    <label for="postLastName" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="postLastName" aria-describedby="postlastNameHelp" name="last_name" required>
+                                    <div id="postLastNameHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                  <label for="inputEmail" class="form-label">Email address</label>
-                                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
-                                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                                  <label for="postEmail" class="form-label">Email address</label>
+                                  <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required>
+                                  <div id="postEmailHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                  <label for="inputPassword" class="form-label">Password</label>
-                                  <input type="password" class="form-control" id="inputPassword">
+                                  <label for="postPassword" class="form-label">Password</label>
+                                  <input type="password" class="form-control" id="postPassword" name="password" required>
+                                  <div id="postPasswordHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="inputPhone" class="form-label">Phone number</label>
-                                    <input type="number" class="form-control" id="inputPhone" aria-describedby="phoneHelp">
-                                    <!-- <div id="numberHelp" class="form-text">We'll never share your document with anyone else.</div> -->
+                                    <label for="postPhone" class="form-label">Phone number</label>
+                                    <input type="number" class="form-control" id="postPhone" aria-describedby="postPhoneHelp" name="phone_number" required>
+                                    <div id="postPhoneHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio1">
-                                    <label class="form-check-label" for="flexRadio1">Pet Owner</label>
+                                    <input class="form-check-input" type="radio" name="rol" id="postRol" value="Pet Owner" required>
+                                    <label class="form-check-label" for="postRol">Pet Owner</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio2" checked>
-                                    <label class="form-check-label" for="flexRadio2">Veterinarian</label>
+                                    <input class="form-check-input" type="radio" name="rol" id="postRol1" value="Veterinarian" required>
+                                    <label class="form-check-label" for="postRol1">Veterinarian</label>
                                 </div>
+                                <div id="postRolHelp" class="form-text">* required field</div>
+                                <br><br><br>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" id="postTerms" required>
+                                    <label class="form-check-label" for="postTerms">
                                         Accept our 
                                         <a href="">Terms & Conditions</a>
                                     </label>
+                                    <div id="postTermsHelp" class="form-text">* required field</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-info">Submit</button>
                             </form>
                             <!-- form register Users -->
                         </div>
@@ -254,42 +249,61 @@
                     <!-- collapse content visualize Users -->
 
                     <!-- collapse content update Users -->
-                    <div class="collapse" id="collapseUpdateUsers">
+                    <div class="collapse" id="collapseUpdateUser">
                         <div class="text-start bg-info-subtle p-5">
-                            <!-- form update Users -->
-                            <select class="form-select mb-3" aria-label="Default select example" id="selectName">
-                                <option selected>Document</option>
-                                <!-- here will be the options with each document -->
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingName" placeholder="Name">
-                                <label for="floatingUserName">Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name">
-                                <label for="floatingUserlastName">Last name</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" id="selectRole">
-                                <option selected>Role</option>
-                                <option value="1">Veterinarian</option>
-                                <option value="2">Pet owner</option>
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmail" placeholder="Email">
-                                <label for="floatingUserEmail">Email</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                <label for="floatingPassword">Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingPhone" placeholder="Phone">
-                                <label for="floatingUserPhone">Phone number</label>
-                            </div>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary">Update</button>
-                            </div>
-                            <!-- form update Users -->
+                            <!-- form register Users -->
+                            <form action="/putUser" method="PUT">
+                                <div class="mb-3">
+                                    <label for="putDocument" class="form-label">Document</label>
+                                    <input type="number" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required>
+                                    <div id="putDocumentHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="putName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required>
+                                    <div id="putNameHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="putLastName" class="form-label">Last name</label>
+                                    <input type="text" class="form-control" id="putLastName" aria-describedby="putlastNameHelp" name="last_name" required>
+                                    <div id="putLastNameHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="putEmail" class="form-label">Email address</label>
+                                  <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required>
+                                  <div id="putEmailHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="putPassword" class="form-label">Password</label>
+                                  <input type="password" class="form-control" id="putPassword" name="password" required>
+                                  <div id="putPasswordHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="putPhone" class="form-label">Phone number</label>
+                                    <input type="number" class="form-control" id="putPhone" aria-describedby="putPhoneHelp" name="phone_number" required>
+                                    <div id="putPhoneHelp" class="form-text">* required field</div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="putRol" value="Pet Owner" required>
+                                    <label class="form-check-label" for="putRol">Pet Owner</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="putRol1" value="Veterinarian" required>
+                                    <label class="form-check-label" for="putRol1">Veterinarian</label>
+                                </div>
+                                <div id="putRolHelp" class="form-text">* required field</div>
+                                <br><br><br>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="putTerms" required>
+                                    <label class="form-check-label" for="putTerms">
+                                        Accept our 
+                                        <a href="">Terms & Conditions</a>
+                                    </label>
+                                    <div id="putTermsHelp" class="form-text">* required field</div>
+                                </div>
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            </form>
+                            <!-- form register Users -->
                         </div>
                     </div>
                     <!-- collapse content update Users -->

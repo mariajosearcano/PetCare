@@ -117,54 +117,12 @@ async function get(rol) {
 
 
 async function chooseUrl(rol){
-    if (rol == 'PetOwner'){
+    if (rol == 'Pet Owner'){
         return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
     } else {
         return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
     }
 }
-
-// async function createUser(document, name, lastName, rol, email, password, phoneNumber) {
-//     const url = chooseUrl(rol);
-    
-//     try {
-//       const response = await fetch(url, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json' // Set appropriate content type
-//         },
-//         body: JSON.stringify({ // Send data as JSON
-//           document,
-//           name,
-//           lastName, // Use camelCase for consistency
-//           email,
-//           password,
-//           phoneNumber
-//         })
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error(`Error creating user: ${response.statusText}`);
-//       }
-  
-//       const data = await response.json(); // Parse response as JSON if applicable
-//       console.log(data.message); // Example: "New user inserted with ID: ..."
-//     } catch (error) {
-//       console.error('Error creating user:', error);
-//     }
-//   }
-
-// async function chooseUrl(rol){
-//     if (rol == 'Veterinarian'){
-//         return '/veterinarian/create'; // Replace with your actual endpoint URL
-//     } else {
-//         return '/petowner/create'; // Replace with your actual endpoint URL
-//     }
-// }
-
-// async function deconstruct(){
-
-// }
 
 // other functions
 
@@ -178,14 +136,22 @@ function createTableRow(data) {
         <td>${data.email}</td>
         <td>${data.phone_number}</td>
         <td>
-            <button type="button" class="btn btn-outline-info">
-                Edit
-            </button>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseUpdateUser" aria-expanded="false"
+                    aria-controls="collapseUpdateUser">
+                    Edit
+                </button>
+            </p>
         </td>
         <td>
-            <button type="button" class="btn btn-outline-danger">
-                Delete
-            </button>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-danger btn-lg toggle-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+                    aria-controls="collapseVisualizeVeterinarians">
+                    Delete
+                </button>
+            </p>
         </td>
     `;
     return row;
@@ -216,3 +182,19 @@ function chooseId(url){
         return ('veterinarianTableBody').toString();
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.toggle-button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            const target = document.querySelector(this.getAttribute('data-bs-target'));
+            if (target.classList.contains('show')) {
+                target.classList.remove('show');
+            } else {
+                document.querySelectorAll('.collapse').forEach(collapse => collapse.classList.remove('show'));
+                target.classList.add('show');
+            }
+        });
+    });
+});
