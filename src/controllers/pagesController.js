@@ -9,7 +9,7 @@ function getManageUsers(req, res) {
 }
 
 function getLogin(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/login.html'));
+    res.sendFile(path.join(__dirname, '../html/login.html'));
 }
 
 function getAdmin(req, res) {
