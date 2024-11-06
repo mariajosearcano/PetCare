@@ -17,28 +17,6 @@ async function postUser(req, res) {
     });
 }
 
-async function putUser(req, res) {
-    const { document, name, last_name, email, password, phone_number, rol } = req.body;
-    const table = await chooseTable(rol);
-
-    const sql = `
-        UPDATE ${table} SET name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
-    `;
-
-    connection.query(sql, [name, last_name, email, password, phone_number, document], (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        //res.redirect('/manageUsers');
-        deleteUser(req, res);
-    });
-}
-
 async function deleteUser(req, res) {
     const { document, rol } = req.body;
     const table = await chooseTable(rol);
@@ -70,7 +48,6 @@ function chooseTable(rol) {
 
 module.exports = {
     postUser,
-    putUser,
     deleteUser
 }   
 

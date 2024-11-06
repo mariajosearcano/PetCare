@@ -11,6 +11,31 @@ async function getPetOwners(req, res) {
     });
 }
 
+async function putPetOwner(req, res) {
+
+    const { 
+        document,
+        putDocument, putName, putLastName, putEmail, putPassword, putPhoneNumber
+    } = req.body;
+
+    const sql = `
+        UPDATE pet_owner SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
+    `;
+
+    connection.query(sql, [putDocument, putName, putLastName, putEmail, putPassword, putPhoneNumber, document], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.redirect('/manageUsers');
+    });
+}
+
 module.exports = {
-    getPetOwners
+    getPetOwners,
+    putPetOwner
 }

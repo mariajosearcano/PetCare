@@ -17,11 +17,15 @@ const loginController = require('./src/controllers/loginController.js');
 const userController = require('./src/controllers/userController');
 const registermedicineController = require('./src/controllers/registermedicineController');
 
-//const userController = require('./src/controllers/userController');
+
 
 router.get('/home', pagesController.getHome);
+
 router.get('/manageUsers', pagesController.getManageUsers);
+router.get('/manageMedicines', pagesController.getManageMedicines);
+
 router.get('/login', pagesController.getLogin);
+
 
 router.get('/getAllappointments', appointmentController.getAppointments);
 
@@ -42,18 +46,18 @@ router.get('/getAlltreatments', treatmentController.getTreatments);
 router.get('/getAllvaccines', vaccineController.getVaccines);
 
 router.get('/getPetOwners', petOwnerController.getPetOwners);
+router.put('/putPetOwner', petOwnerController.putPetOwner);
 
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
+router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 
 router.post('/postLogin', loginController.login);
 
 router.post('/postUser', userController.postUser);
-router.put('/putUser', userController.putUser);
 
 router.post('/postMedicine', registermedicineController.medicine);
 
 
-//router.get('/postUser', userController.postUser);
 
 module.exports = router;
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Manage users | PetCare</title>
+    <title>Manage Users | PetCare</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -29,10 +29,10 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="#">Manage Users</a>
-                    <a class="nav-link" href="#">Manage Medicines Stock</a>
-                    <a class="nav-link" href="#">Manage Appointments</a>
-                    <a class="nav-link" href="#">Reports</a>
-                    <a class="nav-link" href="#">Sign In</a>
+                    <a class="nav-link" href="/manageMedicines">Manage Medicines Stock</a>
+                    <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
+                    <a class="nav-link" href="/generateReports">Reports</a>
+                    <a class="nav-link" href="/signIn">Sign In</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
         <div class="p-5 text-center bg-body-tertiary"
             style="background-image: url('/assets/7261023.jpg'); background-size: cover; background-position: center; color: rgb(2, 1, 1);">
             <h1 class="mb-3">PetCare</h1>
-            <h4 class="mb-3">Veterinary clinic</h4>
+            <h4 class="mb-3">Veterinary Clinic</h4>
         </div>
 
     </header>
@@ -243,32 +243,32 @@
                             <!-- form register Users -->
                             <form>
                                 <div class="mb-3">
-                                    <label for="putDocument" class="form-label">Document</label>
+                                    <label for="putDocument" class="form-label">New Document</label>
                                     <input type="number" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required>
                                     <div id="putDocumentHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="putName" class="form-label">Name</label>
+                                    <label for="putName" class="form-label">New Name</label>
                                     <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required>
                                     <div id="putNameHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="putLastName" class="form-label">Last name</label>
+                                    <label for="putLastName" class="form-label">New Last name</label>
                                     <input type="text" class="form-control" id="putLastName" aria-describedby="putlastNameHelp" name="last_name" required>
                                     <div id="putLastNameHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                  <label for="putEmail" class="form-label">Email address</label>
+                                  <label for="putEmail" class="form-label">New Email address</label>
                                   <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required>
                                   <div id="putEmailHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                  <label for="putPassword" class="form-label">Password</label>
+                                  <label for="putPassword" class="form-label">New Password</label>
                                   <input type="password" class="form-control" id="putPassword" name="password" required>
                                   <div id="putPasswordHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="putPhone" class="form-label">Phone number</label>
+                                    <label for="putPhone" class="form-label">New Phone number</label>
                                     <input type="number" class="form-control" id="putPhoneNumber" aria-describedby="putPhoneHelp" name="phone_number" required>
                                     <div id="putPhoneHelp" class="form-text">* required field</div>
                                 </div>
@@ -281,7 +281,7 @@
                                     </label>
                                     <div id="putTermsHelp" class="form-text">* required field</div>
                                 </div>
-                                <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" onclick="putUser()">
+                                <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="put-user-button" onclick="putAction()">
                                     Submit
                                 </button>
                                 <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
@@ -294,26 +294,6 @@
                         </div>
                     </div>
                     <!-- collapse content update Users -->
-
-                    <!-- collapse content register Medicine -->
-
-                    <div class="collapse" id="collapseRegisterMedicine">
-                        <div class="text-start bg-info-subtle p-5">
-                            <form action="/postMedicine" method="POST">
-                                <div class="mb-3">
-                                    <label for="inputName" class="form-label">Medicine name</label>
-                                    <input type="text" class="form-control" id="inputName" name="name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputStock" class="form-label">Stock</label>
-                                    <input type="number" class="form-control" id="inputStock" name="stock" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Register</button>
-                            </form>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
         </div>
@@ -382,7 +362,7 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-5">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> Medellin, carrera 10 # 20-40</p>
+                        <p><i class="fas fa-home me-3"></i> Medellin, Carrera 10 # 20-40</p>
                         <p>
                             <i class="fas fa-envelope me-3"></i>
                             info@petcare.com

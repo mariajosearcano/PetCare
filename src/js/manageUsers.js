@@ -1,31 +1,29 @@
-
+var putUserForm = {};
+const formPutDocument = document.getElementById('putDocument');
+const formPutName = document.getElementById('putName');
+const formPutLastName = document.getElementById('putLastName');
+const formPutEmail = document.getElementById('putEmail');
+const formPutPassword = document.getElementById('putPassword');
+const formPutPhoneNumber = document.getElementById('putPhoneNumber');
 // onclick functions
 
 async function getUsers(url) {
     const urlString = (url).toString();
 
     try {
-      const response = await fetch(urlString);
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error('Error to get Pet Owner data');
-      }
-  
-      populateTable(data, urlString);
-      collapse();
+        const response = await fetch(urlString);
+        const data = await response.json();
+    
+        if (!response.ok) {
+            throw new Error('Error to get Pet Owners data');
+        }
+    
+        populateTable(data, urlString);
+        collapse();
     } catch (error) {
       console.error('Error:', error);
     }
 }
-
-// function chooseUrl(rol){
-//     if (rol == 'Pet Owner'){
-//         return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
-//     } else {
-//         return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
-//     }
-// }
 
 // other functions
 
@@ -58,10 +56,14 @@ function createTableRow(data) {
         </td>
     `;
 
-    const editButton = row.querySelector('.edit-btn');
-    editButton.addEventListener('click', () => populateForm(data));
+    gatewayPopulateForm(data, row);
 
     return row;
+}
+
+function gatewayPopulateForm(data, row){
+    const editButton = row.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => populateForm(data));
 }
 
     // Function to populate the table
@@ -101,20 +103,75 @@ function chooseTable(url) {
 }
 
 function populateForm(data){
-    const putDocument = document.getElementById('putDocument');
-    const putName = document.getElementById('putName');
-    const putLastName = document.getElementById('putLastName');
-    const putEmail = document.getElementById('putEmail');
-    const putPhoneNumber = document.getElementById('putPhoneNumber');
+    formPutDocument.value = data.document;
+    formPutName.value = data.name;
+    formPutLastName.value = data.last_name;
+    formPutEmail.value = data.email;
+    formPutPhoneNumber.value = data.phone_number;
 
-    putDocument.value = data.document;
-    putName.value = data.name;
-    putLastName.value = data.last_name;  
-    putEmail.value = data.email;
-    putPhoneNumber.value = data.phone_number;
+    putUserForm = {
+        putDocument: data.document,
+        putName: data.name,
+        putLastName: data.last_name,
+        putEmail: data.email,
+        putPassword: data.password,
+        putPhoneNumber: data.phone_number,
+        table: data.table
+    }
 }
 
+function putAction(){
+    var newPutUserForm = {
+        newPutDocument: formPutDocument.value,
+        newPutName: formPutName.value,
+        newPutLastName: formPutLastName.value,
+        newPutEmail: formPutEmail.value,
+        newPutPassword: formPutPassword.value,
+        newPutPhoneNumber: formPutPhoneNumber.value
+    }
 
+    //gatewayPutUser(putUserForm, newPutUserForm);
+    putUser(putUserForm, newPutUserForm);
+}
+
+// function gatewayPutUser(putUserForm, newPutUserForm){
+//     const putUserButton = document.getElementById('put-user-button');
+//     putUserButton.addEventListener('click', () => putUser(putUserForm, newPutUserForm));
+// }
+
+async function putUser(putUserForm, newPutUserForm) {
+    const url = chooseUrl(putUserForm.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json' // Set appropriate content type
+            },
+            body: JSON.stringify({ // Send data as JSON
+                putUserForm,
+                newPutUserForm
+            })
+        });
+    
+        if (!response.ok) {
+            throw new Error(`Error updating user: ${response.statusText}`);
+        }
+    
+        const data = await response.json(); // Parse response as JSON if applicable
+        console.log(data.message); // Example: "New user inserted with ID: ..."
+    } catch (error) {
+        console.error('Error updating user:', error);
+    }
+}
+
+function chooseUrl(table){
+    if (table == 'pet_owner'){
+        return ('/putPetOwner').toString(); 
+    } else {
+        return ('/putVeterinarian').toString(); 
+    }
+}
 
 
 
