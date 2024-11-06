@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" href="/assets/Logo.png" type="image/x-icon">
+    <link rel="icon" href="/assets/circle-logo.png" type="image/x-icon">
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,36 +18,25 @@
 <body>
     <header>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-body">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarExample01"
-                    aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                <a class="navbar-brand" href="/home">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50wv" height="50hv" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarExample01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="/src/html/admin.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/src/html/manageUsers.html">Manage users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manage medicines stock</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manage appointments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Reports</a>
-                        </li>
-                    </ul>
-
-                    <!-- sign in buttom -->
-                    <button type="button" class="btn ms-auto">Sign in</button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Manage Users</a>
+                    <a class="nav-link" href="#">Manage Medicines Stock</a>
+                    <a class="nav-link" href="#">Manage Appointments</a>
+                    <a class="nav-link" href="#">Reports</a>
+                    <a class="nav-link" href="#">Sign In</a>
+                    </div>
                 </div>
             </div>
-        </nav>
+          </nav>
 
         <!-- Jumbotron -->
         <div class="p-5 text-center bg-body-tertiary"
@@ -119,34 +108,34 @@
 
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCreateUsers" aria-expanded="false"
-                            aria-controls="collapseCreateUsers">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsePostUsers" aria-expanded="false"
+                            aria-controls="collapsePostUsers">
                             Create user
                         </button>
                     </p>
 
                     <!-- collapse button visualize Users -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseVisualizePetOwners" aria-expanded="false"
-                            aria-controls="collapseVisualizePetOwners" onclick="get('Pet Owner')">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGetPetOwners" aria-expanded="false"
+                            aria-controls="collapseGetPetOwners" onclick="getUsers('/getPetOwners')">
                             Visualize Pet Owners
                         </button>
                     </p>
 
                     <!-- collapse button update Users info -->
                     <p class="d-inline-flex gap-1">
-                        <button class="btn btn-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
-                            aria-controls="collapseVisualizeVeterinarians" onclick="get('Veterinarian')">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGetVeterinarians" aria-expanded="false"
+                            aria-controls="collapseGetVeterinarians" onclick="getUsers('/getVeterinarians')">
                             Visualize Veterinarians
                         </button>
                     </p>
 
                     <!-- collapse content register Users -->
-                    <div class="collapse" id="collapseCreateUsers">
-                        <div class="text-start bg-info-subtle p-5">
+                    <div class="collapse envelope" id="collapsePostUsers">
+                        <div class="text-start p-5">
                             <!-- form register Users -->
                             <form action="/postUser" method="POST">
                                 <div class="mb-3">
@@ -176,7 +165,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="postPhone" class="form-label">Phone number</label>
-                                    <input type="number" class="form-control" id="postPhone" aria-describedby="postPhoneHelp" name="phone_number" required>
+                                    <input type="number" class="form-control" id="postPhoneNumber" aria-describedby="postPhoneHelp" name="phone_number" required>
                                     <div id="postPhoneHelp" class="form-text">* required field</div>
                                 </div>
                                 <div class="form-check">
@@ -205,8 +194,8 @@
                     <!-- collapse content register Users -->
 
                     <!-- collapse content visualize Users -->
-                    <div class="collapse" id="collapseVisualizePetOwners">
-                        <div class="text-start bg-info-subtle p-5">
+                    <div class="collapse table-collapse envelope" id="collapseGetPetOwners">
+                        <div class="text-start p-5">
                             <table class="table">
                                 <thead>
                                   <tr>
@@ -215,8 +204,8 @@
                                     <th scope="col">Last name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone number</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                   </tr>
                                 </thead>
                                 <tbody id="petOwnerTableBody">
@@ -226,8 +215,8 @@
                         </div>
                     </div>
 
-                    <div class="collapse" id="collapseVisualizeVeterinarians">
-                        <div class="text-start bg-info-subtle p-5">
+                    <div class="collapse table-collapse envelope" id="collapseGetVeterinarians">
+                        <div class="text-start p-5">
                             <table class="table">
                                 <thead>
                                   <tr>
@@ -236,8 +225,8 @@
                                     <th scope="col">Last name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone number</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                   </tr>
                                 </thead>
                                 <tbody id="veterinarianTableBody">
@@ -249,10 +238,10 @@
                     <!-- collapse content visualize Users -->
 
                     <!-- collapse content update Users -->
-                    <div class="collapse" id="collapseUpdateUser">
-                        <div class="text-start bg-info-subtle p-5">
+                    <div class="collapse envelope" id="collapsePutUser">
+                        <div class="text-start p-5">
                             <!-- form register Users -->
-                            <form action="/putUser" method="PUT">
+                            <form>
                                 <div class="mb-3">
                                     <label for="putDocument" class="form-label">Document</label>
                                     <input type="number" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required>
@@ -280,18 +269,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="putPhone" class="form-label">Phone number</label>
-                                    <input type="number" class="form-control" id="putPhone" aria-describedby="putPhoneHelp" name="phone_number" required>
+                                    <input type="number" class="form-control" id="putPhoneNumber" aria-describedby="putPhoneHelp" name="phone_number" required>
                                     <div id="putPhoneHelp" class="form-text">* required field</div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="putRol" value="Pet Owner" required>
-                                    <label class="form-check-label" for="putRol">Pet Owner</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="putRol1" value="Veterinarian" required>
-                                    <label class="form-check-label" for="putRol1">Veterinarian</label>
-                                </div>
-                                <div id="putRolHelp" class="form-text">* required field</div>
                                 <br><br><br>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="putTerms" required>
@@ -301,7 +281,14 @@
                                     </label>
                                     <div id="putTermsHelp" class="form-text">* required field</div>
                                 </div>
-                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" onclick="putUser()">
+                                    Submit
+                                </button>
+                                <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePutUser" aria-expanded="false"
+                                    aria-controls="collapsePutUser">
+                                    Cancel
+                                </button>
                             </form>
                             <!-- form register Users -->
                         </div>
@@ -325,7 +312,9 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-5">
                         <!-- Content -->
-                        <img src="/assets/logo.png" class="img-fluid h-50" alt="...">
+                        <a href="/home">
+                            <img src="/assets/circle-logo.png" class="img-fluid h-50" alt="...">
+                        </a>
                     </div>
                     <!-- Grid column -->
 

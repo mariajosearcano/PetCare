@@ -1,3 +1,172 @@
+
+// onclick functions
+
+async function getUsers(url) {
+    const urlString = (url).toString();
+
+    try {
+      const response = await fetch(urlString);
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error('Error to get Pet Owner data');
+      }
+  
+      populateTable(data, urlString);
+      collapse();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+}
+
+// function chooseUrl(rol){
+//     if (rol == 'Pet Owner'){
+//         return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
+//     } else {
+//         return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
+//     }
+// }
+
+// other functions
+
+    // Function to create a new table row
+function createTableRow(data) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <th scope="row">${data.document}</th>
+        <td>${data.name}</td>
+        <td>${data.last_name}</td>
+        <td>${data.email}</td>
+        <td>${data.phone_number}</td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsePutUser" aria-expanded="false"
+                    aria-controls="collapsePutUser">
+                    Edit
+                </button>
+            </p>
+        </td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-danger btn-lg" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+                    aria-controls="collapseVisualizeVeterinarians">
+                    Delete
+                </button>
+            </p>
+        </td>
+    `;
+
+    const editButton = row.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => populateForm(data));
+
+    return row;
+}
+
+    // Function to populate the table
+function populateTable(data, url) {
+    const id = chooseId(url);
+    const table = chooseTable(url);
+
+    const tableBody = document.getElementById(id);
+    tableBody.innerHTML = '';
+    data.forEach((item, index) => {
+        const row = createTableRow({
+            document: item.document,
+            name: item.name,
+            last_name: item.last_name,
+            email: item.email,
+            phone_number: item.phone_number,
+            table: table
+        });
+        tableBody.appendChild(row);
+    });
+}
+
+function chooseId(url){
+    if (url == '/getPetOwners'){
+        return ('petOwnerTableBody').toString();
+    } else {
+        return ('veterinarianTableBody').toString();
+    }
+}
+
+function chooseTable(url) {
+    if (url == '/getPetOwners'){
+        return ('pet_owner').toString();
+    } else {
+        return ('veterinarian').toString();
+    }
+}
+
+function populateForm(data){
+    const putDocument = document.getElementById('putDocument');
+    const putName = document.getElementById('putName');
+    const putLastName = document.getElementById('putLastName');
+    const putEmail = document.getElementById('putEmail');
+    const putPhoneNumber = document.getElementById('putPhoneNumber');
+
+    putDocument.value = data.document;
+    putName.value = data.name;
+    putLastName.value = data.last_name;  
+    putEmail.value = data.email;
+    putPhoneNumber.value = data.phone_number;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    collapse();
+});
+
+function collapse() {
+    const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    
+    collapseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Obtener el ID del colapso que se va a abrir
+            const targetId = this.getAttribute('data-bs-target');
+
+            // Cerrar otros colapsos
+            collapseButtons.forEach(btn => {
+                const otherTargetId = btn.getAttribute('data-bs-target');
+                if (otherTargetId !== targetId) {
+                    const collapseElement = document.querySelector(otherTargetId);
+                    const collapse = bootstrap.Collapse.getInstance(collapseElement);
+                    if (collapse) {
+                        collapse.hide(); // Cerrar el colapso
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+
+// collapseButtons.forEach(button => {
+//     button.addEventListener('click', function() {
+//         // Obtener el ID del colapso que se va a abrir
+//         var targetId = this.getAttribute('data-bs-target');
+
+//         // Cerrar otros colapsos
+//         collapseButtons.forEach(btn => {
+//             var otherTargetId = btn.getAttribute('data-bs-target');
+//             if (otherTargetId !== targetId) {
+//                 var collapseElement = document.querySelector(otherTargetId);
+//                 var collapse = bootstrap.Collapse.getInstance(collapseElement);
+//                 if (collapse) {
+//                     collapse.hide(); // Cerrar el colapso
+//                 }
+//             }
+//         });
+//     });
+// });
+
+
+
+
 // const create = document.getElementById('create');
 
 // create.addEventListener('click', () => {
@@ -93,108 +262,3 @@
 //         tableBody.innerHTML += row;
 //     });
 // }
-
-
-
-// onclick functions
-
-async function get(rol) {
-    const url = await chooseUrl(rol);
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error('Error to get Pet Owner data');
-      }
-  
-      populateTable(data, url);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-}
-
-
-async function chooseUrl(rol){
-    if (rol == 'Pet Owner'){
-        return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
-    } else {
-        return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
-    }
-}
-
-// other functions
-
-    // Function to create a new table row
-function createTableRow(data) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <th scope="row">${data.document}</th>
-        <td>${data.name}</td>
-        <td>${data.last_name}</td>
-        <td>${data.email}</td>
-        <td>${data.phone_number}</td>
-        <td>
-            <p class="d-inline-flex gap-1">
-                <button class="btn btn-outline-info btn-lg toggle-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseUpdateUser" aria-expanded="false"
-                    aria-controls="collapseUpdateUser">
-                    Edit
-                </button>
-            </p>
-        </td>
-        <td>
-            <p class="d-inline-flex gap-1">
-                <button class="btn btn-outline-danger btn-lg toggle-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
-                    aria-controls="collapseVisualizeVeterinarians">
-                    Delete
-                </button>
-            </p>
-        </td>
-    `;
-    return row;
-}
-
-    // Function to populate the table
-function populateTable(data, url) {
-    const id = chooseId(url);
-
-    const tableBody = document.getElementById(id);
-    tableBody.innerHTML = '';
-    data.forEach((item, index) => {
-        const row = createTableRow({
-            document: item.document,
-            name: item.name,
-            last_name: item.last_name,
-            email: item.email,
-            phone_number: item.phone_number
-        });
-        tableBody.appendChild(row);
-    });
-}
-
-function chooseId(url){
-    if (url == '/getPetOwners'){
-        return ('petOwnerTableBody').toString();
-    } else {
-        return ('veterinarianTableBody').toString();
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.toggle-button');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            const target = document.querySelector(this.getAttribute('data-bs-target'));
-            if (target.classList.contains('show')) {
-                target.classList.remove('show');
-            } else {
-                document.querySelectorAll('.collapse').forEach(collapse => collapse.classList.remove('show'));
-                target.classList.add('show');
-            }
-        });
-    });
-});
