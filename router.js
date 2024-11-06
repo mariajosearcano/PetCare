@@ -15,6 +15,9 @@ const petOwnerController = require('./src/controllers/petOwnerController');
 const veterinarianController = require('./src/controllers/veterinarianController');
 const loginController = require('./src/controllers/loginController.js');
 const userController = require('./src/controllers/userController');
+const registermedicineController = require('./src/controllers/registermedicineController');
+
+//const userController = require('./src/controllers/userController');
 
 router.get('/home', pagesController.getHome);
 router.get('/manageUsers', pagesController.getManageUsers);
@@ -46,6 +49,11 @@ router.post('/postLogin', loginController.login);
 
 router.post('/postUser', userController.postUser);
 router.put('/putUser', userController.putUser);
+
+router.post('/postMedicine', registermedicineController.medicine);
+
+
+//router.get('/postUser', userController.postUser);
 
 module.exports = router;
 

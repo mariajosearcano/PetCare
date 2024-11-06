@@ -295,6 +295,25 @@
                     </div>
                     <!-- collapse content update Users -->
 
+                    <!-- collapse content register Medicine -->
+
+                    <div class="collapse" id="collapseRegisterMedicine">
+                        <div class="text-start bg-info-subtle p-5">
+                            <form action="/postMedicine" method="POST">
+                                <div class="mb-3">
+                                    <label for="inputName" class="form-label">Medicine name</label>
+                                    <input type="text" class="form-control" id="inputName" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="inputStock" name="stock" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
