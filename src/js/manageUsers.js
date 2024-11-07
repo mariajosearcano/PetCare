@@ -255,14 +255,14 @@ function collapse() {
 
 //buttons animations
 
-$('#postUsersButton').click(function(){
-    Swal.fire({
-        icon: "success",
-        title: "User has been saved",
-        showConfirmButton: false,
-        timer: 1500
-    });
-});
+// $('#postUsersButton').click(function(){
+//     Swal.fire({
+//         icon: "success",
+//         title: "User has been saved",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+// });
 
 $('#cancelPostUsersButton').click(function(){
     Swal.fire("The creation of a user was cancelled");
