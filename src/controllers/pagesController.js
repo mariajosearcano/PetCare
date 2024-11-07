@@ -25,7 +25,7 @@ function getFormsPetOwner(req, res) {
 }
 
 function getManagePet(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/managePet.html'));
+    res.sendFile(path.join(__dirname, '../html/managePet.html'));
 }
 
 function getPassword(req, res) {

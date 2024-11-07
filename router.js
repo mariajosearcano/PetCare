@@ -18,7 +18,7 @@ const userController = require('./src/controllers/userController');
 const registermedicineController = require('./src/controllers/registermedicineController');
 
 
-
+// hmtl
 router.get('/home', pagesController.getHome);
 
 router.get('/manageUsers', pagesController.getManageUsers);
@@ -26,7 +26,9 @@ router.get('/manageMedicines', pagesController.getManageMedicines);
 
 router.get('/login', pagesController.getLogin);
 
+router.get('/managePet', pagesController.getManagePet);
 
+// funcionalidades
 router.get('/getAllappointments', appointmentController.getAppointments);
 
 router.get('/getAlladministrators', administratorController.getAdministrators);
@@ -37,7 +39,7 @@ router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getM
 
 router.get('/getAllmedicines', medicineController.getMedicines);
 
-router.get('/getAllpets', petController.getPets);
+router.get('/getPets', petController.getPets);
 
 router.get('/getAllschedules', scheduleController.getSchedules);
 
@@ -57,6 +59,11 @@ router.post('/postUser', userController.postUser);
 
 router.post('/postMedicine', registermedicineController.medicine);
 
+// pet
+router.get('/getPet', petController.getPets);
+// router.post('/postPet', petController.postPet);
+// router.put('/putPet', petController.putPet);
+// router.delete('/deletePet', petController.deletePet);
 
 
 module.exports = router;
