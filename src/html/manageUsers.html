@@ -169,7 +169,7 @@
                                 <div class="col-md-6">
                                     <label for="postEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email">
+                                        placeholder="Enter Email" pattern="^[A-Za-z._\-]+@[A-Za-z._\-]+.[A-Za-z]{2,}">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -177,7 +177,7 @@
                                 <div class="col-md-3">
                                     <label for="postPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="postPassword" name="password" required
-                                        placeholder="Enter Password" minlength="8" maxlength="20">
+                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&._\-])(?=.*[0-9])[A-Za-z\d!@#$%&._\-]{8,20}$">
                                     <div class="invalid-feedback">
                                         Password must be 8-20 characters long
                                     </div>
