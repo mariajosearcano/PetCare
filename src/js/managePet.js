@@ -123,11 +123,9 @@ collapseButtonVisualize.addEventListener('click', VisualizeData);
 // }
 
 async function VisualizeData() {
-    const url = '/getPets';
-    const urlString = (url).toString();
     
     try {
-        const response = await fetch(urlString);
+        const response = await fetch('/getPets');
         const data = await response.json();
 
         if (!response.ok) {

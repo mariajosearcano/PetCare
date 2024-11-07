@@ -26,6 +26,7 @@ router.get('/manageMedicines', pagesController.getManageMedicines);
 
 router.get('/login', pagesController.getLogin);
 
+router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 
 // funcionalidades
