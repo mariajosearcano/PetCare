@@ -6,7 +6,6 @@ async function getPetOwners(req, res) {
             console.error(err);
             return res.status(500).send('Error getting pet owner users');
         } else {
-            //console.log('Pet owner users successfully obtained');
             return res.json(results);
         }
     });
@@ -14,15 +13,15 @@ async function getPetOwners(req, res) {
 
 async function putPetOwner(req, res) {
 
-    const { putUserForm, newPutUserForm } = req.body;
-    const { putDocument } = putUserForm;
-    const { newPutDocument, newPutName, newPutLastName, newPutEmail, newPutPassword, newPutPhoneNumber } = newPutUserForm;
+    const { oldPutForm, putFormData } = req.body;
+    const { putDocument } = oldPutForm;
+    const { document, name, last_name, email, password, phone_number } = putFormData;
 
     const sql = `
         UPDATE pet_owner SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
     `;
 
-    connection.query(sql, [newPutDocument, newPutName, newPutLastName, newPutEmail, newPutPassword, newPutPhoneNumber, putDocument], (err, result) => {
+    connection.query(sql, [document, name, last_name, email, password, phone_number, putDocument], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Pet owner user not updated');
