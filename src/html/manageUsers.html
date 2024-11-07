@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/home">
-                    <img src="/assets/circle-logo.png" alt="Logo" width="50wv" height="50hv" class="d-inline-block align-text-top">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh" class="d-inline-block align-text-top">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -137,78 +137,91 @@
                     </p>
 
                     <!-- collapse content register Users -->
-                    <div class="collapse envelope" id="collapsePostUsers">
+                    <div class="collapse envelope" id="collapsePostUser">
                         <div class="text-start p-5">
-                            <!-- form register Users -->
-                            <form action="/postUser" method="POST" class="needs-validation" novalidate>
-                                <div class="form-group">
-                                    <label for="postDocument" class="form-label">Document</label>
+                            <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
+                                <div class="form-text">* Required Field</div>
+                                <div class="col-md-4">
+                                    <label for="postDocument" class="form-label">* Document</label>
                                     <input type="text" class="form-control" id="postDocument" aria-describedby="postDocumentHelp" name="document" required 
                                         placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
-                                    <div class="invalid-feedback">Please enter a valid document ID (only numbers, 6-20 digits).</div>
-                                    <div id="postDocumentHelp" class="form-text">* required field</div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid document ID (only numbers, 6-20 digits)
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="postName" class="form-label">Name</label>
+                                <div class="col-md-4">
+                                    <label for="postName" class="form-label">* Name</label>
                                     <input type="text" class="form-control" id="postName" aria-describedby="postNameHelp" name="name" required
                                         placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">Please enter a valid name (only letters, 2-50 characters).</div>
-                                    <div id="postNameHelp" class="form-text">* required field</div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid name (only letters, 2-50 characters)
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="postLastName" class="form-label">Last name</label>
+                                <div class="col-md-4">
+                                    <label for="postLastName" class="form-label">* Last name</label>
                                     <input type="text" class="form-control" id="postLastName" aria-describedby="postlastNameHelp" name="last_name" required
                                         placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">Please enter a valid last name (only letters, 2-50 characters).</div>
-                                    <div id="postLastNameHelp" class="form-text">* required field</div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid last name (only letters, 2-50 characters)
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="postEmail" class="form-label">Email address</label>
+                                <div class="col-md-6">
+                                    <label for="postEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                                    <div class="invalid-feedback">Please enter a valid email address.</div>
-                                    <div id="postEmailHelp" class="form-text">* required field</div>
+                                        placeholder="Enter Email">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="postPassword" class="form-label">Password</label>
+                                <div class="col-md-3">
+                                    <label for="postPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="postPassword" name="password" required
                                         placeholder="Enter Password" minlength="8" maxlength="20">
-                                    <div class="invalid-feedback">Password must be 8-20 characters long.</div>
-                                    <div id="postPasswordHelp" class="form-text">* required field</div>
+                                    <div class="invalid-feedback">
+                                        Password must be 8-20 characters long
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="postPhone" class="form-label">Phone number</label>
+                                <div class="col-md-3">
+                                    <label for="postPhone" class="form-label">* Phone number</label>
                                     <input type="tel" class="form-control" id="postPhoneNumber" aria-describedby="postPhoneHelp" name="phone_number" required
                                         placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
-                                    <div class="invalid-feedback">Please enter a valid phone number (10-15 digits).</div>
-                                    <div id="postPhoneHelp" class="form-text">* required field</div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid phone number (10-15 digits)
+                                    </div>
                                 </div>
-                                <div class="form-group form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="postRol" value="Pet Owner" required>
-                                    <label class="form-check-label" for="postRol">Pet Owner</label>
+                                <div class="col-md-4">
+                                    <div class="form-text">* Rol</div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="rol" id="postRol" value="Pet Owner" required>
+                                        <label class="form-check-label" for="postRol">Pet Owner</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input type="radio" class="form-check-input" name="rol" id="postRol1" value="Veterinarian" required>
+                                        <label class="form-check-label" for="postRol1">Veterinarian</label>
+                                        <div class="invalid-feedback">Please select a rol</div>
+                                    </div>
                                 </div>
-                                <div class="form-group form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="postRol1" value="Veterinarian" required>
-                                    <label class="form-check-label" for="postRol1">Veterinarian</label>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            * Agree to terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="postRolHelp" class="form-text">* required field</div>
-                                <br><br><br>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="postTerms" required>
-                                    <label class="form-check-label" for="postTerms">
-                                        Accept our 
-                                        <a href="">Terms & Conditions</a>
-                                    </label>
-                                    <div id="postTermsHelp" class="form-text">* required field</div>
+                                <div class="col-12">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButton" onclick="handlePostSubmit()">
+                                        Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapsePostUser" aria-expanded="false"
+                                        aria-controls="collapsePostUser" id="cancelPostUserButton">
+                                        Cancel
+                                    </button>
                                 </div>
-                                <button class="btn btn-info btn-lg edit-btn" type="submit" aria-expanded="false" id="postUsersButton">
-                                    Submit
-                                </button>
-                                <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapsePostUsers" aria-expanded="false"
-                                    aria-controls="collapsePostUsers" id="cancelPostUsersButton">
-                                    Cancel
-                                </button>
                             </form>
                             <!-- form register Users -->
                         </div>
@@ -263,54 +276,77 @@
                     <div class="collapse envelope" id="collapsePutUser">
                         <div class="text-start p-5">
                             <!-- form register Users -->
-                            <form>
-                                <div class="mb-3">
-                                    <label for="putDocument" class="form-label">New Document</label>
-                                    <input type="number" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required>
-                                    <div id="putDocumentHelp" class="form-text">* required field</div>
+                            <form class="row g-3 needs-validation" id="putForm" onsubmit="return false" novalidate>
+                                <div class="form-text">* Required Field</div>
+                                <div class="col-md-4">
+                                    <label for="putDocument" class="form-label">* Document</label>
+                                    <input type="text" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required 
+                                        placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid document ID (only numbers, 6-20 digits)
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="putName" class="form-label">New Name</label>
-                                    <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required>
-                                    <div id="putNameHelp" class="form-text">* required field</div>
+                                <div class="col-md-4">
+                                    <label for="putName" class="form-label">* Name</label>
+                                    <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required
+                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid name (only letters, 2-50 characters)
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="putLastName" class="form-label">New Last name</label>
-                                    <input type="text" class="form-control" id="putLastName" aria-describedby="putlastNameHelp" name="last_name" required>
-                                    <div id="putLastNameHelp" class="form-text">* required field</div>
+                                <div class="col-md-4">
+                                    <label for="putLastName" class="form-label">* Last name</label>
+                                    <input type="text" class="form-control" id="putLastName" aria-describedby="putlastNameHelp" name="last_name" required
+                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid last name (only letters, 2-50 characters)
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                  <label for="putEmail" class="form-label">New Email address</label>
-                                  <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required>
-                                  <div id="putEmailHelp" class="form-text">* required field</div>
+                                <div class="col-md-6">
+                                    <label for="putEmail" class="form-label">* Email address</label>
+                                    <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required
+                                        placeholder="Enter Email">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                  <label for="putPassword" class="form-label">New Password</label>
-                                  <input type="password" class="form-control" id="putPassword" name="password" required>
-                                  <div id="putPasswordHelp" class="form-text">* required field</div>
+                                <div class="col-md-3">
+                                    <label for="putPassword" class="form-label">* Password</label>
+                                    <input type="password" class="form-control" id="putPassword" name="password" required
+                                        placeholder="Enter Password" minlength="8" maxlength="20">
+                                    <div class="invalid-feedback">
+                                        Password must be 8-20 characters long
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="putPhone" class="form-label">New Phone number</label>
-                                    <input type="number" class="form-control" id="putPhoneNumber" aria-describedby="putPhoneHelp" name="phone_number" required>
-                                    <div id="putPhoneHelp" class="form-text">* required field</div>
+                                <div class="col-md-3">
+                                    <label for="putPhone" class="form-label">* Phone number</label>
+                                    <input type="tel" class="form-control" id="putPhoneNumber" aria-describedby="putPhoneHelp" name="phone_number" required
+                                        placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid phone number (10-15 digits)
+                                    </div>
                                 </div>
-                                <br><br><br>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="putTerms" required>
-                                    <label class="form-check-label" for="putTerms">
-                                        Accept our 
-                                        <a href="">Terms & Conditions</a>
-                                    </label>
-                                    <div id="putTermsHelp" class="form-text">* required field</div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            * Agree to terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting
+                                        </div>
+                                    </div>
                                 </div>
-                                <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putUserButton" onclick="putAction()">
-                                    Submit
-                                </button>
-                                <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapsePutUser" aria-expanded="false"
-                                    aria-controls="collapsePutUser" id="cancelPutUserButton">
-                                    Cancel
-                                </button>
+                                <div class="col-12">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putButton" onclick="handlePutSubmit()">
+                                        Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapsePutUser" aria-expanded="false"
+                                        aria-controls="collapsePutUser" id="cancelPutUserButton">
+                                        Cancel
+                                    </button>
+                                </div>
                             </form>
                             <!-- form register Users -->
                         </div>
@@ -321,9 +357,9 @@
         </div>
         <!-- collapse -->
 
-        <button>
+        <button id="whatsapp-icon">
             <a href="https://wa.link/3spfot">
-              <img src="/assets/whatsapp-icon.jpg" alt="" id="whatsapp-icon">
+              <img src="/assets/whatsapp-icon.jpg" alt="">
             </a>
         </button>
 
