@@ -1,4 +1,6 @@
-var putUserForm = {};
+
+// variables for put actions
+var oldPutForm = {};
 const formPutDocument = document.getElementById('putDocument');
 const formPutName = document.getElementById('putName');
 const formPutLastName = document.getElementById('putLastName');
@@ -32,7 +34,6 @@ async function handlePostSubmit() {
 
 async function postUser(postFormData, postForm) {
     try {
-        // Enviar los datos usando fetch
         const response = await fetch('/postUser', {
             method: 'POST',
             headers: {
@@ -43,7 +44,7 @@ async function postUser(postFormData, postForm) {
 
         if (response.ok) {
             alert("Form submitted successfully!");
-            postForm.reset(); // Opcional: Limpia el formulario
+            postForm.reset();
             postForm.classList.remove('was-validated');
         } else {
             const errorData = await response.json();
@@ -65,8 +66,13 @@ async function getUsers(url) {
         const response = await fetch(urlString);
         const data = await response.json();
     
-        if (!response.ok) {
-            throw new Error('Error to get Pet Owners data');
+        if (response.ok) {
+            alert("Form submitted successfully!");
+            postForm.reset();
+            postForm.classList.remove('was-validated');
+        } else {
+            const errorData = await response.json();
+            alert("Error: " + (errorData.message || "An error occurred"));
         }
     
         populateTable(data, urlString);
@@ -158,6 +164,85 @@ function chooseTableByGetUrl(url) {
 }
 
 
+// PUT LOGIC
+
+function populateForm(data){
+    formPutDocument.value = data.document;
+    formPutName.value = data.name;
+    formPutLastName.value = data.last_name;
+    formPutEmail.value = data.email;
+    formPutPhoneNumber.value = data.phone_number;
+
+    oldPutForm = {
+        putDocument: data.document,
+        putName: data.name,
+        putLastName: data.last_name,
+        putEmail: data.email,
+        putPassword: data.password,
+        putPhoneNumber: data.phone_number,
+        table: data.table
+    }
+}
+
+async function handlePutSubmit() {
+    const putForm = document.getElementById('putForm');
+
+    if (!putForm.checkValidity()) {
+        putForm.classList.add('was-validated');
+        return;
+    }
+
+    const putFormData = {
+        document: formPutDocument.value,
+        name: formPutName.value,
+        last_name: formPutLastName.value,
+        email: formPutEmail.value,
+        password: formPutPassword.value,
+        phone_number: formPutPhoneNumber.value
+    };
+
+    putUser(putFormData, putForm);
+}
+
+async function putUser(putFormData, putForm) {
+    const url = choosePutUrl(oldPutForm.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                oldPutForm,
+                putFormData
+            })
+        });
+    
+        if (response.ok) {
+            alert("Form submitted successfully!");
+            putForm.reset();
+            putForm.classList.remove('was-validated');
+        } else {
+            const errorData = await response.json();
+            alert("Error: " + (errorData.message || "An error occurred"));
+        }
+    } catch (error) {
+        console.error("Error submitting form", error);
+        alert("There was an error submitting the form");
+    }
+}
+
+function choosePutUrl(table){
+    if (table == 'pet_owner'){
+        return ('/putPetOwner').toString(); 
+    } else {
+        return ('/putVeterinarian').toString(); 
+    }
+}
+
+
 // DELETE LOGIC
 
 async function deleteUser(data) {
@@ -194,101 +279,10 @@ function chooseDeleteUrl(table){
 }
 
 
-// PUT LOGIC 
-
-async function handlePutSubmit() {
-    const putForm = document.getElementById('putForm');
-
-    if (!putForm.checkValidity()) {
-        putForm.classList.add('was-validated');
-        return;
-    }
-
-    const postFormData = {
-        document: document.getElementById('postDocument').value,
-        name: document.getElementById('postName').value,
-        last_name: document.getElementById('postLastName').value,
-        email: document.getElementById('postEmail').value,
-        password: document.getElementById('postPassword').value,
-        phone_number: document.getElementById('postPhoneNumber').value,
-        rol: document.querySelector('input[name="rol"]:checked').value
-    };
-
-    postUser(postFormData, postForm);
-}
-
-function populateForm(data){
-    formPutDocument.value = data.document;
-    formPutName.value = data.name;
-    formPutLastName.value = data.last_name;
-    formPutEmail.value = data.email;
-    formPutPhoneNumber.value = data.phone_number;
-
-    putUserForm = {
-        putDocument: data.document,
-        putName: data.name,
-        putLastName: data.last_name,
-        putEmail: data.email,
-        putPassword: data.password,
-        putPhoneNumber: data.phone_number,
-        table: data.table
-    }
-}
-
-function putAction(){
-    var newPutUserForm = {
-        newPutDocument: formPutDocument.value,
-        newPutName: formPutName.value,
-        newPutLastName: formPutLastName.value,
-        newPutEmail: formPutEmail.value,
-        newPutPassword: formPutPassword.value,
-        newPutPhoneNumber: formPutPhoneNumber.value
-    }
-
-    putUser(putUserForm, newPutUserForm);
-}
-
-async function putUser(putUserForm, newPutUserForm) {
-    const url = choosePutUrl(putUserForm.table);
-
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                putUserForm,
-                newPutUserForm
-            })
-        });
-    
-        if (!response.ok) {
-            throw new Error(`Error updating user: ${response.statusText}`);
-        }
-
-        reloadWindow();
-    
-        // const data = await response.json();
-        // console.log(data.message);
-    } catch (error) {
-        console.error('Error updating user:', error);
-    }
-}
-
 function reloadWindow(){
     setTimeout(function() {
         location.reload();
     }, 2000);
-}
-
-function choosePutUrl(table){
-    if (table == 'pet_owner'){
-        return ('/putPetOwner').toString(); 
-    } else {
-        return ('/putVeterinarian').toString(); 
-    }
 }
 
 
@@ -302,10 +296,8 @@ function collapse() {
     
     collapseButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Obtener el ID del colapso que se va a abrir
             const targetId = this.getAttribute('data-bs-target');
 
-            // Cerrar otros colapsos
             collapseButtons.forEach(btn => {
                 const otherTargetId = btn.getAttribute('data-bs-target');
                 if (otherTargetId !== targetId) {
@@ -368,6 +360,19 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         event.stopPropagation();
     }
 });
+
+// function putAction(){
+//     var newPutUserForm = {
+//         newPutDocument: formPutDocument.value,
+//         newPutName: formPutName.value,
+//         newPutLastName: formPutLastName.value,
+//         newPutEmail: formPutEmail.value,
+//         newPutPassword: formPutPassword.value,
+//         newPutPhoneNumber: formPutPhoneNumber.value
+//     }
+
+//     putUser(putUserForm, newPutUserForm);
+// }
 
 
 // document.getElementById('postForm').addEventListener('submit', function(event) {
