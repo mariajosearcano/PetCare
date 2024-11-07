@@ -15,7 +15,6 @@ async function postUser(req, res) {
         }
 
         console.log('User inserted successfully');
-        // return res.redirect('/manageUsers');
         return res.status(201).send('User inserted successfully');
     });
 }

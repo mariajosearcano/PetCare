@@ -5,7 +5,58 @@ const formPutLastName = document.getElementById('putLastName');
 const formPutEmail = document.getElementById('putEmail');
 const formPutPassword = document.getElementById('putPassword');
 const formPutPhoneNumber = document.getElementById('putPhoneNumber');
-// onclick functions
+
+
+// POST LOGIC
+
+async function handlePostSubmit() {
+    const postForm = document.getElementById('postForm');
+
+    if (!postForm.checkValidity()) {
+        postForm.classList.add('was-validated');
+        return;
+    }
+
+    const postFormData = {
+        document: document.getElementById('postDocument').value,
+        name: document.getElementById('postName').value,
+        last_name: document.getElementById('postLastName').value,
+        email: document.getElementById('postEmail').value,
+        password: document.getElementById('postPassword').value,
+        phone_number: document.getElementById('postPhoneNumber').value,
+        rol: document.querySelector('input[name="rol"]:checked').value
+    };
+
+    postUser(postFormData, postForm);
+}
+
+async function postUser(postFormData, postForm) {
+    try {
+        // Enviar los datos usando fetch
+        const response = await fetch('/postUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postFormData)
+        });
+
+        if (response.ok) {
+            alert("Form submitted successfully!");
+            postForm.reset(); // Opcional: Limpia el formulario
+            postForm.classList.remove('was-validated');
+        } else {
+            const errorData = await response.json();
+            alert("Error: " + (errorData.message || "An error occurred"));
+        }
+    } catch (error) {
+        console.error("Error submitting form", error);
+        alert("There was an error submitting the form");
+    }
+}
+
+
+// GET LOGIC
 
 async function getUsers(url) {
     const urlString = (url).toString();
@@ -25,9 +76,6 @@ async function getUsers(url) {
     }
 }
 
-// other functions
-
-    // Function to create a new table row
 function createTableRow(data) {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -54,7 +102,7 @@ function createTableRow(data) {
         </td>
     `;
 
-    gatewayPopulateForm(data, row);
+    addEventListeners(data, row);
 
     return row;
 }
@@ -67,17 +115,16 @@ function createTableRow(data) {
 //                 </button>
 //             </p> */}
 
-function gatewayPopulateForm(data, row){
+function addEventListeners(data, row){
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
     const deleteButton = row.querySelector('.delete-btn');
     deleteButton.addEventListener('click', () => deleteUser(data));
 }
 
-    // Function to populate the table
 function populateTable(data, url) {
-    const id = chooseId(url);
-    const table = chooseTable(url);
+    const id = chooseIdByGetUrl(url);
+    const table = chooseTableByGetUrl(url);
 
     const tableBody = document.getElementById(id);
     tableBody.innerHTML = '';
@@ -94,7 +141,7 @@ function populateTable(data, url) {
     });
 }
 
-function chooseId(url){
+function chooseIdByGetUrl(url){
     if (url == '/getPetOwners'){
         return ('petOwnerTableBody').toString();
     } else {
@@ -102,12 +149,72 @@ function chooseId(url){
     }
 }
 
-function chooseTable(url) {
+function chooseTableByGetUrl(url) {
     if (url == '/getPetOwners'){
         return ('pet_owner').toString();
     } else {
         return ('veterinarian').toString();
     }
+}
+
+
+// DELETE LOGIC
+
+async function deleteUser(data) {
+    const url = chooseDeleteUrl(data.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                document: data.document
+            })
+        });
+    
+        if (!response.ok) {
+            throw new Error(`Error deleting user: ${response.statusText}`);
+        }
+
+        reloadWindow();
+    } catch (error) {
+        console.error('Error deleting user:', error);
+    }
+}
+
+function chooseDeleteUrl(table){
+    if (table == 'pet_owner'){
+        return ('/deletePetOwner').toString(); 
+    } else {
+        return ('/deleteVeterinarian').toString(); 
+    }
+}
+
+
+// PUT LOGIC 
+
+async function handlePutSubmit() {
+    const putForm = document.getElementById('putForm');
+
+    if (!putForm.checkValidity()) {
+        putForm.classList.add('was-validated');
+        return;
+    }
+
+    const postFormData = {
+        document: document.getElementById('postDocument').value,
+        name: document.getElementById('postName').value,
+        last_name: document.getElementById('postLastName').value,
+        email: document.getElementById('postEmail').value,
+        password: document.getElementById('postPassword').value,
+        phone_number: document.getElementById('postPhoneNumber').value,
+        rol: document.querySelector('input[name="rol"]:checked').value
+    };
+
+    postUser(postFormData, postForm);
 }
 
 function populateForm(data){
@@ -138,14 +245,8 @@ function putAction(){
         newPutPhoneNumber: formPutPhoneNumber.value
     }
 
-    //gatewayPutUser(putUserForm, newPutUserForm);
     putUser(putUserForm, newPutUserForm);
 }
-
-// function gatewayPutUser(putUserForm, newPutUserForm){
-//     const putUserButton = document.getElementById('put-user-button');
-//     putUserButton.addEventListener('click', () => putUser(putUserForm, newPutUserForm));
-// }
 
 async function putUser(putUserForm, newPutUserForm) {
     const url = choosePutUrl(putUserForm.table);
@@ -187,39 +288,6 @@ function choosePutUrl(table){
         return ('/putPetOwner').toString(); 
     } else {
         return ('/putVeterinarian').toString(); 
-    }
-}
-
-async function deleteUser(data) {
-    const url = chooseDeleteUrl(data.table);
-
-    try {
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                //'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                document: data.document
-            })
-        });
-    
-        if (!response.ok) {
-            throw new Error(`Error deleting user: ${response.statusText}`);
-        }
-
-        reloadWindow();
-    } catch (error) {
-        console.error('Error deleting user:', error);
-    }
-}
-
-function chooseDeleteUrl(table){
-    if (table == 'pet_owner'){
-        return ('/deletePetOwner').toString(); 
-    } else {
-        return ('/deleteVeterinarian').toString(); 
     }
 }
 
@@ -289,6 +357,25 @@ function deleteAlert(){
         timer: 1500
     });
 }
+
+document.getElementById('postForm').addEventListener('submit', function(event) {
+    // Activa la validación de Bootstrap
+    this.classList.add('was-validated');
+
+    // Si el formulario no es válido, se evita el envío
+    if (!this.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+});
+
+
+// document.getElementById('postForm').addEventListener('submit', function(event) {
+//     event.preventDefault(); // Evita el envío del formulario
+
+//     // Activa la validación de Bootstrap
+//     this.classList.add('was-validated');
+//   });
 
 // $('.delete-btn').click(function(){
 //     Swal.fire({
