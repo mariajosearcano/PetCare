@@ -7,3 +7,13 @@
 .envelope {
     background-color: #ccf9f9;
 }
+
+#whatsapp-icon {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    border-radius: 50%;
+    height: 15vh;
+    width: 15vh;
+}
