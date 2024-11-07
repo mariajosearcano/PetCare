@@ -113,8 +113,8 @@
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePostUsers" aria-expanded="false"
-                            aria-controls="collapsePostUsers">
+                            data-bs-target="#collapsePostUser" aria-expanded="false"
+                            aria-controls="collapsePostUser">
                             Create user
                         </button>
                     </p>
@@ -219,7 +219,7 @@
                                     </button>
                                     <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePostUser" aria-expanded="false"
-                                        aria-controls="collapsePostUser" id="cancelPostButton">
+                                        aria-controls="collapsePostUser" id="cancelPostButton" onclick="postCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -344,7 +344,7 @@
                                     </button>
                                     <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePutUser" aria-expanded="false"
-                                        aria-controls="collapsePutUser" id="cancelPutButton">
+                                        aria-controls="collapsePutUser" id="cancelPutButton" onclick="putCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
