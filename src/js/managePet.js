@@ -68,64 +68,45 @@ const tableBody = document.querySelector('#tbody-visualize-pet');
 //     inputPetOwnerDocument.value = '';
 // }
 
-// // filter pet by name
-// collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
-// collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
+// filter pet by name
+collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
+collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
-// function GetNames(selectElement) {
+async function GetNames(selectElement) {
 
-//     fetch('http://localhost:3007/pet/read')
-//         .then(res => {
-//             if (!res.ok) {
-//                 throw new Error('Network error: ' + res.statusText);
-//             }
-//             return res.json();
-//         })
-//         .then(data => {
-//             selectElement.innerHTML = ''; // Clear existing options
-//             data.forEach(pet => {
-//                 AddPetOption(pet, selectElement);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//             console.error('There was no possible to fetch the names');
-//         });
-// }
+    const urlString = ('/getPets').toString();
 
-// function AddPetOption(pet, selectElement) {
-//     const option = document.createElement('option');
-//     option.textContent = pet.name;
-//     selectElement.appendChild(option);
-// }
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Error to get Pet Owners data');
+        }
+
+        tableBody.innerHTML = ''; // Clear existing rows
+        data.forEach(pet => {
+            AddPetOption(pet, selectElement);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function AddPetOption(pet, selectElement) {
+    const option = document.createElement('option');
+    option.textContent = pet.name;
+    selectElement.appendChild(option);
+}
 
 // READ
 collapseButtonVisualize.addEventListener('click', VisualizeData);
 
-// function VisualizeData() {
-//     fetch('http://localhost:3007/pet/read')
-//         .then(res => {
-//             if (!res.ok) {
-//                 throw new Error('Network error: ' + res.statusText);
-//             }
-//             return res.json();
-//         })
-//         .then(data => {
-//             tableBody.innerHTML = ''; // Clear existing rows
-//             data.forEach(pet => {
-//                 AddPetRow(pet);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//             console.error('There was no possible to fetch the pets');
-//         });
-// }
-
 async function VisualizeData() {
-    
+    const urlString = ('/getPets').toString();
+
     try {
-        const response = await fetch('/getPets');
+        const response = await fetch(urlString);
         const data = await response.json();
 
         if (!response.ok) {
