@@ -50,13 +50,15 @@ router.get('/getAllvaccines', vaccineController.getVaccines);
 
 router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
+router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
 
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
-
-router.post('/postLogin', loginController.login);
+router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
 router.post('/postUser', userController.postUser);
+
+router.post('/postLogin', loginController.login);
 
 router.post('/postMedicine', registermedicineController.medicine);
 

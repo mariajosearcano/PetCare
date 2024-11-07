@@ -4,39 +4,61 @@ async function getPetOwners(req, res) {
     connection.query('SELECT * FROM pet_owner', (err, results) => {
         if (err) {
             console.error(err);
-            res.status(500).send('Error al obtener los datos');
+            return res.status(500).send('Error getting pet owner users');
         } else {
-            console.log(results) ////usa esto para depurrar mas el codigo, generalmente las funciones err no se nstancian asi, no se trabaja en ese else,
-            res.json(results);
+            //console.log('Pet owner users successfully obtained');
+            return res.json(results);
         }
     });
 }
 
 async function putPetOwner(req, res) {
 
-    const { 
-        document,
-        putDocument, putName, putLastName, putEmail, putPassword, putPhoneNumber
-    } = req.body;
+    const { putUserForm, newPutUserForm } = req.body;
+    const { putDocument } = putUserForm;
+    const { newPutDocument, newPutName, newPutLastName, newPutEmail, newPutPassword, newPutPhoneNumber } = newPutUserForm;
 
     const sql = `
         UPDATE pet_owner SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
     `;
 
-    connection.query(sql, [putDocument, putName, putLastName, putEmail, putPassword, putPhoneNumber, document], (err, result) => {
+    connection.query(sql, [newPutDocument, newPutName, newPutLastName, newPutEmail, newPutPassword, newPutPhoneNumber, putDocument], (err, result) => {
         if (err) {
-            return res.status(500).send(err);
+            console.error(err);
+            return res.status(500).send('Pet owner user not updated');
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Pet owner user not found' });
         }
 
-        res.redirect('/manageUsers');
+        return res.json({ message: 'Pet owner user updated successfully' });
+    });
+}
+
+async function deletePetOwner(req, res) {
+    const { document } = req.body;
+
+    const sql = `
+        DELETE FROM pet_owner WHERE document = ?
+    `;
+
+    connection.query(sql, [document], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Pet owner user not deleted');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pet owner user not found' });
+        }
+
+        return res.json({ message: 'Pet owner user deleted successfully' });
     });
 }
 
 module.exports = {
     getPetOwners,
-    putPetOwner
+    putPetOwner,
+    deletePetOwner
 }

@@ -47,9 +47,7 @@ function createTableRow(data) {
         </td>
         <td>
             <p class="d-inline-flex gap-1">
-                <button class="btn btn-outline-danger btn-lg" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
-                    aria-controls="collapseVisualizeVeterinarians">
+                <button class="btn btn-outline-danger btn-lg delete-btn" type="button" aria-expanded="false" onclick="deleteAlert()">
                     Delete
                 </button>
             </p>
@@ -61,9 +59,19 @@ function createTableRow(data) {
     return row;
 }
 
+// {/* <p class="d-inline-flex gap-1">
+//                 <button class="btn btn-outline-danger btn-lg delete-btn" type="button" data-bs-toggle="collapse"
+//                     data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+//                     aria-controls="collapseVisualizeVeterinarians">
+//                     Delete
+//                 </button>
+//             </p> */}
+
 function gatewayPopulateForm(data, row){
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
+    const deleteButton = row.querySelector('.delete-btn');
+    deleteButton.addEventListener('click', () => deleteUser(data));
 }
 
     // Function to populate the table
@@ -140,15 +148,16 @@ function putAction(){
 // }
 
 async function putUser(putUserForm, newPutUserForm) {
-    const url = chooseUrl(putUserForm.table);
+    const url = choosePutUrl(putUserForm.table);
 
     try {
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json' // Set appropriate content type
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
-            body: JSON.stringify({ // Send data as JSON
+            body: JSON.stringify({
                 putUserForm,
                 newPutUserForm
             })
@@ -157,19 +166,60 @@ async function putUser(putUserForm, newPutUserForm) {
         if (!response.ok) {
             throw new Error(`Error updating user: ${response.statusText}`);
         }
+
+        reloadWindow();
     
-        const data = await response.json(); // Parse response as JSON if applicable
-        console.log(data.message); // Example: "New user inserted with ID: ..."
+        // const data = await response.json();
+        // console.log(data.message);
     } catch (error) {
         console.error('Error updating user:', error);
     }
 }
 
-function chooseUrl(table){
+function reloadWindow(){
+    setTimeout(function() {
+        location.reload();
+    }, 2000);
+}
+
+function choosePutUrl(table){
     if (table == 'pet_owner'){
         return ('/putPetOwner').toString(); 
     } else {
         return ('/putVeterinarian').toString(); 
+    }
+}
+
+async function deleteUser(data) {
+    const url = chooseDeleteUrl(data.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                document: data.document
+            })
+        });
+    
+        if (!response.ok) {
+            throw new Error(`Error deleting user: ${response.statusText}`);
+        }
+
+        reloadWindow();
+    } catch (error) {
+        console.error('Error deleting user:', error);
+    }
+}
+
+function chooseDeleteUrl(table){
+    if (table == 'pet_owner'){
+        return ('/deletePetOwner').toString(); 
+    } else {
+        return ('/deleteVeterinarian').toString(); 
     }
 }
 
@@ -203,6 +253,60 @@ function collapse() {
 }
 
 
+//buttons animations
+
+// $('#postUsersButton').click(function(){
+//     Swal.fire({
+//         icon: "success",
+//         title: "User has been saved",
+//         showConfirmButton: false,
+//         timer: 1500
+//     });
+// });
+
+$('#cancelPostUsersButton').click(function(){
+    Swal.fire("The creation of a user was cancelled");
+});
+
+$('#putUserButton').click(function(){
+    Swal.fire({
+        icon: "success",
+        title: "User has been updated",
+        showConfirmButton: false,
+        timer: 1500
+      });
+});
+
+$('#cancelPutUserButton').click(function(){
+    Swal.fire("The updated of a user was cancelled");
+});
+
+function deleteAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "User deleted successfully",
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
+// $('.delete-btn').click(function(){
+//     Swal.fire({
+//         title: 'Are you sure you want to delete the user?',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonText: 'Yes',
+//         cancelButtonText: 'No',
+//         customClass: {
+//             confirmButton: 'btn-confirm',
+//             cancelButton: 'btn-cancel'
+//         }
+//     }).then(result => {
+//         if (result.isConfirmed) {
+//             Swal.fire("User deleted successfully")
+//         }
+//     });
+// });
 
 // collapseButtons.forEach(button => {
 //     button.addEventListener('click', function() {
