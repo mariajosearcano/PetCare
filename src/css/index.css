@@ -1,4 +1,4 @@
-header {
+/* header {
   grid-area: a;
   background-color: #522760;
 }
@@ -11,7 +11,7 @@ main {
 footer {
   grid-area: c;
   background-color: #5a99c3;
-}
+} */
 
 /*
 body {
@@ -27,11 +27,19 @@ body {
 }
 */
 
-main {
+/* main {
   background-color: rgb(165, 225, 236);
+} */
+
+main {
+  background-color: #cbfcff;
 }
 
+/* .custom-background {
+  background-color: #a2c9ec; /* Cambia este color al que desees
+} */
+
 .custom-background {
-  background-color: #a2c9ec; /* Cambia este color al que desees */
+  background-color: #cbfcff; /* Cambia este color al que desees */
 }
 

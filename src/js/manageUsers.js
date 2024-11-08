@@ -1,3 +1,532 @@
+
+// variables for put actions
+var oldPutForm = {};
+const formPutDocument = document.getElementById('putDocument');
+const formPutName = document.getElementById('putName');
+const formPutLastName = document.getElementById('putLastName');
+const formPutEmail = document.getElementById('putEmail');
+const formPutPassword = document.getElementById('putPassword');
+const formPutPhoneNumber = document.getElementById('putPhoneNumber');
+
+
+// POST LOGIC
+
+async function handlePostSubmit() {
+    const postForm = document.getElementById('postForm');
+
+    if (!postForm.checkValidity()) {
+        postForm.classList.add('was-validated');
+        return;
+    }
+
+    const postFormData = {
+        document: document.getElementById('postDocument').value,
+        name: document.getElementById('postName').value,
+        last_name: document.getElementById('postLastName').value,
+        email: document.getElementById('postEmail').value,
+        password: document.getElementById('postPassword').value,
+        phone_number: document.getElementById('postPhoneNumber').value,
+        rol: document.querySelector('input[name="rol"]:checked').value
+    };
+
+    postUser(postFormData, postForm);
+}
+
+async function postUser(postFormData, postForm) {
+    const url = choosePostUrlByRol(postFormData.rol);
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify(postFormData)
+        });
+
+        if (response.ok) {
+            postAlert();
+            // postForm.reset();
+            // postForm.classList.remove('was-validated');
+        } else {
+            const errorData = await response.json();
+            
+            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
+                console.error("Error: Duplicate entry - A record with this information already exists");
+                postDuplicateAlert();
+            } else {
+                console.error("Error: " + (errorData.message || "An error occurred"));
+                postErrorAlert();
+            }
+        }
+    } catch (error) {
+        console.error("Error submitting form", error);
+        postErrorAlert();
+    }
+}
+
+function choosePostUrlByRol(rol){
+    if (rol == 'Pet Owner'){
+        return ('/postPetOwner').toString(); 
+    } else {
+        return ('/postVeterinarian').toString(); 
+    }
+}
+
+
+// GET LOGIC
+
+async function getUsers(url) {
+    const urlString = (url).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            getErrorAlert();
+        }
+    
+        populateTable(data, urlString);
+        collapse();
+    } catch (error) {
+        console.error("Error getting users", error);
+        getErrorAlert();
+    }
+}
+
+function createTableRow(data) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <th scope="row">${data.document}</th>
+        <td>${data.name}</td>
+        <td>${data.last_name}</td>
+        <td>${data.email}</td>
+        <td>${data.phone_number}</td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsePutUser" aria-expanded="false"
+                    aria-controls="collapsePutUser">
+                    Edit
+                </button>
+            </p>
+        </td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-danger btn-lg delete-btn" type="button" aria-expanded="false">
+                    Delete
+                </button>
+            </p>
+        </td>
+    `;
+
+    addEventListeners(data, row);
+
+    return row;
+}
+
+// {/* <p class="d-inline-flex gap-1">
+//                 <button class="btn btn-outline-danger btn-lg delete-btn" type="button" data-bs-toggle="collapse"
+//                     data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
+//                     aria-controls="collapseVisualizeVeterinarians">
+//                     Delete
+//                 </button>
+//             </p> */}
+
+function addEventListeners(data, row){
+    const editButton = row.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => populateForm(data));
+    const deleteButton = row.querySelector('.delete-btn');
+    //deleteButton.addEventListener('click', () => deleteUser(data));
+    deleteButton.addEventListener('click', () => deleteCancelAlert(data));
+}
+
+function populateTable(data, url) {
+    const id = chooseIdByGetUrl(url);
+    const table = chooseTableByGetUrl(url);
+
+    const tableBody = document.getElementById(id);
+    tableBody.innerHTML = '';
+    data.forEach((item, index) => {
+        const row = createTableRow({
+            document: item.document,
+            name: item.name,
+            last_name: item.last_name,
+            email: item.email,
+            phone_number: item.phone_number,
+            table: table
+        });
+        tableBody.appendChild(row);
+    });
+}
+
+function chooseIdByGetUrl(url){
+    if (url == '/getPetOwners'){
+        return ('petOwnerTableBody').toString();
+    } else {
+        return ('veterinarianTableBody').toString();
+    }
+}
+
+function chooseTableByGetUrl(url) {
+    if (url == '/getPetOwners'){
+        return ('pet_owner').toString();
+    } else {
+        return ('veterinarian').toString();
+    }
+}
+
+
+// PUT LOGIC
+
+function populateForm(data){
+    formPutDocument.value = data.document;
+    formPutName.value = data.name;
+    formPutLastName.value = data.last_name;
+    formPutEmail.value = data.email;
+    formPutPhoneNumber.value = data.phone_number;
+
+    oldPutForm = {
+        putDocument: data.document,
+        putName: data.name,
+        putLastName: data.last_name,
+        putEmail: data.email,
+        putPassword: data.password,
+        putPhoneNumber: data.phone_number,
+        table: data.table
+    }
+}
+
+async function handlePutSubmit() {
+    const putForm = document.getElementById('putForm');
+
+    if (!putForm.checkValidity()) {
+        putForm.classList.add('was-validated');
+        return;
+    }
+
+    const putFormData = {
+        document: formPutDocument.value,
+        name: formPutName.value,
+        last_name: formPutLastName.value,
+        email: formPutEmail.value,
+        password: formPutPassword.value,
+        phone_number: formPutPhoneNumber.value
+    };
+
+    putUser(putFormData, putForm);
+}
+
+async function putUser(putFormData, putForm) {
+    const url = choosePutUrlByTable(oldPutForm.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                oldPutForm,
+                putFormData
+            })
+        });
+    
+        if (response.ok) {
+            putAlert();
+            // putForm.reset();
+            // putForm.classList.remove('was-validated');
+        } else {
+            const errorData = await response.json();
+            
+            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
+                console.error("Error: Duplicate entry - A record with this information already exists");
+                putDuplicateAlert();
+            } else {
+                console.error("Error: " + (errorData.message || "An error occurred"));
+                putErrorAlert();
+            }
+        }
+    } catch (error) {
+        console.error("Error updating user", error);
+        putErrorAlert();
+    }
+}
+
+function choosePutUrlByTable(table){
+    if (table == 'pet_owner'){
+        return ('/putPetOwner').toString(); 
+    } else {
+        return ('/putVeterinarian').toString(); 
+    }
+}
+
+
+// DELETE LOGIC
+
+async function deleteUser(data) {
+    const url = chooseDeleteUrlByTable(data.table);
+
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                document: data.document
+            })
+        });
+    
+        if (response.ok) {
+            deleteAlert();
+        } else {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            deleteErrorAlert();
+        }
+    } catch (error) {
+        console.error('Error deleting user', error);
+        deleteErrorAlert();
+    }
+}
+
+function chooseDeleteUrlByTable(table){
+    if (table == 'pet_owner'){
+        return ('/deletePetOwner').toString(); 
+    } else {
+        return ('/deleteVeterinarian').toString(); 
+    }
+}
+
+
+// collapse buttons logic
+
+document.addEventListener('DOMContentLoaded', function() {
+    collapse();
+});
+
+function collapse() {
+    const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    
+    collapseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-bs-target');
+
+            collapseButtons.forEach(btn => {
+                const otherTargetId = btn.getAttribute('data-bs-target');
+                if (otherTargetId !== targetId) {
+                    const collapseElement = document.querySelector(otherTargetId);
+                    const collapse = bootstrap.Collapse.getInstance(collapseElement);
+                    if (collapse) {
+                        collapse.hide();
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+
+// ALERTS
+
+
+//// POST ALERTS
+
+function postAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "User has been created"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
+
+function postCancelAlert(){
+    Swal.fire("The creation of a user was cancelled");
+};
+
+function postErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error creating user"
+    });
+};
+
+function postDuplicateAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Duplicate entry",
+        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+    });
+}
+
+
+//// GET ALERTS
+
+function getErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error getting users"
+    });
+};
+
+
+//// PUT ALERTS
+
+function putAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "User has been updated"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
+
+function putCancelAlert(){
+    Swal.fire("The update of a user was cancelled");
+};
+
+function putErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error updating user"
+    });
+};
+
+function putDuplicateAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Duplicate entry",
+        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+    });
+}
+
+
+//// DELETE ALERTS
+
+function deleteAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "User has been deleted"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
+
+function deleteCancelAlert(data){
+    Swal.fire({
+        title: "Are you sure you want to delete the user?",
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteUser(data);
+        };
+    });
+};
+
+function deleteErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error deleting user"
+    });
+};
+
+
+
+
+
+// reload window
+
+// function reloadWindow(){
+//     setTimeout(function() {
+//         location.reload();
+//     }, 1000);
+// }
+
+// document.getElementById('postForm').addEventListener('submit', function(event) {
+//     this.classList.add('was-validated');
+
+//     if (!this.checkValidity()) {
+//         event.preventDefault();
+//         event.stopPropagation();
+//     }
+// });
+
+// function putAction(){
+//     var newPutUserForm = {
+//         newPutDocument: formPutDocument.value,
+//         newPutName: formPutName.value,
+//         newPutLastName: formPutLastName.value,
+//         newPutEmail: formPutEmail.value,
+//         newPutPassword: formPutPassword.value,
+//         newPutPhoneNumber: formPutPhoneNumber.value
+//     }
+
+//     putUser(putUserForm, newPutUserForm);
+// }
+
+
+// document.getElementById('postForm').addEventListener('submit', function(event) {
+//     event.preventDefault(); // Evita el envío del formulario
+
+//     // Activa la validación de Bootstrap
+//     this.classList.add('was-validated');
+//   });
+
+// $('.delete-btn').click(function(){
+//     Swal.fire({
+//         title: 'Are you sure you want to delete the user?',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonText: 'Yes',
+//         cancelButtonText: 'No',
+//         customClass: {
+//             confirmButton: 'btn-confirm',
+//             cancelButton: 'btn-cancel'
+//         }
+//     }).then(result => {
+//         if (result.isConfirmed) {
+//             Swal.fire("User deleted successfully")
+//         }
+//     });
+// });
+
+// collapseButtons.forEach(button => {
+//     button.addEventListener('click', function() {
+//         // Obtener el ID del colapso que se va a abrir
+//         var targetId = this.getAttribute('data-bs-target');
+
+//         // Cerrar otros colapsos
+//         collapseButtons.forEach(btn => {
+//             var otherTargetId = btn.getAttribute('data-bs-target');
+//             if (otherTargetId !== targetId) {
+//                 var collapseElement = document.querySelector(otherTargetId);
+//                 var collapse = bootstrap.Collapse.getInstance(collapseElement);
+//                 if (collapse) {
+//                     collapse.hide(); // Cerrar el colapso
+//                 }
+//             }
+//         });
+//     });
+// });
+
+
+
+
 // const create = document.getElementById('create');
 
 // create.addEventListener('click', () => {
@@ -93,126 +622,3 @@
 //         tableBody.innerHTML += row;
 //     });
 // }
-
-
-
-// onclick functions
-
-async function get(rol) {
-    const url = await chooseUrl(rol);
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error('Error to get Pet Owner data');
-      }
-  
-      populateTable(data, url);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-}
-
-
-async function chooseUrl(rol){
-    if (rol == 'PetOwner'){
-        return ('/getPetOwners').toString(); // Replace with your actual endpoint URL
-    } else {
-        return ('/getVeterinarians').toString(); // Replace with your actual endpoint URL
-    }
-}
-
-// async function createUser(document, name, lastName, rol, email, password, phoneNumber) {
-//     const url = chooseUrl(rol);
-    
-//     try {
-//       const response = await fetch(url, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json' // Set appropriate content type
-//         },
-//         body: JSON.stringify({ // Send data as JSON
-//           document,
-//           name,
-//           lastName, // Use camelCase for consistency
-//           email,
-//           password,
-//           phoneNumber
-//         })
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error(`Error creating user: ${response.statusText}`);
-//       }
-  
-//       const data = await response.json(); // Parse response as JSON if applicable
-//       console.log(data.message); // Example: "New user inserted with ID: ..."
-//     } catch (error) {
-//       console.error('Error creating user:', error);
-//     }
-//   }
-
-// async function chooseUrl(rol){
-//     if (rol == 'Veterinarian'){
-//         return '/veterinarian/create'; // Replace with your actual endpoint URL
-//     } else {
-//         return '/petowner/create'; // Replace with your actual endpoint URL
-//     }
-// }
-
-// async function deconstruct(){
-
-// }
-
-// other functions
-
-    // Function to create a new table row
-function createTableRow(data) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <th scope="row">${data.document}</th>
-        <td>${data.name}</td>
-        <td>${data.last_name}</td>
-        <td>${data.email}</td>
-        <td>${data.phone_number}</td>
-        <td>
-            <button type="button" class="btn btn-outline-info">
-                Edit
-            </button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-outline-danger">
-                Delete
-            </button>
-        </td>
-    `;
-    return row;
-}
-
-    // Function to populate the table
-function populateTable(data, url) {
-    const id = chooseId(url);
-
-    const tableBody = document.getElementById(id);
-    tableBody.innerHTML = '';
-    data.forEach((item, index) => {
-        const row = createTableRow({
-            document: item.document,
-            name: item.name,
-            last_name: item.last_name,
-            email: item.email,
-            phone_number: item.phone_number
-        });
-        tableBody.appendChild(row);
-    });
-}
-
-function chooseId(url){
-    if (url == '/getPetOwners'){
-        return ('petOwnerTableBody').toString();
-    } else {
-        return ('veterinarianTableBody').toString();
-    }
-}

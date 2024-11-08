@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Manage Users | Administrator | PetCare</title>
+    <title>Manage Medicines | Administrator | PetCare</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <link rel="stylesheet" href="../css/manageUsers.css">
+    <link rel="stylesheet" href="../css/manageMedicines.css">
     <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
 
@@ -32,8 +32,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Manage Users</a>
-                    <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
+                    <a class="nav-link" href="/manageUsers">Manage Users</a>
+                    <a class="nav-link active" aria-current="page" href="/manageMedicines">Manage Medicines</a>
                     <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
                     <a class="nav-link" href="/generateReports">Reports</a>
                     <a class="nav-link" href="/logOut">Administrator</a>
@@ -57,13 +57,13 @@
             <div class="row">
                 <div class="col">
                     <!-- carousel -->
-                    <div id="carousel" class="carousel slide small-carousel">
+                    <div id="carouselManageUsers" class="carousel slide">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
+                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
+                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
+                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="2"
                                 aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
@@ -77,12 +77,12 @@
                                 <img src="/assets/exotic pet 6.jpg" class="d-block w-100" alt="...">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselManageUsers"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel"
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselManageUsers"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
@@ -113,9 +113,9 @@
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePostUser" aria-expanded="false"
-                            aria-controls="collapsePostUser">
-                            Create user
+                                data-bs-target="#collapseRegisterMedicine" aria-expanded="false"
+                                aria-controls="collapseRegisterMedicine" onclick="get('medicines')">
+                            Register Medicine
                         </button>
                     </p>
 
@@ -131,100 +131,26 @@
                     <!-- collapse button update Users info -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseGetVeterinarians" aria-expanded="false"
-                            aria-controls="collapseGetVeterinarians" onclick="getUsers('/getVeterinarians')">
-                            Visualize Veterinarians
+                            data-bs-target="#collapseGetMedicines" aria-expanded="false"
+                            aria-controls="collapseGetMedicines" onclick="getMedicines('/getMedicines')">
+                            Visualize Medicines
                         </button>
                     </p>
 
                     <!-- collapse content register Users -->
-                    <div class="collapse envelope" id="collapsePostUser">
-                        <div class="text-start p-5">
-                            <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
-                                <div class="form-text">* Required Field</div>
-                                <div class="col-md-4">
-                                    <label for="postDocument" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="postDocument" aria-describedby="postDocumentHelp" name="document" required 
-                                        placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid document ID (only numbers, 6-20 digits)
-                                    </div>
+                    <div class="collapse" id="collapseRegisterMedicine">
+                        <div class="text-start bg-info-subtle p-5">
+                            <form action="/postMedicine" method="POST">
+                                <div class="mb-3">
+                                    <label for="inputName" class="form-label">Medicine name</label>
+                                    <input type="text" class="form-control" id="inputName" name="name" required>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="postName" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="postName" aria-describedby="postNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid name (only letters, 2-50 characters)
-                                    </div>
+                                <div class="mb-3">
+                                    <label for="inputStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="inputStock" name="stock" required>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="postLastName" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="postLastName" aria-describedby="postlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid last name (only letters, 2-50 characters)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="postEmail" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z._\-]+@[A-Za-z._\-]+.[A-Za-z]{2,}">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid email address
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="postPassword" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="postPassword" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&._\-])(?=.*[0-9])[A-Za-z\d!@#$%&._\-]{8,20}$">
-                                    <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="postPhone" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="postPhoneNumber" aria-describedby="postPhoneHelp" name="phone_number" required
-                                        placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid phone number (10-15 digits)
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-text">* Rol</div>
-                                    <div class="form-check">
-                                        <input type="radio" class="form-check-input" name="rol" id="postRol" value="Pet Owner" required>
-                                        <label class="form-check-label" for="postRol">Pet Owner</label>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input type="radio" class="form-check-input" name="rol" id="postRol1" value="Veterinarian" required>
-                                        <label class="form-check-label" for="postRol1">Veterinarian</label>
-                                        <div class="invalid-feedback">Please select a rol</div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            * Agree to terms and conditions
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButton" onclick="handlePostSubmit()">
-                                        Submit
-                                    </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePostUser" aria-expanded="false"
-                                        aria-controls="collapsePostUser" id="cancelPostButton" onclick="postCancelAlert()">
-                                        Cancel
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Register</button>
                             </form>
-                            <!-- form register Users -->
                         </div>
                     </div>
                     <!-- collapse content register Users -->
@@ -251,21 +177,19 @@
                         </div>
                     </div>
 
-                    <div class="collapse table-collapse envelope" id="collapseGetVeterinarians">
+                    <div class="collapse table-collapse envelope" id="collapseGetMedicines">
                         <div class="text-start p-5">
                             <table class="table">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">Document</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Last name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone number</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Medicine ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
                                 </thead>
-                                <tbody id="veterinarianTableBody">
+                                <tbody id="getMedicinesTableBody">
                                   
                                 </tbody>
                             </table>
@@ -456,3 +380,4 @@
 </body>
 
 </html>
+

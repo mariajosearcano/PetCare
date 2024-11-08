@@ -7,6 +7,9 @@ function getHome(req, res) {
 function getManageUsers(req, res) {
     res.sendFile(path.join(__dirname, '../html/manageUsers.html'));
 }
+function getManageMedicines(req, res) {
+    res.sendFile(path.join(__dirname, '../html/manageMedicines.html'));
+}
 
 function getLogin(req, res) {
     res.sendFile(path.join(__dirname, '../html/login.html'));
@@ -32,6 +35,7 @@ module.exports = {
     getHome,
     getLogin,
     getManageUsers,
+    getManageMedicines,
     getAdmin,
     getFormsPetOwner,
     getManagePet,
