@@ -38,8 +38,6 @@ router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistori
 
 router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
 
-router.get('/getAllpets', petController.getPets);
-
 router.get('/getAllschedules', scheduleController.getSchedules);
 
 router.get('/getAlltreatments', treatmentController.getTreatments);
@@ -61,7 +59,10 @@ router.get('/getMedicines', medicineController.getMedicines);
 
 router.post('/postLogin', loginController.login);
 
-
+// pet
+router.get('/getPet', petController.getPets);
+router.post('/postPet', petController.createPets);
+router.delete('/deletePet/:name', petController.deletePets);
 
 module.exports = router;
 
