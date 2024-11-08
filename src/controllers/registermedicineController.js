@@ -1,5 +1,23 @@
 const connection = require('../../db');
 
+function findMedicineById(req, res) {
+  const { id } = req.params; // Obtener el ID del parámetro de la URL
+
+  console.log('Datos recibidos:', req.body);
+  const query = 'SELECT * FROM medicine WHERE medicine_id = ?';
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error al buscar la medicina' });
+    } else if (results.length === 0) {
+      res.status(404).json({ error: 'Medicina no encontrada' });
+    } else {
+      res.json(results[0]);
+    }
+  });
+}
+
 function medicine(req, res) {
     const { name, stock } = req.body;
     
@@ -52,30 +70,7 @@ async function getMedicines(req, res) {
 //   });
 // }
 
-  async function deleteMedicineById(req, res) {
-    const { medicine_id } = req.body;
 
-    try {
-      const sql = `
-        DELETE FROM medicine WHERE medicine_id = ?
-      `;
-
-      await connection.query(sql, [medicine_id], (err, result) => {
-        if (err) {
-          throw err;
-        }
-
-        if (result.affectedRows === 0) {
-          throw new Error('Medicine not found');
-        }
-
-        res.status(200).json({ message: 'Medicine deleted successfully' });
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error deleting pet owner' });
-    }
-  }
 
 // async function getMedicineById(req, res) {
 //   const medicineId = req.params.id; 
@@ -137,7 +132,7 @@ module.exports = {
     getMedicines,
     //getMedicineById,
     //updateMedicine
-    deleteMedicineById
+    findMedicineById
 
 };
 

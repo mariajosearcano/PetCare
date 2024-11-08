@@ -60,6 +60,7 @@ router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicines', medicineController.getMedicines);
+router.post('/postMedicinesearch', registermedicineController.findMedicineById);
 
 router.post('/postLogin', loginController.login);
 

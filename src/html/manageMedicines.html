@@ -119,9 +119,6 @@
                         </button>
                     </p>
 
-
-                    
-
                     <!-- collapse button visualize Medicines -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
@@ -130,6 +127,15 @@
                             Visualize Medicines
                         </button>
                     </p>
+
+                    <!-- collapse button delete Medicines -->
+                                         <p class="d-inline-flex gap-1">
+                                            <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseDeleteMedicine" aria-expanded="false"
+                                                aria-controls="collapseDeleteMedicine" onclick="deleteMedicine('/deleteMedicines')">
+                                                Delete medicine
+                                            </button>
+                                        </p>
 
                                         <!-- collapse button Update Medicines
                                         <p class="d-inline-flex gap-1">
@@ -140,26 +146,6 @@
                                             </button>
                                         </p> -->
 
-                                        <!-- collapse button Update Medicines -->
-                                        <p class="d-inline-flex gap-1">
-                                            <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseDeleteMedicine" aria-expanded="false"
-                                                aria-controls="collapseDeleteMedicine" onclick="deleteMedicine('/deleteMedicines')">
-                                                Delete medicine
-                                            </button>
-                                        </p>
-<!-- collapse content delete Medicine
-<div class="collapse" id="collapseDeleteMedicine">
-    <div class="card card-body">
-      <form action="/deleteMedicine" method="POST">
-        <label for="medicineId">ID medicine:</label>
-        <input type="text" id="medicineId" name="medicineId" required>
-        <button type="submit">Delete</button>
-      </form>
-    </div>
-  </div> -->
-  
-                    
 
 
 
@@ -174,7 +160,7 @@
                                 Please enter a valid medicine name.
                               </div>
                             </div>
-                      
+
                             <div class="col-md-4">
                               <label for="inputStock" class="form-label">Stock</label>
                               <input type="number" class="form-control" id="inputStock" name="stock" required min="0">
@@ -182,7 +168,7 @@
                                 Please enter a valid stock quantity.
                               </div>
                             </div>
-                      
+
                             <button type="submit" class="btn btn-primary">Register</button>
                             <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapsePostUser" aria-expanded="false"
@@ -194,6 +180,8 @@
                         </div>
                       </div>
 
+                      <!-- collapse content view Medicine -->
+
                       <div class="collapse table-collapse envelope" id="collapseGetMedicines">
                         <div class="d-inline-flex align-items-center">
                             <label for="stock-filter" class="form-label">Filter by Stock Status</label>
@@ -202,7 +190,7 @@
                                 <option value="with-stock">With Stock</option>
                                 <option value="without-stock">Without Stock</option>
                             </select>
-                        </div>                        
+                        </div>
                         <div class="text-start p-5">
                             <table class="table">
                                 <thead>
@@ -214,20 +202,32 @@
                                     </tr>
                                 </thead>
                                 <tbody id="getMedicinesTableBody">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <!-- collapse content visualize Users -->
 
-                      <!-- collapse content Update Medicines -->
-<!-- 
+                    <!-- collapse content search Medicine -->
+                    <div class="collapse" id="collapseDeleteMedicine">
+                        <div class="card card-body">
+                          <form id="deleteMedicineForm" action="/postMedicinesearch" method="POST">
+                            <label for="medicineId">ID medicine:</label>
+                            <input type="text" id="medicineId" name="medicineId" required>
+                            <button type="submit">Search</button>
+                          </form>
+                          <div id="message"></div>
+                        </div>
+                      </div>
+
+                      <!-- collapse content Update Medicines
+
                       <div class="collapse table-collapse envelope" id="collapsePutMedicine">
                         <div class="text-start p-5">
                           <input type="text" id="searchMedicineId" placeholder="Ingrese el ID del medicamento">
                           <button onclick="searchMedicine()">Buscar</button>
-                      
+
                           <table class="table" id="medicineTable">
                             <thead>
                               <tr>
@@ -239,122 +239,10 @@
                             <tbody>
                             </tbody>
                           </table> -->
-                      
+
                           <!-- <button onclick="updateMedicine()">Actualizar</button>
                         </div>
-                    </div>
-
-                    <div class="collapse table-collapse envelope" id="collapseGetMedicines">
-                        <div class="d-inline-flex align-items-center">
-                            <label for="stock-filter" class="form-label">Filter by Stock Status</label>
-                            <select class="form-select form-select-sm mx-1" aria-label="stock-filter" id="stock-filter" style="width: 150px;" onchange="filterTable()">
-                                <option selected value="all">All</option>
-                                <option value="with-stock">With Stock</option>
-                                <option value="without-stock">Without Stock</option>
-                            </select>
-                        </div>                        
-                        <div class="text-start p-5">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Medicine ID</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Stock</th>
-                                        <th scope="col">Out of Stock?</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="getMedicinesTableBody">
-                                    
-                                </tbody>
-                              </table>
-                        </div>
-                    </div>  
-
-
-                    <!-- collapse content update Users -->
-                    <div class="collapse envelope" id="collapsePutUser">
-                        <div class="text-start p-5">
-                            <!-- form register Users -->
-                            <form class="row g-3 needs-validation" id="putForm" onsubmit="return false" novalidate>
-                                <div class="form-text">* Required Field</div>
-                                <div class="col-md-4">
-                                    <label for="putDocument" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required 
-                                        placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid document ID (only numbers, 6-20 digits)
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="putName" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid name (only letters, 2-50 characters)
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="putLastName" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="putLastName" aria-describedby="putlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid last name (only letters, 2-50 characters)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="putEmail" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid email address
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="putPassword" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="putPassword" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
-                                    <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="putPhone" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="putPhoneNumber" aria-describedby="putPhoneHelp" name="phone_number" required
-                                        placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
-                                    <div class="invalid-feedback">
-                                        Please enter a valid phone number (10-15 digits)
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            * Agree to terms and conditions
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putButton" onclick="handlePutSubmit()">
-                                        Submit
-                                    </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePutUser" aria-expanded="false"
-                                        aria-controls="collapsePutUser" id="cancelPutButton" onclick="putCancelAlert()">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
-                            <!-- form register Users -->
-                        </div>
-                    </div>
-                    <!-- collapse content update Users -->
-                </div>
-            </div>
-        </div>
-        <!-- collapse -->
+                    </div> -->
 
         <button id="whatsapp-icon">
             <a href="https://wa.link/3spfot">
