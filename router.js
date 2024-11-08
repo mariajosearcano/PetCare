@@ -23,7 +23,6 @@ router.get('/home', pagesController.getHome);
 
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
-router.get('/manageMedicinesVeterinarian', pagesController.getManageMedicines);
 
 
 router.get('/login', pagesController.getLogin);
@@ -62,8 +61,10 @@ router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
 // medicines
 router.post('/postMedicine', registermedicineController.medicine);
+router.get('/getMedicineVet', registermedicineController.getMedicines);
 router.get('/getMedicines', medicineController.getMedicines);
-router.post('/postMedicinesearch', registermedicineController.findMedicineById);
+//router.post('/postMedicinesearch', registermedicineController.findMedicineById);
+router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 
 // login
 router.post('/postLogin', loginController.login);
