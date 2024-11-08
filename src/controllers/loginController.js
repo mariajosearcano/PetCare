@@ -24,7 +24,7 @@ function login(req, res) {
 
             if (tableName === 'pet_owner') {
                 console.log("dueñomascota");
-                res.redirect('/home');
+                res.redirect('/petOwner');
             } else if (tableName === 'veterinarian') {
                 console.log("veterinario");
                 res.redirect('/veterinarian');

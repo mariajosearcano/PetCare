@@ -37,6 +37,8 @@
                     <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
                     <a class="nav-link" href="/generateReports">Reports</a>
                     <a class="nav-link" href="/logOut">Administrator</a>
+                    <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
+
                     </div>
                 </div>
             </div>
@@ -129,25 +131,23 @@
                     </p>
 
                     <!-- collapse button delete Medicines -->
-                                         <p class="d-inline-flex gap-1">
+                                         <!-- <p class="d-inline-flex gap-1">
                                             <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseDeleteMedicine" aria-expanded="false"
                                                 aria-controls="collapseDeleteMedicine" onclick="deleteMedicine ('/deleteMedicine')">
                                                 Delete medicine
                                             </button>
-                                        </p>
-
-                                        <!-- collapse button Update Medicines
-                                        <p class="d-inline-flex gap-1">
-                                            <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapsePutMedicine" aria-expanded="false"
-                                                aria-controls="collapsePutMedicine" onclick="getUsers('/putMedicine')">
-                                                Update medicine
-                                            </button>
                                         </p> -->
 
 
-
+                    <!-- collapse button Update Medicines -->
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGetPutMedicines" aria-expanded="false"
+                            aria-controls="collapseGetPutMedicines" onclick="getMedicines('/getMedicines')">
+                            Update Medicines
+                        </button>
+                    </p>
 
                     <!-- collapse content register Medicine -->
                     <div class="collapse envelope id="collapseRegisterMedicine">
@@ -209,6 +209,25 @@
                     </div>
                     <!-- collapse content visualize Users -->
 
+                    <div class="collapse table-collapse envelope" id="collapsePutMedicine">
+                        <div class="d-inline-flex align-items-center">
+                        </div>
+                        <div class="text-start p-5">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Medicine ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="getMedicinesTableBody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- collapse content search Medicine -->
                     <div class="collapse" id="collapseDeleteMedicine">
                         <div class="card card-body">
@@ -221,28 +240,95 @@
                         </div>
                       </div>
 
-                      <!-- collapse content Update Medicines
 
-                      <div class="collapse table-collapse envelope" id="collapsePutMedicine">
-                        <div class="text-start p-5">
-                          <input type="text" id="searchMedicineId" placeholder="Ingrese el ID del medicamento">
-                          <button onclick="searchMedicine()">Buscar</button>
 
-                          <table class="table" id="medicineTable">
-                            <thead>
-                              <tr>
-                                <th>ID Medicamento</th>
-                                <th>Nombre</th>
-                                <th>Stock</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table> -->
+                      <div class="collapse table-collapse envelope" id="collapseGetPutMedicines">
+                        <div class="d-inline-flex align-items-center">
+                          <div class="text-start p-5">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>ID Medicamento</th>
+                                  <th>Nombre</th>
+                                  <th>Stock</th>
+                                  <th>Acciones</th>
+                                </tr>
+                              </thead>
+                              <tbody id="medicineTableBody">
+                                <script>
+                                  
+async function eliminarMedicamento(medicineId) {
+              if (confirm(`¿Estás seguro de eliminar el medicamento con ID ${medicineId}?`)) {
+                try {
+                    const response = await fetch('/deleteMedicine'); {
+                    method: 'DELETE'
+                  };
 
-                          <!-- <button onclick="updateMedicine()">Actualizar</button>
-                        </div>
-                    </div> -->
+                  if (response.ok) {
+                    const row = document.querySelector(`tr[data-medicine-id="${medicineId}"]`);
+                    row.remove();
+                    alert('Medicamento eliminado correctamente');
+                  } else {
+                    alert('Error al eliminar el medicamento');
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                }
+              }
+            }
+             // **Función para obtener y mostrar medicamentos**
+            async function getMedicines() {
+              try {
+                const response = await fetch('/getMedicineVet');
+                const data = await response.json();
+
+                const tableBody = document.getElementById('medicineTableBody');
+                tableBody.innerHTML = '';
+
+                data.forEach(medicine => {
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                    <td>${medicine.medicine_id}</td>
+                    <td>${medicine.name}</td>
+                    <td>${medicine.stock}</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm update-btn" data-medicine-id="${medicine.medicine_id}">Actualizar</button>
+                      <button class="btn btn-danger btn-sm delete-btn" data-medicine-id="${medicine.medicine_id}">Eliminar</button>
+                    </td>
+                  `;
+                  row.setAttribute('data-medicine-id', medicine.medicine_id);
+                  tableBody.appendChild(row);
+                });
+              } catch (error) {
+                console.error('Error fetching medicines:', error);
+                alert('Error al cargar los medicamentos. Por favor, inténtalo de nuevo más tarde.');
+              }
+            }
+
+            // **Agregar event listener a los botones "Eliminar"**
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+              button.addEventListener('click',   
+ () => {
+                const   
+ medicineId = button.dataset.medicineId;
+                eliminarMedicamento(medicineId);
+              });
+            });
+
+            // **Llama a la función getMedicines para cargar los datos**
+            getMedicines();
+          </script>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>                     
+                      
+                               
+
+
+
 
         <button id="whatsapp-icon">
             <a href="https://wa.link/3spfot">
