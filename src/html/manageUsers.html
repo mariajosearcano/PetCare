@@ -169,7 +169,7 @@
                                 <div class="col-md-6">
                                     <label for="postEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\-]+@[A-Za-z0-9._\-]+.[A-Za-z]{2,}">
+                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -306,7 +306,7 @@
                                 <div class="col-md-6">
                                     <label for="putEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z._\-]+@[A-Za-z._\-]+.[A-Za-z]{2,}">
+                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -314,7 +314,7 @@
                                 <div class="col-md-3">
                                     <label for="putPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="putPassword" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&._\-])(?=.*[0-9])[A-Za-z\d!@#$%&._\-]{8,20}$">
+                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
                                         Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
                                     </div>
