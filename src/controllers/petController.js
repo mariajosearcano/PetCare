@@ -39,6 +39,17 @@ function deletePets(req, res) {
     });
 }
 
+function createPets(req, res) {
+    const { age, name, species, weight, pet_owner_document } = req.body;
+    const sql = 'INSERT INTO pet (age, name, species, weight, pet_owner_document) VALUES (?, ?, ?, ?, ?)';    // el id se genera automaticamente
+    connection.query(sql, [age, name, species, weight, pet_owner_document], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ id: result.insertId, age, name, species, weight, pet_owner_document });
+    });
+}
+
 
 
 function getPetsAndPetOwners(req, res) {
@@ -93,7 +104,7 @@ async function putPet(req, res) {
 
 
 
-module.exports = {
+module.exports ={
     createPets,
     getPets,
     deletePets,
