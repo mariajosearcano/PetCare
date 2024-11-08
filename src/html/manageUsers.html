@@ -15,8 +15,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/manageUsers.css">
+    <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
 
 <body>
@@ -33,10 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="#">Manage Users</a>
-                    <a class="nav-link" href="/manageMedicines">Manage Medicines Stock</a>
+                    <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
                     <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
                     <a class="nav-link" href="/generateReports">Reports</a>
-                    <a class="nav-link" href="/logout">Administrator</a>
+                    <a class="nav-link" href="/logOut">Administrator</a>
                     </div>
                 </div>
             </div>
@@ -57,13 +57,13 @@
             <div class="row">
                 <div class="col">
                     <!-- carousel -->
-                    <div id="carouselManageUsers" class="carousel slide">
+                    <div id="carousel" class="carousel slide small-carousel">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="0"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="1"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="2"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
                                 aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
@@ -77,12 +77,12 @@
                                 <img src="/assets/exotic pet 6.jpg" class="d-block w-100" alt="...">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselManageUsers"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselManageUsers"
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
@@ -113,8 +113,8 @@
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePostUsers" aria-expanded="false"
-                            aria-controls="collapsePostUsers">
+                            data-bs-target="#collapsePostUser" aria-expanded="false"
+                            aria-controls="collapsePostUser">
                             Create user
                         </button>
                     </p>
@@ -169,7 +169,7 @@
                                 <div class="col-md-6">
                                     <label for="postEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="postEmail" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email">
+                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\-]+@[A-Za-z0-9._\-]+.[A-Za-z]{2,}">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -177,9 +177,9 @@
                                 <div class="col-md-3">
                                     <label for="postPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="postPassword" name="password" required
-                                        placeholder="Enter Password" minlength="8" maxlength="20">
+                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8-20 characters long
+                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -219,7 +219,7 @@
                                     </button>
                                     <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePostUser" aria-expanded="false"
-                                        aria-controls="collapsePostUser" id="cancelPostButton">
+                                        aria-controls="collapsePostUser" id="cancelPostButton" onclick="postCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -306,7 +306,7 @@
                                 <div class="col-md-6">
                                     <label for="putEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email">
+                                        placeholder="Enter Email" pattern="^[A-Za-z._\-]+@[A-Za-z._\-]+.[A-Za-z]{2,}">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -314,9 +314,9 @@
                                 <div class="col-md-3">
                                     <label for="putPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="putPassword" name="password" required
-                                        placeholder="Enter Password" minlength="8" maxlength="20">
+                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&._\-])(?=.*[0-9])[A-Za-z\d!@#$%&._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8-20 characters long
+                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -344,7 +344,7 @@
                                     </button>
                                     <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePutUser" aria-expanded="false"
-                                        aria-controls="collapsePutUser" id="cancelPutButton">
+                                        aria-controls="collapsePutUser" id="cancelPutButton" onclick="putCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>

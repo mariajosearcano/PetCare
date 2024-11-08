@@ -33,26 +33,44 @@ async function handlePostSubmit() {
 }
 
 async function postUser(postFormData, postForm) {
+    const url = choosePostUrlByRol(postFormData.rol);
+
     try {
-        const response = await fetch('/postUser', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
+                //'Accept': 'application/json'
             },
             body: JSON.stringify(postFormData)
         });
 
         if (response.ok) {
-            alert("Form submitted successfully!");
-            postForm.reset();
-            postForm.classList.remove('was-validated');
+            postAlert();
+            // postForm.reset();
+            // postForm.classList.remove('was-validated');
         } else {
             const errorData = await response.json();
-            alert("Error: " + (errorData.message || "An error occurred"));
+            
+            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
+                console.error("Error: Duplicate entry - A record with this information already exists");
+                postDuplicateAlert();
+            } else {
+                console.error("Error: " + (errorData.message || "An error occurred"));
+                postErrorAlert();
+            }
         }
     } catch (error) {
         console.error("Error submitting form", error);
-        alert("There was an error submitting the form");
+        postErrorAlert();
+    }
+}
+
+function choosePostUrlByRol(rol){
+    if (rol == 'Pet Owner'){
+        return ('/postPetOwner').toString(); 
+    } else {
+        return ('/postVeterinarian').toString(); 
     }
 }
 
@@ -66,19 +84,17 @@ async function getUsers(url) {
         const response = await fetch(urlString);
         const data = await response.json();
     
-        if (response.ok) {
-            alert("Form submitted successfully!");
-            postForm.reset();
-            postForm.classList.remove('was-validated');
-        } else {
+        if (!response.ok) {
             const errorData = await response.json();
-            alert("Error: " + (errorData.message || "An error occurred"));
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            getErrorAlert();
         }
     
         populateTable(data, urlString);
         collapse();
     } catch (error) {
-      console.error('Error:', error);
+        console.error("Error getting users", error);
+        getErrorAlert();
     }
 }
 
@@ -101,7 +117,7 @@ function createTableRow(data) {
         </td>
         <td>
             <p class="d-inline-flex gap-1">
-                <button class="btn btn-outline-danger btn-lg delete-btn" type="button" aria-expanded="false" onclick="deleteAlert()">
+                <button class="btn btn-outline-danger btn-lg delete-btn" type="button" aria-expanded="false">
                     Delete
                 </button>
             </p>
@@ -125,7 +141,8 @@ function addEventListeners(data, row){
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
     const deleteButton = row.querySelector('.delete-btn');
-    deleteButton.addEventListener('click', () => deleteUser(data));
+    //deleteButton.addEventListener('click', () => deleteUser(data));
+    deleteButton.addEventListener('click', () => deleteCancelAlert(data));
 }
 
 function populateTable(data, url) {
@@ -205,14 +222,14 @@ async function handlePutSubmit() {
 }
 
 async function putUser(putFormData, putForm) {
-    const url = choosePutUrl(oldPutForm.table);
+    const url = choosePutUrlByTable(oldPutForm.table);
 
     try {
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
             },
             body: JSON.stringify({
                 oldPutForm,
@@ -221,20 +238,27 @@ async function putUser(putFormData, putForm) {
         });
     
         if (response.ok) {
-            alert("Form submitted successfully!");
-            putForm.reset();
-            putForm.classList.remove('was-validated');
+            putAlert();
+            // putForm.reset();
+            // putForm.classList.remove('was-validated');
         } else {
             const errorData = await response.json();
-            alert("Error: " + (errorData.message || "An error occurred"));
+            
+            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
+                console.error("Error: Duplicate entry - A record with this information already exists");
+                putDuplicateAlert();
+            } else {
+                console.error("Error: " + (errorData.message || "An error occurred"));
+                putErrorAlert();
+            }
         }
     } catch (error) {
-        console.error("Error submitting form", error);
-        alert("There was an error submitting the form");
+        console.error("Error updating user", error);
+        putErrorAlert();
     }
 }
 
-function choosePutUrl(table){
+function choosePutUrlByTable(table){
     if (table == 'pet_owner'){
         return ('/putPetOwner').toString(); 
     } else {
@@ -246,13 +270,13 @@ function choosePutUrl(table){
 // DELETE LOGIC
 
 async function deleteUser(data) {
-    const url = chooseDeleteUrl(data.table);
+    const url = chooseDeleteUrlByTable(data.table);
 
     try {
         const response = await fetch(url, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
                 //'Accept': 'application/json'
             },
             body: JSON.stringify({
@@ -260,17 +284,20 @@ async function deleteUser(data) {
             })
         });
     
-        if (!response.ok) {
-            throw new Error(`Error deleting user: ${response.statusText}`);
+        if (response.ok) {
+            deleteAlert();
+        } else {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            deleteErrorAlert();
         }
-
-        reloadWindow();
     } catch (error) {
-        console.error('Error deleting user:', error);
+        console.error('Error deleting user', error);
+        deleteErrorAlert();
     }
 }
 
-function chooseDeleteUrl(table){
+function chooseDeleteUrlByTable(table){
     if (table == 'pet_owner'){
         return ('/deletePetOwner').toString(); 
     } else {
@@ -279,13 +306,7 @@ function chooseDeleteUrl(table){
 }
 
 
-function reloadWindow(){
-    setTimeout(function() {
-        location.reload();
-    }, 2000);
-}
-
-
+// collapse buttons logic
 
 document.addEventListener('DOMContentLoaded', function() {
     collapse();
@@ -304,7 +325,7 @@ function collapse() {
                     const collapseElement = document.querySelector(otherTargetId);
                     const collapse = bootstrap.Collapse.getInstance(collapseElement);
                     if (collapse) {
-                        collapse.hide(); // Cerrar el colapso
+                        collapse.hide();
                     }
                 }
             });
@@ -313,53 +334,137 @@ function collapse() {
 }
 
 
-//buttons animations
 
-// $('#postUsersButton').click(function(){
-//     Swal.fire({
-//         icon: "success",
-//         title: "User has been saved",
-//         showConfirmButton: false,
-//         timer: 1500
-//     });
-// });
+// ALERTS
 
-$('#cancelPostUsersButton').click(function(){
-    Swal.fire("The creation of a user was cancelled");
-});
 
-$('#putUserButton').click(function(){
+//// POST ALERTS
+
+function postAlert(){
     Swal.fire({
         icon: "success",
-        title: "User has been updated",
-        showConfirmButton: false,
-        timer: 1500
-      });
-});
+        title: "User has been created"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
 
-$('#cancelPutUserButton').click(function(){
-    Swal.fire("The updated of a user was cancelled");
-});
+function postCancelAlert(){
+    Swal.fire("The creation of a user was cancelled");
+};
+
+function postErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error creating user"
+    });
+};
+
+function postDuplicateAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Duplicate entry",
+        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+    });
+}
+
+
+//// GET ALERTS
+
+function getErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error getting users"
+    });
+};
+
+
+//// PUT ALERTS
+
+function putAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "User has been updated"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
+
+function putCancelAlert(){
+    Swal.fire("The update of a user was cancelled");
+};
+
+function putErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error updating user"
+    });
+};
+
+function putDuplicateAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Duplicate entry",
+        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+    });
+}
+
+
+//// DELETE ALERTS
 
 function deleteAlert(){
     Swal.fire({
         icon: "success",
-        title: "User deleted successfully",
-        showConfirmButton: false,
-        timer: 1500
+        title: "User has been deleted"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
     });
-}
+};
 
-document.getElementById('postForm').addEventListener('submit', function(event) {
-    // Activa la validación de Bootstrap
-    this.classList.add('was-validated');
+function deleteCancelAlert(data){
+    Swal.fire({
+        title: "Are you sure you want to delete the user?",
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteUser(data);
+        };
+    });
+};
 
-    // Si el formulario no es válido, se evita el envío
-    if (!this.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-});
+function deleteErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error deleting user"
+    });
+};
+
+
+
+
+
+// reload window
+
+// function reloadWindow(){
+//     setTimeout(function() {
+//         location.reload();
+//     }, 1000);
+// }
+
+// document.getElementById('postForm').addEventListener('submit', function(event) {
+//     this.classList.add('was-validated');
+
+//     if (!this.checkValidity()) {
+//         event.preventDefault();
+//         event.stopPropagation();
+//     }
+// });
 
 // function putAction(){
 //     var newPutUserForm = {
