@@ -279,10 +279,39 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// collapse 2 (por el bien del update)
+function collapse() {
+    const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    
+    collapseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-bs-target');
+
+            collapseButtons.forEach(btn => {
+                const otherTargetId = btn.getAttribute('data-bs-target');
+                if (otherTargetId !== targetId) {
+                    const collapseElement = document.querySelector(otherTargetId);
+                    const collapse = bootstrap.Collapse.getInstance(collapseElement);
+                    if (collapse) {
+                        collapse.hide();
+                    }
+                }
+            });
+        });
+    });
+}
+
+// update variables
+var oldPutForm = {};
+const formName = document.getElementById('name-update');
+const formSpecies = document.getElementById('select-species-update');
+const formAge = document.getElementById('age-update');
+const formWeight = document.getElementById('weight-update');
+const formPhoto = document.getElementById('photo-update');
 
 //UPDATE LOGIC
 
-async function getPets(url) {
+async function getPetsAndPetOwners(url) {
     const urlString = (url).toString();
 
     try {
@@ -292,13 +321,158 @@ async function getPets(url) {
         if (!response.ok) {
             const errorData = await response.json();
             console.error("Error: " + (errorData.message || "An error occurred"));
-            getErrorAlert();
+            getPetsAndPetOwnersErrorAlert();
         }
     
         populateTable(data, urlString);
         collapse();
     } catch (error) {
-        console.error("Error getting pets", error);
-        getErrorAlert();
+        console.error("Error getting pets and pet owners", error);
+        getPetsAndPetOwnersErrorAlert();
     }
 }
+
+function createTableRow(data) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <th scope="row">${data.pet_id}</th>
+        <td>${data.name}</td>
+        <td>${data.species}</td>
+        <td>${data.age}</td>
+        <td>${data.weight}</td>
+        <td>${data.photo}</td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseUpdatePet" aria-expanded="false"
+                    aria-controls="collapseUpdatePet">
+                    Edit
+                </button>
+            </p>
+        </td>
+    `;
+
+    addEventListeners(data, row);
+
+    return row;
+}
+
+function addEventListeners(data, row){
+    const editButton = row.querySelector('.edit-btn');
+    editButton.addEventListener('click', () => populateForm(data));
+}
+
+function populateTable(data, url) {
+    const id = 'tbody-update-pet';
+
+    const tableBody = document.getElementById(id);
+    tableBody.innerHTML = '';
+    data.forEach((item, index) => {
+        const row = createTableRow({
+            pet_id: item.pet_id,
+            name: item.name,
+            species: item.species,
+            weight: item.weight,
+            photo: item.photo
+        });
+        tableBody.appendChild(row);
+    });
+}
+
+function populateForm(data){
+    formName.value = data.name;
+    formSpecies.value = data.species;
+    formAge.value = data.age;
+    formWeight.value = data.weight;
+    formPhoto.value = data.photo;
+
+    oldPutForm = {
+        putPetId: data.pet_id,
+        putName: data.name,
+        putSpecies: data.species,
+        putAge: data.age,
+        putWeight: data.weight,
+        putPhoto: data.photo,
+        pet_owner_document: data.pet_owner_document
+    }
+}
+
+async function handlePutSubmit() {
+    const putForm = document.getElementById('putForm');
+
+    if (!putForm.checkValidity()) {
+        putForm.classList.add('was-validated');
+        return;
+    }
+
+    const putFormData = {
+        name: formName.value,
+        species: formSpecies.value,
+        age: formAge.value,
+        weight: formWeight.value,
+        photo: formPhoto.value
+    };
+
+    putPet(putFormData, putForm);
+}
+
+async function putPet(putFormData, putForm) {
+    try {
+        const response = await fetch('/putPet', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                oldPutForm,
+                putFormData
+            })
+        });
+    
+        if (response.ok) {
+            putAlert();
+        } else {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            putErrorAlert();
+        }
+    } catch (error) {
+        console.error("Error updating pet", error);
+        putErrorAlert();
+    }
+}
+
+
+//// ALERTS
+
+function getPetsAndPetOwnersErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error getting pets and pet owners"
+    });
+};
+
+//// PUT ALERTS
+
+function putAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "Pet has been updated"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.reload(true);
+        }
+    });
+};
+
+function putCancelAlert(){
+    Swal.fire("The update of a pet was cancelled");
+};
+
+function putErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error updating pet"
+    });
+};

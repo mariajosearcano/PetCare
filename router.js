@@ -44,8 +44,6 @@ router.get('/getAlltreatments', treatmentController.getTreatments);
 
 router.get('/getAllvaccines', vaccineController.getVaccines);
 
-router.get('/getPets', petController.getPets);
-
 router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
@@ -65,6 +63,8 @@ router.post('/postLogin', loginController.login);
 router.get('/getPet', petController.getPets);
 router.post('/postPet', petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
+router.get('/getPetsAndPetOwners', petController.getPetsAndPetOwners);
+router.put('/putPet', petController.putPet);
 
 module.exports = router;
 
