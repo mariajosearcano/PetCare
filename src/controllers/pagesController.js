@@ -31,6 +31,10 @@ function getManagePet(req, res) {
     res.sendFile(path.join(__dirname, '../html/managePet.html'));
 }
 
+function getScheduleAppointment(req, res) {
+    res.sendFile(path.join(__dirname, '../html/scheduleAppointment.html'));
+}
+
 function getPassword(req, res) {
     res.sendFile(path.join(__dirname, '../html/password.html'));
 }
@@ -44,5 +48,6 @@ module.exports = {
     getFormsPetOwner,
     getPetOwner,
     getManagePet,
+    getScheduleAppointment,
     getPassword
 }

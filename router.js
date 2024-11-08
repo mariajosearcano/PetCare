@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 
 const pagesController = require('./src/controllers/pagesController');
+
 const appointmentController = require('./src/controllers/appointmentController');
 const administratorController = require('./src/controllers/administratorController');
 const medicalHistoryController = require('./src/controllers/medicalHistoryController');
@@ -14,9 +15,8 @@ const petOwnerController = require('./src/controllers/petOwnerController');
 const veterinarianController = require('./src/controllers/veterinarianController');
 const medicineController = require('./src/controllers/medicineController');
 const loginController = require('./src/controllers/loginController.js');
-const userController = require('./src/controllers/userController');
+const userController = require('./src/controllers/userController');    
 const registermedicineController = require('./src/controllers/registermedicineController');
-
 
 // hmtl
 router.get('/home', pagesController.getHome);
@@ -28,6 +28,7 @@ router.get('/login', pagesController.getLogin);
 
 router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
+router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
 
 // funcionalidades
 router.get('/getAllappointments', appointmentController.getAppointments);
@@ -61,7 +62,4 @@ router.get('/getMedicines', medicineController.getMedicines);
 
 router.post('/postLogin', loginController.login);
 
-
-
 module.exports = router;
-
