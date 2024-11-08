@@ -132,7 +132,7 @@
                                          <p class="d-inline-flex gap-1">
                                             <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseDeleteMedicine" aria-expanded="false"
-                                                aria-controls="collapseDeleteMedicine" onclick="deleteMedicine('/deleteMedicines')">
+                                                aria-controls="collapseDeleteMedicine" onclick="deleteMedicine ('/deleteMedicine')">
                                                 Delete medicine
                                             </button>
                                         </p>
@@ -212,10 +212,10 @@
                     <!-- collapse content search Medicine -->
                     <div class="collapse" id="collapseDeleteMedicine">
                         <div class="card card-body">
-                          <form id="deleteMedicineForm" action="/postMedicinesearch" method="POST">
+                          <form id="deleteMedicineForm" action="/deleteMedicine" method="DELETE">
                             <label for="medicineId">ID medicine:</label>
                             <input type="text" id="medicineId" name="medicineId" required>
-                            <button type="submit">Search</button>
+                            <button type="submit">Delete</button>
                           </form>
                           <div id="message"></div>
                         </div>

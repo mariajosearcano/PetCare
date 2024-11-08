@@ -1,3 +1,27 @@
+async function deleteMedicine(medicineId) {
+  try {
+    const response = await fetch('/deleteMedicine', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ medicineId })
+    });
+
+    if (response.ok) {
+      // Manejar eliminación exitosa
+      deleteAlert(); // Mostrar mensaje de éxito
+    } else {
+      // Manejar error
+      const errorData = await response.json();
+      console.error("Error: " + (errorData.message || "Ocurrió un error al eliminar la medicina"));
+      deleteErrorAlert(); // Mostrar mensaje de error
+    }
+  } catch (error) {
+    console.error('Error deleting medicine:', error);
+    deleteErrorAlert(); // Mostrar mensaje de error genérico
+  }
+}
 
 // GET LOGIC
 
