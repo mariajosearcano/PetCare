@@ -44,6 +44,38 @@ async function getVeterinarians(req, res) {
     });
 }
 
+async function getOneVeterinarian(req, res) {
+    const { name } = req.params;
+    const sql = 'SELECT * FROM veterinarian WHERE name = ?';
+    connection.query(sql, [name], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error getting veterinary users');
+        } else {
+            //console.log('Veterinary users successfully obtained');
+            return res.json(results);
+        }
+    });
+}
+
+// // obtener una persona
+// app.get('/person/read/:document', (req, res) => {
+//     const document = req.params.document;
+//     const sql = 'SELECT * FROM person WHERE document = ?';
+    
+//     conexion.query(sql, [document], (err, results) => {
+//         if (err) {
+//             return res.status(500).send(err);
+//         }
+        
+//         if (results.length === 0) {
+//             return res.status(404).json({ message: 'Persona no encontrada' });
+//         }
+        
+//         res.json(results[0]);
+//     });
+// });
+
 async function putVeterinarian(req, res) {
 
     const { oldPutForm, putFormData } = req.body;
@@ -106,6 +138,7 @@ async function deleteVeterinarian(req, res) {
 module.exports = {
     postVeterinarian,
     getVeterinarians,
+    getOneVeterinarian,
     putVeterinarian,
     deleteVeterinarian
 }

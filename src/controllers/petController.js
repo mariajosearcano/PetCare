@@ -39,6 +39,18 @@ function deletePets(req, res) {
     });
 }
 
+// agendar cita (actualizar)
+function createPets(req, res) {
+    const { age, name, species, weight, pet_owner_document } = req.body;
+    const sql = 'INSERT INTO pet (age, name, species, weight, pet_owner_document) VALUES (?, ?, ?, ?, ?)';    // el id se genera automaticamente
+    connection.query(sql, [age, name, species, weight, pet_owner_document], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ id: result.insertId, age, name, species, weight, pet_owner_document });
+    });
+}
+
 module.exports ={
     createPets,
     getPets,
