@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Veterinarian | Pet Care</title>
+    <title>Treatment | Veterinarian | Pet Care</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,9 +31,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/managePet">Home</a>
+                        <a class="nav-link" href="/managePet">Home</a>
                         <a class="nav-link" href="/manageMedicines">Manage medicine</a>
-                        <a class="nav-link" href="/treatment">Treatment</a>
+                        <a class="nav-link active" aria-current="page" href="/treatment">Treatment</a>
                         <a class="nav-link" href="/manageAppointments">Medical Record</a>
                         <a class="nav-link" href="/signIn">Sign In</a>
                     </div>
@@ -97,14 +97,58 @@
             <div class="row">
                 <div class="col">
                     <br>
-                    <p class="h3">Welcome to Pet Care! We specialize in providing expert care for your unique and exotic
-                        pets, from reptiles and birds to small mammals and more. Our dedicated team is here to ensure
-                        your pet receives the best possible medical attention, tailored to their specific needs. Trust
-                        us to keep your special companion healthy and happy!</p>
+                    <p class="h3">¡Welcome to Pet Care, dear veterinarian! Please select which feature do you want to use:
+                    </p>
                 </div>
             </div>
         </div>
-        <br>
+
+        <!-- collapse -->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col mt-4">
+
+                <!-- collapse button treatment -->
+                <p class="d-inline-flex gap-1">
+                    <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse-create-treatment" aria-expanded="false"
+                        aria-controls="collapse-create-treatment" id="btn-collapse-create-treatment">
+                        Create Treatment
+                    </button>
+                </p>
+
+                <!-- collapse content treatment -->
+                <div class="collapse" id="collapse-create-treatment">
+                    <div class="text-start bg-info-subtle p-5">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floating-dose" placeholder="dose" required>
+                            <label for="floating-dose">Dose *</label>
+                        </div>
+
+                        <label for="select-medical-history" class="form-label">Select medical history *</label>
+                        <select class="form-select mb-3" aria-label="Default select example" id="select-medical-history">
+                            <option selected></option>
+                        </select>
+                        
+                        <label for="select-medicine" class="form-label">Select medicine *</label>
+                        <select class="form-select mb-3" aria-label="Default select example" id="select-medicine">
+                            <option selected></option>
+                        </select>
+
+                        <p><em>* Required fields</em></p>
+
+                        <div class="d-grid gap-2 col-6 mx-auto mb-3">
+                            <button type="button" class="btn btn-primary" id="btn-create-treatment">Create Treatment</button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- collapse content treatment -->
+            </div>
+        </div>
+    </div>
+    <!-- collapse -->
 
         <!-- whatsapp button -->
         <button id="whatsapp-icon">

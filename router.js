@@ -42,8 +42,6 @@ router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistori
 
 router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
 
-router.get('/getAlltreatments', treatmentController.getTreatments);
-
 router.get('/getAllvaccines', vaccineController.getVaccines);
 
 // pet owners
@@ -58,6 +56,8 @@ router.get('/getVeterinarians', veterinarianController.getVeterinarians);
 router.get('/getOneVeterinarian/:name', veterinarianController.getOneVeterinarian);
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
+
+router.get('/postTreatment', treatmentController.postTreatment);
 
 // medicines
 router.post('/postMedicine', registermedicineController.medicine);
