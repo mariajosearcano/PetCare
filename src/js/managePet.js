@@ -26,47 +26,48 @@ const updateButton = document.getElementById('btn-update-pet');
 const tableBody = document.querySelector('#tbody-visualize-pet');
 
 // INSERT
-// registerButton.addEventListener('click', InsertPet);
+registerButton.addEventListener('click', InsertPet);
 
-// function InsertPet() {
-//     let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
-//         name: inputName.value,
-//         species: selectSpecies.options[selectSpecies.selectedIndex].text,
-//         age: inputAge.value,
-//         weight: inputWeight.value,
-//         photo: inputPhoto.value,    // modificarlo para que sea un archivo
-//         pet_owner_document: inputPetOwnerDocument.value
-//     };
+async function InsertPet() {
+    let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
+        name: inputName.value,
+        species: selectSpecies.options[selectSpecies.selectedIndex].text,
+        age: inputAge.value,
+        weight: inputWeight.value,
+        photo: inputPhoto.value,    // modificarlo para que sea un archivo
+        pet_owner_document: inputPetOwnerDocument.value
+    };
 
-//     fetch('http://localhost:3007/pet/post', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(pets)
-//     })
-//         .then(res => {
-//             if (!res.ok) {
-//                 throw new Error('Network error: ' + res.statusText);
-//             }
-//             return res.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             alert('Pet registered successfully');
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//             alert('There was no possible to register the pet');
-//         });
+    const urlString = ('/getPets').toString();
 
-//     inputName.value = '';
-//     selectSpecies.selectedIndex = 0;
-//     inputAge.value = '';
-//     inputWeight.value = '';
-//     inputPhoto.value = '';
-//     inputPetOwnerDocument.value = '';
-// }
+    try {
+        const response = await fetch(urlString, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(pets)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network error: ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        alert('Pet registered successfully');
+    } catch (error) {
+        console.error('Error:', error);
+        alert('There was no possible to register the pet');
+    }
+
+    inputName.value = '';
+    selectSpecies.selectedIndex = 0;
+    inputAge.value = '';
+    inputWeight.value = '';
+    inputPhoto.value = '';
+    inputPetOwnerDocument.value = '';
+}
 
 // filter pet by name
 collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
@@ -220,38 +221,38 @@ function AddPetRow(pet) {
 // }
 
 // // DELETE
-// deleteButton.addEventListener('click', DeletePet);
+deleteButton.addEventListener('click', DeletePet);
 
-// function DeletePet() {
+async function DeletePet() {
+    const urlString = ('/delePets').toString();
 
-//     const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
+    try {
+        const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
 
-//     if (confirm !== 'yes') {
-//         return;
-//     }
+        if (confirm !== 'yes') {
+            return;
+        }
 
-//     let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+        let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
 
-//     fetch(`http://localhost:3007/pet/delete/${name}`, {
-//         method: 'DELETE'
-//     })
-//         .then(res => {
-//             if (!res.ok) {
-//                 throw new Error('Network response was not ok ' + res.statusText);
-//             }
-//             return res.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             alert('Pet deleted successfully');
-//             GetNames(selectNames);
-//             GetNames(selectNameUpdate);
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//             alert('There was no possible to delete the pet');
-//         });
-// }
+        const res = await fetch(`${urlString}/${name}`, {
+            method: 'DELETE'
+        });
+
+        if (!res.ok) {
+            throw new Error('Network response was not ok ' + res.statusText);
+        }
+
+        const data = await res.json();
+        console.log(data);
+        alert('Pet deleted successfully');
+        await GetNames(selectNames);
+        await GetNames(selectNameUpdate);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('There was no possible to delete the pet');
+    }
+}
 
 // control collapse
 document.addEventListener('DOMContentLoaded', function () {

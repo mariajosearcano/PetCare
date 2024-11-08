@@ -63,10 +63,10 @@ router.post('/postLogin', loginController.login);
 router.post('/postMedicine', registermedicineController.medicine);
 
 // pet
+router.post('/postPet', petController.createPets);
 router.get('/getPet', petController.getPets);
-// router.post('/postPet', petController.postPet);
 // router.put('/putPet', petController.putPet);
-// router.delete('/deletePet', petController.deletePet);
+router.delete('/deletePets/:name', petController.deletePets);
 
 
 module.exports = router;
