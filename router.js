@@ -66,6 +66,7 @@ router.get('/getMedicines', medicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);
 router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 
+
 // login
 router.post('/postLogin', loginController.login);
 
