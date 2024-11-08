@@ -18,7 +18,7 @@ const userController = require('./src/controllers/userController');
 const registermedicineController = require('./src/controllers/registermedicineController');
 
 
-
+// hmtl
 router.get('/home', pagesController.getHome);
 
 router.get('/manageUsers', pagesController.getManageUsers);
@@ -26,7 +26,10 @@ router.get('/manageMedicines', pagesController.getManageMedicines);
 
 router.get('/login', pagesController.getLogin);
 
+router.get('/petOwner', pagesController.getPetOwner);
+router.get('/managePet', pagesController.getManagePet);
 
+// funcionalidades
 router.get('/getAllappointments', appointmentController.getAppointments);
 
 router.get('/getAlladministrators', administratorController.getAdministrators);

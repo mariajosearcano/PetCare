@@ -177,41 +177,7 @@ app.listen(3007, () => {
 
 // // Rutas de la API para pet
 
-// // Obtener todas las mascotas
-// app.get('/pet/read', (req, res) => {
-//     conexion.query('SELECT * FROM pet', (err, results) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.json(results);
-//     });
-// });
-
-// // Crear mascota 
-// app.post('/pet/post', (req, res) => {
-//     const { age, name, photo, species, weight, pet_owner_document } = req.body;
-//     const sql = 'INSERT INTO pet (age, name, photo, species, weight, pet_owner_document) VALUES (?, ?, ?, ?, ?, ?)';    // el id se genera automaticamente
-//     conexion.query(sql, [age, name, photo, species, weight, pet_owner_document], (err, result) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.json({ id: result.insertId, age, name, photo, species, weight, pet_owner_document });
-//     });
-// });
-
-// Eliminar mascota
-// app.delete('/pet/delete', (req, res) => {
-//     const { id } = req.params;
-//     const sql = 'DELETE FROM pet WHERE id = ?';
-//     conexion.query(sql, [id], (err, result) => {
-//         if (err) {
-//             return res.status(500).send(err);
-//         }
-//         res.json({ message: 'pet deleted' });
-//     });
-// });
-
-// // Actualizar mascota
+// // Actualizar mascota (majo)
 // app.put('/pet/put', (req, res) => {
 //     const { id } = req.params;
 //     const { age, name, photo, species, weight, pet_owner_document } = req.body;
