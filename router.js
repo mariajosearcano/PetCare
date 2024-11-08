@@ -21,9 +21,9 @@ const registermedicineController = require('./src/controllers/registermedicineCo
 // hmtl
 router.get('/home', pagesController.getHome);
 
+router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
-
 
 router.get('/login', pagesController.getLogin);
 

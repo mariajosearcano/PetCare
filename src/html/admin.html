@@ -6,43 +6,34 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" href="/assets/Logo.png" type="image/x-icon">
+    <link rel="icon" href="/assets/circle-logo.png" type="image/x-icon">
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
 
 <body>
     <header>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-body">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarExample01"
-                    aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                <a class="navbar-brand" href="/admin">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh" class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarExample01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="/src/html/admin.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/src/html/manageUsers.html">Manage users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/src/html/manageMedicines.html">Manage medicines </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manage appointments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Reports</a>
-                        </li>
-                    </ul>
-
-                    <!-- sign in buttom -->
-                    <button type="button" class="btn ms-auto">Sign in</button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                    <a class="nav-link" href="/manageUsers">Manage Users</a>
+                    <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
+                    <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
+                    <a class="nav-link" href="/generateReports">Reports</a>
+                    <a class="nav-link" href="/logOut">Administrator</a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -51,7 +42,7 @@
         <div class="p-5 text-center bg-body-tertiary"
             style="background-image: url('/assets/7261023.jpg'); background-size: cover; background-position: center; color: rgb(2, 1, 1);">
             <h1 class="mb-3">PetCare</h1>
-            <h4 class="mb-3">Veterinary clinic</h4>
+            <h4 class="mb-3">Veterinary Clinic</h4>
         </div>
 
     </header>
@@ -62,13 +53,13 @@
             <div class="row">
                 <div class="col">
                     <!-- carousel -->
-                    <div id="carouselManagePet" class="carousel slide">
+                    <div id="carousel" class="carousel slide small-carousel">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselManagePet" data-bs-slide-to="0"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselManagePet" data-bs-slide-to="1"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselManagePet" data-bs-slide-to="2"
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
                                 aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
@@ -82,12 +73,12 @@
                                 <img src="/assets/exotic pet 3.jpg" class="d-block w-100" alt="...">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselManagePet"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselManagePet"
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
@@ -112,6 +103,12 @@
             </div>
         </div>
 
+        <button id="whatsapp-icon">
+            <a href="https://wa.link/3spfot">
+              <img src="/assets/whatsapp-icon.jpg" alt="">
+            </a>
+        </button>
+
 
     </main>
 
@@ -125,7 +122,9 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-5">
                         <!-- Content -->
-                        <img src="/assets/logo.png" class="img-fluid h-50" alt="...">
+                        <a href="/admin">
+                            <img src="/assets/circle-logo.png" class="img-fluid h-50" alt="...">
+                        </a>
                     </div>
                     <!-- Grid column -->
 
@@ -174,7 +173,7 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-5">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> Medellin, carrera 10 # 20-40</p>
+                        <p><i class="fas fa-home me-3"></i> Medellin, Carrera 10 # 20-40</p>
                         <p>
                             <i class="fas fa-envelope me-3"></i>
                             info@petcare.com
