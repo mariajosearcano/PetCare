@@ -178,6 +178,14 @@
                     </div>
 
                     <div class="collapse table-collapse envelope" id="collapseGetMedicines">
+                        <div class="d-inline-flex align-items-center">
+                            <label for="stock-filter" class="form-label">Filter by Stock Status</label>
+                            <select class="form-select form-select-sm mx-1" aria-label="stock-filter" id="stock-filter" style="width: 150px;" onchange="filterTable()">
+                                <option selected value="all">All</option>
+                                <option value="with-stock">With Stock</option>
+                                <option value="without-stock">Without Stock</option>
+                            </select>
+                        </div>                        
                         <div class="text-start p-5">
                             <table class="table">
                                 <thead>
@@ -185,12 +193,11 @@
                                         <th scope="col">Medicine ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Stock</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Out of Stock?</th>
                                     </tr>
                                 </thead>
                                 <tbody id="getMedicinesTableBody">
-                                  
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -230,7 +237,7 @@
                                 <div class="col-md-6">
                                     <label for="putEmail" class="form-label">* Email address</label>
                                     <input type="email" class="form-control" id="putEmail" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z._\-]+@[A-Za-z._\-]+.[A-Za-z]{2,}">
+                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
@@ -238,7 +245,7 @@
                                 <div class="col-md-3">
                                     <label for="putPassword" class="form-label">* Password</label>
                                     <input type="password" class="form-control" id="putPassword" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&._\-])(?=.*[0-9])[A-Za-z\d!@#$%&._\-]{8,20}$">
+                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
                                         Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
                                     </div>

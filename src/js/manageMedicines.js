@@ -1,5 +1,81 @@
 
+// GET LOGIC
 
+async function getMedicines(url) {
+    const urlString = (url).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            getErrorAlert();
+        }
+    
+        window.dataCache = data;
+        populateTable(data);
+        collapse();
+    } catch (error) {
+        console.error("Error getting users", error);
+        getErrorAlert();
+    }
+}
+
+function createTableRow(data) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <th scope="row">${data.medicine_id}</th>
+        <td>${data.name}</td>
+        <td>${data.stock}</td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                ${
+                    data.stock === 0
+                    ? `<img src="/assets/circle-without-medicines.png" alt="Without stock" class="img-fluid size">`
+                    : `<img src="/assets/circle-with-medicines.png" alt="With stock" class="img-fluid size">`
+                }
+            </p>
+        </td>
+    `;
+
+    return row;
+}
+
+function populateTable(data) {
+    const id = 'getMedicinesTableBody';
+    const tableBody = document.getElementById(id);
+    const filterValue = document.getElementById("stock-filter").value;
+
+    tableBody.innerHTML = '';
+
+    data.forEach((item) => {
+        const hasStock = item.stock > 0;
+        
+        if (
+            (filterValue === "with-stock" && hasStock) ||
+            (filterValue === "without-stock" && !hasStock) ||
+            (filterValue === "all")
+        ) {
+            const row = createTableRow({
+                medicine_id: item.medicine_id,
+                name: item.name,
+                stock: item.stock
+            });
+            tableBody.appendChild(row);
+        }
+    });
+}
+
+function filterTable() {
+    if (window.dataCache) {
+        populateTable(window.dataCache);
+    }
+}
+
+
+// collapse buttons logic
 
 document.addEventListener('DOMContentLoaded', function() {
     collapse();
@@ -25,3 +101,13 @@ function collapse() {
         });
     });
 }
+
+
+//// GET ALERTS
+
+function getErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error getting medicines"
+    });
+};
