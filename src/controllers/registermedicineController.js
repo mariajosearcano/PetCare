@@ -1,30 +1,8 @@
 const connection = require('../../db');
 
-function findMedicineById(req, res) {
-  const { id } = req.params; // Obtener el ID del parámetro de la URL
-
-  console.log('Datos recibidos:', req.body);
-  const query = 'SELECT * FROM medicine WHERE medicine_id = ?';
-
-  connection.query(query, [id], (err, results) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Error al buscar la medicina' });
-    } else if (results.length === 0) {
-      res.status(404).json({ error: 'Medicina no encontrada' });
-    } else {
-      res.json(results[0]);
-    }
-  });
-}
-
 function medicine(req, res) {
     const { name, stock } = req.body;
 
-    // Validación de datos de entrada (opcional, pero recomendado)
-    // Validación de datos de entrada (opcional, pero recomendado)
-
-    // Validación de datos de entrada (opcional, pero recomendado)
     if (!name || !stock) {
         return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
@@ -44,7 +22,7 @@ function medicine(req, res) {
     });
 }
 
-async function getMedicines(req, res) {
+ function getMedicines(req, res) {
   connection.query('SELECT * FROM medicine', (err, results) => {
       if (err) {
           console.error(err);
@@ -55,22 +33,22 @@ async function getMedicines(req, res) {
   });
 }
 
-// async function deleteMedicineById(req, res) {
-//   const medicineId = req.params.id; // Obtener el ID del medicamento de los parámetros de la solicitud
+async function deleteMedicineById(req, res) {
+  const medicineId = req.params.id; // Obtener el ID del medicamento de los parámetros de la solicitud
 
-//   connection.query('DELETE FROM medicine WHERE id = ?', [medicineId], (err, result) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send('Error deleting medicine');
-//     }
+  connection.query('DELETE FROM medicine WHERE medicine_id = ?', [medicineId], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error deleting medicine');
+    }
 
-//     if (result.affectedRows === 0) {
-//       return res.status(404).send('Medicine not found');
-//     }
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Medicine not found');
+    }
 
-//     return res.sendStatus(204); // No content, indicating successful deletion
-//   });
-// }
+    return res.sendStatus(204); // No content, indicating successful deletion
+  });
+}
 
 
 
@@ -134,7 +112,7 @@ module.exports = {
     getMedicines,
     //getMedicineById,
     //updateMedicine
-    findMedicineById
+    deleteMedicineById
 
 };
 
