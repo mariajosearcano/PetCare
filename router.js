@@ -39,30 +39,36 @@ router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistori
 
 router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
 
-router.get('/getAllschedules', scheduleController.getSchedules);
-
 router.get('/getAlltreatments', treatmentController.getTreatments);
 
 router.get('/getAllvaccines', vaccineController.getVaccines);
 
+// pet owners
 router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
 router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
 
+// veterinarians
 router.post('/postVeterinarian', veterinarianController.postVeterinarian);
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
+router.get('/getOneVeterinarian/:name', veterinarianController.getOneVeterinarian);
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
+// medicines
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicines', medicineController.getMedicines);
 
+// login
 router.post('/postLogin', loginController.login);
 
 // pet
 router.get('/getPet', petController.getPets);
 router.post('/postPet', petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
+
+// schedule
+router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);
 
 module.exports = router;

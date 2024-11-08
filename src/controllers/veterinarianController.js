@@ -45,7 +45,9 @@ async function getVeterinarians(req, res) {
 }
 
 async function getOneVeterinarian(req, res) {
-    connection.query('SELECT * FROM veterinarian WHERE name = ?', (err, results) => {
+    const { name } = req.params;
+    const sql = 'SELECT * FROM veterinarian WHERE name = ?';
+    connection.query(sql, [name], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Error getting veterinary users');
