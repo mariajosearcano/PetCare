@@ -13,3 +13,13 @@
 #whatsapp-icon:hover {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
+
+.small-carousel {
+    max-width: 500px;
+    margin: auto;
+}
+
+.small-carousel .carousel-inner img{
+    height: 300px;
+    object-fit: cover;
+}

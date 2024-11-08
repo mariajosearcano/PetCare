@@ -16,19 +16,23 @@ function getLogin(req, res) {
 }
 
 function getAdmin(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/admin.html'));
+    res.sendFile(path.join(__dirname, '../html/admin.html'));
 }
 
 function getFormsPetOwner(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/formsPetOwner.html'));
+    res.sendFile(path.join(__dirname, '../html/formsPetOwner.html'));
+}
+
+function getPetOwner(req, res) {
+    res.sendFile(path.join(__dirname, '../html/petOwner.html'));
 }
 
 function getManagePet(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/managePet.html'));
+    res.sendFile(path.join(__dirname, '../html/managePet.html'));
 }
 
 function getPassword(req, res) {
-    res.sendFile(path.join(__dirname, '/src/html/password.html'));
+    res.sendFile(path.join(__dirname, '../html/password.html'));
 }
 
 module.exports = {
@@ -38,6 +42,7 @@ module.exports = {
     getManageMedicines,
     getAdmin,
     getFormsPetOwner,
+    getPetOwner,
     getManagePet,
     getPassword
 }
