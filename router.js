@@ -40,6 +40,8 @@ router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistori
 router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
 
 router.get('/getAllpets', petController.getPets);
+router.post('/postPet', petController.createPets);
+router.delete('/deletePet', petController.deletePets);
 
 router.get('/getAllschedules', scheduleController.getSchedules);
 
