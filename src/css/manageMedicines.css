@@ -11,3 +11,18 @@
 .form-control {
     color: #cfcfcf;
 }
+
+.small-carousel {
+    max-width: 500px;
+    margin: auto; 
+}
+
+.small-carousel .carousel-inner img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.size {
+    width: 10vw;
+    height: 10vw;
+}
