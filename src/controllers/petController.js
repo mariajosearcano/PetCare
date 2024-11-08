@@ -39,7 +39,6 @@ function deletePets(req, res) {
     });
 }
 
-// agendar cita (actualizar)
 function createPets(req, res) {
     const { age, name, species, weight, pet_owner_document } = req.body;
     const sql = 'INSERT INTO pet (age, name, species, weight, pet_owner_document) VALUES (?, ?, ?, ?, ?)';    // el id se genera automaticamente
@@ -51,8 +50,65 @@ function createPets(req, res) {
     });
 }
 
+
+
+function getPetsAndPetOwners(req, res) {
+    const sql = `
+        SELECT 
+            pet.pet_id AS pet_id,
+            pet.name AS name,
+            pet.species AS species,
+            pet.age AS age,
+            pet.weight AS weight,
+            pet.pet_owner_document AS pet_owner_document,
+            pet_owner.name AS pet_owner_name
+        FROM 
+            pet
+        JOIN 
+            pet_owner ON pet.pet_owner_document = pet_owner.document;
+    `;
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('there was an error getting the data'); 
+        } else {
+            console.log(result);
+            res.json(result);
+        }
+    });
+}
+
+async function putPet(req, res) {
+
+    const { oldPutForm, putFormData } = req.body;
+    const { putPetId, pet_owner_document } = oldPutForm;
+    const { name, species, age, weight/*,photo*/ } = putFormData;
+
+    const sql = `
+        UPDATE pet SET name = ?, species = ?, age = ?, weight = ? WHERE pet_id = ?
+    `;
+
+    connection.query(sql, [name, species, age, weight, /*photo,*/ putPetId], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Pet not updated');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pet not found' });
+        }
+
+        return res.json({ message: 'Pet updated successfully' });
+    });
+}
+
+
+
 module.exports ={
     createPets,
     getPets,
-    deletePets
+    deletePets,
+    getPetsAndPetOwners,
+    putPet
 }

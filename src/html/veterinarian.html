@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin home</title>
+    <title>Veterinarian | Pet Care</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -11,30 +11,41 @@
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
 
 <body>
     <header>
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-body">
+         <!-- navbar -->
+         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarExample01"
-                    aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                <a class="navbar-brand" href="/veterinarian">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50wv" height="50hv"
+                        class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarExample01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="/src/html/veterinarian.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/src/html/manageMedicineVeterinarian.html">Manage Medicine</a>
-                        </li>
-                    </ul>
+      
                     <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
 
                     <!-- sign in buttom -->
                     <button type="button" class="btn ms-auto">Sign in</button>
+
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="/managePet">Home</a>
+                        <a class="nav-link" href="/manageMedicines">Manage medicine</a>
+                        <a class="nav-link" href="/treatment">Treatment</a>
+                        <a class="nav-link" href="/manageAppointments">Medical Record</a>
+                        <a class="nav-link" href="/signIn">Sign In</a>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -54,7 +65,9 @@
             <div class="row">
                 <div class="col">
                     <!-- carousel -->
-                    <div id="carouselExampleIndicators" class="carousel slide small-carousel">
+
+                    <div id="carouselManagePet" class="carousel slide small-carousel">
+
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -96,12 +109,21 @@
             <div class="row">
                 <div class="col">
                     <br>
-                    <p class="h3">Welcome Veterinarian!</p>
-                    </p>
+                    <p class="h3">Welcome to Pet Care! We specialize in providing expert care for your unique and exotic
+                        pets, from reptiles and birds to small mammals and more. Our dedicated team is here to ensure
+                        your pet receives the best possible medical attention, tailored to their specific needs. Trust
+                        us to keep your special companion healthy and happy!</p>
                 </div>
             </div>
         </div>
+        <br>
 
+        <!-- whatsapp button -->
+        <button id="whatsapp-icon">
+            <a href="https://wa.link/3spfot">
+                <img src="/assets/whatsapp-icon.jpg" alt="">
+            </a>
+        </button>
 
     </main>
 
@@ -115,7 +137,9 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mt-5">
                         <!-- Content -->
-                        <img src="/assets/logo.png" class="img-fluid h-50" alt="...">
+                        <a href="/veterinarian">
+                            <img src="/assets/circle-logo.png" class="img-fluid h-50" alt="...">
+                        </a>
                     </div>
                     <!-- Grid column -->
 
