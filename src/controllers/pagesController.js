@@ -11,8 +11,16 @@ function getManageMedicines(req, res) {
     res.sendFile(path.join(__dirname, '../html/manageMedicines.html'));
 }
 
+function getManageMedicinesVeterinarian(req, res) {
+    res.sendFile(path.join(__dirname, '../html/manageMedicineVeterinarian.html'));
+}
+
 function getLogin(req, res) {
     res.sendFile(path.join(__dirname, '../html/login.html'));
+}
+
+function getVeterinarians(req, res) {
+    res.sendFile(path.join(__dirname, '../html/veterinarian.html'));
 }
 
 function getAdmin(req, res) {
@@ -48,6 +56,8 @@ module.exports = {
     getFormsPetOwner,
     getPetOwner,
     getManagePet,
-    getScheduleAppointment,
-    getPassword
+    getPassword,
+    getVeterinarians,
+    getManageMedicinesVeterinarian,
+    getScheduleAppointment
 }
