@@ -277,3 +277,28 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+//UPDATE LOGIC
+
+async function getPets(url) {
+    const urlString = (url).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            getErrorAlert();
+        }
+    
+        populateTable(data, urlString);
+        collapse();
+    } catch (error) {
+        console.error("Error getting pets", error);
+        getErrorAlert();
+    }
+}

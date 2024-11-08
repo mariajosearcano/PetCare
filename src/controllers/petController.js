@@ -39,6 +39,29 @@ function deletePets(req, res) {
     });
 }
 
+function getPetsAndPetOwners(req, res) {
+    const sql = `
+        SELECT 
+        pet.pet_id AS pet_id,
+        pet.name AS pet_name,
+        pet.owner_id,
+        pet_owner.name AS owner_name
+    FROM 
+        pet
+    JOIN 
+        pet_owner ON pet.owner_id = pet_owner.id;
+    `;
+    connection.query(sql, [name], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('there was an error getting the data'); 
+            } else {
+                console.log(results)
+                res.json(results);
+            }
+        });
+}
+
 module.exports ={
     createPets,
     getPets,

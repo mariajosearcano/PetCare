@@ -38,13 +38,13 @@ router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistori
 
 router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
 
-router.get('/getAllpets', petController.getPets);
-
 router.get('/getAllschedules', scheduleController.getSchedules);
 
 router.get('/getAlltreatments', treatmentController.getTreatments);
 
 router.get('/getAllvaccines', vaccineController.getVaccines);
+
+router.get('/getPets', petController.getPets);
 
 router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);

@@ -131,7 +131,7 @@
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" id="btn-collapse-update"
                             data-bs-toggle="collapse" data-bs-target="#collapseUpdatePet" aria-expanded="false"
-                            aria-controls="collapseUpdatePet">
+                            aria-controls="collapseUpdatePet" onclick="getPets('/getPets')">
                             Update pet
                         </button>
                     </p>
@@ -211,6 +211,28 @@
                         </div>
                     </div>
                     <!-- collapse content visualize pet -->
+
+                    <div class="collapse" id="collapseUpdatePet">
+                        <div class="text-start bg-info-subtle p-5">
+                            <!-- table visualize pet -->
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Species</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Photo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-update-pet">
+                                    <!-- here will be insert the fetch info -->
+                                </tbody>
+                            </table>
+                            <!-- table visualize pet -->
+                        </div>
+                    </div>
 
                     <!-- collapse content update pet -->
                     <div class="collapse" id="collapseUpdatePet">
