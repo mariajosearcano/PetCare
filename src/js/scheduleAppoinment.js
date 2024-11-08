@@ -38,6 +38,8 @@ selectVeterinarian.addEventListener('change', GetSchedules);
 // agregar horarios al select
 async function GetSchedules() {
 
+    selectSchedule.innerHTML = '';  // limpiar select
+
     let name = selectVeterinarian.options[selectVeterinarian.selectedIndex].text;
 
     // fetch del veterinario para obtener el document
