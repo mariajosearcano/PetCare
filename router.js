@@ -40,8 +40,6 @@ router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getM
 
 router.get('/getAllmedicines', medicineController.getMedicines);
 
-router.get('/getPets', petController.getPets);
-
 router.get('/getAllschedules', scheduleController.getSchedules);
 
 router.get('/getAlltreatments', treatmentController.getTreatments);
@@ -63,10 +61,10 @@ router.post('/postLogin', loginController.login);
 router.post('/postMedicine', registermedicineController.medicine);
 
 // pet
-router.post('/postPet', petController.createPets);
+router.post('/postPet', petController.createPets);  // crear url para la funcion
 router.get('/getPet', petController.getPets);
 // router.put('/putPet', petController.putPet);
-router.delete('/deletePets/:name', petController.deletePets);
+router.delete('/deletePet/:name', petController.deletePets);
 
 
 module.exports = router;

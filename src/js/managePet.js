@@ -38,7 +38,7 @@ async function InsertPet() {
         pet_owner_document: inputPetOwnerDocument.value
     };
 
-    const urlString = ('/getPets').toString();
+    const urlString = ('/postPet').toString();  // url de router.js
 
     try {
         const response = await fetch(urlString, {
@@ -75,7 +75,7 @@ collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
 async function GetNames(selectElement) {
 
-    const urlString = ('/getPets').toString();
+    const urlString = ('/getPet').toString();
 
     try {
         const response = await fetch(urlString);
@@ -104,7 +104,7 @@ function AddPetOption(pet, selectElement) {
 collapseButtonVisualize.addEventListener('click', VisualizeData);
 
 async function VisualizeData() {
-    const urlString = ('/getPets').toString();
+    const urlString = ('/getPet').toString();
 
     try {
         const response = await fetch(urlString);
@@ -224,7 +224,9 @@ function AddPetRow(pet) {
 deleteButton.addEventListener('click', DeletePet);
 
 async function DeletePet() {
-    const urlString = ('/delePets').toString();
+    
+    let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+    const urlString = (`/deletePet/${name}`).toString();
 
     try {
         const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
@@ -233,9 +235,7 @@ async function DeletePet() {
             return;
         }
 
-        let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
-
-        const res = await fetch(`${urlString}/${name}`, {
+        const res = await fetch(urlString, {
             method: 'DELETE'
         });
 
