@@ -56,39 +56,39 @@
         <div class="container text-center mt-4">
             <div class="row">
                 <div class="col">
-                    <!-- carousel -->
-                    <div id="carouselManageUsers" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselManageUsers" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="/assets/exotic pet 4.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/assets/exotic pet 5.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/assets/exotic pet 6.jpg" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselManageUsers"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselManageUsers"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <!-- carousel -->
+<!-- carousel -->
+<div id="carousel" class="carousel slide small-carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
+            class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/assets/exotic pet 4.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/exotic pet 5.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="/assets/exotic pet 6.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- carousel -->
                 </div>
             </div>
         </div>
@@ -137,23 +137,40 @@
                         </button>
                     </p>
 
-                    <!-- collapse content register Users -->
-                    <div class="collapse" id="collapseRegisterMedicine">
-                        <div class="text-start bg-info-subtle p-5">
-                            <form action="/postMedicine" method="POST">
-                                <div class="mb-3">
-                                    <label for="inputName" class="form-label">Medicine name</label>
-                                    <input type="text" class="form-control" id="inputName" name="name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputStock" class="form-label">Stock</label>
-                                    <input type="number" class="form-control" id="inputStock" name="stock" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Register</button>
-                            </form>
+                    <!-- collapse content register Medicine -->
+                    <div class="collapse envelope" id="collapseRegisterMedicine">
+                        <div class="text-start p-5">
+                            <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
+                                <div class="form-text">* Required Field</div>
+                                <div class="col-md-4">
+                              <label for="inputName" class="form-label">* Medicine name</label>
+                              <input type="text" class="form-control" id="inputName" aria-describedby="postDocumentHelp" name="name" required
+                             placeholder="Enter Medicine Name" minlength="2" maxlength="50" pattern="[a-zA-Z0-9\s]+" title="Please enter a valid medicine name (only letters and numbers)">
+                      </div>
+                      
+                            <div class="col-md-4">
+                              <label for="inputStock" class="form-label">Stock</label>
+                              <input type="number" class="form-control" id="inputStock" aria-describedby="postDocumentHelp" name="stock" required 
+                                     min="0" placeholder="Enter the quantity in stock">
+                              <div class="invalid-feedback">
+                                Please enter a valid stock quantity.
+                              </div>
+                            </div>
+                            </div>
+                            <div class="col-12">
+
+                        <button type="submit" class="btn btn-primary">Register</button>
+                            <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePostUser" aria-expanded="false"
+                                    aria-controls="collapsePostUser" id="cancelPostButton" onclick="postCancelAlert()">
+                              Cancel
+                            </button>
+                          </form>
+
                         </div>
-                    </div>
-                    <!-- collapse content register Users -->
+                      </div>
+                                    
+                    <!-- collapse content register Medicine -->
 
                     <!-- collapse content visualize Users -->
                     <div class="collapse table-collapse envelope" id="collapseGetPetOwners">

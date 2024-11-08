@@ -2,6 +2,7 @@ const connection = require('../../db');
 
 function medicine(req, res) {
     const { name, stock } = req.body;
+    
 
     // Validación de datos de entrada (opcional, pero recomendado)
     if (!name || !stock) {
