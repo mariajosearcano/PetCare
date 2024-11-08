@@ -84,3 +84,38 @@ function AddScheduleOption(schedule) {
     option.textContent = (`${schedule.start_hour}-${schedule.end_hour}`).toString();
     selectSchedule.appendChild(option);
 }
+
+// agendar cita
+// btnSchedule.addEventListener('click', ScheduleAppointment);
+
+// async function ScheduleAppointment() {
+
+//     let veterinarian_document = localStorage.getItem('vet_document');
+//     let schedule = selectSchedule.options[selectSchedule.selectedIndex].text;
+
+//     const data = {
+//         veterinarian_document: veterinarian_document,
+//         schedule: schedule
+//     }
+
+//     const url = '/scheduleAppointment';
+
+//     try {
+//         const response = await fetch(url, {
+//             method: 'POST',
+//             body: JSON.stringify(data),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Error to get Pet Owners data');
+//         }
+
+//         alert('Appointment scheduled successfully');
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
+
