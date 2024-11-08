@@ -73,6 +73,7 @@ function getPetsAndPetOwners(req, res) {
             console.error(err);
             res.status(500).send('there was an error getting the data'); 
         } else {
+            console.log(result);
             res.json(result);
         }
     });
@@ -82,13 +83,13 @@ async function putPet(req, res) {
 
     const { oldPutForm, putFormData } = req.body;
     const { putPetId, pet_owner_document } = oldPutForm;
-    const { name, species, age, weight, photo } = putFormData;
+    const { name, species, age, weight/*,photo*/ } = putFormData;
 
     const sql = `
-        UPDATE pet SET name = ?, species = ?, age = ?, weight = ?, photo = ? WHERE pet_id = ?
+        UPDATE pet SET name = ?, species = ?, age = ?, weight = ? WHERE pet_id = ?
     `;
 
-    connection.query(sql, [name, species, age, weight, photo, putPetId], (err, result) => {
+    connection.query(sql, [name, species, age, weight, /*photo,*/ putPetId], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Pet not updated');

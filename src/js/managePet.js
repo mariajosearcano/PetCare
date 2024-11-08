@@ -221,38 +221,38 @@ function AddPetRow(pet) {
 // }
 
 // // DELETE
-deleteButton.addEventListener('click', DeletePet);
+// deleteButton.addEventListener('click', DeletePet);
 
-async function DeletePet() {
+// async function DeletePet() {
     
-    let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
-    const urlString = (`/deletePet/${name}`).toString();
+//     let name = selectNameUpdate.options[selectNameUpdate.selectedIndex].text;
+//     const urlString = (`/deletePet/${name}`).toString();
 
-    try {
-        const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
+//     try {
+//         const confirm = prompt('Please type "yes" to confirm the deletion of the pet');
 
-        if (confirm !== 'yes') {
-            return;
-        }
+//         if (confirm !== 'yes') {
+//             return;
+//         }
 
-        const res = await fetch(urlString, {
-            method: 'DELETE'
-        });
+//         const res = await fetch(urlString, {
+//             method: 'DELETE'
+//         });
 
-        if (!res.ok) {
-            throw new Error('Network response was not ok ' + res.statusText);
-        }
+//         if (!res.ok) {
+//             throw new Error('Network response was not ok ' + res.statusText);
+//         }
 
-        const data = await res.json();
-        console.log(data);
-        alert('Pet deleted successfully');
-        await GetNames(selectNames);
-        await GetNames(selectNameUpdate);
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('There was no possible to delete the pet');
-    }
-}
+//         const data = await res.json();
+//         console.log(data);
+//         alert('Pet deleted successfully');
+//         await GetNames(selectNames);
+//         await GetNames(selectNameUpdate);
+//     } catch (error) {
+//         console.error('There was a problem with the fetch operation:', error);
+//         alert('There was no possible to delete the pet');
+//     }
+// }
 
 // control collapse
 document.addEventListener('DOMContentLoaded', function () {
@@ -317,7 +317,7 @@ async function getPetsAndPetOwners(url) {
     try {
         const response = await fetch(urlString);
         const data = await response.json();
-    
+        
         if (!response.ok) {
             const errorData = await response.json();
             console.error("Error: " + (errorData.message || "An error occurred"));
@@ -340,7 +340,7 @@ function createTableRow(data) {
         <td>${data.species}</td>
         <td>${data.age}</td>
         <td>${data.weight}</td>
-        <td>${data.photo}</td>
+        <td></td>
         <td>
             <p class="d-inline-flex gap-1">
                 <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
@@ -372,8 +372,9 @@ function populateTable(data, url) {
             pet_id: item.pet_id,
             name: item.name,
             species: item.species,
-            weight: item.weight,
-            photo: item.photo
+            age: item.age,
+            weight: item.weight
+            //photo: item.photo
         });
         tableBody.appendChild(row);
     });
@@ -384,7 +385,7 @@ function populateForm(data){
     formSpecies.value = data.species;
     formAge.value = data.age;
     formWeight.value = data.weight;
-    formPhoto.value = data.photo;
+    //formPhoto.value = data.photo;
 
     oldPutForm = {
         putPetId: data.pet_id,
@@ -392,7 +393,7 @@ function populateForm(data){
         putSpecies: data.species,
         putAge: data.age,
         putWeight: data.weight,
-        putPhoto: data.photo,
+        //putPhoto: data.photo,
         pet_owner_document: data.pet_owner_document
     }
 }
@@ -410,7 +411,7 @@ async function handlePutSubmit() {
         species: formSpecies.value,
         age: formAge.value,
         weight: formWeight.value,
-        photo: formPhoto.value
+        //photo: formPhoto.value
     };
 
     putPet(putFormData, putForm);
