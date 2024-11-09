@@ -73,6 +73,7 @@ async function InsertPet() {
 collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
 collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
 
+
 async function GetNames(selectElement) {
 
     const urlString = ('/getPet').toString();
