@@ -76,6 +76,7 @@ router.post('/postPet', petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
 router.get('/getPetsAndPetOwners', petController.getPetsAndPetOwners);
 router.put('/putPet', petController.putPet);
+router.delete('/deletePet', petController.deletePet);
 
 // schedule
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);

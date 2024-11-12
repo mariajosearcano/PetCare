@@ -103,6 +103,27 @@ async function putPet(req, res) {
     });
 }
 
+async function deletePet(req, res) {
+    const { pet_id } = req.body;
+
+    const sql = `
+        DELETE FROM pet WHERE pet_id = ?
+    `;
+
+    connection.query(sql, [pet_id], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Pet user not deleted');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pet user not found' });
+        }
+
+        return res.json({ message: 'Pet user deleted successfully' });
+    });
+}
+
 
 
 module.exports ={
@@ -110,5 +131,6 @@ module.exports ={
     getPets,
     deletePets,
     getPetsAndPetOwners,
-    putPet
+    putPet,
+    deletePet
 }

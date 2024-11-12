@@ -351,6 +351,13 @@ function createTableRow(data) {
                 </button>
             </p>
         </td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                <button class="btn btn-outline-danger btn-lg delete-btn" type="button" aria-expanded="false">
+                    Delete
+                </button>
+            </p>
+        </td>
     `;
 
     addEventListeners(data, row);
@@ -361,6 +368,9 @@ function createTableRow(data) {
 function addEventListeners(data, row){
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
+    const deleteButton = row.querySelector('.delete-btn');
+    //deleteButton.addEventListener('click', () => deleteUser(data));
+    deleteButton.addEventListener('click', () => deleteCancelAlert(data));
 }
 
 function populateTable(data, url) {
@@ -381,7 +391,7 @@ function populateTable(data, url) {
     });
 }
 
-function populateForm(data){
+function populateForm(data) {
     formName.value = data.name;
     formSpecies.value = data.species;
     formAge.value = data.age;
@@ -445,6 +455,36 @@ async function putPet(putFormData, putForm) {
     }
 }
 
+// DELETE LOGIC
+
+async function deletePet(data) {
+    const url = '/deletePet';
+
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+                //'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                pet_id: data.pet_id
+            })
+        });
+    
+        if (response.ok) {
+            deleteAlert();
+        } else {
+            const errorData = await response.json();
+            console.error("Error: " + (errorData.message || "An error occurred"));
+            deleteErrorAlert();
+        }
+    } catch (error) {
+        console.error('Error deleting pet', error);
+        deleteErrorAlert();
+    }
+}
+
 
 //// ALERTS
 
@@ -476,5 +516,36 @@ function putErrorAlert(){
     Swal.fire({
         icon: "error",
         title: "Error updating pet"
+    });
+};
+
+//// DELETE ALERTS
+
+function deleteAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "Pet has been deleted"
+    }).then((result) => {
+        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+            location.reload(true);
+        }
+    });
+};
+
+function deleteCancelAlert(data){
+    Swal.fire({
+        title: "Are you sure you want to delete the pet?",
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deletePet(data);
+        };
+    });
+};
+
+function deleteErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error deleting pet"
     });
 };
