@@ -8,7 +8,6 @@ const inputPetOwnerDocument = document.getElementById('floating-pet-owner-docume
 const selectNames = document.getElementById('select-name');
 
 // update and delete
-const selectNameUpdate = document.getElementById('select-name-update');
 const inputNameUpdate = document.getElementById('floating-name-update');
 const selectSpeciesUpdate = document.getElementById('select-species-update');
 const inputAgeUpdate = document.getElementById('floating-age-update');
@@ -71,8 +70,6 @@ async function InsertPet() {
 
 // filter pet by name
 collapseButtonVisualize.addEventListener('click', GetNames(selectNames));
-collapseButtonUpdate.addEventListener('click', GetNames(selectNameUpdate));
-
 
 async function GetNames(selectElement) {
 
