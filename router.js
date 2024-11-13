@@ -85,4 +85,7 @@ router.delete('/deletePet', petController.deletePet);
 // schedule
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);
 
+// medical history
+router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
+
 module.exports = router;
