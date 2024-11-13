@@ -21,15 +21,12 @@ async function getMedicalHistories() {
         }
 
         data.forEach(MedicalHistory => {
-            AddMedicalHistoryOption(MedicalHistory);
+            const option = document.createElement('option');
+            option.textContent = MedicalHistory.medical_history_id;
+            selectMedicalHistory.appendChild(option);
         });
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-function AddMedicalHistoryOption(MedicalHistory) {
-    const option = document.createElement('option');
-    option.textContent = MedicalHistory.medical_history_id;
-    selectMedicalHistory.appendChild(option);
-}
