@@ -21,17 +21,18 @@ const registermedicineController = require('./src/controllers/registermedicineCo
 // hmtl
 router.get('/home', pagesController.getHome);
 
+router.get('/login', pagesController.getLogin);
+
 router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
-
-router.get('/login', pagesController.getLogin);
 
 router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
 
 router.get('/veterinarian', pagesController.getVeterinarians);
+router.get('/treatment', pagesController.getTreatment);
 
 // funcionalidades
 router.get('/getAllappointments', appointmentController.getAppointments);
@@ -66,6 +67,9 @@ router.get('/getMedicines', medicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);
 router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 
+// treatment
+router.post('/postTreatment', treatmentController.postTreatment);
+router.get('/getTreatment', treatmentController.getTreatment);
 
 // login
 router.post('/postLogin', loginController.login);
