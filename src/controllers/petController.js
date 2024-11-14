@@ -71,7 +71,7 @@ function getPetsAndPetOwners(req, res) {
     connection.query(sql, (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send('there was an error getting the data'); 
+            res.status(500).json({ error: 'There was an error getting the data' }); 
         } else {
             console.log(result);
             res.json(result);
@@ -92,11 +92,11 @@ async function putPet(req, res) {
     connection.query(sql, [name, species, age, weight, /*photo,*/ putPetId], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Pet not updated');
+            return res.status(500).json({ error: 'Pet not updated' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Pet not found' });
+            return res.status(404).json({ error: 'Pet not found' });
         }
 
         return res.json({ message: 'Pet updated successfully' });
@@ -113,11 +113,11 @@ async function deletePet(req, res) {
     connection.query(sql, [pet_id], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Pet user not deleted');
+            return res.status(500).json({ error: 'Pet user not deleted' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Pet user not found' });
+            return res.status(404).json({ error: 'Pet user not found' });
         }
 
         return res.json({ message: 'Pet user deleted successfully' });
