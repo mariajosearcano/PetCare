@@ -552,6 +552,7 @@ function deleteCancelAlert(data){
 function deleteErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: error || "Error deleting pet"
+        title: error || "Error deleting pet",
+        allowOutsideClick: false
     });
 };
