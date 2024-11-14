@@ -61,9 +61,10 @@ router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 router.get('/postTreatment', treatmentController.postTreatment);
 
 // medicines
+router.get('/getMedicines', medicineController.getMedicines);
+
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicineVet', registermedicineController.getMedicines);
-router.get('/getMedicines', medicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);
 router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 
