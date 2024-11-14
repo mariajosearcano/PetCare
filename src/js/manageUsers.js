@@ -80,9 +80,8 @@ async function getUsers(url) {
         const data = await response.json();
     
         if (!response.ok) {
-            const responseData = await response.json();
-            console.error("Error: " + (responseData.error || "An error occurred"));
-            getErrorAlert(responseData.error);
+            console.error("Error: " + (data.error || "An error occurred"));
+            getErrorAlert(data.error);
         }
     
         populateTable(data, urlString);

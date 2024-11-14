@@ -317,9 +317,8 @@ async function getPetsAndPetOwners(url) {
         const data = await response.json();
         
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
-            getPetsAndPetOwnersErrorAlert();
+            console.error("Error: " + (data.error || "An error occurred"));
+            getPetsAndPetOwnersErrorAlert(data.error);
         }
     
         populateTable(data, urlString);
@@ -438,13 +437,14 @@ async function putPet(putFormData, putForm) {
                 putFormData
             })
         });
+
+        const responseData = await response.json();
     
         if (response.ok) {
-            putAlert();
+            putAlert(responseData.message);
         } else {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
-            putErrorAlert();
+            console.error("Error: " + (responseData.error || "An error occurred"));
+            putErrorAlert(responseData.error);
         }
     } catch (error) {
         console.error("Error updating pet", error);
@@ -468,13 +468,14 @@ async function deletePet(data) {
                 pet_id: data.pet_id
             })
         });
+
+        const responseData = await response.json();
     
         if (response.ok) {
-            deleteAlert();
+            deleteAlert(responseData.message);
         } else {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
-            deleteErrorAlert();
+            console.error("Error: " + (responseData.error || "An error occurred"));
+            deleteErrorAlert(responseData.error);
         }
     } catch (error) {
         console.error('Error deleting pet', error);
@@ -485,19 +486,21 @@ async function deletePet(data) {
 
 //// ALERTS
 
-function getPetsAndPetOwnersErrorAlert(){
+function getPetsAndPetOwnersErrorAlert(message){
     Swal.fire({
         icon: "error",
-        title: "Error getting pets and pet owners"
+        title: message || "Error getting pets and pet owners",
+        allowOutsideClick: false
     });
 };
 
 //// PUT ALERTS
 
-function putAlert(){
+function putAlert(message){
     Swal.fire({
         icon: "success",
-        title: "Pet has been updated"
+        title: message || "Pet has been updated",
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
             location.reload(true);
@@ -506,22 +509,27 @@ function putAlert(){
 };
 
 function putCancelAlert(){
-    Swal.fire("The update of a pet was cancelled");
+    Swal.fire({
+        title: "The update of a pet was cancelled",
+        allowOutsideClick: false
+    });
 };
 
-function putErrorAlert(){
+function putErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Error updating pet"
+        title: error || "Error updating pet",
+        allowOutsideClick: false
     });
 };
 
 //// DELETE ALERTS
 
-function deleteAlert(){
+function deleteAlert(message){
     Swal.fire({
         icon: "success",
-        title: "Pet has been deleted"
+        title: message || "Pet has been deleted",
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
             location.reload(true);
@@ -532,7 +540,8 @@ function deleteAlert(){
 function deleteCancelAlert(data){
     Swal.fire({
         title: "Are you sure you want to delete the pet?",
-        showCancelButton: true
+        showCancelButton: true,
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
             deletePet(data);
@@ -540,9 +549,9 @@ function deleteCancelAlert(data){
     });
 };
 
-function deleteErrorAlert(){
+function deleteErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Error deleting pet"
+        title: error || "Error deleting pet"
     });
 };
