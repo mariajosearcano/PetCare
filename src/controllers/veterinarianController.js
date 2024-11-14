@@ -1,17 +1,17 @@
 const connection = require('../../db');
 
 async function postVeterinarian(req, res) {
-    const { document, name, last_name, email, password, phone_number } = req.body;
+    const { document, name, last_name, email, password, phone_number, specialty } = req.body;
 
     const sql = `
-        INSERT INTO veterinarian (document, name, last_name, email, password, phone_number) VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO veterinarian (document, name, last_name, email, password, phone_number, specialty) VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
-    connection.query(sql, [document, name, last_name, email, password, phone_number], (err, result) => {
+    connection.query(sql, [document, name, last_name, email, password, phone_number, specialty], (err, result) => {
         if (err) {
             if (err.code === 'ER_DUP_ENTRY') {
                 console.error('Duplicate entry:', err.message);
-                
+
                 if (err.message.includes('document')) {
                     return res.status(409).send('The document already exists');
                 } else if (err.message.includes('email')) {
@@ -38,7 +38,7 @@ async function getVeterinarians(req, res) {
             console.error(err);
             return res.status(500).send('Error getting veterinary users');
         } else {
-            //console.log('Veterinary users successfully obtained');
+            //console.log('Veterinarians users successfully obtained');
             return res.json(results);
         }
     });
@@ -58,20 +58,34 @@ async function getOneVeterinarian(req, res) {
     });
 }
 
+async function getVeterinarianBySpecialty(req, res) {
+    const { specialty } = req.params;
+    const sql = 'SELECT * FROM veterinarian WHERE specialty = ?';
+    connection.query(sql, [specialty], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error getting veterinary users');
+        } else {
+            // console.log('Veterinary users successfully obtained');
+            return res.json(results);
+        }
+    });
+}
+
 // // obtener una persona
 // app.get('/person/read/:document', (req, res) => {
 //     const document = req.params.document;
 //     const sql = 'SELECT * FROM person WHERE document = ?';
-    
+
 //     conexion.query(sql, [document], (err, results) => {
 //         if (err) {
 //             return res.status(500).send(err);
 //         }
-        
+
 //         if (results.length === 0) {
 //             return res.status(404).json({ message: 'Persona no encontrada' });
 //         }
-        
+
 //         res.json(results[0]);
 //     });
 // });
@@ -139,6 +153,7 @@ module.exports = {
     postVeterinarian,
     getVeterinarians,
     getOneVeterinarian,
+    getVeterinarianBySpecialty,
     putVeterinarian,
     deleteVeterinarian
 }

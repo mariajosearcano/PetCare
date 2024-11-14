@@ -1,15 +1,19 @@
 const selectVeterinarian = document.getElementById('select-veterinarian');
 const selectSchedule = document.getElementById('select-schedule');
+const selectSpecialty = document.getElementById('select-specialty');
 const btnSchedule = document.getElementById('btn-schedule');
 const btnCancel = document.getElementById('btn-cancel');
 const btnCollapseSchedule = document.getElementById('btn-collapse-schedule');
 
 // agregar veterinarios al select
-btnCollapseSchedule.addEventListener('click', GetVets);
+selectSpecialty.addEventListener('change', GetVets);
 
 async function GetVets() {
 
-    const urlString = ('/getVeterinarians').toString();
+    selectVeterinarian.innerHTML = '';  // limpiar select
+    let specialty = selectSpecialty.options[selectSpecialty.selectedIndex].text;
+
+    const urlString = (`/getVeterinarian/${specialty}`).toString();
 
     try {
         const response = await fetch(urlString);
