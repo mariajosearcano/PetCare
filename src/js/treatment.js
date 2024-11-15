@@ -6,10 +6,11 @@ const selectMedicine = document.getElementById('select-medicine');
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
 
 collapseCreateTreatment.addEventListener('click', () => {
-    getMedicalHistories();
-    getMedicines();
+    fillSelectMedicalHistory();
+    fillSelectMedicine();
 });
 
+// fetch medical histories
 async function getMedicalHistories() {
 
     const urlString = ('/getMedicalHistories').toString();
@@ -22,19 +23,30 @@ async function getMedicalHistories() {
             throw new Error('Error to get medical histories data');
         }
 
-        data.forEach(MedicalHistory => {
+        return data;  // devuelve los datos
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;  // Propagar el error para manejarlo fuera de la función si es necesario
+    }
+}
+
+async function fillSelectMedicalHistory() {
+    try {
+        const medicalHistories = await getMedicalHistories();
+        medicalHistories.forEach(medicalHistory => {
             const option = document.createElement('option');
-            option.textContent = MedicalHistory.medical_history_id;
+            option.textContent = medicalHistory.medical_history_id;
             selectMedicalHistory.appendChild(option);
         });
     } catch (error) {
         console.error('Error:', error);
+
     }
 }
 
+// fetch medicines
 async function getMedicines() {
-
-    const urlString = ('/getMedicines').toString();
+    const urlString = '/getMedicines';
 
     try {
         const response = await fetch(urlString);
@@ -44,7 +56,17 @@ async function getMedicines() {
             throw new Error('Error to get medicines data');
         }
 
-        data.forEach(medicine => {
+        return data;  // devuelve los datos
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;  // Propagar el error para manejarlo fuera de la función si es necesario
+    }
+}
+
+async function fillSelectMedicine() {
+    try {
+        const medicines = await getMedicines();
+        medicines.forEach(medicine => {
             const option = document.createElement('option');
             option.textContent = medicine.medicine_id;
             selectMedicine.appendChild(option);
@@ -54,7 +76,8 @@ async function getMedicines() {
     }
 }
 
-// selectMedicine.addEventListener('change', getMedicines);
+// selectMedicine.addEventListener('change', () => {
+
 
 btnCreateTreatment.addEventListener('click', postTreatment);
 
@@ -93,7 +116,7 @@ async function postTreatment() {
 }
 
 // alerts
-function postAlert(){
+function postAlert() {
     Swal.fire({
         icon: "success",
         title: "Treatment has been created"
@@ -104,7 +127,7 @@ function postAlert(){
     });
 };
 
-function postErrorAlert(){
+function postErrorAlert() {
     Swal.fire({
         icon: "error",
         title: "Error creating Treatment. Please fill all the fields"
