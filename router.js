@@ -33,6 +33,7 @@ router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
 
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
+router.get('/registerPetOwner', pagesController.getregisterPetOwner);
 
 // funcionalidades
 router.get('/getAllappointments', appointmentController.getAppointments);
