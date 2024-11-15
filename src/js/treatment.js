@@ -52,6 +52,8 @@ async function getMedicines() {
     }
 }
 
+selectMedicine.addEventListener('change', getMedicines);
+
 btnCreateTreatment.addEventListener('click', postTreatment);
 
 async function postTreatment() {
@@ -81,7 +83,28 @@ async function postTreatment() {
 
         const data = await response.json();
         console.log(data);
+        postAlert();
     } catch (error) {
         console.error('Error:', error);
+        postErrorAlert();
     }
 }
+
+// alerts
+function postAlert(){
+    Swal.fire({
+        icon: "success",
+        title: "Treatment has been created"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.reload(true);
+        }
+    });
+};
+
+function postErrorAlert(){
+    Swal.fire({
+        icon: "error",
+        title: "Error creating Treatment. Please fill all the fields"
+    });
+};
