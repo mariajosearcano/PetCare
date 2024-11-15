@@ -45,20 +45,15 @@ async function postUser(postFormData, postForm) {
             body: JSON.stringify(postFormData)
         });
 
+        const responseData = await response.json();
+
         if (response.ok) {
-            postAlert();
+            postAlert(responseData.message);
             // postForm.reset();
             // postForm.classList.remove('was-validated');
         } else {
-            const errorData = await response.json();
-            
-            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
-                console.error("Error: Duplicate entry - A record with this information already exists");
-                postDuplicateAlert();
-            } else {
-                console.error("Error: " + (errorData.message || "An error occurred"));
-                postErrorAlert();
-            }
+            console.error("Error: " + (responseData.error || "An error occurred"));
+            postErrorAlert(responseData.error);
         }
     } catch (error) {
         console.error("Error submitting form", error);
@@ -85,9 +80,8 @@ async function getUsers(url) {
         const data = await response.json();
     
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
-            getErrorAlert();
+            console.error("Error: " + (data.error || "An error occurred"));
+            getErrorAlert(data.error);
         }
     
         populateTable(data, urlString);
@@ -236,21 +230,16 @@ async function putUser(putFormData, putForm) {
                 putFormData
             })
         });
+
+        const responseData = await response.json();
     
         if (response.ok) {
-            putAlert();
+            putAlert(responseData.message);
             // putForm.reset();
             // putForm.classList.remove('was-validated');
         } else {
-            const errorData = await response.json();
-            
-            if (errorData.code === 'ER_DUP_ENTRY' || (errorData.message && errorData.message.includes("Duplicate entry"))) {
-                console.error("Error: Duplicate entry - A record with this information already exists");
-                putDuplicateAlert();
-            } else {
-                console.error("Error: " + (errorData.message || "An error occurred"));
-                putErrorAlert();
-            }
+            console.error("Error: " + (responseData.error || "An error occurred"));
+            putErrorAlert(responseData.error);
         }
     } catch (error) {
         console.error("Error updating user", error);
@@ -283,13 +272,14 @@ async function deleteUser(data) {
                 document: data.document
             })
         });
+
+        const responseData = await response.json();
     
         if (response.ok) {
-            deleteAlert();
+            deleteAlert(responseData.message);
         } else {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
-            deleteErrorAlert();
+            console.error("Error: " + (responseData.error || "An error occurred"));
+            deleteErrorAlert(responseData.error);
         }
     } catch (error) {
         console.error('Error deleting user', error);
@@ -340,10 +330,11 @@ function collapse() {
 
 //// POST ALERTS
 
-function postAlert(){
+function postAlert(message){
     Swal.fire({
         icon: "success",
-        title: "User has been created"
+        title: message || "User has been created",
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
             location.reload(true);
@@ -352,41 +343,39 @@ function postAlert(){
 };
 
 function postCancelAlert(){
-    Swal.fire("The creation of a user was cancelled");
-};
-
-function postErrorAlert(){
     Swal.fire({
-        icon: "error",
-        title: "Error creating user"
+        title: "The creation of a user was cancelled",
+        allowOutsideClick: false
     });
 };
 
-function postDuplicateAlert(){
+function postErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Duplicate entry",
-        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+        title: error || "Error creating user",
+        allowOutsideClick: false
     });
-}
+};
 
 
 //// GET ALERTS
 
-function getErrorAlert(){
+function getErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Error getting users"
+        title: error || "Error getting users",
+        allowOutsideClick: false
     });
 };
 
 
 //// PUT ALERTS
 
-function putAlert(){
+function putAlert(message){
     Swal.fire({
         icon: "success",
-        title: "User has been updated"
+        title: message || "User has been updated",
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
             location.reload(true);
@@ -395,31 +384,28 @@ function putAlert(){
 };
 
 function putCancelAlert(){
-    Swal.fire("The update of a user was cancelled");
-};
-
-function putErrorAlert(){
     Swal.fire({
-        icon: "error",
-        title: "Error updating user"
+        title: "The update of a user was cancelled",
+        allowOutsideClick: false
     });
 };
 
-function putDuplicateAlert(){
+function putErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Duplicate entry",
-        text: "Remember that you cannot duplicate documents, emails, or phone numbers"
+        title: error || "Error updating user",
+        allowOutsideClick: false
     });
-}
+};
 
 
 //// DELETE ALERTS
 
-function deleteAlert(){
+function deleteAlert(message){
     Swal.fire({
         icon: "success",
-        title: "User has been deleted"
+        title: message || "User has been deleted",
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
             location.reload(true);
@@ -430,7 +416,8 @@ function deleteAlert(){
 function deleteCancelAlert(data){
     Swal.fire({
         title: "Are you sure you want to delete the user?",
-        showCancelButton: true
+        showCancelButton: true,
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
             deleteUser(data);
@@ -438,10 +425,11 @@ function deleteCancelAlert(data){
     });
 };
 
-function deleteErrorAlert(){
+function deleteErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: "Error deleting user"
+        title: error || "Error deleting user",
+        allowOutsideClick: false
     });
 };
 

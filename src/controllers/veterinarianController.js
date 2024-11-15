@@ -13,22 +13,20 @@ async function postVeterinarian(req, res) {
                 console.error('Duplicate entry:', err.message);
 
                 if (err.message.includes('document')) {
-                    return res.status(409).send('The document already exists');
+                    return res.status(409).json({ error: 'The document already exists' });
                 } else if (err.message.includes('email')) {
-                    return res.status(409).send('The email already exists');
-                } else if (err.message.includes('phone_number')) {
-                    return res.status(409).send('The phone number already exists');
+                    return res.status(409).json({ error: 'The email already exists' });
                 }
 
-                return res.status(409).send('Duplicate entry detected');
+                return res.status(409).json({ error: 'Duplicate entry detected' });
             }
 
             console.error(err);
-            return res.status(500).send('Error inserting Veterinarian user');
+            return res.status(500).json({ error: 'Error inserting Veterinarian user' });
         }
 
         console.log('User inserted successfully');
-        return res.status(201).send('Vaterinarian user inserted successfully');
+        return res.status(201).json({ message: 'Vaterinarian user inserted successfully' });
     });
 }
 
@@ -36,7 +34,7 @@ async function getVeterinarians(req, res) {
     connection.query('SELECT * FROM veterinarian', (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Error getting veterinary users');
+            return res.status(500).json({ error: 'Error getting veterinary users' });
         } else {
             //console.log('Veterinarians users successfully obtained');
             return res.json(results);
@@ -50,7 +48,7 @@ async function getOneVeterinarian(req, res) {
     connection.query(sql, [name], (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Error getting veterinary users');
+            return res.status(500).json({ error: 'Error getting veterinary users' });
         } else {
             //console.log('Veterinary users successfully obtained');
             return res.json(results);
@@ -106,22 +104,20 @@ async function putVeterinarian(req, res) {
                 console.error('Duplicate entry:', err.message);
 
                 if (err.message.includes('document')) {
-                    return res.status(409).send('The document already exists');
+                    return res.status(409).json({ error: 'The document already exists' });
                 } else if (err.message.includes('email')) {
-                    return res.status(409).send('The email already exists');
-                } else if (err.message.includes('phone_number')) {
-                    return res.status(409).send('The phone number already exists');
+                    return res.status(409).json({ error: 'The email already exists' });
                 }
 
-                return res.status(409).send('Duplicate entry detected');
+                return res.status(409).json({ error: 'Duplicate entry detected' });
             }
 
             console.error(err);
-            return res.status(500).send('Veterinarian user not updated');
+            return res.status(500).json({ error: 'Veterinarian user not updated' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Veterinarian user not found' });
+            return res.status(404).json({ error: 'Veterinarian user not found' });
         }
 
         return res.json({ message: 'Veterinarian user updated successfully' });
@@ -138,11 +134,11 @@ async function deleteVeterinarian(req, res) {
     connection.query(sql, [document], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Veterinarian user not deleted');
+            return res.status(500).json({ error: 'Veterinarian user not deleted' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Veterinarian user not found' });
+            return res.status(404).json({ error: 'Veterinarian user not found' });
         }
 
         return res.json({ message: 'Veterinarian user deleted successfully' });
