@@ -5,8 +5,10 @@ const selectMedicine = document.getElementById('select-medicine');
 
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
 
-collapseCreateTreatment.addEventListener('click', getMedicalHistories);
-collapseCreateTreatment.addEventListener('click', getMedicines);
+collapseCreateTreatment.addEventListener('click', () => {
+    getMedicalHistories();
+    getMedicines();
+});
 
 async function getMedicalHistories() {
 
@@ -52,7 +54,7 @@ async function getMedicines() {
     }
 }
 
-selectMedicine.addEventListener('change', getMedicines);
+// selectMedicine.addEventListener('change', getMedicines);
 
 btnCreateTreatment.addEventListener('click', postTreatment);
 
