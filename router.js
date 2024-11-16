@@ -35,17 +35,6 @@ router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
 router.get('/registerPetOwner', pagesController.getregisterPetOwner);
 
-// funcionalidades
-router.get('/getAllappointments', appointmentController.getAppointments);
-
-router.get('/getAlladministrators', administratorController.getAdministrators);
-
-router.get('/getAllmedicalHistories', medicalHistoryController.getMedicalHistories);
-
-router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getMedicalHistoryVaccines);
-
-router.get('/getAllvaccines', vaccineController.getVaccines);
-
 // pet owners
 router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);
