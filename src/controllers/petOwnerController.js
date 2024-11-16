@@ -1,7 +1,28 @@
 const connection = require('../../db');
+const crypto = require ('crypto');
+
+async function encryptPassword(password) {
+    try {
+      // Create a salt (a random string)
+      const salt = crypto.randomBytes(16).toString('hex');
+  
+      // Create a hash of the password and salt
+      
+      const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
+  
+      return hash;
+    } catch (error) {
+      console.error('Error encriptando contraseña:', error);
+      return null;
+    }
+  }
+
 
 async function postPetOwner(req, res) {
-    const { document, name, last_name, email, password, phone_number } = req.body;
+    const { document, name, last_name, email, phone_number } = req.body;
+    let {password}=req.body;
+    password = await encryptPassword(password);
+    console.log(encryptPassword);
 
     const sql = `
         INSERT INTO pet_owner (document, name, last_name, email, password, phone_number) VALUES (?, ?, ?, ?, ?, ?)
