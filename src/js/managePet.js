@@ -72,17 +72,7 @@ async function InsertPet() {
 
         const data = await response.json();
         console.log(data);
-        alert('Pet registered successfully');
-
-        // limpiar campos
-        inputName.value = '';
-        selectSpecies.selectedIndex = 0;
-        inputAge.value = '';
-        inputWeight.value = '';
-        inputPhoto.value = '';
-        inputPetOwnerDocument.value = '';
-
-        location.reload()
+        postAlert();
 
     } catch (error) {
         console.error('Error:', error);
@@ -392,5 +382,18 @@ function deleteErrorAlert(error) {
         icon: "error",
         title: error || "Error deleting pet",
         allowOutsideClick: false
+    });
+};
+
+// post
+
+function postAlert() {
+    Swal.fire({
+        icon: "success",
+        title: "Pet has been created"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.reload(true);
+        }
     });
 };
