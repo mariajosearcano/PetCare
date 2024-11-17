@@ -10,8 +10,40 @@ const selectNames = document.getElementById('select-name');
 // buttons
 const registerButton = document.getElementById('btnRegisterPet');
 
+// validacion de campos
+(() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+
 // INSERT
-registerButton.addEventListener('click', InsertPet);
+
+registerButton.addEventListener('click', async function(event) {
+    event.preventDefault();  // Evita que se envíe el formulario si el botón no tiene tipo submit
+    const form = document.getElementById('register-form');
+    
+    // Verifica si el formulario es válido antes de proceder con el registro
+    if (form.checkValidity()) {
+        // Llama a la función para registrar la mascota
+        await InsertPet();
+    } else {
+        form.classList.add('was-validated');  // Agrega la clase para mostrar los errores
+    }
+});
 
 async function InsertPet() {
     let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
@@ -41,38 +73,22 @@ async function InsertPet() {
         const data = await response.json();
         console.log(data);
         alert('Pet registered successfully');
+
+        // limpiar campos
+        inputName.value = '';
+        selectSpecies.selectedIndex = 0;
+        inputAge.value = '';
+        inputWeight.value = '';
+        inputPhoto.value = '';
+        inputPetOwnerDocument.value = '';
+
+        location.reload()
+
     } catch (error) {
         console.error('Error:', error);
         alert('There was no possible to register the pet');
     }
-
-    inputName.value = '';
-    selectSpecies.selectedIndex = 0;
-    inputAge.value = '';
-    inputWeight.value = '';
-    inputPhoto.value = '';
-    inputPetOwnerDocument.value = '';
 }
-
-// validacion de campos
-(() => {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
 
 // control collapse
 document.addEventListener('DOMContentLoaded', function () {
@@ -102,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // collapse 2 (para el manage pet)
 function collapse() {
     const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
-    
+
     collapseButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const targetId = this.getAttribute('data-bs-target');
 
             collapseButtons.forEach(btn => {
@@ -137,12 +153,12 @@ async function getPetsAndPetOwners(url) {
     try {
         const response = await fetch(urlString);
         const data = await response.json();
-        
+
         if (!response.ok) {
             console.error("Error: " + (data.error || "An error occurred"));
             getPetsAndPetOwnersErrorAlert(data.error);
         }
-    
+
         populateTable(data, urlString);
         collapse();
     } catch (error) {
@@ -183,7 +199,7 @@ function createTableRow(data) {
     return row;
 }
 
-function addEventListeners(data, row){
+function addEventListeners(data, row) {
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
     const deleteButton = row.querySelector('.delete-btn');
@@ -261,7 +277,7 @@ async function putPet(putFormData, putForm) {
         });
 
         const responseData = await response.json();
-    
+
         if (response.ok) {
             putAlert(responseData.message);
         } else {
@@ -292,7 +308,7 @@ async function deletePet(data) {
         });
 
         const responseData = await response.json();
-    
+
         if (response.ok) {
             deleteAlert(responseData.message);
         } else {
@@ -308,7 +324,7 @@ async function deletePet(data) {
 
 //// ALERTS
 
-function getPetsAndPetOwnersErrorAlert(message){
+function getPetsAndPetOwnersErrorAlert(message) {
     Swal.fire({
         icon: "error",
         title: message || "Error getting pets and pet owners",
@@ -318,7 +334,7 @@ function getPetsAndPetOwnersErrorAlert(message){
 
 //// PUT ALERTS
 
-function putAlert(message){
+function putAlert(message) {
     Swal.fire({
         icon: "success",
         title: message || "Pet has been updated",
@@ -330,14 +346,14 @@ function putAlert(message){
     });
 };
 
-function putCancelAlert(){
+function putCancelAlert() {
     Swal.fire({
         title: "The update of a pet was cancelled",
         allowOutsideClick: false
     });
 };
 
-function putErrorAlert(error){
+function putErrorAlert(error) {
     Swal.fire({
         icon: "error",
         title: error || "Error updating pet",
@@ -347,7 +363,7 @@ function putErrorAlert(error){
 
 //// DELETE ALERTS
 
-function deleteAlert(message){
+function deleteAlert(message) {
     Swal.fire({
         icon: "success",
         title: message || "Pet has been deleted",
@@ -359,7 +375,7 @@ function deleteAlert(message){
     });
 };
 
-function deleteCancelAlert(data){
+function deleteCancelAlert(data) {
     Swal.fire({
         title: "Are you sure you want to delete the pet?",
         showCancelButton: true,
@@ -371,7 +387,7 @@ function deleteCancelAlert(data){
     });
 };
 
-function deleteErrorAlert(error){
+function deleteErrorAlert(error) {
     Swal.fire({
         icon: "error",
         title: error || "Error deleting pet",
