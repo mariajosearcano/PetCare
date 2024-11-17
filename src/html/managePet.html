@@ -137,50 +137,63 @@
                     <div class="collapse envelope" id="collapseRegisterPet">
                         <div class="text-start bg-info-subtle p-5">
                             <!-- form register pet -->
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingName" placeholder="Name" required>
-                                <label for="floatingName">Name *</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" id="select-species"
-                                required>
-                                <option selected>Species *</option>
-                                <option value="Vertebrate">Vertebrate</option>
-                                <option value="Arthropod">Arthropod</option>
-                                <option value="Annelid">Annelid</option>
-                                <option value="Mollusk">Mollusk</option>
-                                <option value="Sponge">Sponge</option>
-                                <option value="Cnidarian">Cnidarian</option>
-                                <option value="Echinoderm">Echinoderm</option>
-                                <option value="Nematode">Nematode</option>
-                                <option value="Platyhelminth">Platyhelminth</option>
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingAge" placeholder="Age" required>
-                                <label for="floatingAge">Age *</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingWeight" placeholder="Weight"
-                                    required>
-                                <label for="floatingWeight">Weight (kg) *</label>
-                            </div>
-                            <div class="mb-5">
-                                <label for="pet-photo" class="form-label">Pet photo</label>
-                                <input class="form-control" type="file" id="pet-photo">
-                            </div>
-                            <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
-                                <input type="text" class="form-control" id="floating-pet-owner-document"
-                                    placeholder="pet-owner-document">
-                                <label for="floating-pet-owner-document">Pet owner document</label>
-                            </div>
-                            <p><em>* Required fields</em></p>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="btnRegisterPet">Register</button>
-                            </div>
+                            <form class="needs-validation" id="register-form" novalidate>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required>
+                                    <label for="floatingName">Name *</label>
+                                    <div class="invalid-feedback">Please enter the pet's name.</div>
+                                </div>
+
+                                <select class="form-select mb-3" aria-label="Default select example" id="select-species" required>
+                                    <option selected disabled value="">Species *</option>
+                                    <option value="Vertebrate">Vertebrate</option>
+                                    <option value="Arthropod">Arthropod</option>
+                                    <option value="Annelid">Annelid</option>
+                                    <option value="Mollusk">Mollusk</option>
+                                    <option value="Sponge">Sponge</option>
+                                    <option value="Cnidarian">Cnidarian</option>
+                                    <option value="Echinoderm">Echinoderm</option>
+                                    <option value="Nematode">Nematode</option>
+                                    <option value="Platyhelminth">Platyhelminth</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a species.</div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="floatingAge" placeholder="Age" required>
+                                    <label for="floatingAge">Age *</label>
+                                    <div class="invalid-feedback">Please enter the pet's age.</div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="floatingWeight" placeholder="Weight" required>
+                                    <label for="floatingWeight">Weight (kg) *</label>
+                                    <div class="invalid-feedback">Please enter the pet's weight.</div>
+                                </div>
+
+                                <div class="mb-5">
+                                    <label for="pet-photo" class="form-label">Pet photo</label>
+                                    <input class="form-control" type="file" id="pet-photo">
+                                    <div class="invalid-feedback">Please upload a photo of the pet.</div>
+                                </div>
+
+                                <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
+                                    <input type="text" class="form-control" id="floating-pet-owner-document"
+                                        placeholder="pet-owner-document" required>
+                                    <label for="floating-pet-owner-document">Pet owner document</label>
+                                </div>
+
+                                <p><em>* Required fields</em></p>
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <button type="submit" class="btn btn-primary" id="btnRegisterPet">Register</button>
+                                </div>
+
+                            </form>
                             <!-- form register pet -->
                         </div>
                     </div>
                     <!-- collapse content register pet -->
-                   
+
                     <!-- tabla para visualizar -->
                     <div class="collapse envelope table-collapse" id="table-collapseUpdatePet">
                         <div class="text-start bg-info-subtle p-5">
