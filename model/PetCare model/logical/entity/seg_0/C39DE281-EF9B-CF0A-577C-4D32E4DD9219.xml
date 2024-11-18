@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="C39DE281-EF9B-CF0A-577C-4D32E4DD9219" name="Vaccine">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:20:01 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Vaccine ID" id="098DCEAF-1972-E5F6-AF2B-7C1F3499B6B4">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:20:18 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Name" id="2641E2D6-C991-C553-BE2E-B216CA0C1844">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:20:34 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="751992E9-630B-BAB9-C766-D0B69C3FB80C" name="Vaccine PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:20:33 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>098DCEAF-1972-E5F6-AF2B-7C1F3499B6B4</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

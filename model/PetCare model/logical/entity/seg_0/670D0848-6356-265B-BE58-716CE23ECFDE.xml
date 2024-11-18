@@ -1,0 +1,127 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="670D0848-6356-265B-BE58-716CE23ECFDE" name="Appointment">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 17:07:17 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Appointment ID" id="E49BC8C4-EA43-0E7C-B63E-0683E71E8ACD">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 17:07:33 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Date" id="70D788F0-FB72-B1D3-DF3B-160E10DAD6D8">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:23:09 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Start Time" id="512AF0E6-2856-8F1E-A3DF-62811FA019D3">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:23:34 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="End Time" id="492466F3-8C85-5087-7B73-1B8D05FBE705">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 19:23:55 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Pet ID" id="5705BBC7-E769-CF77-70B1-9214D0776D02">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-18 04:08:33 UTC</createdTime>
+<generatorID>85E7481A-01C2-D0B2-7F62-0DB4A7765CE5</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<referedAttribute>4CCF0AAC-EF8C-1A80-83C7-E3A1E5A295D3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Document" id="6F7B249E-4F8B-9581-009F-5B819DE00540">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-23 16:29:42 UTC</createdTime>
+<generatorID>E7FD9847-359E-BBF4-5A6B-C0283BAB6AEB</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<referedAttribute>E525643D-F73F-2D94-643B-6334D4D84D6C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Schedule ID" id="703146B2-6BA8-94EA-F14B-3CB607AC674A">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-18 15:55:20 UTC</createdTime>
+<generatorID>F7EAF516-6649-0FC1-FC68-C8107D42E04A</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<referedAttribute>466E23D9-CF09-BA2F-0AFC-F8F6F9E4BBF3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D852FDC7-A29A-23C5-266E-327E27C8486B" name="Appointment PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 17:07:48 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E49BC8C4-EA43-0E7C-B63E-0683E71E8ACD</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

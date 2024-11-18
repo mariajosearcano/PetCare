@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="PetCare model" id="930C96E9-C41A-874C-B154-5906EB20EC81" version="3.5">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-11 16:56:53 UTC</createdTime>
+<ownerDesignName>Vet</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>930C96E9-C41A-874C-B154-5906EB20EC81</designId>
+</OSDM_Design>
