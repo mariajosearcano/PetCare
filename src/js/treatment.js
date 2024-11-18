@@ -76,9 +76,28 @@ async function fillSelectMedicine() {
     }
 }
 
-// selectMedicine.addEventListener('change', () => {
+// check stock
+selectMedicine.addEventListener('change', () => {
+    checkStock();
+});
 
+async function checkStock() {
+    try {
+        const medicines = await getMedicines();
+        const selectedMedicine = selectMedicine.options[selectMedicine.selectedIndex].text;
+        const medicine = medicines.find(medicine => medicine.medicine_id == selectedMedicine);
+        const stock = medicine.stock;
 
+        if (stock <= 0) {
+            withoutStockAlert();
+            return;
+        } 
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// post
 btnCreateTreatment.addEventListener('click', postTreatment);
 
 async function postTreatment() {
@@ -133,3 +152,10 @@ function postErrorAlert() {
         title: "Error creating Treatment. Please fill all the fields"
     });
 };
+
+function withoutStockAlert() {
+    Swal.fire({
+        icon: "error",
+        title: "There is no stock for this medicine"
+    });
+}
