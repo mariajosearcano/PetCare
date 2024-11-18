@@ -140,9 +140,9 @@
                             <form class="needs-validation" id="register-form" novalidate>
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required>
+                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required minlength="2" maxlength="50">
                                     <label for="floatingName">Name *</label>
-                                    <div class="invalid-feedback">Please enter the pet's name.</div>
+                                    <div class="invalid-feedback">Please enter a name between 2 and 50 characters</div>
                                 </div>
 
                                 <select class="form-select" aria-label="Default select example" id="select-species" required>
@@ -157,24 +157,24 @@
                                     <option value="Nematode">Nematode</option>
                                     <option value="Platyhelminth">Platyhelminth</option>
                                 </select>
-                                <div class="invalid-feedback">Please select a species.</div>
+                                <div class="invalid-feedback">Please select a species</div>
 
                                 <div class="form-floating mb-3 mt-3">
-                                    <input type="number" class="form-control" id="floatingAge" placeholder="Age" required min="0">
+                                    <input type="number" class="form-control" id="floatingAge" placeholder="Age" required min="0" max="200">
                                     <label for="floatingAge">Age *</label>
-                                    <div class="invalid-feedback">Please enter the pet's age.</div>
+                                    <div class="invalid-feedback">Please enter a age between 0 and 200 years</div>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="floatingWeight" placeholder="Weight" required>
+                                    <input type="number" class="form-control" id="floatingWeight" placeholder="Weight" required min="0" max="500">
                                     <label for="floatingWeight">Weight (kg) *</label>
-                                    <div class="invalid-feedback">Please enter the pet's weight.</div>
+                                    <div class="invalid-feedback">Please enter a weight between 0 and 500 kg</div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="pet-photo" class="form-label">Pet photo</label>
                                     <input class="form-control" type="file" id="pet-photo">
-                                    <div class="invalid-feedback">Please upload a photo of the pet.</div>
+                                    <div class="invalid-feedback">Please upload a photo of the pet</div>
                                 </div>
 
                                 <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
