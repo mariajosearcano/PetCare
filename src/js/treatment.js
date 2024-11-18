@@ -5,6 +5,26 @@ const selectMedicine = document.getElementById('select-medicine');
 
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
 
+// validacion de campos
+(() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})();
+
 collapseCreateTreatment.addEventListener('click', () => {
     fillSelectMedicalHistory();
     fillSelectMedicine();
@@ -98,7 +118,16 @@ async function checkStock() {
 }
 
 // post
-btnCreateTreatment.addEventListener('click', postTreatment);
+btnCreateTreatment.addEventListener('click', async function (event) {
+    event.preventDefault();  // Evita que se envíe el formulario por defecto
+    const form = document.getElementById('register-form');
+    
+    if (form.checkValidity()) {
+        await postTreatment();
+    } else {
+        form.classList.add('was-validated');  // Agrega la clase para mostrar los errores
+    }
+});
 
 async function postTreatment() {
 
@@ -130,7 +159,6 @@ async function postTreatment() {
         postAlert();
     } catch (error) {
         console.error('Error:', error);
-        postErrorAlert();
     }
 }
 
@@ -143,13 +171,6 @@ function postAlert() {
         if (result.isConfirmed) {
             location.reload(true);
         }
-    });
-};
-
-function postErrorAlert() {
-    Swal.fire({
-        icon: "error",
-        title: "Error creating Treatment. Please fill all the fields"
     });
 };
 
