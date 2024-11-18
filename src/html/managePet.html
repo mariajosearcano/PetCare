@@ -140,9 +140,9 @@
                             <form class="needs-validation" id="register-form" novalidate>
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required minlength="2" maxlength="50">
+                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
                                     <label for="floatingName">Name *</label>
-                                    <div class="invalid-feedback">Please enter a name between 2 and 50 characters</div>
+                                    <div class="invalid-feedback">Please enter a name between 2 and 50 letters</div>
                                 </div>
 
                                 <select class="form-select" aria-label="Default select example" id="select-species" required>
