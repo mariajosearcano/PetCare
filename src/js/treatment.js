@@ -46,6 +46,7 @@ async function fillSelectMedicalHistory() {
 
 // fetch medicines
 async function getMedicines() {
+
     const urlString = '/getMedicines';
 
     try {
@@ -98,16 +99,24 @@ async function checkStock() {
 }
 
 // post
-btnCreateTreatment.addEventListener('click', async function (event) {
+btnCreateTreatment.addEventListener('click', async (event) => {
+    if (await Postvalidation(event) == false) {
+        return;
+    }
+    postTreatment();
+});
+
+async function Postvalidation(event) {
     event.preventDefault();  // Evita que se envíe el formulario por defecto
     const form = document.getElementById('register-form');
-    
+
     if (form.checkValidity()) {
-        await postTreatment();
+        return true;
     } else {
         form.classList.add('was-validated');  // Agrega la clase para mostrar los errores
+        return false;
     }
-});
+}
 
 async function postTreatment() {
 
