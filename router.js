@@ -19,29 +19,31 @@ const userController = require('./src/controllers/userController');
 const registermedicineController = require('./src/controllers/registermedicineController');
 
 // hmtl
+
 router.get('/home', pagesController.getHome);
 
 router.get('/login', pagesController.getLogin);
-
+////admin
 router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
-
+router.get('/manageSchedules', pagesController.getManageSchedules);
+////pet owner
 router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
-
+////veterinarian
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
 router.get('/registerPetOwner', pagesController.getregisterPetOwner);
 
-// pet owners
+// pet owner
 router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
 router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
 
-// veterinarians
+// veterinarian
 router.post('/postVeterinarian', veterinarianController.postVeterinarian);
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
 router.get('/getOneVeterinarian/:name', veterinarianController.getOneVeterinarian);
@@ -49,11 +51,8 @@ router.get('/getVeterinarian/:specialty', veterinarianController.getVeterinarian
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
-router.get('/postTreatment', treatmentController.postTreatment);
-
-// medicines
+// medicine
 router.get('/getMedicines', medicineController.getMedicines);
-
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicineVet', registermedicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);
@@ -62,6 +61,7 @@ router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 // treatment
 router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
+router.get('/postTreatment', treatmentController.postTreatment);
 
 // login
 router.post('/postLogin', loginController.login);

@@ -32,12 +32,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/manageUsers">Manage Users</a>
-                    <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
-                    <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
-                    <a class="nav-link" href="/generateReports">Reports</a>
-                    <a class="nav-link" href="/logOut">Administrator</a>
-                    <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
+                        <a class="nav-link active" aria-current="page" href="/manageUsers">Manage Users</a>
+                        <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
+                        <a class="nav-link" href="/manageSchedules">Manage Schedules</a>
+                        <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
+                        <a class="nav-link" href="/generateReports">Reports</a>
+                        <a class="nav-link" href="/logOut">Administrator</a>
+                        <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
                     </div>
                 </div>
             </div>
@@ -142,7 +143,9 @@
                     <div class="collapse envelope" id="collapsePostUser">
                         <div class="text-start p-5">
                             <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
-                                <div class="form-text">* Required Field</div>
+                                <div class="form-text">
+                                    <em>* Required Fields</em>
+                                </div>
                                 <div class="col-md-4">
                                     <label for="postDocument" class="form-label">* Document</label>
                                     <input type="text" class="form-control" id="postDocument" aria-describedby="postDocumentHelp" name="document" required 
@@ -279,7 +282,9 @@
                         <div class="text-start p-5">
                             <!-- form register Users -->
                             <form class="row g-3 needs-validation" id="putForm" onsubmit="return false" novalidate>
-                                <div class="form-text">* Required Field</div>
+                                <div class="form-text">
+                                    <em>* Required Fields</em>
+                                </div>
                                 <div class="col-md-4">
                                     <label for="putDocument" class="form-label">* Document</label>
                                     <input type="text" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required 
