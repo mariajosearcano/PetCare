@@ -123,109 +123,78 @@
                         </button>
                     </p>
 
-                    <!-- collapse button visualize pet -->
-                    <p class="d-inline-flex gap-1">
-                        <button class="btn btn-info btn-lg" type="button" id="btn-collapse-visualize"
-                            data-bs-toggle="collapse" data-bs-target="#collapseVisualizePet" aria-expanded="false"
-                            aria-controls="collapseVisualizePet">
-                            Visualize pet
-                        </button>
-                    </p>
-
                     <!-- collapse button update pet -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" id="btn-collapse-update"
                             data-bs-toggle="collapse" data-bs-target="#table-collapseUpdatePet" aria-expanded="false"
                             aria-controls="table-collapseUpdatePet"
                             onclick="getPetsAndPetOwners('/getPetsAndPetOwners')">
-                            Update pet
+                            Manage pet
                         </button>
                     </p>
-
-                    <!-- <p class="d-inline-flex gap-1">
-                        <button class="btn btn-info btn-lg" type="button" id="btn-collapse-delete"
-                            data-bs-toggle="collapse" data-bs-target="#collapse-delete-pet" aria-expanded="false"
-                            aria-controls="table-collapseUpdatePet">
-                            Delete pet
-                        </button>
-                    </p> -->
 
                     <!-- collapse content register pet -->
                     <div class="collapse envelope" id="collapseRegisterPet">
                         <div class="text-start bg-info-subtle p-5">
                             <!-- form register pet -->
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingName" placeholder="Name" required>
-                                <label for="floatingName">Name *</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" id="select-species"
-                                required>
-                                <option selected>Species *</option>
-                                <option value="Vertebrate">Vertebrate</option>
-                                <option value="Arthropod">Arthropod</option>
-                                <option value="Annelid">Annelid</option>
-                                <option value="Mollusk">Mollusk</option>
-                                <option value="Sponge">Sponge</option>
-                                <option value="Cnidarian">Cnidarian</option>
-                                <option value="Echinoderm">Echinoderm</option>
-                                <option value="Nematode">Nematode</option>
-                                <option value="Platyhelminth">Platyhelminth</option>
-                            </select>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingAge" placeholder="Age" required>
-                                <label for="floatingAge">Age *</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingWeight" placeholder="Weight"
-                                    required>
-                                <label for="floatingWeight">Weight (kg) *</label>
-                            </div>
-                            <div class="mb-5">
-                                <label for="pet-photo" class="form-label">Pet photo</label>
-                                <input class="form-control" type="file" id="pet-photo">
-                            </div>
-                            <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
-                                <input type="text" class="form-control" id="floating-pet-owner-document"
-                                    placeholder="pet-owner-document">
-                                <label for="floating-pet-owner-document">Pet owner document</label>
-                            </div>
-                            <p><em>* Required fields</em></p>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-primary" id="btnRegisterPet">Register</button>
-                            </div>
+                            <form class="needs-validation" id="register-form" novalidate>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingName" placeholder="Name" required minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <label for="floatingName">Name *</label>
+                                    <div class="invalid-feedback">Please enter a name between 2 and 50 letters</div>
+                                </div>
+
+                                <select class="form-select" aria-label="Default select example" id="select-species" required>
+                                    <option selected disabled value="">Species *</option>
+                                    <option value="Vertebrate">Vertebrate</option>
+                                    <option value="Arthropod">Arthropod</option>
+                                    <option value="Annelid">Annelid</option>
+                                    <option value="Mollusk">Mollusk</option>
+                                    <option value="Sponge">Sponge</option>
+                                    <option value="Cnidarian">Cnidarian</option>
+                                    <option value="Echinoderm">Echinoderm</option>
+                                    <option value="Nematode">Nematode</option>
+                                    <option value="Platyhelminth">Platyhelminth</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a species</div>
+
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="number" class="form-control" id="floatingAge" placeholder="Age" required min="0" max="200">
+                                    <label for="floatingAge">Age *</label>
+                                    <div class="invalid-feedback">Please enter a age between 0 and 200 years</div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="floatingWeight" placeholder="Weight" required min="0" max="500">
+                                    <label for="floatingWeight">Weight (kg) *</label>
+                                    <div class="invalid-feedback">Please enter a weight between 0 and 500 kg</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="pet-photo" class="form-label">Pet photo</label>
+                                    <input class="form-control" type="file" id="pet-photo">
+                                    <div class="invalid-feedback">Please upload a photo of the pet</div>
+                                </div>
+
+                                <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
+                                    <input type="text" class="form-control" id="floating-pet-owner-document"
+                                        placeholder="pet-owner-document" required>
+                                    <label for="floating-pet-owner-document">Pet owner document</label>
+                                </div>
+
+                                <p><em>* Required fields</em></p>
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <button type="submit" class="btn btn-primary" id="btnRegisterPet">Register</button>
+                                </div>
+
+                            </form>
                             <!-- form register pet -->
                         </div>
                     </div>
                     <!-- collapse content register pet -->
 
-                    <!-- collapse content visualize pet -->
-                    <div class="collapse envelope table-collapse" id="collapseVisualizePet">
-                        <div class="text-start bg-info-subtle p-5">
-                            <select class="form-select mb-3" aria-label="Default select example" id="select-name">
-                                <option selected>Name</option>
-                            </select>
-                            <!-- table visualize pet -->
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Species</th>
-                                        <th scope="col">Age</th>
-                                        <th scope="col">Weight</th>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Pet owner document</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody-visualize-pet">
-                                    <!-- here will be insert the fetch info -->
-                                </tbody>
-                            </table>
-                            <!-- table visualize pet -->
-                        </div>
-                    </div>
-                    <!-- collapse content visualize pet -->
-
+                    <!-- tabla para visualizar -->
                     <div class="collapse envelope table-collapse" id="table-collapseUpdatePet">
                         <div class="text-start bg-info-subtle p-5">
                             <table class="table table-striped">
@@ -348,23 +317,6 @@
                         </div>
                     </div>
                     <!-- collapse content update pet -->
-
-                    <!-- collapse content delete pet -->
-                    <!-- <div class="collapse envelope table-collapse" id="collapse-delete-pet">
-                        <div class="text-start bg-info-subtle p-5">
-                            <div class="col">
-                                <label for="pet-photo-update" class="form-label">Select your pet</label>
-                                <select class="form-select mb-3" aria-label="Default select example"
-                                    id="select-name-update">
-                                    <option selected>Name</option>
-                                </select>
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button type="button" class="btn btn-primary"
-                                        id="btn-delete-pet">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
 
                 </div>
             </div>
