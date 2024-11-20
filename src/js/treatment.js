@@ -1,6 +1,9 @@
 const collapseCreateTreatment = document.getElementById('btn-collapse-create-treatment');
 const selectMedicalHistory = document.getElementById('select-medical-history');
 const selectMedicine = document.getElementById('select-medicine');
+
+const selectMedicineType = document.getElementById('select-medicine-type');
+
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
 
 const selectElement = document.getElementById('animalSelect');
@@ -32,6 +35,16 @@ async function getMedicalHistories() {
 }
 
 async function fillSelectMedicalHistory() {
+
+    // limpiar el select
+    selectMedicalHistory.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Medical history *';
+    selectMedicalHistory.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+    option.value = '';
+
     try {
         const medicalHistories = await getMedicalHistories();
         medicalHistories.forEach(medicalHistory => {
@@ -65,6 +78,16 @@ async function getMedicines() {
 }
 
 async function fillSelectMedicine() {
+
+    // limpiar el select
+    selectMedicine.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Medicine *';
+    selectMedicine.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+    option.value = '';
+
     try {
         const medicines = await getMedicines();
         medicines.forEach(medicine => {
@@ -77,16 +100,53 @@ async function fillSelectMedicine() {
     }
 }
 
-// selectMedicine.addEventListener('change', () => {
+// check stock
+selectMedicine.addEventListener('change', () => {
+    checkStock();
+});
 
+async function checkStock() {
+    try {
+        const medicines = await getMedicines();
+        const selectedMedicine = selectMedicine.options[selectMedicine.selectedIndex].text;
+        const medicine = medicines.find(medicine => medicine.medicine_id == selectedMedicine);
+        const stock = medicine.stock;
 
-btnCreateTreatment.addEventListener('click', postTreatment);
+        if (stock <= 0) {
+            withoutStockAlert();
+            return;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// post
+btnCreateTreatment.addEventListener('click', async (event) => {
+    if (await Postvalidation(event) == false) {
+        return;
+    }
+    postTreatment();
+});
+
+async function Postvalidation(event) {
+    event.preventDefault();  // Evita que se envíe el formulario por defecto
+    const form = document.getElementById('register-form');
+
+    if (form.checkValidity()) {
+        return true;
+    } else {
+        form.classList.add('was-validated');  // Agrega la clase para mostrar los errores
+        return false;
+    }
+}
 
 async function postTreatment() {
 
     const dose = document.getElementById('floating-dose').value;
     const medical_history_id = selectMedicalHistory.options[selectMedicalHistory.selectedIndex].text;
     const medicine_id = selectMedicine.options[selectMedicine.selectedIndex].text;
+    const medicine_type = selectMedicineType.options[selectMedicineType.selectedIndex].text;
 
     const url = ('/postTreatment').toString();
 
@@ -99,7 +159,8 @@ async function postTreatment() {
             body: JSON.stringify({
                 dose,
                 medical_history_id,
-                medicine_id
+                medicine_id,
+                medicine_type
             })
         });
 
@@ -112,7 +173,6 @@ async function postTreatment() {
         postAlert();
     } catch (error) {
         console.error('Error:', error);
-        postErrorAlert();
     }
 }
 
@@ -128,11 +188,12 @@ function postAlert() {
     });
 };
 
-function postErrorAlert() {
+function withoutStockAlert() {
     Swal.fire({
         icon: "error",
-        title: "Error creating Treatment. Please fill all the fields"
+        title: "There is no stock for this medicine"
     });
+
 };
 
 
