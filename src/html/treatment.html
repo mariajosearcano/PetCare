@@ -126,19 +126,29 @@
                         <div class="text-start bg-info-subtle p-5">
 
                             <form class="needs-validation" id="register-form" novalidate>
-                                <select class="form-select mb-3" aria-label="Default select example"
+                                <select class="form-select" aria-label="Default select example"
                                     id="select-medical-history" required>
                                     <option disabled selected value="">Medical history *</option>
                                 </select>
                                 <div class="invalid-feedback">Please select a medical history</div>
 
-                                <select class="form-select mb-3" aria-label="Default select example"
+                                <select class="form-select mt-3" aria-label="Default select example"
                                     id="select-medicine" required>
                                     <option disabled selected value="">Medicine *</option>
                                 </select>
                                 <div class="invalid-feedback">Please select a medicine</div>
 
-                                <div class="form-floating mb-3">
+                                <select class="form-select mt-3" aria-label="Default select example"
+                                    id="select-medicine-type" required>
+                                    <option disabled selected value="">Medicine type *</option>
+                                    <option value="lozenge">lozenge</option>
+                                    <option value="syringe">syringe</option>
+                                    <option value="pomade">pomade</option>
+                                    <option value="drop">drop</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a medicine type</div>
+
+                                <div class="form-floating my-3">
                                     <input type="number" class="form-control" id="floating-dose" placeholder="dose"
                                         required min="0" max="300">
                                     <label for="floating-dose">Dose (mg) *</label>

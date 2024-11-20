@@ -2,6 +2,7 @@ const collapseCreateTreatment = document.getElementById('btn-collapse-create-tre
 
 const selectMedicalHistory = document.getElementById('select-medical-history');
 const selectMedicine = document.getElementById('select-medicine');
+const selectMedicineType = document.getElementById('select-medicine-type');
 
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
 
@@ -142,6 +143,7 @@ async function postTreatment() {
     const dose = document.getElementById('floating-dose').value;
     const medical_history_id = selectMedicalHistory.options[selectMedicalHistory.selectedIndex].text;
     const medicine_id = selectMedicine.options[selectMedicine.selectedIndex].text;
+    const medicine_type = selectMedicineType.options[selectMedicineType.selectedIndex].text;
 
     const url = ('/postTreatment').toString();
 
@@ -154,7 +156,8 @@ async function postTreatment() {
             body: JSON.stringify({
                 dose,
                 medical_history_id,
-                medicine_id
+                medicine_id,
+                medicine_type
             })
         });
 
