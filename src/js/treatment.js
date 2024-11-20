@@ -31,6 +31,16 @@ async function getMedicalHistories() {
 }
 
 async function fillSelectMedicalHistory() {
+
+    // limpiar el select
+    selectMedicalHistory.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Medical history *';
+    selectMedicalHistory.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+    option.value = '';
+
     try {
         const medicalHistories = await getMedicalHistories();
         medicalHistories.forEach(medicalHistory => {
@@ -46,7 +56,6 @@ async function fillSelectMedicalHistory() {
 
 // fetch medicines
 async function getMedicines() {
-
     const urlString = '/getMedicines';
 
     try {
@@ -65,6 +74,16 @@ async function getMedicines() {
 }
 
 async function fillSelectMedicine() {
+
+    // limpiar el select
+    selectMedicine.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Medicine *';
+    selectMedicine.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+    option.value = '';
+
     try {
         const medicines = await getMedicines();
         medicines.forEach(medicine => {
@@ -92,7 +111,7 @@ async function checkStock() {
         if (stock <= 0) {
             withoutStockAlert();
             return;
-        } 
+        }
     } catch (error) {
         console.error('Error:', error);
     }
