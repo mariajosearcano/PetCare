@@ -45,13 +45,9 @@ form.addEventListener('submit', async (event) => {
     .catch(error => {
       console.error('Error:', error);
     });
-  } else {
-    for (const field in validationMessages) {
-      errorMessages.innerHTML += <div class="alert alert-danger">${validationMessages[field]}</div>;
-    }
-  }
-});
+  } else { for (const field in validationMessages) { errorMessages.innerHTML += `<div class="alert alert-danger">${validationMessages[field]}</div>`; } } });
 
+  
 function validateForm() {
   // Get form elements
   const documentField = document.getElementById('document');
