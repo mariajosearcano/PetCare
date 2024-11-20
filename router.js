@@ -76,6 +76,7 @@ router.delete('/deletePet', petController.deletePet);
 
 // schedule
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);
+router.post('/postSchedule', scheduleController.postSchedule);
 
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
