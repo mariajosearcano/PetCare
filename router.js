@@ -61,7 +61,12 @@ router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 // treatment
 router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
+<<<<<<< HEAD
 router.get('/postTreatment', treatmentController.postTreatment);
+=======
+router.get('/getPetsId', treatmentController.getPetsId);
+
+>>>>>>> 6eb31e2882c8b23b3d89279568ccf339252f8833
 
 // login
 router.post('/postLogin', loginController.login);
