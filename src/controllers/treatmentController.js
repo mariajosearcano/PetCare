@@ -7,7 +7,7 @@ function postTreatment(req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ treatment_id: result.treatment_id, dose, medical_history_id, medicine_id });
+        res.json({dose, medical_history_id, medicine_id });
     });
 }
 
