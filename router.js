@@ -73,6 +73,8 @@ router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 // treatment
 router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
+router.get('/getPetsId', treatmentController.getPetsId);
+
 
 // login
 router.post('/postLogin', loginController.login);

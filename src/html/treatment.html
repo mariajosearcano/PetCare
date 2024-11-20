@@ -121,6 +121,14 @@
                         </button>
                     </p>
 
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse-view-treatment" aria-expanded="false"
+                                aria-controls="collapse-view-treatment" onclick="obtenerDatosDeMascotas('/getPetsId')">
+                          Visualize treatment
+                        </button>
+                      </p>
+
                     <!-- collapse content treatment -->
                     <div class="collapse" id="collapse-create-treatment">
                         <div class="text-start bg-info-subtle p-5">
@@ -151,6 +159,18 @@
                         </div>
                     </div>
                     <!-- collapse content treatment -->
+
+                    <!-- collapse view treatment -->
+                    <div class="collapse" id="collapse-view-treatment">
+                        <div class="card card-body bg-info-subtle p-4">
+                          <label for="animalSelect" class="form-label">Select Pet :</label>
+                          <select id="animalSelect" class="form-select">
+                            </select>
+                        </div>
+                      </div>
+                    <!-- collapse view treatment -->
+
+
                 </div>
             </div>
         </div>
