@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3F174C8E-A793-F687-416C-B8228684E4CA" name="Schedule">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>20264540-4B88-8D0B-E1FB-29ED7DB0E313</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="schedule_id" id="AEC88EB2-ACF6-46AE-8FFB-D881F35E1E05">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>466E23D9-CF09-BA2F-0AFC-F8F6F9E4BBF3</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="start_hour" id="9D8A9D7A-E1B7-EB36-5E01-4118B8B32A4D">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>18D2992D-0F0E-3B15-C3BC-EC15DA95EEC3</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="end_hour" id="9BBDC276-4FD5-11ED-F1A8-49F76906F00E">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>4F5ED044-54ED-8BDB-6601-E92C013E5580</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CCEA491F-8B66-3448-A94E-58EFBC5AA1A4" name="Schedule_PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>DD9CED84-43F1-2162-215B-B1B5CBD66342</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AEC88EB2-ACF6-46AE-8FFB-D881F35E1E05"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

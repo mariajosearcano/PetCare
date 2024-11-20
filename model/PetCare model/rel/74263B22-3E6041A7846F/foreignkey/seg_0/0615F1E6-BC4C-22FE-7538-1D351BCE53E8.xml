@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="0615F1E6-BC4C-22FE-7538-1D351BCE53E8" containerWithKeyObject="BD943594-71D1-A1BD-ADAA-D2CDE8023C90" localFKIndex="1E7870E4-6DE5-D196-0F67-1105AF088C70" name="Available_Schedule_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>DFBDB210-E142-B1E3-9BFD-553AB3D4AAEA</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<referredTableLongName>Schedule</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3F174C8E-A793-F687-416C-B8228684E4CA</referredTableID>
+<keyObject>CCEA491F-8B66-3448-A94E-58EFBC5AA1A4</keyObject>
+<referredKeyID>CCEA491F-8B66-3448-A94E-58EFBC5AA1A4</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>schedule_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

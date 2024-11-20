@@ -15,6 +15,32 @@
 <maxVolumes>9999999</maxVolumes>
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="document" id="6FE00218-71D2-4B6C-3DB1-C56AB3B70CC1">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 19:39:00 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="specialty" id="22D698B1-9EEF-60B9-0355-061E65F28427">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 19:39:21 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="D2DD7166-9A34-B159-31F0-6A4A56B48EA9" name="Veterinarian PK">
 <createdBy>maria</createdBy>
@@ -24,6 +50,9 @@
 <item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
 </engineerTo>
 <pk>true</pk>
+<usedAttributes>
+<attributeRef>6FE00218-71D2-4B6C-3DB1-C56AB3B70CC1</attributeRef>
+</usedAttributes>
 </identifier>
 </identifiers>
 </Entity>

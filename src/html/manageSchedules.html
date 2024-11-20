@@ -128,19 +128,19 @@
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="putDocument" class="form-label">* Start Time</label>
-                                    <input type="text" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required 
-                                        placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
+                                    <label for="putDocument" class="form-label">* Start Hour</label>
+                                    <input type="time" class="form-control" id="putDocument" aria-describedby="putDocumentHelp" name="document" required 
+                                        placeholder="Enter Document ID" pattern="^([01]\d|2[0-3]):00$">
                                     <div class="invalid-feedback">
-                                        Please enter a valid document ID (only numbers, 6-20 digits)
+                                        Please enter a valid hour (only numbers 2 digits, : separator)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="putName" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <label for="putName" class="form-label">* End Hour</label>
+                                    <input type="time" class="form-control" id="putName" aria-describedby="putNameHelp" name="name" required
+                                        placeholder="Enter Name" pattern="^([01]\d|2[0-3]):[0-5]\d$">
                                     <div class="invalid-feedback">
-                                        Please enter a valid name (only letters, 2-50 characters)
+                                        Please enter a valid hour (only numbers 2 digits, and : separator)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -343,7 +343,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
-    <script src="../js/manageUsers.js"></script>
+    <script src="../js/manageSchedules.js"></script>
 </body>
 
 </html>

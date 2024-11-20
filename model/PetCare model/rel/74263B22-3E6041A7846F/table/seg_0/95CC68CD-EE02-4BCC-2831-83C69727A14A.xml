@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="95CC68CD-EE02-4BCC-2831-83C69727A14A" name="Clinic_Administrator">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>74FC1917-B370-AC09-EFD6-16D45422B69B</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="document" id="00534589-3ED8-6E56-5EA5-ADA7A8804677">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>E525643D-F73F-2D94-643B-6334D4D84D6C</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FFF815B1-23B0-4538-E715-2B61E245A358" referredColumn="0354EE0D-CF89-7482-5F12-AC629F827A55"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="37BEABB8-D12F-DEAB-3A39-2DEBE83414DB" name="Clinic_Administrator_PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>C8A173AD-E84B-8B40-3161-439A279A97ED</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00534589-3ED8-6E56-5EA5-ADA7A8804677"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FA4E00C4-AB4D-5767-D839-B9957747EE3D" name="Clinic_Administrator_Person_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>08FD91E1-27EC-1098-8AB5-D1D7E6FDDA92</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00534589-3ED8-6E56-5EA5-ADA7A8804677"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

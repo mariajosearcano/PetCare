@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="3C0336A0-E1A2-4CF0-5A1C-EF804A297FF9" containerWithKeyObject="D94420F6-9091-BC87-E6B8-73F1C6BA9578" localFKIndex="3797F841-D624-573E-0678-21D473864701" name="Relation_13_Vaccine_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>3F1DC35B-C660-C938-6434-257992A1BE83</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<referredTableLongName>Vaccine</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>7EB7880B-BCDA-23CE-4C0B-5C73746FC44B</referredTableID>
+<keyObject>EA2A28BE-CDD3-5605-809C-06DF3CFABA91</keyObject>
+<referredKeyID>EA2A28BE-CDD3-5605-809C-06DF3CFABA91</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>vaccine_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

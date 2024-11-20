@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="Medical History ID" id="A3C1E295-A01A-4074-FF9D-D2E0A6996505">
+<Attribute name="medical_history_id" id="A3C1E295-A01A-4074-FF9D-D2E0A6996505">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 17:09:56 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -28,7 +28,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Diagnosis" id="8CFA97DC-C6EF-BB16-EFAE-4839D0EC1A49">
+<Attribute name="diagnosis" id="8CFA97DC-C6EF-BB16-EFAE-4839D0EC1A49">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-18 04:11:24 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -41,7 +41,7 @@
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Pet ID" id="D28DB4F4-CE9F-791E-4105-C0D0E75C4208">
+<Attribute name="ped_id" id="D28DB4F4-CE9F-791E-4105-C0D0E75C4208">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-18 04:18:35 UTC</createdTime>
 <generatorID>AF03914E-3ACE-C55E-9B68-A5EA45336764</generatorID>

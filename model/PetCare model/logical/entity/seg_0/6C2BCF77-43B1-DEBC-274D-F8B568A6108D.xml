@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="Pet ID" id="4CCF0AAC-EF8C-1A80-83C7-E3A1E5A295D3">
+<Attribute name="ped_id" id="4CCF0AAC-EF8C-1A80-83C7-E3A1E5A295D3">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-18 03:42:10 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -28,7 +28,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Name" id="8A7054CE-852D-486A-384E-FE8B870C184D">
+<Attribute name="name" id="8A7054CE-852D-486A-384E-FE8B870C184D">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:14:27 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -41,7 +41,7 @@
 <dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Species" id="77BC7F76-8CC0-41AB-ABF6-9D88B243E347">
+<Attribute name="species" id="77BC7F76-8CC0-41AB-ABF6-9D88B243E347">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:11:18 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -54,7 +54,7 @@
 <dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Age" id="34D8F00E-CE1A-06B6-3362-CECA2AF252B4">
+<Attribute name="age" id="34D8F00E-CE1A-06B6-3362-CECA2AF252B4">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:12:38 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -67,7 +67,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Weight" id="2AB03BD9-4E37-088F-ED18-0F628AAE23FE">
+<Attribute name="weight" id="2AB03BD9-4E37-088F-ED18-0F628AAE23FE">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:13:00 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -80,7 +80,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Photo" id="7DFA2A3A-5D82-F8F7-10A5-93FAEC558EDA">
+<Attribute name="photo" id="7DFA2A3A-5D82-F8F7-10A5-93FAEC558EDA">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:13:15 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -92,7 +92,7 @@
 <logicalDatatype>LOGDT029</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Document" id="DF9FB4D9-F5BF-8F88-FA78-8BEF0F3222C8">
+<Attribute name="document" id="DF9FB4D9-F5BF-8F88-FA78-8BEF0F3222C8">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-23 16:29:42 UTC</createdTime>
 <generatorID>22EA1852-EF7F-0C88-1687-D1ECBE150F1A</generatorID>
@@ -105,7 +105,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

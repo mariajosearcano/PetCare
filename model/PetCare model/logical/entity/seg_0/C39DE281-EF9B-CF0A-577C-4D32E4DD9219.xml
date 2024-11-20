@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="Vaccine ID" id="098DCEAF-1972-E5F6-AF2B-7C1F3499B6B4">
+<Attribute name="vaccine_id" id="098DCEAF-1972-E5F6-AF2B-7C1F3499B6B4">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:20:18 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -28,7 +28,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Name" id="2641E2D6-C991-C553-BE2E-B216CA0C1844">
+<Attribute name="name" id="2641E2D6-C991-C553-BE2E-B216CA0C1844">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 19:20:34 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>

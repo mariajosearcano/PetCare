@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="Medicine ID" id="068B2B21-494B-5D79-4EF9-95A02FB4484D">
+<Attribute name="medicine_id" id="068B2B21-494B-5D79-4EF9-95A02FB4484D">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-11 17:06:29 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -28,7 +28,7 @@
 <dataTypePrecision>3</dataTypePrecision>
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Name" id="4ED9AC96-0C28-73BF-9B0F-3CC9E90233D0">
+<Attribute name="name" id="4ED9AC96-0C28-73BF-9B0F-3CC9E90233D0">
 <createdBy>maria</createdBy>
 <createdTime>2024-10-23 03:48:57 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
@@ -41,7 +41,7 @@
 <dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Stock" id="31136484-C813-6B98-870E-867191E88F73">
+<Attribute name="stock" id="31136484-C813-6B98-870E-867191E88F73">
 <createdBy>maria</createdBy>
 <createdTime>2024-11-18 15:52:35 UTC</createdTime>
 <ownerDesignName>PetCare model</ownerDesignName>
