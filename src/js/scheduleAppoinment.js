@@ -1,16 +1,19 @@
 const selectVeterinarian = document.getElementById('select-veterinarian');
 const selectSchedule = document.getElementById('select-schedule');
 const selectSpecialty = document.getElementById('select-specialty');
-const btnSchedule = document.getElementById('btn-schedule');
-const btnCancel = document.getElementById('btn-cancel');
+
 const btnCollapseSchedule = document.getElementById('btn-collapse-schedule');
 
+const btnSchedule = document.getElementById('btn-schedule');
+const btnCancel = document.getElementById('btn-cancel');
+
 // agregar veterinarios al select
-selectSpecialty.addEventListener('change', GetVets);
+selectSpecialty.addEventListener('change', () => {
+    fillSelectVet();
+});
 
 async function GetVets() {
 
-    selectVeterinarian.innerHTML = '';  // limpiar select
     let specialty = selectSpecialty.options[selectSpecialty.selectedIndex].text;
 
     const urlString = (`/getVeterinarian/${specialty}`).toString();
@@ -23,23 +26,41 @@ async function GetVets() {
             throw new Error('Error to get Pet Owners data');
         }
 
-        data.forEach(vet => {
-            AddVetOption(vet);
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+async function fillSelectVet() {
+
+    // limpiar el select
+    selectVeterinarian.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Veterinarian *';
+    selectVeterinarian.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+    option.value = '';
+
+    try {
+        const vets = await GetVets();
+        vets.forEach(vet => {
+            const option = document.createElement('option');
+            option.textContent = vet.name;
+            selectVeterinarian.appendChild(option);
         });
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-function AddVetOption(vet) {
-    const option = document.createElement('option');
-    option.textContent = vet.name;
-    selectVeterinarian.appendChild(option);
-}
-
-selectVeterinarian.addEventListener('change', GetSchedules);
-
 // agregar horarios al select
+selectVeterinarian.addEventListener('change', () => {
+    GetSchedules();
+});
+
 async function GetSchedules() {
 
     selectSchedule.innerHTML = '';  // limpiar select
