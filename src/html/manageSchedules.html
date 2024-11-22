@@ -132,9 +132,17 @@
                         </button>
                     </p>
 
+                    <p class="d-inline-flex gap-1">
+                        <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGetSchedules" aria-expanded="false"
+                            aria-controls="collapseGetSchedules" id="btn-collapseGetSchedules">
+                            Visualize Schedules
+                        </button>
+                    </p>
+
                     <div class="collapse envelope" id="collapsePostSchedule">
                         <div class="text-start p-5">
-                            <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
+                            <form class="row g-3 needs-validation form" id="postForm" onsubmit="return false" novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
@@ -174,7 +182,7 @@
                                     <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButton" onclick="handlePostSubmit()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                    <button class="btn btn-danger btn-lg cancel-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePostSchedule" aria-expanded="false"
                                         aria-controls="collapsePostSchedule" id="cancelPostSchedule" onclick="postCancelAlert()">
                                         Cancel
@@ -184,61 +192,76 @@
                         </div>
                     </div>
 
-                    <!-- <div class="collapse envelope" id="collapsePostSchedule">
+                    <div class="collapse table-collapse envelope" id="collapseGetSchedules">
                         <div class="text-start p-5">
-                            <form class="row g-3 needs-validation" id="postForm" onsubmit="return false" novalidate>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Schedule ID</th>
+                                        <th scope="col">Start Day</th>
+                                        <th scope="col">End Day</th>
+                                        <th scope="col">Start Hour</th>
+                                        <th scope="col">End Hour</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scheduleTableBody">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="collapse envelope" id="collapsePutSchedule">
+                        <div class="text-start p-5">
+                            <form class="row g-3 needs-validation form" id="putForm" onsubmit="return false" novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="postStartHour" class="form-label">* Start Hour</label>
-                                    <input type="time" class="form-control" id="postStartHour" aria-describedby="postStartHourHelp" name="start_hour" required 
-                                        placeholder="Enter the time" min="00:00" max="23:00" step="3600">
+                                    <label for="putStartDay" class="form-label">* Start Day</label>
+                                    <input type="text" class="form-control start date" id="putStartDay" aria-describedby="putStartDayHelp" name="start_day" required 
+                                        placeholder="Enter the Start Day">
+                                    <div class="invalid-feedback" id="putStartDayInvalidFeedback">
+                                        The day is valid but you must enter only Monday
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="putEndDay" class="form-label">End Date</label>
+                                    <input type="text" class="form-control end date" id="putEndDay" aria-describedby="putEndDayHelp" name="end_day" disabled
+                                        placeholder="Enter the End Day">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid day (in format yyyy-mm-dd and only future days bigger than start day)
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="putStartHour" class="form-label">* Start Hour</label>
+                                    <input type="text" class="form-control start time" id="putStartHour" aria-describedby="putStartHourHelp" name="start_hour" required 
+                                        placeholder="Enter the Start Time" min="00:00" max="22:00" pattern="^([01]\d|2[0-3]):00$">
                                     <div class="invalid-feedback">
                                         Please enter a valid hour (only numbers 2 digits, : separator and only o'clock hours)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="postEndHour" class="form-label">* End Hour</label>
-                                    <input type="time" class="form-control" id="postEndHour" aria-describedby="postEndHourHelp" name="end_hour" required
-                                        placeholder="Enter Name" pattern="^([01]\d|2[0-3]):00$">
+                                    <label for="putEndHour" class="form-label">End Hour</label>
+                                    <input type="text" class="form-control end time" id="putEndHour" aria-describedby="putEndHourHelp" name="end_hour" required
+                                        placeholder="Enter the End Time" min="01:00" max="23:00" pattern="^([01]\d|2[0-3]):00$">
                                     <div class="invalid-feedback">
                                         Please enter a valid hour (only numbers 2 digits, : separator and only o'clock hours)
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButton" onclick="handlePostSubmit()">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putButton" onclick="handlePutSubmit()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePostSchedule" aria-expanded="false"
-                                        aria-controls="collapsePostSchedule" id="cancelPostSchedule" onclick="postCancelAlert()">
+                                    <button class="btn btn-danger btn-lg cancel-btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapsePutSchedule" aria-expanded="false"
+                                        aria-controls="collapsePutSchedule" id="cancelPutSchedule" onclick="putCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                    </div> -->
-
-                    <!-- collapse content visualize Users -->
-                    <div class="collapse table-collapse envelope" id="collapseGetVeterinarian">
-                        <div class="text-start p-5">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Document</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Last name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone number</th>
-                                    <th scope="col">Specialty</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                                </thead>
-                                <tbody id="veterinarianTableBody">
-                                  
-                                </tbody>
-                            </table>
                         </div>
                     </div>
 
@@ -341,7 +364,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
-    <script src="../js/manageSchedules.js"></script>
+    <script type="module" src="../js/manageSchedules.js"></script>
 </body>
 
 </html>

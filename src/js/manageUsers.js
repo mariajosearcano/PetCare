@@ -123,14 +123,6 @@ function createTableRow(data) {
     return row;
 }
 
-// {/* <p class="d-inline-flex gap-1">
-//                 <button class="btn btn-outline-danger btn-lg delete-btn" type="button" data-bs-toggle="collapse"
-//                     data-bs-target="#collapseVisualizeVeterinarians" aria-expanded="false"
-//                     aria-controls="collapseVisualizeVeterinarians">
-//                     Delete
-//                 </button>
-//             </p> */}
-
 function addEventListeners(data, row){
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
