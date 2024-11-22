@@ -6,14 +6,8 @@ import { format } from 'https://cdn.jsdelivr.net/npm/@formkit/tempo@latest/dist/
 // VARIABLES
 
 
-// POST VARIABLES
-var postForm = document.getElementById('postForm');
-var datepair = new Datepair(postForm, {
-    'defaultDateDelta': 5      // days
-    // 'defaultTimeDelta': 7200000 // milliseconds
-});
-
 // PUT VARIABLES
+
 var oldPutForm = {};
 const formPutStartDay = document.getElementById('putStartDay');
 const formPutEndDay = document.getElementById('putEndDay');
@@ -22,30 +16,33 @@ const formPutEndHour = document.getElementById('putEndHour');
 
 
 
-// EVENT LISTENERS
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const startDayInput = document.getElementById('postStartDay');
-//     startDayInput.addEventListener('change', isMonday());
-// });
+// EVENT LISTENERS LOGIC
 
 document.addEventListener('DOMContentLoaded', function() {
-    const visualizeButton = document.getElementById('btn-collapseGetSchedules');
-    if (visualizeButton) {
-        visualizeButton.addEventListener('click', function() {
-            getSchedules();
-        });
-    }
+    collapse();
+
+    const postButton = document.getElementById('postButton');
+    postButton.addEventListener('click', handlePostSubmit);
+    const cancelPostButton = document.getElementById('cancelPostButton');
+    cancelPostButton.addEventListener('click', postCancelAlert);
+
+    const getButton = document.getElementById('getButton');
+    getButton.addEventListener('click', getSchedules);
+
+    const putButton = document.getElementById('putButton');
+    putButton.addEventListener('click', handlePutSubmit);
+    const cancelPutButton = document.getElementById('cancelPutButton');
+    cancelPutButton.addEventListener('click', putCancelAlert);
 });
 
 
 
-//POST LOGIC
+// POST LOGIC
 
 async function handlePostSubmit() {
     const postForm = document.getElementById('postForm');
 
-    if (!postForm.checkValidity() || !isMonday()) {
+    if (!postForm.checkValidity() || !isMonday('postStartDay')) {
         postForm.classList.add('was-validated');
         return;
     }
@@ -57,32 +54,10 @@ async function handlePostSubmit() {
         end_hour: document.getElementById('postEndHour').value
     };
 
-    postSchedule(postFormData, postForm);
+    postSchedule(postFormData);
 }
 
-function isMonday() {
-    const startDayInput = document.getElementById('postStartDay');
-    const invalidFeedback = document.getElementById('postStartDayInvalidFeedback');
-
-    var date = new Date(startDayInput.value + 'T00:00:00-05:00');
-    var isValidMonday = date.getDay() === 1;
-
-    if (!isValidMonday) {
-        startDayInput.classList.add('is-invalid');
-        // if (invalidFeedback) {
-        //     invalidFeedback.style.display = 'block';
-        // }
-    } else {
-        startDayInput.classList.remove('is-invalid');
-        // if (invalidFeedback) {
-        //     invalidFeedback.style.display = 'none';
-        // }
-    }
-
-    return isValidMonday;
-}
-
-async function postSchedule(postFormData, postForm) {
+async function postSchedule(postFormData) {
     try {
         const response = await fetch('/postSchedule', {
             method: 'POST',
@@ -153,7 +128,7 @@ function createTableRow(data) {
         <td>
             <p class="d-inline-flex gap-1">
                 <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsePutUser" aria-expanded="false"
+                    data-bs-target="#collapsePutSchedule" aria-expanded="false"
                     aria-controls="collapsePutSchedule">
                     Edit
                 </button>
@@ -182,7 +157,6 @@ function addEventListeners(data, row){
 }
 
 function populateTable(data) {
-
     const tableBody = document.getElementById('scheduleTableBody');
     tableBody.innerHTML = '';
     data.forEach((item, index) => {
@@ -203,9 +177,9 @@ function populateTable(data) {
 
 function populateForm(data){
     formPutStartDay.value = data.start_day;
-    formPutEndDay.value = data.end_day;
+    //formPutEndDay.value = data.end_day;
     formPutStartHour.value = data.start_hour;
-    formPutEndHour.value = data.end_hour;
+    //formPutEndHour.value = data.end_hour;
 
     oldPutForm = {
         putScheduleId: data.schedule_id,
@@ -219,7 +193,7 @@ function populateForm(data){
 async function handlePutSubmit() {
     const putForm = document.getElementById('putForm');
 
-    if (!putForm.checkValidity()) {
+    if (!putForm.checkValidity() || !isMonday('putStartDay')) {
         putForm.classList.add('was-validated');
         return;
     }
@@ -231,10 +205,10 @@ async function handlePutSubmit() {
         end_hour: formPutEndHour.value
     };
 
-    putUser(putFormData, putForm);
+    putUser(putFormData);
 }
 
-async function putUser(putFormData, putForm) {
+async function putUser(putFormData) {
     try {
         const response = await fetch('/putSchedule', {
             method: 'PUT',
@@ -268,18 +242,16 @@ async function putUser(putFormData, putForm) {
 
 // DELETE LOGIC
 
-async function deleteUser(data) {
-    const url = chooseDeleteUrlByTable(data.table);
-
+async function deleteSchedule(data) {
     try {
-        const response = await fetch(url, {
+        const response = await fetch('/deleteSchedule', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
                 //'Accept': 'application/json'
             },
             body: JSON.stringify({
-                document: data.document
+                schedule_id: data.schedule_id
             })
         });
 
@@ -292,26 +264,44 @@ async function deleteUser(data) {
             deleteErrorAlert(responseData.error);
         }
     } catch (error) {
-        console.error('Error deleting user', error);
+        console.error('Error deleting Schedule', error);
         deleteErrorAlert();
     }
 }
 
-function chooseDeleteUrlByTable(table){
-    if (table == 'pet_owner'){
-        return ('/deletePetOwner').toString(); 
+
+
+// VALIDATION LOGIC
+
+function isMonday(startDayId) {
+    const startDayInput = document.getElementById(startDayId);
+    //const invalidFeedback = document.getElementById('postStartDayInvalidFeedback');
+
+    var date = new Date(startDayInput.value + 'T00:00:00-05:00');
+    var isValidMonday = date.getDay() === 1;
+
+    if (!isValidMonday) {
+        startDayInput.classList.add('is-invalid');
+        // if (invalidFeedback) {
+        //     invalidFeedback.style.display = 'block';
+        // }
     } else {
-        return ('/deleteVeterinarian').toString(); 
+        startDayInput.classList.remove('is-invalid');
+        // if (invalidFeedback) {
+        //     invalidFeedback.style.display = 'none';
+        // }
     }
+
+    return isValidMonday;
 }
 
 
 
 // COLLAPSE LOGIC
 
-document.addEventListener('DOMContentLoaded', function() {
-    collapse();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     collapse();
+// });
 
 function collapse() {
     const collapseButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
@@ -355,6 +345,18 @@ $('.form .time').timepicker({
 
 
 
+// DATEPAIR LOGIC
+
+var forms = document.querySelectorAll('.form'); // Select all elements with the class 'form'
+forms.forEach(function(form) {
+    var datepair = new Datepair(form, {
+        'defaultDateDelta': 5 // days
+        // 'defaultTimeDelta': 7200000 // milliseconds
+    });
+});
+
+
+
 // ALERTS
 
 
@@ -374,7 +376,7 @@ function postAlert(message){
 
 function postCancelAlert(){
     Swal.fire({
-        title: "The creation of a schedule was cancelled",
+        title: "The creation of a Schedule was cancelled",
         allowOutsideClick: false
     });
 };
@@ -382,7 +384,7 @@ function postCancelAlert(){
 function postErrorAlert(error){
     Swal.fire({
         icon: "error",
-        title: error || "Error creating schedule",
+        title: error || "Error creating Schedule",
         allowOutsideClick: false
     });
 };
@@ -450,7 +452,7 @@ function deleteCancelAlert(data){
         allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteUser(data);
+            deleteSchedule(data);
         };
     });
 };

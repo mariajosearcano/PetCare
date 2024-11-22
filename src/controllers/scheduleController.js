@@ -22,6 +22,16 @@ async function postSchedule(req, res) {
 
     connection.query(sql, [start_day, end_day, start_hour, end_hour], (err, result) => {
         if (err) {
+            if (err.code === 'ER_DUP_ENTRY') {
+                console.error('Duplicate entry:', err.message);
+                
+                if (err.message.includes('start_day')) {
+                    return res.status(409).json({ error: 'There is already a schedule for that date' });
+                }
+
+                return res.status(409).json({ error: 'Duplicate entry detected' });
+            }
+
             console.error(err);
             return res.status(500).json({ error: 'Error inserting Schedule' });
         }
@@ -43,7 +53,6 @@ async function getSchedules(req, res) {
 }
 
 async function putSchedule(req, res) {
-
     const { oldPutForm, putFormData } = req.body;
     const { putScheduleId } = oldPutForm;
     const { start_day, end_day, start_hour, end_hour } = putFormData;
@@ -57,45 +66,43 @@ async function putSchedule(req, res) {
             if (err.code === 'ER_DUP_ENTRY') {
                 console.error('Duplicate entry:', err.message);
 
-                if (err.message.includes('document')) {
-                    return res.status(409).json({ error: 'The document already exists' });
-                } else if (err.message.includes({ error: 'email' })) {
-                    return res.status(409).json({ error: 'The email already exists' });
+                if (err.message.includes('start_day')) {
+                    return res.status(409).json({ error: 'There is already a schedule for that date' });
                 }
 
                 return res.status(409).json({ error: 'Duplicate entry detected' });
             }
 
             console.error(err);
-            return res.status(500).json({ error: 'Pet owner user not updated' });
+            return res.status(500).json({ error: 'Schedule not updated' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Pet owner user not found' });
+            return res.status(404).json({ error: 'Schedule not found' });
         }
 
-        return res.json({ message: 'Pet owner user updated successfully' });
+        return res.json({ message: 'Schedule updated successfully' });
     });
 }
 
 async function deleteSchedule(req, res) {
-    const { document } = req.body;
+    const { schedule_id } = req.body;
 
     const sql = `
-        DELETE FROM pet_owner WHERE document = ?
+        DELETE FROM schedule WHERE schedule_id = ?
     `;
 
-    connection.query(sql, [document], (err, result) => {
+    connection.query(sql, [schedule_id], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).json({ error: 'Pet owner user not deleted' });
+            return res.status(500).json({ error: 'Schedule not deleted' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Pet owner user not found' });
+            return res.status(404).json({ error: 'Schedule not found' });
         }
 
-        return res.json({ message: 'Pet owner user deleted successfully' });
+        return res.json({ message: 'Schedule deleted successfully' });
     });
 }
 

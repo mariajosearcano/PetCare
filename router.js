@@ -80,8 +80,8 @@ router.delete('/deletePet', petController.deletePet);
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);
 router.post('/postSchedule', scheduleController.postSchedule);
 router.get('/getSchedules', scheduleController.getSchedules);
-router.put('/postSchedule', scheduleController.putSchedule);
-router.delete('/postSchedule', scheduleController.deleteSchedule);
+router.put('/putSchedule', scheduleController.putSchedule);
+router.delete('/deleteSchedule', scheduleController.deleteSchedule);
 
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
