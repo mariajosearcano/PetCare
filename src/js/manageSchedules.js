@@ -11,10 +11,10 @@ var datepair = new Datepair(postForm, {
 
 // EVENT LISTENERS
 
-document.addEventListener('DOMContentLoaded', function() {
-    const startDayInput = document.getElementById('postStartDay');
-    startDayInput.addEventListener('change', isMonday);
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     const startDayInput = document.getElementById('postStartDay');
+//     startDayInput.addEventListener('change', isMonday());
+// });
 
 
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function handlePostSubmit() {
     const postForm = document.getElementById('postForm');
 
-    if (!postForm.checkValidity()) {
+    if (!postForm.checkValidity() || !isMonday()) {
         postForm.classList.add('was-validated');
         return;
     }
@@ -42,19 +42,19 @@ function isMonday() {
     const startDayInput = document.getElementById('postStartDay');
     const invalidFeedback = document.getElementById('postStartDayInvalidFeedback');
 
-    const date = new Date(startDayInput.value);
-    const isValidMonday = date.getDay() === 1;
+    var date = new Date(startDayInput.value + 'T00:00:00-05:00');
+    var isValidMonday = date.getDay() === 1;
 
     if (!isValidMonday) {
         startDayInput.classList.add('is-invalid');
-        if (invalidFeedback) {
-            invalidFeedback.style.display = 'block';
-        }
+        // if (invalidFeedback) {
+        //     invalidFeedback.style.display = 'block';
+        // }
     } else {
         startDayInput.classList.remove('is-invalid');
-        if (invalidFeedback) {
-            invalidFeedback.style.display = 'none';
-        }
+        // if (invalidFeedback) {
+        //     invalidFeedback.style.display = 'none';
+        // }
     }
 
     return isValidMonday;

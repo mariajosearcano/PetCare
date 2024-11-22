@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: bjx1hpzxdac8j87ji6tk-mysql.services.clever-cloud.com:3306
--- Tiempo de generación: 20-11-2024 a las 17:10:01
+-- Tiempo de generación: 21-11-2024 a las 14:48:55
 -- Versión del servidor: 8.0.22-13
 -- Versión de PHP: 8.2.21
 
@@ -43,12 +43,12 @@ CREATE TABLE `appointment` (
 --
 
 CREATE TABLE `available` (
-  `start_hour` time DEFAULT NULL,
-  `end_hour` time DEFAULT NULL,
-  `veterinarian_document` varchar(10) NOT NULL,
-  `status` set('avalible','scheduled') NOT NULL DEFAULT 'avalible',
   `available_id` int NOT NULL,
   `day` date NOT NULL,
+  `start_hour` time DEFAULT NULL,
+  `end_hour` time DEFAULT NULL,
+  `status` set('available','scheduled') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'available',
+  `veterinarian_document` varchar(10) NOT NULL,
   `schedule_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -204,6 +204,8 @@ INSERT INTO `pet_owner` (`document`, `name`, `last_name`, `email`, `password`, `
 
 CREATE TABLE `schedule` (
   `schedule_id` int NOT NULL,
+  `start_day` date NOT NULL,
+  `end_day` date NOT NULL,
   `start_hour` time NOT NULL,
   `end_hour` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -212,13 +214,24 @@ CREATE TABLE `schedule` (
 -- Volcado de datos para la tabla `schedule`
 --
 
-INSERT INTO `schedule` (`schedule_id`, `start_hour`, `end_hour`) VALUES
-(1, '08:00:00', '16:00:00'),
-(4, '10:00:00', '18:00:00'),
-(5, '16:00:00', '00:00:00'),
-(6, '00:00:00', '08:00:00'),
-(7, '00:00:00', '00:00:00'),
-(8, '00:00:00', '23:00:00');
+INSERT INTO `schedule` (`schedule_id`, `start_day`, `end_day`, `start_hour`, `end_hour`) VALUES
+(1, '0000-00-00', '0000-00-00', '08:00:00', '16:00:00'),
+(4, '0000-00-00', '0000-00-00', '10:00:00', '18:00:00'),
+(5, '0000-00-00', '0000-00-00', '16:00:00', '00:00:00'),
+(6, '0000-00-00', '0000-00-00', '00:00:00', '08:00:00'),
+(7, '0000-00-00', '0000-00-00', '00:00:00', '00:00:00'),
+(8, '0000-00-00', '0000-00-00', '00:00:00', '23:00:00'),
+(9, '2024-11-21', '2024-11-30', '00:00:00', '23:00:00'),
+(10, '2025-07-28', '2025-08-02', '01:00:00', '02:00:00'),
+(11, '2024-11-25', '2024-11-30', '02:00:00', '03:00:00'),
+(12, '2024-11-25', '2024-11-30', '01:00:00', '02:00:00'),
+(13, '2024-12-09', '2024-12-14', '01:00:00', '02:00:00'),
+(14, '2025-07-07', '2025-07-12', '01:00:00', '02:00:00'),
+(15, '2025-09-15', '2025-09-20', '03:00:00', '04:00:00'),
+(16, '2026-01-12', '2026-01-17', '04:00:00', '05:00:00'),
+(17, '2026-04-13', '2026-04-18', '03:00:00', '04:00:00'),
+(18, '2024-12-02', '2024-12-07', '04:00:00', '05:00:00'),
+(19, '2026-07-13', '2026-07-18', '02:00:00', '23:00:00');
 
 -- --------------------------------------------------------
 
@@ -283,15 +296,16 @@ CREATE TABLE `veterinarian` (
 --
 
 INSERT INTO `veterinarian` (`document`, `name`, `last_name`, `email`, `password`, `phone_number`, `specialty`) VALUES
-('09743557', 'Manuela', 'Diaz', 'manu@diaz.com', 'Manu1.888888', 2345679765, ''),
-('45845886', 'Valen', 'Vo', 'valen@vo.co', 'Wg1.968hghg', 8567724658, ''),
-('7564767', 'Lusss', 'Miguel', 'luis@miguel.co', 'Mq1.biuf67', 8743764737, ''),
-('75647674', 'Luis', 'Miguel', 'luis@miguel.com', 'Mq1.4587gg', 8743764737, ''),
-('766754789', 'David', 'Cordoba', 'cordoba@david.mail.com', 'Pq1.dfghjk', 45675478976, ''),
-('83476294', 'mafalda', 'mafalda', 'josue@mail.co', 'Mq.1llll', 1234567890, ''),
-('8678432', 'obi', 'obi', 'josue@mail.co', 'Mq1.444444', 1234567891, ''),
-('9847564', 'Lukas', 'Munos', 'munos@mu.so', 'Mq.175835', 7454364347, ''),
-('9857634', 'Carlos', 'Xd', 'x.w@mail.co', 'Paq1.....', 8754623787, '');
+('09743557', 'Manuela', 'Diaz', 'manu@diaz.com', 'Manu1.888888', 2345679765, 'dermatologist'),
+('45845886', 'Valen', 'Vo', 'valen@vo.co', 'Wg1.968hghg', 8567724658, 'cardiologist'),
+('7482947278', 'ricardo', 'mena', 'ricardo@gmail.com', 'Mq1.4500gg', 836294817, 'cardiologist'),
+('7564767', 'Lusss', 'Miguel', 'luis@miguel.co', 'Mq1.biuf67', 8743764737, 'endocrinologist'),
+('75647674', 'Luis', 'Miguel', 'luis@miguel.com', 'Mq1.4587gg', 8743764737, 'gastroenterologist'),
+('766754789', 'David', 'Cordoba', 'cordoba@david.mail.com', 'Pq1.dfghjk', 45675478976, 'neurologist'),
+('83476294', 'mafalda', 'mafalda', 'josue@mail.co', 'Mq.1llll', 1234567890, 'none'),
+('8678432', 'obi', 'obi', 'josue@mail.co', 'Mq1.444444', 1234567891, 'endocrinologist'),
+('9847564', 'Lukas', 'Munos', 'munos@mu.so', 'Mq.175835', 7454364347, 'gastroenterologist'),
+('9857634', 'Carlos', 'Xd', 'x.w@mail.co', 'Paq1.....', 8754623787, 'none');
 
 --
 -- Índices para tablas volcadas
@@ -421,7 +435,7 @@ ALTER TABLE `pet`
 -- AUTO_INCREMENT de la tabla `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `schedule_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `schedule_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `treatment`
