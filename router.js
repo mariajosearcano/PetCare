@@ -17,6 +17,7 @@ const medicineController = require('./src/controllers/medicineController');
 const loginController = require('./src/controllers/loginController.js');
 const userController = require('./src/controllers/userController');    
 const registermedicineController = require('./src/controllers/registermedicineController');
+const availableController = require('./src/controllers/availableController');
 
 // hmtl
 router.get('/home', pagesController.getHome);
@@ -90,5 +91,9 @@ router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSc
 
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
+
+// available
+router.get('/getAvailability', availableController.getAvailability);
+router.get('/getScheduleBySpecialty/:specialty', availableController.getScheduleBySpecialty);
 
 module.exports = router;
