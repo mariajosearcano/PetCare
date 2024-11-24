@@ -57,20 +57,18 @@ async function fillSelectDate() {
     }
 }
 
-
-
-
-
-// agregar veterinarios al select
-selectSpecialty.addEventListener('change', () => {
-    fillSelectVet();
+// agregar horarios al select
+selectDate.addEventListener('change', () => {
+    fillSelectSchedule();
 });
 
-async function GetVets() {
+async function GetSchedules() {
 
     let specialty = selectSpecialty.options[selectSpecialty.selectedIndex].text;
 
-    const urlString = (`/getVeterinarian/${specialty}`).toString();
+    let day = selectDate.options[selectDate.selectedIndex].text;
+
+    const urlString = (`/getScheduleByDay/${specialty}/${day}`).toString();
 
     try {
         const response = await fetch(urlString);
@@ -87,82 +85,30 @@ async function GetVets() {
     }
 }
 
-async function fillSelectVet() {
+async function fillSelectSchedule() {
 
     // limpiar el select
-    selectVeterinarian.innerHTML = '';
+    selectSchedule.innerHTML = '';
     const option = document.createElement('option');
-    option.textContent = 'Veterinarian *';
-    selectVeterinarian.appendChild(option);
+    option.textContent = 'Schedule *';
+    selectSchedule.appendChild(option);
     option.disabled = true;
     option.selected = true;
-    option.value = '';
 
     try {
-        const vets = await GetVets();
-        vets.forEach(vet => {
+        const schedules = await GetSchedules();
+        schedules.forEach(schedule => {
             const option = document.createElement('option');
-            option.textContent = vet.veterinarian_document;
-            selectVeterinarian.appendChild(option);
+            option.textContent = (`${schedule.start_hour}`).toString();
+            selectSchedule.appendChild(option);
         });
     } catch (error) {
         console.error('Error:', error);
     }
+
 }
 
-// agregar horarios al select
-selectVeterinarian.addEventListener('change', () => {
-    GetSchedules();
-});
 
-async function GetSchedules() {
-
-    selectSchedule.innerHTML = '';  // limpiar select
-
-    let name = selectVeterinarian.options[selectVeterinarian.selectedIndex].text;
-
-    // fetch del veterinario para obtener el document
-    const url2 = (`/getOneVeterinarian/${name}`).toString();
-
-    try {
-        const response = await fetch(url2);
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error('Error to get Pet Owners data');
-        }
-
-        localStorage.setItem('vet_document', data[0].document);
-
-    } catch (error) {
-        console.error('Error:', error);
-    }
-
-    // fetch del horario segun el documento del vet
-    let veterinarian_document = localStorage.getItem('vet_document');
-    const urlString = (`getVetSchedule/${veterinarian_document}`).toString();
-
-    try {
-        const response = await fetch(urlString);
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error('Error to get Pet Owners data');
-        }
-
-        data.forEach(schedule => {
-            AddScheduleOption(schedule);
-        });
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-function AddScheduleOption(schedule) {
-    const option = document.createElement('option');
-    option.textContent = (`${schedule.start_hour}-${schedule.end_hour}`).toString();
-    selectSchedule.appendChild(option);
-}
 
 // agendar cita
 // btnSchedule.addEventListener('click', ScheduleAppointment);
