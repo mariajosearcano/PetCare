@@ -2,11 +2,59 @@ const selectVeterinarian = document.getElementById('select-veterinarian');
 const selectSchedule = document.getElementById('select-schedule');
 const selectSpecialty = document.getElementById('select-specialty');
 const selectDate = document.getElementById('select-date');
+const selectPet = document.getElementById('select-pet');
 
 const btnCollapseSchedule = document.getElementById('btn-collapse-schedule');
 
 const btnSchedule = document.getElementById('btn-schedule');
 const btnCancel = document.getElementById('btn-cancel');
+
+// agregar mascotas al select
+btnCollapseSchedule.addEventListener('click', () => {
+    fillSelectPet();
+});
+
+async function GetPets() {
+
+    const urlString = (`/getPet`).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Error to get Pet Owners data');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+async function fillSelectPet() {
+
+    // limpiar el select
+    selectPet.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Pet *';
+    selectPet.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+
+    try {
+        const pets = await GetPets();
+        pets.forEach(pet => {
+            const option = document.createElement('option');
+            option.textContent = (`${pet.name}`).toString();
+            selectPet.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+}
 
 // agregar dias al select
 selectSpecialty.addEventListener('change', () => {

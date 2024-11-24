@@ -21,7 +21,6 @@ function getPets(req, res) {
             console.error(err);
             res.status(500).send('there was an error getting the data'); 
         } else {
-            console.log(results)
             res.json(results);
         }
     });
