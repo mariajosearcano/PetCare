@@ -108,7 +108,58 @@ async function fillSelectSchedule() {
 
 }
 
+// agregar veterinarios al select
+selectSchedule.addEventListener('change', () => {
+    fillSelectVeterinarian();
+});
 
+async function GetVeterinarians() {
+
+    let specialty = selectSpecialty.options[selectSpecialty.selectedIndex].text;
+
+    let day = selectDate.options[selectDate.selectedIndex].text;
+
+    let start_hour = selectSchedule.options[selectSchedule.selectedIndex].text;
+
+    const urlString = (`/getVeterinarian/${specialty}/${day}/${start_hour}`).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Error to get Pet Owners data');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+async function fillSelectVeterinarian() {
+
+    // limpiar el select
+    selectVeterinarian.innerHTML = '';
+    const option = document.createElement('option');
+    option.textContent = 'Veterinarian *';
+    selectVeterinarian.appendChild(option);
+    option.disabled = true;
+    option.selected = true;
+
+    try {
+        const veterinarians = await GetVeterinarians();
+        veterinarians.forEach(veterinarian => {
+            const option = document.createElement('option');
+            option.textContent = (`${veterinarian.name} ${veterinarian.last_name}`).toString();
+            selectVeterinarian.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+}
 
 // agendar cita
 // btnSchedule.addEventListener('click', ScheduleAppointment);
