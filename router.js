@@ -93,7 +93,7 @@ router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSc
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
 
 // available
-router.get('/getAvailability', availableController.getAvailability);
 router.get('/getDayBySpecialty/:specialty', availableController.getDayBySpecialty);
+router.get('/getScheduleByDay/:specialty/:day', availableController.getScheduleByDay);
 
 module.exports = router;
