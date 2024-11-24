@@ -48,7 +48,7 @@ async function fillSelectVet() {
         const vets = await GetVets();
         vets.forEach(vet => {
             const option = document.createElement('option');
-            option.textContent = vet.name;
+            option.textContent = vet.veterinarian_document;
             selectVeterinarian.appendChild(option);
         });
     } catch (error) {

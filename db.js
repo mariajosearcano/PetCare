@@ -2,10 +2,11 @@ const mysql = require('mysql2');
 
 // Crea una conexión a la base de datos
 const connection = mysql.createConnection({
-    host: 'bjx1hpzxdac8j87ji6tk-mysql.services.clever-cloud.com',
-    user: 'uaux4nod8a8vlzvo',
-    password: 'OEsn3ZhxuooWuMbaP7y6',
-    database: 'bjx1hpzxdac8j87ji6tk'
+    host: 'junction.proxy.rlwy.net',
+    port: '50251',
+    user: 'root',
+    password: 'gSaORPcztMEEDuVUhVWDzTtqBJmNajZv',
+    database: 'railway'
 });
 
 // establecer la conexión

@@ -58,7 +58,7 @@ async function getOneVeterinarian(req, res) {
 
 async function getVeterinarianBySpecialty(req, res) {
     const { specialty } = req.params;
-    const sql = 'SELECT * FROM veterinarian WHERE specialty = ?';
+    const sql = `SELECT veterinarian_document FROM available INNER JOIN veterinarian ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND veterinarian.specialty = ? GROUP BY veterinarian_document`;
     connection.query(sql, [specialty], (err, results) => {
         if (err) {
             console.error(err);
