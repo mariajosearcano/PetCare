@@ -210,36 +210,38 @@ async function fillSelectVeterinarian() {
 }
 
 // agendar cita
-// btnSchedule.addEventListener('click', ScheduleAppointment);
+btnSchedule.addEventListener('click', () => {
+    ScheduleAppointment();
+});
 
-// async function ScheduleAppointment() {
+async function postAppointment() {
 
-//     let veterinarian_document = localStorage.getItem('vet_document');
-//     let schedule = selectSchedule.options[selectSchedule.selectedIndex].text;
+    let schedule = selectSchedule.options[selectSchedule.selectedIndex].text;
+    
 
-//     const data = {
-//         veterinarian_document: veterinarian_document,
-//         schedule: schedule
-//     }
+    const data = {
+        veterinarian_document: veterinarian_document,
+        schedule: schedule
+    }
 
-//     const url = '/scheduleAppointment';
+    const url = '/postAppointment';
 
-//     try {
-//         const response = await fetch(url, {
-//             method: 'POST',
-//             body: JSON.stringify(data),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         });
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-//         if (!response.ok) {
-//             throw new Error('Error to get Pet Owners data');
-//         }
+        if (!response.ok) {
+            throw new Error('Error to get Pet Owners data');
+        }
 
-//         alert('Appointment scheduled successfully');
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
+        alert('Appointment scheduled successfully');
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 

@@ -37,7 +37,6 @@ router.get('/treatment', pagesController.getTreatment);
 router.get('/registerPetOwner', pagesController.getregisterPetOwner);
 
 // funcionalidades
-router.get('/getAllappointments', appointmentController.getAppointments);
 
 router.get('/getAlladministrators', administratorController.getAdministrators);
 
@@ -95,5 +94,8 @@ router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories)
 // available
 router.get('/getDayBySpecialty/:specialty', availableController.getDayBySpecialty);
 router.get('/getScheduleByDay/:specialty/:day', availableController.getScheduleByDay);
+
+// appointment
+router.post('/postAppointment', appointmentController.postAppointment);
 
 module.exports = router;
