@@ -12,9 +12,9 @@ async function getAvailability(req, res) {
     });
 }
 
-async function getScheduleBySpecialty(req, res) {
+async function getDayBySpecialty(req, res) {
     const { specialty } = req.params;
-    const sql = `SELECT start_hour FROM available INNER JOIN veterinarian ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND veterinarian.specialty = ? GROUP BY start_hour`;
+    const sql = `SELECT day FROM available INNER JOIN veterinarian ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND veterinarian.specialty = ? GROUP BY day ORDER BY day`;
     connection.query(sql, [specialty], (err, results) => {
         if (err) {
             console.error(err);
@@ -27,5 +27,5 @@ async function getScheduleBySpecialty(req, res) {
 
 module.exports = {
     getAvailability,
-    getScheduleBySpecialty
+    getDayBySpecialty
 }

@@ -94,6 +94,6 @@ router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories)
 
 // available
 router.get('/getAvailability', availableController.getAvailability);
-router.get('/getScheduleBySpecialty/:specialty', availableController.getScheduleBySpecialty);
+router.get('/getDayBySpecialty/:specialty', availableController.getDayBySpecialty);
 
 module.exports = router;
