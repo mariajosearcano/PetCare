@@ -26,6 +26,20 @@ function getPets(req, res) {
     });
 }
 
+// get pet id
+function getPetId(req, res) {
+    const { name } = req.params;
+    const sql = 'SELECT pet_id FROM pet WHERE name = ?';
+    connection.query(sql, [name], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error getting pet id');
+        } else {
+            res.json(results[0]);
+        }
+    });
+}
+
 // delete pet
 function deletePets(req, res) {
     const { name } = req.params;
@@ -131,5 +145,6 @@ module.exports ={
     deletePets,
     getPetsAndPetOwners,
     putPet,
-    deletePet
+    deletePet,
+    getPetId
 }

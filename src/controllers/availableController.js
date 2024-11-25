@@ -15,7 +15,7 @@ async function getDayBySpecialty(req, res) {
 
 async function getScheduleByDay(req, res) {
     const { specialty, day } = req.params;
-    const sql = `SELECT start_hour FROM available INNER JOIN veterinarian ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND veterinarian.specialty = ? AND day = ? GROUP BY start_hour ORDER BY day;`;
+    const sql = `SELECT start_hour, end_hour FROM available INNER JOIN veterinarian ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND veterinarian.specialty = ? AND day = ? GROUP BY start_hour, end_hour ORDER BY day;`;
     connection.query(sql, [specialty, day], (err, results) => {
         if (err) {
             console.error(err);

@@ -53,7 +53,36 @@ async function fillSelectPet() {
     } catch (error) {
         console.error('Error:', error);
     }
+}
 
+// aguardar pet_id
+selectPet.addEventListener('change', async () => {
+    try {
+        const petId = await GetPetId(); // Espera el resultado de la promesa
+        localStorage.setItem('pet_id', petId);
+    } catch (error) {
+        console.error('Error al obtener el pet_id:', error);
+    }
+});
+
+async function GetPetId() {
+    let pet = selectPet.options[selectPet.selectedIndex].text;
+
+    const urlString = (`/getPetId/${pet}`).toString();
+
+    try {
+        const response = await fetch(urlString);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Error to get Pet id');
+        }
+
+        return data.pet_id;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
 }
 
 // agregar dias al select
@@ -122,6 +151,8 @@ async function GetSchedules() {
         const response = await fetch(urlString);
         const data = await response.json();
 
+        localStorage.setItem('end_hour', data[0].end_hour);
+
         if (!response.ok) {
             throw new Error('Error to get Pet Owners data');
         }
@@ -175,6 +206,8 @@ async function GetVeterinarians() {
         const response = await fetch(urlString);
         const data = await response.json();
 
+        localStorage.setItem('available_id', data[0].available_id);
+
         if (!response.ok) {
             throw new Error('Error to get Pet Owners data');
         }
@@ -211,23 +244,29 @@ async function fillSelectVeterinarian() {
 
 // agendar cita
 btnSchedule.addEventListener('click', () => {
-    ScheduleAppointment();
+    postAppointment();
 });
 
 async function postAppointment() {
 
-    let schedule = selectSchedule.options[selectSchedule.selectedIndex].text;
-    
+    let day = selectDate.options[selectDate.selectedIndex].text;
+    let start_hour = selectSchedule.options[selectSchedule.selectedIndex].text;
+    let end_hour = localStorage.getItem('end_hour');
+    let pet_id = localStorage.getItem('pet_id');
+    let available_id = localStorage.getItem('available_id');
 
     const data = {
-        veterinarian_document: veterinarian_document,
-        schedule: schedule
+        day,
+        start_hour,
+        end_hour,
+        pet_id,
+        available_id
     }
 
-    const url = '/postAppointment';
+    const urlString = ('/postAppointment').toString();
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(urlString, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -236,7 +275,7 @@ async function postAppointment() {
         });
 
         if (!response.ok) {
-            throw new Error('Error to get Pet Owners data');
+            throw new Error('Error to schedule appointment');
         }
 
         alert('Appointment scheduled successfully');

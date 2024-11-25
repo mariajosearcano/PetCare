@@ -79,6 +79,7 @@ router.post('/postLogin', loginController.login);
 
 // pet
 router.get('/getPet', petController.getPets);
+router.get('/getPetId/:name', petController.getPetId);
 router.post('/postPet', petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
 router.get('/getPetsAndPetOwners', petController.getPetsAndPetOwners);
