@@ -313,3 +313,21 @@ function postAlert() {
         }
     });
 };
+
+// cerrar collapse
+
+btnCancel.addEventListener('click', () => {
+    selectPet.selectedIndex = 0;
+    selectSpecialty.selectedIndex = 0;
+    selectDate.selectedIndex = 0;
+    selectSchedule.selectedIndex = 0;
+    selectVeterinarian.selectedIndex = 0;
+
+    const form = document.getElementById('register-form');
+    form.classList.remove('was-validated');
+
+    // cerrar collapse
+    const collapseElement = document.getElementById('collapse-schedule-appointment');
+    const collapse = bootstrap.Collapse.getInstance(collapseElement);
+    collapse.hide();
+});
