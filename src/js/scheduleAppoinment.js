@@ -42,6 +42,7 @@ async function fillSelectPet() {
     selectPet.appendChild(option);
     option.disabled = true;
     option.selected = true;
+    option.value = '';
 
     try {
         const pets = await GetPets();
@@ -55,7 +56,7 @@ async function fillSelectPet() {
     }
 }
 
-// aguardar pet_id
+// guardar pet_id
 selectPet.addEventListener('change', async () => {
     try {
         const petId = await GetPetId(); // Espera el resultado de la promesa
@@ -173,6 +174,7 @@ async function fillSelectSchedule() {
     selectSchedule.appendChild(option);
     option.disabled = true;
     option.selected = true;
+    option.value = '';
 
     try {
         const schedules = await GetSchedules();
@@ -228,6 +230,7 @@ async function fillSelectVeterinarian() {
     selectVeterinarian.appendChild(option);
     option.disabled = true;
     option.selected = true;
+    option.value = '';
 
     try {
         const veterinarians = await GetVeterinarians();
@@ -243,9 +246,24 @@ async function fillSelectVeterinarian() {
 }
 
 // agendar cita
-btnSchedule.addEventListener('click', () => {
+btnSchedule.addEventListener('click', async (event) => {
+    if (await Postvalidation(event) == false) {
+        return;
+    }
     postAppointment();
 });
+
+async function Postvalidation(event) {
+    event.preventDefault();  // Evita que se envíe el formulario por defecto
+    const form = document.getElementById('register-form');
+
+    if (form.checkValidity()) {
+        return true;
+    } else {
+        form.classList.add('was-validated');  // Agrega la clase para mostrar los errores
+        return false;
+    }
+}
 
 async function postAppointment() {
 
@@ -278,9 +296,20 @@ async function postAppointment() {
             throw new Error('Error to schedule appointment');
         }
 
-        alert('Appointment scheduled successfully');
+        postAlert();
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
+// alerts
+function postAlert() {
+    Swal.fire({
+        icon: "success",
+        title: "The appointment has been scheduled"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.reload(true);
+        }
+    });
+};
