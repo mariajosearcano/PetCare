@@ -5,6 +5,7 @@ const conexion = require('./db');  // modulo local db
 const router = require('./router');  // modulo local routes
 const path = require('path');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 // Inicializar la app de Express 
 const app = express();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors(({ origin: '*' })));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use((req, res, next) => {
     res.setHeader(

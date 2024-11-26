@@ -86,4 +86,11 @@ router.delete('/deleteSchedule', scheduleController.deleteSchedule);
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
 
+//appointment
+// router.get('/getAppointments', appointmentController.getAppointments);
+router.get('/getAppointmentsByDocument', appointmentController.getAppointmentsByDocument);
+router.delete('/deleteAppointment', appointmentController.deleteAppointment);
+
+
+
 module.exports = router;
