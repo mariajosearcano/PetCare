@@ -24,6 +24,9 @@
     <!--SweetAlert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link rel="stylesheet" href="../css/scheduleAppointment.css">
     <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
@@ -48,7 +51,8 @@
                         <a class="nav-link active" aria-current="page" href="/manageMedicines">Schedule Appointment</a>
                         <a class="nav-link" href="/manageAppointments">Medical Record</a>
                         <a class="nav-link" href="/signIn">Sign In</a>
-                        <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
+                        <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30"
+                                height="30"></a>
                     </div>
                 </div>
             </div>
@@ -143,36 +147,52 @@
                 </p>
 
                 <!-- collapse content schedule appointment -->
-                <div class="collapse" id="collapse-schedule-appointment">
-                    <div class="text-start bg-info-subtle p-5">
+                <form class="needs-validation" id="register-form" novalidate>
+                    <div class="collapse" id="collapse-schedule-appointment">
+                        <div class="text-start bg-info-subtle p-5">
 
-                        <label for="select-specialty" class="form-label">Select specialty</label>
-                        <select class="form-select mb-3" aria-label="Default select example" id="select-specialty">
-                            <option selected></option>
-                            <option value="none">none</option>
-                            <option value="cardiologist">cardiologist</option>
-                            <option value="dermatologist">dermatologist</option>
-                            <option value="endocrinologist">endocrinologist</option>
-                            <option value="gastroenterologist">gastroenterologist</option>
-                            <option value="neurologist">neurologist</option>
-                        </select>
-                        <label for="select-veterinarian" class="form-label">Select veterinarian</label>
-                        <select class="form-select mb-3" aria-label="Default select example" id="select-veterinarian">
-                            <option selected></option>
-                        </select>
-                        <label for="select-schedule" class="form-label">Select schedule</label>
-                        <select class="form-select mb-3" aria-label="Default select example" id="select-schedule">
-                            <option selected></option>
-                        </select>
-                        <div class="d-grid gap-2 col-6 mx-auto mb-3">
-                            <button type="button" class="btn btn-primary" id="btn-schedule">Schedule</button>
-                        </div>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button type="button" class="btn btn-primary" id="btn-cancel">Cancel</button>
-                        </div>
+                            <select class="form-select" aria-label="Default select example" id="select-pet" required>
+                                <option selected disabled value="">Pet *</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a pet</div>
 
+                            <select class="form-select mt-3" aria-label="Default select example" id="select-specialty" required>
+                                <option selected disabled value="">Specialty *</option>
+                                <option value="none">none</option>
+                                <option value="cardiologist">cardiologist</option>
+                                <option value="dermatologist">dermatologist</option>
+                                <option value="endocrinologist">endocrinologist</option>
+                                <option value="gastroenterologist">gastroenterologist</option>
+                                <option value="neurologist">neurologist</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a speciality</div>
+
+                            <select class="form-select mt-3" aria-label="Default select example" id="select-date" required>
+                                <option selected disabled value="">Date *</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a date</div>
+
+                            <select class="form-select mt-3" aria-label="Default select example" id="select-schedule" required>
+                                <option selected disabled value="">Schedule *</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a schedule</div>
+
+                            <select class="form-select mt-3" aria-label="Default select example"
+                                id="select-veterinarian" required>
+                                <option selected disabled value="">Veterinarian *</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a veterinarian</div>
+
+                            <div class="d-grid gap-2 col-6 mx-auto my-3">
+                                <button type="button" class="btn btn-primary" id="btn-schedule">Schedule</button>
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="button" class="btn btn-primary" id="btn-cancel">Cancel</button>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                </form>
                 <!-- collapse content schedule appointment -->
 
                 <div class="collapse table-collapse envelope" id="collapseGetAppointments">

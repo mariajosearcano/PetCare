@@ -21,8 +21,21 @@ function getPets(req, res) {
             console.error(err);
             res.status(500).send('there was an error getting the data'); 
         } else {
-            console.log(results)
             res.json(results);
+        }
+    });
+}
+
+// get pet id
+function getPetId(req, res) {
+    const { name } = req.params;
+    const sql = 'SELECT pet_id FROM pet WHERE name = ?';
+    connection.query(sql, [name], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error getting pet id');
+        } else {
+            res.json(results[0]);
         }
     });
 }
@@ -132,5 +145,6 @@ module.exports ={
     deletePets,
     getPetsAndPetOwners,
     putPet,
-    deletePet
+    deletePet,
+    getPetId
 }
