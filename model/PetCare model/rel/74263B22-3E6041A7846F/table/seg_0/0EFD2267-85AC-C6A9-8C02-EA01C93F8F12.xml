@@ -1,0 +1,135 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0EFD2267-85AC-C6A9-8C02-EA01C93F8F12" name="Appointment">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>670D0848-6356-265B-BE58-716CE23ECFDE</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="appointment_id" id="6E6C7C7A-440C-E842-41E3-EBC44AC90EBD">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>E49BC8C4-EA43-0E7C-B63E-0683E71E8ACD</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Pet_ped_id" id="0AA5D1C3-E9E6-0B06-2FF8-1292F50CAB54">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>5705BBC7-E769-CF77-70B1-9214D0776D02</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="88BE9CF8-E5DB-8FA0-714D-15A9CB750CCD" referredColumn="730E5FBE-25C1-AA44-7802-65A6C9568C34"/>
+</associations>
+</Column>
+<Column name="Available_available_id" id="7E74E394-8AD7-D2C3-A2B8-3ADE0BF99E42">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>E5EF7ADE-474E-62DB-6D44-E08476017DD2</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E3310B7E-8B3F-B982-65CF-0CB5CB76602B" referredColumn="EAACADBF-CD1A-4E4E-D474-2ABA999D8CF3"/>
+</associations>
+</Column>
+<Column name="start_hour" id="173E512C-C108-6BB4-8817-5BDC763939E7">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>E15EC8F0-152F-6568-46B2-9CEFB31D0A1A</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="end_hour" id="2AA4130E-FB1B-1A87-41E5-877CA7ADFD52">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>EEB8911E-6BE4-C3E2-E3AB-AE87F235AE9F</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT014</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="day" id="93E7792C-8F23-B083-153E-4954FE936506">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>79209D10-17A3-311E-F8A5-42DFB17AE875</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="79ECA12C-89CB-15C9-E9B0-F4AFC1F1B96E" name="Appointment_PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>D852FDC7-A29A-23C5-266E-327E27C8486B</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6E6C7C7A-440C-E842-41E3-EBC44AC90EBD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6485DDD1-30CB-64BA-EBFC-50A201AECE45" name="Appointment__IDX">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>092B4026-C99C-F4D1-16DE-716CF1C6E59A</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="7E74E394-8AD7-D2C3-A2B8-3ADE0BF99E42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1B650D73-3DB0-1A4F-2AAB-7E91F3B1D6AE" name="Appointment_Available_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>092B4026-C99C-F4D1-16DE-716CF1C6E59A</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E74E394-8AD7-D2C3-A2B8-3ADE0BF99E42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5824F57B-24F5-B90B-1061-34583B9E1571" name="Appointment_Pet_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>85E7481A-01C2-D0B2-7F62-0DB4A7765CE5</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0AA5D1C3-E9E6-0B06-2FF8-1292F50CAB54"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

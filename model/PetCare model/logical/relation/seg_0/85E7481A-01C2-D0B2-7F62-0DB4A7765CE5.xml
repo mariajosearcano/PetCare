@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_7" directorySegmentName="seg_0" id="85E7481A-01C2-D0B2-7F62-0DB4A7765CE5">
+<createdBy>maria</createdBy>
+<createdTime>2024-10-18 04:08:33 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<engineerTo>
+<item key="74263B22-D569-3FE4-EFB1-3E6041A7846F" value="true"/>
+</engineerTo>
+<sourcePk>2AED5A96-45DC-25DA-1452-DD1C099FDA9B</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>6C2BCF77-43B1-DEBC-274D-F8B568A6108D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>670D0848-6356-265B-BE58-716CE23ECFDE</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

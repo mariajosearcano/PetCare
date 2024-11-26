@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
 
 const pagesController = require('./src/controllers/pagesController');
@@ -20,18 +20,20 @@ const registermedicineController = require('./src/controllers/registermedicineCo
 const availableController = require('./src/controllers/availableController');
 
 // hmtl
+
 router.get('/home', pagesController.getHome);
 
 router.get('/login', pagesController.getLogin);
-
+////admin
 router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
-
+router.get('/manageSchedules', pagesController.getManageSchedules);
+////pet owner
 router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
-
+////veterinarian
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
 router.get('/registerPetOwner', pagesController.getregisterPetOwner);
@@ -52,7 +54,7 @@ router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
 router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
 
-// veterinarians
+// veterinarian
 router.post('/postVeterinarian', veterinarianController.postVeterinarian);
 router.get('/getVeterinarians', veterinarianController.getVeterinarians);
 router.get('/getOneVeterinarian/:name', veterinarianController.getOneVeterinarian);
@@ -60,11 +62,8 @@ router.get('/getVeterinarian/:specialty/:day/:start_hour', veterinarianControlle
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
-router.get('/postTreatment', treatmentController.postTreatment);
-
-// medicines
+// medicine
 router.get('/getMedicines', medicineController.getMedicines);
-
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicineVet', registermedicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);
@@ -73,6 +72,9 @@ router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 // treatment
 router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
+router.get('/postTreatment', treatmentController.postTreatment);
+router.get('/getPetsId', treatmentController.getPetsId);
+
 
 // login
 router.post('/postLogin', loginController.login);
@@ -88,9 +90,14 @@ router.delete('/deletePet', petController.deletePet);
 
 // schedule
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);
+router.post('/postSchedule', scheduleController.postSchedule);
+router.get('/getSchedules', scheduleController.getSchedules);
+router.put('/putSchedule', scheduleController.putSchedule);
+router.delete('/deleteSchedule', scheduleController.deleteSchedule);
 
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
+
 
 // available
 router.get('/getDayBySpecialty/:specialty', availableController.getDayBySpecialty);
@@ -98,5 +105,8 @@ router.get('/getScheduleByDay/:specialty/:day', availableController.getScheduleB
 
 // appointment
 router.post('/postAppointment', appointmentController.postAppointment);
+// router.get('/getAppointments', appointmentController.getAppointments);
+router.get('/getAppointmentsByDocument', appointmentController.getAppointmentsByDocument);
+router.delete('/deleteAppointment', appointmentController.deleteAppointment);
 
 module.exports = router;

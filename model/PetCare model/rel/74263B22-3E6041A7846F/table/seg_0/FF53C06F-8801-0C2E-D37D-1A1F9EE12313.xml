@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FF53C06F-8801-0C2E-D37D-1A1F9EE12313" name="Veterinarian">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>18EEB2B0-E1A2-F5CD-3B8F-BABC8E56E899</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="document" id="BBEF5522-5C31-1CEE-01D5-7A7865F16A4E">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>E525643D-F73F-2D94-643B-6334D4D84D6C</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D05E5533-F348-6BD5-48D9-674DBA0DA96B" referredColumn="0354EE0D-CF89-7482-5F12-AC629F827A55"/>
+</associations>
+</Column>
+<Column name="document1" id="E02D105C-8C04-EF9D-1A33-605DE1363539">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>6FE00218-71D2-4B6C-3DB1-C56AB3B70CC1</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="specialty" id="D9F880DB-236E-BC72-C961-CDB650FD14E4">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>22D698B1-9EEF-60B9-0355-061E65F28427</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="70A0F547-B5EE-64F9-06EB-7A1AB25C992B" name="Veterinarian_PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>C8A173AD-E84B-8B40-3161-439A279A97ED</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BBEF5522-5C31-1CEE-01D5-7A7865F16A4E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="ADD0F2E1-DE93-20F4-A9E4-B90AC38339A7" name="Veterinarian_PKv1">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>D2DD7166-9A34-B159-31F0-6A4A56B48EA9</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E02D105C-8C04-EF9D-1A33-605DE1363539"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9776E95B-A2BC-4088-E954-59447918EEAB" name="Veterinarian_Person_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>B76986D7-4ACA-18F0-069A-A31153C02B37</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BBEF5522-5C31-1CEE-01D5-7A7865F16A4E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

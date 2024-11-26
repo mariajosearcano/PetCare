@@ -1,10 +1,13 @@
 const collapseCreateTreatment = document.getElementById('btn-collapse-create-treatment');
-
 const selectMedicalHistory = document.getElementById('select-medical-history');
 const selectMedicine = document.getElementById('select-medicine');
+
 const selectMedicineType = document.getElementById('select-medicine-type');
 
 const btnCreateTreatment = document.getElementById('btn-create-treatment');
+
+const selectElement = document.getElementById('animalSelect');
+
 
 collapseCreateTreatment.addEventListener('click', () => {
     fillSelectMedicalHistory();
@@ -190,4 +193,28 @@ function withoutStockAlert() {
         icon: "error",
         title: "There is no stock for this medicine"
     });
-}
+
+};
+
+
+  async function obtenerDatosDeMascotas(url) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+  
+      // Imprime los datos en la consola
+      console.log(data);
+  
+      const selectElement = document.getElementById('animalSelect');
+      selectElement.innerHTML = '';
+  
+      data.forEach(pet => {
+        const option = document.createElement('option');
+        option.value = pet.pet_id;
+        option.text = `${pet.pet_id} - ${pet.name}`;
+        selectElement.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+    }
+  }

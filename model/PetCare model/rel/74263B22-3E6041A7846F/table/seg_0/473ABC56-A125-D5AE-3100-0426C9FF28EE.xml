@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="473ABC56-A125-D5AE-3100-0426C9FF28EE" name="Relation_14">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Medical_History_medical_history_id" id="0F687597-7DFC-ED11-401C-AB4072C66482">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C3A05B32-50C6-C769-78DE-793E4DBE9C71" referredColumn="7BE72CC8-313B-C2E4-1684-EF90C695E03E"/>
+</associations>
+</Column>
+<Column name="Medicine_medicine_id" id="6FBD35BB-7E42-F695-9476-CF1C8C7CCFD5">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D75ED1B4-248A-88E7-0A9D-F1869BD925D5" referredColumn="1A7358EB-3D63-B32B-3B5D-33A11B7156D2"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9A67C5C5-A126-493C-702E-5B60A20A4FF3" name="Relation_14_PK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0F687597-7DFC-ED11-401C-AB4072C66482"/>
+<colUsage columnID="6FBD35BB-7E42-F695-9476-CF1C8C7CCFD5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="826CB030-92F5-4FFC-5302-DB482DBF7DFA" name="Relation_14_Medical_History_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>0F58BB46-0C20-1733-1239-9BD8520853CA</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0F687597-7DFC-ED11-401C-AB4072C66482"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D1E9CE21-9860-7EAD-A92E-E22EA1A9686B" name="Relation_14_Medicine_FK">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<generatorID>0F58BB46-0C20-1733-1239-9BD8520853CA</generatorID>
+<ownerDesignName>PetCare model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6FBD35BB-7E42-F695-9476-CF1C8C7CCFD5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

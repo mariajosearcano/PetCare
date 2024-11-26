@@ -42,7 +42,7 @@ async function getMedicines(url) {
         populateTable(data);
         collapse();
     } catch (error) {
-        console.error("Error getting users", error);
+        console.error("Error getting Medicines", error);
         getErrorAlert();
     }
 }
