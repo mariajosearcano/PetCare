@@ -36,7 +36,7 @@ app.use('/src/html', express.static(path.resolve(__dirname, 'src/html')));
 
 // Iniciar el servidor
 app.listen(3007, () => {
-    console.log('Server listening on http://localhost:3007');
+    console.log('Server listening on http://localhost:3007/home');
 });
 
 // app.get('/', (req, res) => {

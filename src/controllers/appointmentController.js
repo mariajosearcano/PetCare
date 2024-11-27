@@ -81,8 +81,13 @@ async function deleteAppointment(req, res) {
 
     connection.query(sql, [appointment_id], (err, result) => {
         if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Appointment not deleted' });
+            if (err.sqlState === '45000') {
+                // Error lanzado por el trigger
+                return res.status(400).json({ error: err.message });
+            } else {
+                console.error(err);
+                return res.status(500).json({ error: 'Appointment not deleted' });
+            }
         }
 
         if (result.affectedRows === 0) {
