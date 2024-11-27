@@ -480,7 +480,6 @@ async function deleteAppointment(data) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-                //'Accept': 'application/json'
             },
             body: JSON.stringify({
                 appointment_id: data.appointment_id
@@ -491,9 +490,15 @@ async function deleteAppointment(data) {
     
         if (response.ok) {
             deleteAlert(responseData.message);
-        } else {
-            console.error("Error: " + (responseData.error || "An error occurred"));
-            deleteErrorAlert(responseData.error);
+        }
+        else {
+            // Si hay un error, maneja el mensaje según la lógica del backend
+            console.error("Error: " + responseData.error);
+            if (responseData.error.includes("Cancellation must be made no more than 24 hours")) {
+                HoursAlert();
+            } else {
+                deleteErrorAlert(responseData.error);
+            }
         }
     } catch (error) {
         console.error('Error deleting Appointment', error);
