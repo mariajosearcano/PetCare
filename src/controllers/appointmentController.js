@@ -1,3 +1,4 @@
+const { get } = require('jquery');
 const connection = require('../../db');
 
 function postAppointment(req, res) {
@@ -11,7 +12,7 @@ function postAppointment(req, res) {
     });
 }
 
-async function getAppointmentsByDocument(req, res) {
+async function getAppointmentsByPetOwner(req, res) {
     const pet_owner_document = req.cookies.document;
     
     if (!pet_owner_document) {
@@ -32,6 +33,37 @@ async function getAppointmentsByDocument(req, res) {
     `;
 
     connection.query(query, [pet_owner_document], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error getting Appointments' });
+        }
+        return res.json(results);
+    });
+}
+
+async function getAppointmentsByVeterinarian(req, res) {
+    const veterinarian_document = req.cookies.document;
+    
+    if (!veterinarian_document) {
+        return res.status(400).json({ error: 'Veterinarian document not found in cookies' });
+    }
+
+    const query = `
+        SELECT 
+            appointment.*,
+            pet.pet_id AS pet_id,
+            pet.name AS name
+        FROM 
+            appointment 
+        INNER JOIN 
+            pet ON appointment.pet_id = pet.pet_id
+        INNER JOIN 
+            available ON appointment.available_id = available.available_id
+        WHERE 
+            available.veterinarian_document = ?
+    `;
+
+    connection.query(query, [veterinarian_document], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Error getting Appointments' });
@@ -62,7 +94,8 @@ async function deleteAppointment(req, res) {
 }
 
 module.exports = {
-    getAppointmentsByDocument,
-    deleteAppointment,
-    postAppointment
+    postAppointment,
+    getAppointmentsByPetOwner,
+    getAppointmentsByVeterinarian,
+    deleteAppointment
 }

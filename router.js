@@ -19,7 +19,7 @@ const userController = require('./src/controllers/userController');
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
 
-// hmtl
+// html
 
 router.get('/home', pagesController.getHome);
 
@@ -37,6 +37,7 @@ router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
 router.get('/registerPetOwner', pagesController.getregisterPetOwner);
+router.get('/scheduleAppointmentVeterinarian', pagesController.getScheduleAppointmentVeterinarian);
 
 // funcionalidades
 
@@ -106,7 +107,8 @@ router.get('/getScheduleByDay/:specialty/:day', availableController.getScheduleB
 // appointment
 router.post('/postAppointment', appointmentController.postAppointment);
 // router.get('/getAppointments', appointmentController.getAppointments);
-router.get('/getAppointmentsByDocument', appointmentController.getAppointmentsByDocument);
+router.get('/getAppointmentsByPetOwner', appointmentController.getAppointmentsByPetOwner);
 router.delete('/deleteAppointment', appointmentController.deleteAppointment);
+router.get('/getAppointmentsByVeterinarian', appointmentController.getAppointmentsByVeterinarian);
 
 module.exports = router;

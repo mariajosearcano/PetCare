@@ -63,6 +63,12 @@ function getregisterPetOwner(req, res){
     res.sendFile(path.join(__dirname, '../html/registerPetOwner.html'));
 }
 
+function getScheduleAppointmentVeterinarian(req, res) {
+    res.sendFile(path.join(__dirname, '../html/scheduleAppointmentVeterinarian.html'));
+}
+
+
+
 module.exports = {
     getHome,
     getManageMedicinesVeterinarian,
@@ -81,5 +87,6 @@ module.exports = {
     //veterinarian
     getVeterinarians,
     getTreatment,
-    getregisterPetOwner
+    getregisterPetOwner,
+    getScheduleAppointmentVeterinarian
 }

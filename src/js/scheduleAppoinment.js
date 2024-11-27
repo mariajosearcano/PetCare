@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
     collapse();
 
     const getButton = document.getElementById('getButton');
-    getButton.addEventListener('click', getAppointmentsByDocument);
+    getButton.addEventListener('click', getAppointmentsByPetOwner);
 
     const petFilter = document.getElementById('pet-filter');
     petFilter.addEventListener('change', filterTable);
@@ -352,9 +352,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // GET LOGIC
 
-async function getAppointmentsByDocument() {
+async function getAppointmentsByPetOwner() {
     try {
-        const response = await fetch('/getAppointmentsByDocument');
+        const response = await fetch('/getAppointmentsByPetOwner');
         const data = await response.json();
     
         if (!response.ok) {
