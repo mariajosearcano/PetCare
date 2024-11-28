@@ -24,8 +24,7 @@ async function getAppointmentsByVeterinarian() {
         const data = await response.json();
     
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
+            console.error("Error: " + (data.message || "An error occurred"));
             getErrorAlert();
         }
     
@@ -113,7 +112,7 @@ function populateTable(data) {
         const pet_id = item.pet_id;
         
         if (
-            (filterValue === pet_id) ||
+            (filterValue == pet_id) ||
             (filterValue === "All")
         ) {
             const row = createTableRow({

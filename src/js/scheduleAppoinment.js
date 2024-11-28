@@ -358,8 +358,7 @@ async function getAppointmentsByPetOwner() {
         const data = await response.json();
     
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error: " + (errorData.message || "An error occurred"));
+            console.error("Error: " + (data.message || "An error occurred"));
             getErrorAlert();
         }
     
