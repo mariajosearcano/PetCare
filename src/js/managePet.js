@@ -127,13 +127,19 @@ function collapse() {
     });
 }
 
-// update variables
+
+
+// VARIABLES
+
+//// UPDATE
 var oldPutForm = {};
 const formName = document.getElementById('name-update');
 const formSpecies = document.getElementById('select-species-update');
 const formAge = document.getElementById('age-update');
 const formWeight = document.getElementById('weight-update');
 const formPhoto = document.getElementById('photo-update');
+
+
 
 //UPDATE LOGIC
 
@@ -280,6 +286,8 @@ async function putPet(putFormData, putForm) {
     }
 }
 
+
+
 // DELETE LOGIC
 
 async function deletePet(data) {
@@ -312,7 +320,10 @@ async function deletePet(data) {
 }
 
 
-//// ALERTS
+
+// ALERTS
+
+//// GET ALERTS
 
 function getPetsAndPetOwnersErrorAlert(message) {
     Swal.fire({

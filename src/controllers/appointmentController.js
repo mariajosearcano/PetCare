@@ -20,7 +20,7 @@ async function getAppointmentsByPetOwner(req, res) {
     }
 
     // Consulta con JOIN para obtener las citas relacionadas con las mascotas del dueño
-    const query = `
+    const sql = `
         SELECT 
             appointment.*,
             pet.name AS name
@@ -32,7 +32,7 @@ async function getAppointmentsByPetOwner(req, res) {
             pet.pet_owner_document = ?
     `;
 
-    connection.query(query, [pet_owner_document], (err, results) => {
+    connection.query(sql, [pet_owner_document], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Error getting Appointments' });
@@ -48,7 +48,7 @@ async function getAppointmentsByVeterinarian(req, res) {
         return res.status(400).json({ error: 'Veterinarian document not found in cookies' });
     }
 
-    const query = `
+    const sql = `
         SELECT 
             appointment.*,
             pet.pet_id AS pet_id,
@@ -63,11 +63,12 @@ async function getAppointmentsByVeterinarian(req, res) {
             available.veterinarian_document = ?
     `;
 
-    connection.query(query, [veterinarian_document], (err, results) => {
+    connection.query(sql, [veterinarian_document], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Error getting Appointments' });
         }
+
         return res.json(results);
     });
 }

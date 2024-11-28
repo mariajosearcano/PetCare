@@ -1,12 +1,15 @@
 const mysql = require('mysql2');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Crea una conexión a la base de datos
 const connection = mysql.createConnection({
-    host: 'junction.proxy.rlwy.net',
-    port: '50251',
-    user: 'root',
-    password: 'gSaORPcztMEEDuVUhVWDzTtqBJmNajZv',
-    database: 'railway'
+    host: process.env.HOST ?? 'junction.proxy.rlwy.net',
+    port: process.env.PORT ?? '50251',
+    user: process.env.MYSQLUSER ?? 'root',
+    password: process.env.MYSQL_ROOT_PASSWORD ?? 'gSaORPcztMEEDuVUhVWDzTtqBJmNajZv',
+    database: process.env.MYSQL_DATABASE ?? 'railway'
 });
 
 // establecer la conexión
