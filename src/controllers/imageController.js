@@ -17,9 +17,9 @@ cloudinary.config({
 
 // Función para subir imagen
 async function uploadImage(req, res, next) {
-    upload(req, res, async function (err) {
-        const pet_owner_document = req.cookies.document;
+    const pet_owner_document = req.cookies.document;
 
+    upload(req, res, async function (err) {
         cloudinary.uploader.upload_stream({
             resource_type: 'image',
             public_id: `${pet_owner_document}/${req.body.name}`,
@@ -34,8 +34,6 @@ async function uploadImage(req, res, next) {
         }).end(req.file.buffer);
     });
 }
-
-
 
 // Función para eliminar imagen
 async function deleteImage(res, res, next) {
@@ -55,6 +53,8 @@ async function deleteImage(res, res, next) {
             next();
         });
 }
+
+
 
 module.exports = {
     uploadImage,
