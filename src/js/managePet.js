@@ -131,7 +131,7 @@ function collapse() {
 
 // VARIABLES
 
-//// UPDATE
+//// UPDATE VARIABLES
 var oldPutForm = {};
 const formName = document.getElementById('name-update');
 const formSpecies = document.getElementById('select-species-update');
@@ -141,25 +141,25 @@ const formPhoto = document.getElementById('photo-update');
 
 
 
-//UPDATE LOGIC
+// LOGIC
 
-async function getPetsAndPetOwners(url) {
-    const urlString = (url).toString();
+//// GET LOGIC
 
+async function getPetsByPetOwner() {
     try {
-        const response = await fetch(urlString);
+        const response = await fetch('/getPetsByPetOwner');
         const data = await response.json();
 
         if (!response.ok) {
             console.error("Error: " + (data.error || "An error occurred"));
-            getPetsAndPetOwnersErrorAlert(data.error);
+            getPetsByPetOwnerErrorAlert(data.error);
         }
 
-        populateTable(data, urlString);
+        populateTable(data);
         collapse();
     } catch (error) {
         console.error("Error getting pets and pet owners", error);
-        getPetsAndPetOwnersErrorAlert();
+        getPetsByPetOwnerErrorAlert();
     }
 }
 
@@ -203,7 +203,7 @@ function addEventListeners(data, row) {
     deleteButton.addEventListener('click', () => deleteCancelAlert(data));
 }
 
-function populateTable(data, url) {
+function populateTable(data) {
     const id = 'tbody-update-pet';
 
     const tableBody = document.getElementById(id);
@@ -221,12 +221,15 @@ function populateTable(data, url) {
     });
 }
 
+
+
+//// UPDATE LOGIC
+
 function populateForm(data) {
     formName.value = data.name;
     formSpecies.value = data.species;
     formAge.value = data.age;
     formWeight.value = data.weight;
-    //formPhoto.value = data.photo;
 
     oldPutForm = {
         putPetId: data.pet_id,
@@ -234,7 +237,7 @@ function populateForm(data) {
         putSpecies: data.species,
         putAge: data.age,
         putWeight: data.weight,
-        //putPhoto: data.photo,
+        putPhoto: data.photo_url,
         pet_owner_document: data.pet_owner_document
     }
 }
@@ -252,13 +255,13 @@ async function handlePutSubmit() {
         species: formSpecies.value,
         age: formAge.value,
         weight: formWeight.value,
-        //photo: formPhoto.value
+        photo: formPhoto.value
     };
 
     putPet(putFormData, putForm);
 }
 
-async function putPet(putFormData, putForm) {
+async function putPet(putFormData) {
     try {
         const response = await fetch('/putPet', {
             method: 'PUT',
@@ -288,13 +291,11 @@ async function putPet(putFormData, putForm) {
 
 
 
-// DELETE LOGIC
+//// DELETE LOGIC
 
 async function deletePet(data) {
-    const url = '/deletePet';
-
     try {
-        const response = await fetch(url, {
+        const response = await fetch('/deletePet', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -325,7 +326,7 @@ async function deletePet(data) {
 
 //// GET ALERTS
 
-function getPetsAndPetOwnersErrorAlert(message) {
+function getPetsByPetOwnerErrorAlert(message) {
     Swal.fire({
         icon: "error",
         title: message || "Error getting pets and pet owners",

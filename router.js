@@ -85,7 +85,7 @@ router.get('/getPet', petController.getPets);
 router.get('/getPetId/:name', petController.getPetId);
 router.post('/postPet', petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
-router.get('/getPetsAndPetOwners', petController.getPetsByPetOwner);
+router.get('/getPetsByPetOwner', petController.getPetsByPetOwner);
 router.put('/putPet', petController.putPet);
 router.delete('/deletePet', petController.deletePet);
 
