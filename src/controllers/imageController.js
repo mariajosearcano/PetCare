@@ -7,13 +7,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME ?? 'dieprtgzj',
-    api_key: process.env.CLOUDINARY_API_KEY ?? '929629359712862', 
-    api_secret: process.env.CLOUDINARY_API_SECRET ?? 'b6rhvyNQT22etLGtx4HCi0RVi0o',
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dieprtgzj',
+    api_key: process.env.CLOUDINARY_API_KEY || '929629359712862', 
+    api_secret: process.env.CLOUDINARY_API_SECRET || 'b6rhvyNQT22etLGtx4HCi0RVi0o',
     secure: true
 });
-
-
 
 // Función para subir imagen
 async function uploadImage(req, res, next) {
