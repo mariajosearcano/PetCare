@@ -74,6 +74,8 @@ router.delete('/deleteMedicine', registermedicineController.deleteMedicineById);
 router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
 router.get('/getPetsId', treatmentController.getPetsId);
+router.get('/getTreatmentForPet', treatmentController.getTreatmentForPet);
+
 
 
 // login
