@@ -1,4 +1,3 @@
-// config/cloudinary.js
 const multer = require('multer');
 const upload = multer().single('image');
 const cloudinary = require('cloudinary').v2;

@@ -15,9 +15,9 @@ const petOwnerController = require('./src/controllers/petOwnerController');
 const veterinarianController = require('./src/controllers/veterinarianController');
 const medicineController = require('./src/controllers/medicineController');
 const loginController = require('./src/controllers/loginController.js');
-const userController = require('./src/controllers/userController');    
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
+const imageController = require('./src/controllers/imageController');
 
 // html
 
