@@ -1,11 +1,15 @@
 const mysql = require('mysql2');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Crea una conexión a la base de datos
 const connection = mysql.createConnection({
-    host: 'bjx1hpzxdac8j87ji6tk-mysql.services.clever-cloud.com',
-    user: 'uaux4nod8a8vlzvo',
-    password: 'OEsn3ZhxuooWuMbaP7y6',
-    database: 'bjx1hpzxdac8j87ji6tk'
+    host: process.env.HOST ?? 'junction.proxy.rlwy.net',
+    port: process.env.PORT ?? '50251',
+    user: process.env.MYSQLUSER ?? 'root',
+    password: process.env.MYSQL_ROOT_PASSWORD ?? 'gSaORPcztMEEDuVUhVWDzTtqBJmNajZv',
+    database: process.env.MYSQL_DATABASE ?? 'railway'
 });
 
 // establecer la conexión

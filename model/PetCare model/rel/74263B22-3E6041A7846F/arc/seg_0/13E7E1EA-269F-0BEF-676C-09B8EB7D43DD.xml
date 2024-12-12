@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKArc class="oracle.dbtools.crest.model.design.relational.FKArc" directorySegmentName="seg_0" id="13E7E1EA-269F-0BEF-676C-09B8EB7D43DD" name="FKArc_2">
+<createdBy>maria</createdBy>
+<createdTime>2024-11-19 21:46:10 UTC</createdTime>
+<ownerDesignName>PetCare model</ownerDesignName>
+<mandatory>false</mandatory>
+<reverseArc>true</reverseArc>
+<table>6328A9FA-EE9D-D25E-18A6-11145124E51E</table>
+<fkeys>
+<fkeyID>FFF815B1-23B0-4538-E715-2B61E245A358</fkeyID>
+<fkeyID>D05E5533-F348-6BD5-48D9-674DBA0DA96B</fkeyID>
+<fkeyID>84F0426E-4BBA-0F44-38DE-A03A94D7A808</fkeyID>
+</fkeys>
+</FKArc>

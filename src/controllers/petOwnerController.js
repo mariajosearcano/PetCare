@@ -20,7 +20,7 @@ async function encryptPassword(password) {
 
 async function postPetOwner(req, res) {
     const { document, name, last_name, email, phone_number } = req.body;
-    let {password}=req.body;
+    let { password } = req.body;
     password = await encryptPassword(password);
     console.log(encryptPassword);
 

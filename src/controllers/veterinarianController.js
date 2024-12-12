@@ -57,14 +57,13 @@ async function getOneVeterinarian(req, res) {
 }
 
 async function getVeterinarianBySpecialty(req, res) {
-    const { specialty } = req.params;
-    const sql = 'SELECT * FROM veterinarian WHERE specialty = ?';
-    connection.query(sql, [specialty], (err, results) => {
+    const { specialty, day, start_hour } = req.params;
+    const sql = `SELECT name, last_name, available_id FROM veterinarian INNER JOIN available ON available.veterinarian_document = veterinarian.document WHERE status = 'available' AND specialty = ? AND day = ? AND start_hour = ?`;
+    connection.query(sql, [specialty, day, start_hour], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Error getting veterinary users');
         } else {
-            // console.log('Veterinary users successfully obtained');
             return res.json(results);
         }
     });

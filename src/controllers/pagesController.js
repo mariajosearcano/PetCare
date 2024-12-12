@@ -1,18 +1,7 @@
 const path = require('path');
 
-function getAdmin(req, res) {
-    res.sendFile(path.join(__dirname, '../html/admin.html'));
-}
-
 function getHome(req, res) {
     res.sendFile(path.join(__dirname, '../html/index.html'));
-}
-
-function getManageUsers(req, res) {
-    res.sendFile(path.join(__dirname, '../html/manageUsers.html'));
-}
-function getManageMedicines(req, res) {
-    res.sendFile(path.join(__dirname, '../html/manageMedicines.html'));
 }
 
 function getManageMedicinesVeterinarian(req, res) {
@@ -29,6 +18,23 @@ function getFormsPetOwner(req, res) {
 
 function getPassword(req, res) {
     res.sendFile(path.join(__dirname, '../html/password.html'));
+}
+
+//administrator
+function getAdmin(req, res) {
+    res.sendFile(path.join(__dirname, '../html/admin.html'));
+}
+
+function getManageUsers(req, res) {
+    res.sendFile(path.join(__dirname, '../html/manageUsers.html'));
+}
+
+function getManageMedicines(req, res) {
+    res.sendFile(path.join(__dirname, '../html/manageMedicines.html'));
+}
+
+function getManageSchedules(req, res) {
+    res.sendFile(path.join(__dirname, '../html/manageSchedules.html'));
 }
 
 // pet owner
@@ -57,19 +63,30 @@ function getregisterPetOwner(req, res){
     res.sendFile(path.join(__dirname, '../html/registerPetOwner.html'));
 }
 
+function getScheduleAppointmentVeterinarian(req, res) {
+    res.sendFile(path.join(__dirname, '../html/scheduleAppointmentVeterinarian.html'));
+}
+
+
+
 module.exports = {
     getHome,
+    getManageMedicinesVeterinarian,
     getLogin,
+    getFormsPetOwner,
+    getPassword,
+    //administrator
+    getAdmin,
     getManageUsers,
     getManageMedicines,
-    getAdmin,
-    getFormsPetOwner,
+    getManageSchedules,
+    //pet owner
     getPetOwner,
     getManagePet,
-    getPassword,
-    getVeterinarians,
-    getManageMedicinesVeterinarian,
     getScheduleAppointment,
+    //veterinarian
+    getVeterinarians,
     getTreatment,
-    getregisterPetOwner
+    getregisterPetOwner,
+    getScheduleAppointmentVeterinarian
 }

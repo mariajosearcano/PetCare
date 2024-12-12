@@ -1,4 +1,34 @@
 const connection = require('../../db');
+const { uploadImage, deleteImage } = require('../controllers/imageController');
+const multer = require('multer');
+const path = require('path');
+
+
+
+// MULTER CONFIG
+
+// Configuración de multer para manejar la subida de archivos
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/') // Directorio temporal para las imágenes
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        // Validar tipos de archivo
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+            return cb(new Error('Only image files are allowed!'), false);
+        }
+        cb(null, true);
+    }
+}).single('photo'); // 'photo' debe coincidir con el nombre del campo en el formulario
+
+
 
 // funciones
 
@@ -21,8 +51,21 @@ function getPets(req, res) {
             console.error(err);
             res.status(500).send('there was an error getting the data'); 
         } else {
-            console.log(results)
             res.json(results);
+        }
+    });
+}
+
+// get pet id
+function getPetId(req, res) {
+    const { name } = req.params;
+    const sql = 'SELECT pet_id FROM pet WHERE name = ?';
+    connection.query(sql, [name], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error getting pet id');
+        } else {
+            res.json(results[0]);
         }
     });
 }
@@ -52,37 +95,27 @@ function createPets(req, res) {
 
 
 
-function getPetsAndPetOwners(req, res) {
+function getPetsByPetOwner(req, res) {
+    const pet_owner_document = req.cookies.document;
+
     const sql = `
-        SELECT 
-            pet.pet_id AS pet_id,
-            pet.name AS name,
-            pet.species AS species,
-            pet.age AS age,
-            pet.weight AS weight,
-            pet.pet_owner_document AS pet_owner_document,
-            pet_owner.name AS pet_owner_name
-        FROM 
-            pet
-        JOIN 
-            pet_owner ON pet.pet_owner_document = pet_owner.document;
+        SELECT * FROM pet WHERE pet_owner_document = ?
     `;
 
-    connection.query(sql, (err, result) => {
+    connection.query(sql, [pet_owner_document], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).json({ error: 'There was an error getting the data' }); 
-        } else {
-            console.log(result);
-            res.json(result);
+            return res.status(500).json({ error: 'Error getting Pets' }); 
         }
+
+        return res.json(result);
     });
 }
 
 async function putPet(req, res) {
 
     const { oldPutForm, putFormData } = req.body;
-    const { putPetId, pet_owner_document } = oldPutForm;
+    const { putPetId } = oldPutForm;
     const { name, species, age, weight/*,photo*/ } = putFormData;
 
     const sql = `
@@ -113,14 +146,14 @@ async function deletePet(req, res) {
     connection.query(sql, [pet_id], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).json({ error: 'Pet user not deleted' });
+            return res.status(500).json({ error: 'Pet not deleted' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Pet user not found' });
+            return res.status(404).json({ error: 'Pet not found' });
         }
 
-        return res.json({ message: 'Pet user deleted successfully' });
+        return res.json({ message: 'Pet deleted successfully' });
     });
 }
 
@@ -130,7 +163,8 @@ module.exports ={
     createPets,
     getPets,
     deletePets,
-    getPetsAndPetOwners,
+    getPetsByPetOwner,
     putPet,
-    deletePet
+    deletePet,
+    getPetId
 }

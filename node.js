@@ -4,6 +4,8 @@ const cors = require('cors');
 const conexion = require('./db');  // modulo local db
 const router = require('./router');  // modulo local routes
 const path = require('path');
+const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 // Inicializar la app de Express 
 const app = express();
 
@@ -11,11 +13,16 @@ const app = express();
 app.use(cors(({ origin: '*' })));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use((req, res, next) => {
     res.setHeader(
         'Content-Security-Policy',
-        "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
+        "default-src 'self'; " +
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://cdnjs.cloudflare.com; " +
+        "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+        "img-src 'self' data: https:;"
     );
     next();
 });
@@ -29,7 +36,7 @@ app.use('/src/html', express.static(path.resolve(__dirname, 'src/html')));
 
 // Iniciar el servidor
 app.listen(3007, () => {
-    console.log('Server listening on http://localhost:3007');
+    console.log('Server listening on http://localhost:3007/home');
 });
 
 // app.get('/', (req, res) => {
