@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78edf658-6ac7-47e8-8f72-dbd4fd599b86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PetCare.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PetCare.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/node.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/imageController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/photoController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/petController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/petController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/html/managePet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/html/managePet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/managePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/managePet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,33 +15,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "state": "OPEN"
+      &quot;state&quot;: &quot;OPEN&quot;
     }
   ],
-  "lastFilter": {
-    "state": "OPEN"
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
     {
-      "id": {
-        "id": "PR_kwDOM_cpW86Ex2XP",
-        "number": 38
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM_cpW86Ex2XP&quot;,
+        &quot;number&quot;: 38
       },
-      "lastSeen": 1734010047977
+      &quot;lastSeen&quot;: 1734010047977
     }
   ]
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mariajosearcano/PetCare.git",
-    "accountId": "961dca6e-a14b-49c8-8057-7082e28a8b4e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mariajosearcano/PetCare.git&quot;,
+    &quot;accountId&quot;: &quot;961dca6e-a14b-49c8-8057-7082e28a8b4e&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/router.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/controllers/petController.js" root0="FORCE_HIGHLIGHTING" />
@@ -67,35 +57,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "JavaScript Debug.managePet.html.executor": "Run",
-    "Node.js.PetCare.executor": "Run",
-    "Node.js.PetCareDebug.executor": "Debug",
-    "Node.js.petController.js.executor": "Debug",
-    "Node.js.router.js.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/pet-photo",
-    "last_opened_file_path": "C:/Users/maria/OneDrive/Documents/PROGRAMMING/NODE.JS PROJECTS/PetCare/node.js",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "dev.codetime.CodetimeConfigurable",
-    "ts.external.directory.path": "C:\\Users\\maria\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;JavaScript Debug.managePet.html.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.PetCare.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.PetCareDebug.executor&quot;: &quot;Debug&quot;,
+    &quot;Node.js.petController.js.executor&quot;: &quot;Debug&quot;,
+    &quot;Node.js.router.js.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/pet-photo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maria/OneDrive/Documents/PROGRAMMING/NODE.JS PROJECTS/PetCare/node.js&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dev.codetime.CodetimeConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\maria\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="PetCare" type="NodeJSConfigurationType" temporary="true" path-to-js-file="node.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -161,6 +151,8 @@
       <workItem from="1733946064171" duration="1806000" />
       <workItem from="1733968533851" duration="298000" />
       <workItem from="1734008466899" duration="32507000" />
+      <workItem from="1734057524507" duration="28000" />
+      <workItem from="1734057593013" duration="89000" />
     </task>
     <servers />
   </component>
