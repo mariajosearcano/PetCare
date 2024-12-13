@@ -17,7 +17,7 @@ const medicineController = require('./src/controllers/medicineController');
 const loginController = require('./src/controllers/loginController.js');
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
-const imageController = require('./src/controllers/imageController');
+const photoController = require('./src/controllers/photoController');
 
 // html
 
@@ -83,11 +83,11 @@ router.post('/postLogin', loginController.login);
 // pet
 router.get('/getPet', petController.getPets);
 router.get('/getPetId/:name', petController.getPetId);
-router.post('/postPet', petController.createPets);
+router.post('/postPet', photoController.uploadPhoto, petController.createPets);
 router.delete('/deletePet/:name', petController.deletePets);
 router.get('/getPetsByPetOwner', petController.getPetsByPetOwner);
-router.put('/putPet', petController.putPet);
-router.delete('/deletePet', petController.deletePet);
+router.put('/putPet', photoController.uploadPhoto, petController.putPet);
+router.delete('/deletePet', photoController.deletePhoto, petController.deletePet);
 
 // schedule
 router.get('/getVetSchedule/:veterinarian_document', scheduleController.getVetSchedule);

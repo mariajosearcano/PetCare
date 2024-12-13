@@ -46,24 +46,34 @@ registerButton.addEventListener('click', async function(event) {
 });
 
 async function InsertPet() {
-    let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
-        name: inputName.value,
-        species: selectSpecies.options[selectSpecies.selectedIndex].text,
-        age: inputAge.value,
-        weight: inputWeight.value,
-        photo: inputPhoto.value,    // modificarlo para que sea un archivo
-        pet_owner_document: inputPetOwnerDocument.value
-    };
+    // let pets = {    // los atributos deben coincidir con los nombres de las columnas en la tabla
+    //     name: inputName.value,
+    //     species: selectSpecies.options[selectSpecies.selectedIndex].text,
+    //     age: inputAge.value,
+    //     weight: inputWeight.value,
+    //     photo: inputPhoto.files[0],    // modificarlo para que sea un archivo
+    //     pet_owner_document: inputPetOwnerDocument.value
+    // };
+
+    let formData = new FormData();
+
+    formData.append('name', inputName.value);
+    formData.append('species', selectSpecies.options[selectSpecies.selectedIndex].text);
+    formData.append('age', inputAge.value);
+    formData.append('weight', inputWeight.value);
+    formData.append('photo', inputPhoto.files[0]); // Properly append the file
+    formData.append('pet_owner_document', inputPetOwnerDocument.value);
 
     const urlString = ('/postPet').toString();  // url de router.js
 
     try {
         const response = await fetch(urlString, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(pets)
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
+            // body: JSON.stringify(pets)
+            body: formData
         });
 
         if (!response.ok) {
@@ -132,12 +142,12 @@ function collapse() {
 // VARIABLES
 
 //// UPDATE VARIABLES
-var oldPutForm = {};
-const formName = document.getElementById('name-update');
-const formSpecies = document.getElementById('select-species-update');
-const formAge = document.getElementById('age-update');
-const formWeight = document.getElementById('weight-update');
-const formPhoto = document.getElementById('photo-update');
+// var putFormData = new FormData();
+const putName = document.getElementById('name-update');
+const putSpecies = document.getElementById('select-species-update');
+const putAge = document.getElementById('age-update');
+const putWeight = document.getElementById('weight-update');
+const putPhoto = document.getElementById('photo-update');
 
 
 
@@ -171,7 +181,15 @@ function createTableRow(data) {
         <td>${data.species}</td>
         <td>${data.age}</td>
         <td>${data.weight}</td>
-        <td></td>
+        <td>
+            <p class="d-inline-flex gap-1">
+                ${
+                    data.photo_url
+                    ? `<img src="${data.photo_url}" class="img-thumbnail" alt="Pet photo" style="max-width: 100px;">`
+                    : `<img src="https://res.cloudinary.com/dieprtgzj/image/upload/v1734023704/pet_silhouette_ww3w2l.jpg" class="img-thumbnail" alt="Pet photo" style="max-width: 100px;">`
+                }
+            </p>
+        </td>
         <td>
             <p class="d-inline-flex gap-1">
                 <button class="btn btn-outline-info btn-lg edit-btn" type="button" data-bs-toggle="collapse"
@@ -199,7 +217,6 @@ function addEventListeners(data, row) {
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => populateForm(data));
     const deleteButton = row.querySelector('.delete-btn');
-    //deleteButton.addEventListener('click', () => deleteUser(data));
     deleteButton.addEventListener('click', () => deleteCancelAlert(data));
 }
 
@@ -214,8 +231,8 @@ function populateTable(data) {
             name: item.name,
             species: item.species,
             age: item.age,
-            weight: item.weight
-            //photo: item.photo
+            weight: item.weight,
+            photo_url: item.photo_url
         });
         tableBody.appendChild(row);
     });
@@ -226,23 +243,26 @@ function populateTable(data) {
 //// UPDATE LOGIC
 
 function populateForm(data) {
-    formName.value = data.name;
-    formSpecies.value = data.species;
-    formAge.value = data.age;
-    formWeight.value = data.weight;
+    putName.value = data.name;
+    putSpecies.value = data.species;
+    putAge.value = data.age;
+    putWeight.value = data.weight;
 
-    oldPutForm = {
-        putPetId: data.pet_id,
-        putName: data.name,
-        putSpecies: data.species,
-        putAge: data.age,
-        putWeight: data.weight,
-        putPhoto: data.photo_url,
-        pet_owner_document: data.pet_owner_document
-    }
+    var putFormData = new FormData();
+
+    putFormData.append('pet_id', data.pet_id);
+    putFormData.append('name', data.name);
+    putFormData.append('photo_url', data.photo_url);
+
+    addEventListener(putFormData);
 }
 
-async function handlePutSubmit() {
+function addEventListener(putFormData) {
+    const editButton = document.getElementById('btn-update-submit');
+    editButton.addEventListener('click', () => handlePutSubmit(putFormData));
+}
+
+async function handlePutSubmit(putFormData) {
     const putForm = document.getElementById('putForm');
 
     if (!putForm.checkValidity()) {
@@ -250,29 +270,20 @@ async function handlePutSubmit() {
         return;
     }
 
-    const putFormData = {
-        name: formName.value,
-        species: formSpecies.value,
-        age: formAge.value,
-        weight: formWeight.value,
-        photo: formPhoto.value
-    };
+    putFormData.append('putName', putName.value);
+    putFormData.append('putSpecies', putSpecies.value);
+    putFormData.append('putAge', putAge.value);
+    putFormData.append('putWeight', putWeight.value);
+    putFormData.append('putPhoto', putPhoto.files[0]); // Properly append the file
 
-    putPet(putFormData, putForm);
+    putPet(putFormData);
 }
 
 async function putPet(putFormData) {
     try {
         const response = await fetch('/putPet', {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-                //'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                oldPutForm,
-                putFormData
-            })
+            body: putFormData
         });
 
         const responseData = await response.json();
@@ -293,17 +304,21 @@ async function putPet(putFormData) {
 
 //// DELETE LOGIC
 
-async function deletePet(data) {
+function handleDelete(data) {
+    const deleteData = new FormData();
+
+    deleteData.append('pet_id', data.pet_id);
+    deleteData.append('name', data.name);
+    deleteData.append('photo_url', data.photo_url)
+
+    deletePet(deleteData)
+}
+
+async function deletePet(deleteData) {
     try {
         const response = await fetch('/deletePet', {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-                //'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                pet_id: data.pet_id
-            })
+            body: deleteData
         });
 
         const responseData = await response.json();
@@ -384,7 +399,7 @@ function deleteCancelAlert(data) {
         allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
-            deletePet(data);
+            handleDelete(data);
         };
     });
 };

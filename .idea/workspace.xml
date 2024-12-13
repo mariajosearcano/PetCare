@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78edf658-6ac7-47e8-8f72-dbd4fd599b86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PetCare.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PetCare.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node.js" beforeDir="false" afterPath="$PROJECT_DIR$/node.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/imageController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/imageController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/imageController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/photoController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/petController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/petController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/html/managePet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/html/managePet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/managePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/managePet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,20 +25,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;mariajosearcano&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN"
+    }
+  ],
+  "lastFilter": {
+    "state": "OPEN"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/mariajosearcano/PetCare.git&quot;,
-    &quot;accountId&quot;: &quot;03f77833-9d59-4989-8818-a275d4ca415c&quot;
+}]]></component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOM_cpW86Ex2XP",
+        "number": 38
+      },
+      "lastSeen": 1734010047977
+    }
+  ]
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mariajosearcano/PetCare.git",
+    "accountId": "961dca6e-a14b-49c8-8057-7082e28a8b4e"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/router.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/controllers/petController.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/controllers/photoController.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/html/managePet.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/js/managePet.js" root0="SKIP_INSPECTION" />
   </component>
@@ -44,25 +69,37 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "JavaScript Debug.managePet.html.executor": "Run",
+    "Node.js.PetCare.executor": "Run",
+    "Node.js.PetCareDebug.executor": "Debug",
+    "Node.js.petController.js.executor": "Debug",
+    "Node.js.router.js.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/maria/OneDrive/Documents/PROGRAMMING/NODE.JS PROJECTS/PetCare",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "feature/pet-photo",
+    "last_opened_file_path": "C:/Users/maria/OneDrive/Documents/PROGRAMMING/NODE.JS PROJECTS/PetCare/node.js",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "dev.codetime.CodetimeConfigurable",
     "ts.external.directory.path": "C:\\Users\\maria\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ],
     "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="PetCare" type="NodeJSConfigurationType" temporary="true" path-to-js-file="node.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
@@ -78,6 +115,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.PetCare" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -117,6 +159,8 @@
       <workItem from="1733943545640" duration="1152000" />
       <workItem from="1733944853238" duration="1175000" />
       <workItem from="1733946064171" duration="1806000" />
+      <workItem from="1733968533851" duration="298000" />
+      <workItem from="1734008466899" duration="32507000" />
     </task>
     <servers />
   </component>
