@@ -25,9 +25,9 @@ async function deleteMedicine(medicineId) {
 
 // GET LOGIC
 
-async function getMedicine(url) {
+async function getMedicines(url) {
     try {
-        const response = await fetch('/getMedicine');
+        const response = await fetch('/getMedicines');
         const data = await response.json();
     
         if (!response.ok) {

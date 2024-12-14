@@ -48,7 +48,7 @@ router.get('/scheduleAppointmentVeterinarian', pagesController.getScheduleAppoin
 // funcionalidades
 
 //// administrator
-router.get('/getAlladministrators', administratorController.getAdministrators);
+router.get('/getAllAdministrators', administratorController.getAdministrators);
 
 //// pet owners
 router.post('/postPetOwner', petOwnerController.postPetOwner);
@@ -65,7 +65,7 @@ router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
 
 //// medicine
-router.get('/getMedicine', medicineController.getMedicine);
+router.get('/getMedicines', medicineController.getMedicines);
 router.post('/postMedicine', registermedicineController.medicine);
 router.get('/getMedicineVet', registermedicineController.getMedicines);
 //router.post('/postMedicinesearch', registermedicineController.findMedicineById);

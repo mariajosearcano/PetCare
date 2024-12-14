@@ -140,8 +140,7 @@ function collapse() {
 
 // VARIABLES
 
-//// UPDATE VARIABLES
-// var putFormData = new FormData();
+//// PUT VARIABLES
 const putName = document.getElementById('name-update');
 const putSpecies = document.getElementById('select-species-update');
 const putAge = document.getElementById('age-update');
@@ -279,13 +278,9 @@ async function handlePutSubmit(putFormData) {
 }
 
 async function putPet(putFormData) {
-    console.log(putFormData);
     try {
         const response = await fetch('/putPet', {
             method: 'PUT',
-            // headers: {
-            //     'Content-Type': 'multipart/form-data'
-            // },
             body: putFormData
         });
 
