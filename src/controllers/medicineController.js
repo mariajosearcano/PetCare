@@ -1,6 +1,6 @@
 const connection = require('../../db');
 
-async function getMedicines(req, res) {
+async function getMedicine(req, res) {
     connection.query('SELECT * FROM medicine', (err, results) => {
         if (err) {
             console.error(err);
@@ -12,5 +12,5 @@ async function getMedicines(req, res) {
 }
 
 module.exports ={
-    getMedicines
+    getMedicine
 }
