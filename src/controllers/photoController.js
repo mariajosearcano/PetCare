@@ -34,26 +34,28 @@ async function uploadPhoto(req, res, next) {
             return res.status(500).json({ error: err.message });
         }
 
-        const pet_owner_document = req.cookies.document;
-
         // Verifica si hay archivos y obtén el archivo correcto
-        if (!req.files || (!req.files.photo && !req.files.putPhoto)) {
+        if (!req.files || !req.files.photo) {
             return next();
         }
 
-        // Obtén el archivo (sea de photo o putPhoto)
-        const file = req.files.photo?.[0] || req.files.putPhoto?.[0];
-
         try {
+            const pet_owner_document = req.cookies.document;
+
             const result = await new Promise((resolve, reject) => {
                 const uploadStream = cloudinary.v2.uploader.upload_stream(
                     {
                         resource_type: 'image',
-                        public_id: `pet_care/${pet_owner_document}/${req.body.pet_id}`,
-                        folder: `pet_care/${pet_owner_document}`
+                        folder: `pet_care/${pet_owner_document}`,
+                        public_id: `${req.body.name}`
                     }, async function (error, result) {
                         if (error) {
                             return res.status(500).json({ error: error.message });
+                        }
+
+                        if (req.body.oldName != req.body.name) {
+                            //req.body.oldPhotoUrl = req.body.photo_url;
+                            req.body.flag = true;
                         }
 
                         req.body.photo_url = result.url;
@@ -62,7 +64,7 @@ async function uploadPhoto(req, res, next) {
                 );
 
                 // Usa el buffer del archivo específico
-                uploadStream.end(file.buffer);
+                uploadStream.end(req.files.photo[0].buffer);
             });
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -182,34 +184,35 @@ async function uploadPhoto(req, res, next) {
 // }
 
 async function deletePhoto(req, res, next) {
-    console.log(req.body)
-    upload(req, res, async function (err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
+    if (!req.body.flag) {
+        return next();
+    }
 
+    try {
         const pet_owner_document = req.cookies.document;
+        var nameImage = selectImage(req);
 
-        // Si no hay URL de foto para eliminar, continuar
-        if (!req.body.photo_url) {
-            return next();
-        }
-
-        try {
-            cloudinary.v2.api.delete_resources_by_prefix(`pet_care/${pet_owner_document}/${req.body.pet_id}`,
-                async function (error, result) {
-                    if (error) {
-                        return res.status(500).json({ error: error.message });
-                    }
-
-                    console.log('The photo was deleted successfully');
-                    next();
+        cloudinary.v2.api.delete_resources_by_prefix(`pet_care/${pet_owner_document}/${nameImage}`,
+            async function (error, result) {
+                if (error) {
+                    return res.status(500).json({error: error.message});
                 }
-            );
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
-        }
-    });
+
+                console.log('The photo was deleted successfully');
+                next();
+            }
+        );
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
+}
+
+function selectImage(req){
+    if (req.body.oldName) {
+        return req.body.oldName;
+    } else {
+        return req.body.name;
+    }
 }
 
 

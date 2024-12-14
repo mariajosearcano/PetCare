@@ -62,7 +62,6 @@ async function InsertPet() {
     formData.append('age', inputAge.value);
     formData.append('weight', inputWeight.value);
     formData.append('photo', inputPhoto.files[0]); // Properly append the file
-    formData.append('pet_owner_document', inputPetOwnerDocument.value);
 
     const urlString = ('/postPet').toString();  // url de router.js
 
@@ -251,7 +250,7 @@ function populateForm(data) {
     var putFormData = new FormData();
 
     putFormData.append('pet_id', data.pet_id);
-    putFormData.append('name', data.name);
+    putFormData.append('oldName', data.name);
     putFormData.append('photo_url', data.photo_url);
 
     addEventListener(putFormData);
@@ -270,19 +269,23 @@ async function handlePutSubmit(putFormData) {
         return;
     }
 
-    putFormData.append('putName', putName.value);
-    putFormData.append('putSpecies', putSpecies.value);
-    putFormData.append('putAge', putAge.value);
-    putFormData.append('putWeight', putWeight.value);
-    putFormData.append('putPhoto', putPhoto.files[0]); // Properly append the file
+    putFormData.append('name', putName.value);
+    putFormData.append('species', putSpecies.value);
+    putFormData.append('age', putAge.value);
+    putFormData.append('weight', putWeight.value);
+    putFormData.append('photo', putPhoto.files[0]); // Properly append the file
 
     putPet(putFormData);
 }
 
 async function putPet(putFormData) {
+    console.log(putFormData);
     try {
         const response = await fetch('/putPet', {
             method: 'PUT',
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // },
             body: putFormData
         });
 
@@ -305,11 +308,11 @@ async function putPet(putFormData) {
 //// DELETE LOGIC
 
 function handleDelete(data) {
-    const deleteData = new FormData();
+    const deleteData = {};
 
-    deleteData.append('pet_id', data.pet_id);
-    deleteData.append('name', data.name);
-    deleteData.append('photo_url', data.photo_url)
+    deleteData.pet_id = data.pet_id;
+    deleteData.name = data.name;
+    deleteData.flag = data.photo_url || false;
 
     deletePet(deleteData)
 }
@@ -318,7 +321,10 @@ async function deletePet(deleteData) {
     try {
         const response = await fetch('/deletePet', {
             method: 'DELETE',
-            body: deleteData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(deleteData)
         });
 
         const responseData = await response.json();

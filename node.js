@@ -4,7 +4,7 @@ const cors = require('cors');
 const conexion = require('./db');  // modulo local db
 const router = require('./router');  // modulo local routes
 const path = require('path');
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 // Inicializar la app de Express 
 const app = express();

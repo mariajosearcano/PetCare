@@ -83,12 +83,17 @@ function deletePets(req, res) {
 }
 
 function createPets(req, res) {
-    const { age, name, species, weight, photo_url, pet_owner_document } = req.body;
+    const pet_owner_document = req.cookies.document;
+
+    const { age, name, species, weight, photo_url } = req.body;
+
     const sql = 'INSERT INTO pet (age, name, species, weight, photo_url, pet_owner_document) VALUES (?, ?, ?, ?, ?, ?)';    // el id se genera automaticamente
+
     connection.query(sql, [age, name, species, weight, photo_url, pet_owner_document], (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
+
         res.json({ id: result.insertId, age, name, species, weight, photo_url, pet_owner_document });
     });
 }
@@ -113,13 +118,13 @@ function getPetsByPetOwner(req, res) {
 }
 
 async function putPet(req, res) {
-    const { putName, putSpecies, putAge, putWeight, photo_url, pet_id } = req.body;
+    const { name, species, age, weight, photo_url, pet_id } = req.body;
 
     const sql = `
         UPDATE pet SET name = ?, species = ?, age = ?, weight = ?, photo_url = ? WHERE pet_id = ?
     `;
 
-    connection.query(sql, [putName, putSpecies, putAge, putWeight, photo_url, pet_id], (err, result) => {
+    connection.query(sql, [name, species, age, weight, photo_url, pet_id], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Pet not updated' });
