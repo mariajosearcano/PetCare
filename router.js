@@ -17,6 +17,7 @@ const medicineController = require('./src/controllers/medicineController');
 const loginController = require('./src/controllers/loginController.js');   
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
+const medicalRecord = require('./src/controllers/medicalRecord');
 
 // html
 
@@ -54,6 +55,7 @@ router.post('/postPetOwner', petOwnerController.postPetOwner);
 router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
 router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
+router.get('/getMedicalRecord', medicalRecord.getMedicalRecord);
 
 // veterinarian
 router.post('/postVeterinarian', veterinarianController.postVeterinarian);

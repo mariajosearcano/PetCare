@@ -146,22 +146,22 @@
                 <!-- button visualize treatment -->
                 <p class="d-inline-flex gap-1">
                     <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseGetTreatment" aria-expanded="false"
-                        aria-controls="collapseGetTreatment" id="getButton">
+                        data-bs-target="#collapse-get-treatment" aria-expanded="false"
+                        aria-controls="collapse-get-treatment" id="btn-treatment">
                         Visualize treatment
                     </button>
                 </p>
                 <!-- button visualize treatment -->
 
                 <!-- collapse content visualize treatment -->
-                <div class="collapse table-collapse envelope" id="collapseGetTreatment">
+                <div class="collapse table-collapse envelope" id="collapse-get-treatment">
                     <div class="text-start p-5">
 
                         <div class="d-inline-flex align-items-center">
-                            <label for="pet-filter" class="form-label">Filter by Pet Name</label>
+                            <!-- <label for="pet-filter" class="form-label">Filter by Pet Name</label>
                             <select class="form-select form-select-sm mx-1" aria-label="pet-filter" id="pet-filter"
                                 style="width: 150px;">
-                            </select>
+                            </select> -->
                         </div>
 
                         <div class="text-start p-5">
@@ -169,8 +169,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Treatment ID</th>
+                                        <th scope="col">Pet</th>
                                         <th scope="col">Medical history ID</th>
-                                        <th scope="col">Medicine ID</th>
+                                        <th scope="col">Diagnosis</th>
+                                        <th scope="col">Medicine</th>
                                         <th scope="col">Medicine type</th>
                                         <th scope="col">Dose</th>
                                         <th scope="col"></th>
