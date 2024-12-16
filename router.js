@@ -14,16 +14,15 @@ const vaccineController = require('./src/controllers/vaccineController');
 const petOwnerController = require('./src/controllers/petOwnerController');
 const veterinarianController = require('./src/controllers/veterinarianController');
 const medicineController = require('./src/controllers/medicineController');
-const loginController = require('./src/controllers/loginController.js');
-const userController = require('./src/controllers/userController');    
+const loginController = require('./src/controllers/loginController.js');   
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
 
 // html
 
 router.get('/home', pagesController.getHome);
-
 router.get('/login', pagesController.getLogin);
+
 ////admin
 router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
@@ -33,6 +32,7 @@ router.get('/manageSchedules', pagesController.getManageSchedules);
 router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
+router.get('/medicalRecord', pagesController.getMedicalRecord);
 ////veterinarian
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
@@ -76,7 +76,6 @@ router.get('/getTreatment', treatmentController.getTreatment);
 router.get('/postTreatment', treatmentController.postTreatment);
 router.get('/getPetsId', treatmentController.getPetsId);
 
-
 // login
 router.post('/postLogin', loginController.login);
 
@@ -98,7 +97,6 @@ router.delete('/deleteSchedule', scheduleController.deleteSchedule);
 
 // medical history
 router.get('/getMedicalHistories', medicalHistoryController.getMedicalHistories);
-
 
 // available
 router.get('/getDayBySpecialty/:specialty', availableController.getDayBySpecialty);
