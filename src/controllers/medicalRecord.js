@@ -7,7 +7,7 @@ SELECT
     pet.name AS pet,
     medical_history.medical_history_id,
     diagnosis,
-    medicine.name AS medice,
+    medicine.name AS medicine,
     medicine_type,
     dose
 FROM
