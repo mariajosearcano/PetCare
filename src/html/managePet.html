@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Manage pet | Pet Owner | PetCare</title>
+    <title>Manage Pet | Pet Owner | PetCare</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -128,7 +128,7 @@
                         <button class="btn btn-info btn-lg" type="button" id="btn-collapse-update"
                             data-bs-toggle="collapse" data-bs-target="#table-collapseUpdatePet" aria-expanded="false"
                             aria-controls="table-collapseUpdatePet"
-                            onclick="getPetsAndPetOwners('/getPetsAndPetOwners')">
+                            onclick="getPetsByPetOwner()">
                             Manage pet
                         </button>
                     </p>
@@ -173,14 +173,8 @@
 
                                 <div class="mb-3">
                                     <label for="pet-photo" class="form-label">Pet photo</label>
-                                    <input class="form-control" type="file" id="pet-photo">
+                                    <input class="form-control" type="file" accept="image/*" id="pet-photo" name="photo">
                                     <div class="invalid-feedback">Please upload a photo of the pet</div>
-                                </div>
-
-                                <div class="form-floating mb-3"> <!-- quitarlo cuando se hage el login -->
-                                    <input type="text" class="form-control" id="floating-pet-owner-document"
-                                        placeholder="pet-owner-document" required>
-                                    <label for="floating-pet-owner-document">Pet owner document</label>
                                 </div>
 
                                 <p><em>* Required fields</em></p>
@@ -217,106 +211,99 @@
                         </div>
                     </div>
 
-                    <!-- collapse content update pet -->
-                    <div class="collapse envelope table-collapse" id="collapseUpdatePet">
-                        <div class="text-start bg-info-subtle p-5">
-                            <!-- form Update pet -->
-                            <div class="collapse envelope" id="collapseUpdatePet">
-                                <div class="text-start p-5">
-                                    <form class="row g-3 needs-validation" id="putForm" onsubmit="return false"
-                                        novalidate>
-                                        <div class="form-text">* Required Field</div>
-                                        <div class="col-md-4">
-                                            <label for="name-update" class="form-label">* Name</label>
-                                            <input type="text" class="form-control" id="name-update"
-                                                aria-describedby="name-update-help" name="name" required
-                                                placeholder="Enter Name" minlength="2" maxlength="50"
-                                                pattern="^[A-Za-z\s]+$">
-                                            <div class="invalid-feedback">
-                                                Please enter a valid name (only letters, 2-50 characters)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="select-species-update" class="form-label">Species</label>
-                                            <select class="form-select" id="select-species-update" required>
-                                                <option selected disabled value="">Choose...</option>
-                                                <option value="Vertebrate">Vertebrate</option>
-                                                <option value="Arthropod">Arthropod</option>
-                                                <option value="Annelid">Annelid</option>
-                                                <option value="Mollusk">Mollusk</option>
-                                                <option value="Sponge">Sponge</option>
-                                                <option value="Cnidarian">Cnidarian</option>
-                                                <option value="Echinoderm">Echinoderm</option>
-                                                <option value="Nematode">Nematode</option>
-                                                <option value="Platyhelminth">Platyhelminth</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid species
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="age-update" class="form-label">* Age</label>
-                                            <input type="number" class="form-control" id="age-update"
-                                                aria-describedby="age-update-help" name="age" required
-                                                placeholder="Enter Age" pattern="^[0-9]{1,3}$">
-                                            <div class="invalid-feedback">
-                                                Please enter a valid age (1-3 digits)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="weight-update" class="form-label">* Weight</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="unit-update">Kg</span>
-                                                <input type="text" class="form-control" id="weight-update"
-                                                    aria-describedby="inputGroupPrepend" required
-                                                    min="0" max="1000" pattern="^[0-9]{1,3}([.,]*[0-9]+)*$">
-                                                <div class="invalid-feedback">
-                                                    Please enter a valid weight (1-3 digits)
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="photo-update" class="form-label">Pet photo</label>
-                                            <input type="file" accept="image/*" class="form-control"
-                                                aria-label="photo-update" id="photo-update">
-                                            <div class="invalid-feedback">
-                                                Please upload a valid photo
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="invalidCheck" required>
-                                                <label class="form-check-label" for="invalidCheck">
-                                                    * Agree to terms and conditions
-                                                </label>
-                                                <div class="invalid-feedback">
-                                                    You must agree before submitting
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-info btn-lg edit-btn" type="button"
-                                                aria-expanded="false" id="btn-update-submit"
-                                                onclick="handlePutSubmit()">
-                                                Submit
-                                            </button>
-                                            <button class="btn btn-danger btn-lg edit-btn" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#table-collapseUpdatePet"
-                                                aria-expanded="false" aria-controls="table-collapseUpdatePet"
-                                                id="btn-update-cancel" onclick="putCancelAlert()">
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <!-- form register Users -->
+                    <!-- form Update pet -->
+                    <div class="collapse envelope" id="collapseUpdatePet">
+                        <div class="text-start p-5">
+                            <form class="row g-3 needs-validation" id="putForm" onsubmit="return false"
+                                novalidate>
+                                <div class="form-text">* Required Field</div>
+                                <div class="col-md-4">
+                                    <label for="name-update" class="form-label">* Name</label>
+                                    <input type="text" class="form-control" id="name-update"
+                                        aria-describedby="name-update-help" required
+                                        placeholder="Enter Name" minlength="2" maxlength="50"
+                                        pattern="^[A-Za-z\s]+$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid name (only letters, 2-50 characters)
+                                    </div>
                                 </div>
-                            </div>
-                            <!---->
-                            <!-- form Update pet -->
+                                <div class="col-md-4">
+                                    <label for="select-species-update" class="form-label">Species</label>
+                                    <select class="form-select" id="select-species-update" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option value="Vertebrate">Vertebrate</option>
+                                        <option value="Arthropod">Arthropod</option>
+                                        <option value="Annelid">Annelid</option>
+                                        <option value="Mollusk">Mollusk</option>
+                                        <option value="Sponge">Sponge</option>
+                                        <option value="Cnidarian">Cnidarian</option>
+                                        <option value="Echinoderm">Echinoderm</option>
+                                        <option value="Nematode">Nematode</option>
+                                        <option value="Platyhelminth">Platyhelminth</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid species
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="age-update" class="form-label">* Age</label>
+                                    <input type="number" class="form-control" id="age-update"
+                                        aria-describedby="age-update-help" required
+                                        placeholder="Enter Age" pattern="^[0-9]{1,3}$">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid age (1-3 digits)
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="weight-update" class="form-label">* Weight</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="unit-update">Kg</span>
+                                        <input type="text" class="form-control" id="weight-update"
+                                            aria-describedby="inputGroupPrepend" required
+                                            min="0" max="1000" pattern="^[0-9]{1,3}([.,]*[0-9]+)*$">
+                                        <div class="invalid-feedback">
+                                            Please enter a valid weight (1-3 digits)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="photo-update" class="form-label">* Pet photo</label>
+                                    <input type="file" accept="image/*" class="form-control"
+                                        aria-label="photo-update" id="photo-update" name="photo">
+                                    <div class="invalid-feedback">
+                                        Please upload a valid photo
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            * Agree to terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button"
+                                        aria-expanded="false" id="btn-update-submit">
+                                        Submit
+                                    </button>
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#table-collapseUpdatePet"
+                                        aria-expanded="false" aria-controls="table-collapseUpdatePet"
+                                        id="btn-update-cancel" onclick="putCancelAlert()">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- form register Users -->
                         </div>
                     </div>
-                    <!-- collapse content update pet -->
+                    <!---->
+                    <!-- form Update pet -->
 
                 </div>
             </div>

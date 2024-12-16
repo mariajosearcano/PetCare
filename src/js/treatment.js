@@ -197,24 +197,79 @@ function withoutStockAlert() {
 };
 
 
+//   async function obtenerDatosDeMascotas(url) {
+//     try {
+//       const response = await fetch(url);
+//       const data = await response.json();
+  
+//       // Imprime los datos en la consola
+//       console.log(data);
+  
+//       const selectElement = document.getElementById('animalSelect');
+//       selectElement.innerHTML = '';
+  
+//       data.forEach(pet => {
+//         const option = document.createElement('option');
+//         option.value = pet.pet_id;
+//         option.text = `${pet.pet_id} - ${pet.name}`;
+//         selectElement.appendChild(option);
+//       });
+//     } catch (error) {
+//       console.error('Error al obtener los datos:', error);
+//     }
+//   }
+
   async function obtenerDatosDeMascotas(url) {
     try {
       const response = await fetch(url);
       const data = await response.json();
   
-      // Imprime los datos en la consola
       console.log(data);
+
+      const mascotas = data.map(pet => ({
+        id: pet.pet_id,
+        name: pet.name,
+        medicalHistoryId: pet.medical_history_id
+      }));
   
       const selectElement = document.getElementById('animalSelect');
       selectElement.innerHTML = '';
   
-      data.forEach(pet => {
+      mascotas.forEach(pet => {
         const option = document.createElement('option');
-        option.value = pet.pet_id;
-        option.text = `${pet.pet_id} - ${pet.name}`;
+        option.value = pet.id;
+        option.text = `${pet.id} - ${pet.name}`;
+        option.dataset.medicalHistoryId = pet.medicalHistoryId; // Almacenar medical_history_id en el dataset
         selectElement.appendChild(option);
       });
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+  
+      selectElement.addEventListener('change', async () => {
+        const selectedPetId = selectElement.value;
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const medicalHistoryId = selectedOption.dataset.medicalHistoryId;
+        console.log('Mascota seleccionada:', pet.medical_history_id);
+  
+        const datosAdicionales = await obtenerDatosAdicionales(medicalHistoryId);
+
+        // Muestra los datos adicionales en la interfaz (ejemplo)
+        console.log('Datos adicionales:', datosAdicionales);
+        // ...
+      });
+    
+    }
+  
+
+  async function obtenerDatosAdicionales(medicalHistoryId) {
+    const urlAdicionales = `/getTreatmentForPet/${medicalHistoryId}`;
+
+    try {
+        const response = await fetch(urlAdicionales);
+        const data = await response.json();
+        return data;
     } catch (error) {
-      console.error('Error al obtener los datos:', error);
+        console.error('Error al obtener datos adicionales:', error);
     }
   }

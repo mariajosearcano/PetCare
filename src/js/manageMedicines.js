@@ -26,10 +26,8 @@ async function deleteMedicine(medicineId) {
 // GET LOGIC
 
 async function getMedicines(url) {
-    const urlString = (url).toString();
-
     try {
-        const response = await fetch(urlString);
+        const response = await fetch('/getMedicines');
         const data = await response.json();
     
         if (!response.ok) {
@@ -68,7 +66,7 @@ function createTableRow(data) {
 }
 
 function populateTable(data) {
-    const id = 'getMedicinesTableBody';
+    const id = 'getMedicineTableBody';
     const tableBody = document.getElementById(id);
     const filterValue = document.getElementById("stock-filter").value;
 

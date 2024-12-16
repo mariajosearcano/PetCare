@@ -1,28 +1,27 @@
 const connection = require('../../db');
 const crypto = require ('crypto');
 
+
+
 async function encryptPassword(password) {
     try {
       // Create a salt (a random string)
-      const salt = crypto.randomBytes(16).toString('hex');
+        const salt = crypto.randomBytes(16).toString('hex');
   
       // Create a hash of the password and salt
-      
-      const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
+        const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
   
-      return hash;
-    } catch (error) {
-      console.error('Error encriptando contraseña:', error);
-      return null;
+        return hash;
+    } catch (err) {
+        console.error('Error encrypting password: ', err);
+        return null;
     }
-  }
-
+}
 
 async function postPetOwner(req, res) {
-    const { document, name, last_name, email, phone_number } = req.body;
-    let { password } = req.body;
+    let { document, name, last_name, email, password, phone_number } = req.body;
+
     password = await encryptPassword(password);
-    console.log(encryptPassword);
 
     const sql = `
         INSERT INTO pet_owner (document, name, last_name, email, password, phone_number) VALUES (?, ?, ?, ?, ?, ?)
@@ -43,11 +42,11 @@ async function postPetOwner(req, res) {
             }
             
             console.error(err);
-            return res.status(500).json({ error: 'Error inserting Pet owner user' });
+            return res.status(500).json({ error: 'Error inserting Pet owner' });
         }
 
-        console.log('User inserted successfully');
-        return res.status(201).json({ message: 'Pet owner user created successfully' });
+        console.log('Pet Owner inserted successfully');
+        return res.status(201).json({ message: 'Pet owner created successfully' });
     });
 }
 
@@ -63,16 +62,13 @@ async function getPetOwners(req, res) {
 }
 
 async function putPetOwner(req, res) {
-
-    const { oldPutForm, putFormData } = req.body;
-    const { putDocument } = oldPutForm;
-    const { document, name, last_name, email, password, phone_number } = putFormData;
+    const { document, name, last_name, email, password, phone_number, oldDocument } = req.body;
 
     const sql = `
         UPDATE pet_owner SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
     `;
 
-    connection.query(sql, [document, name, last_name, email, password, phone_number, putDocument], (err, result) => {
+    connection.query(sql, [document, name, last_name, email, password, phone_number, oldDocument], (err, result) => {
         if (err) {
             if (err.code === 'ER_DUP_ENTRY') {
                 console.error('Duplicate entry:', err.message);
@@ -87,14 +83,14 @@ async function putPetOwner(req, res) {
             }
 
             console.error(err);
-            return res.status(500).json({ error: 'Pet owner user not updated' });
+            return res.status(500).json({ error: 'Pet owner not updated' });
         }
 
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Pet owner user not found' });
+            return res.status(404).json({ error: 'Pet owner not found' });
         }
 
-        return res.json({ message: 'Pet owner user updated successfully' });
+        return res.json({ message: 'Pet owner updated successfully' });
     });
 }
 
@@ -118,6 +114,8 @@ async function deletePetOwner(req, res) {
         return res.json({ message: 'Pet owner user deleted successfully' });
     });
 }
+
+
 
 module.exports = {
     postPetOwner,
