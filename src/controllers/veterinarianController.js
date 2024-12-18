@@ -1,9 +1,27 @@
 const connection = require('../../db');
+const crypto = require("crypto");
 
 
+
+// async function encryptPassword(password) {
+//     try {
+//       // Create a salt (a random string)
+//         const salt = crypto.randomBytes(16).toString('hex');
+//
+//       // Create a hash of the password and salt
+//         const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
+//
+//         return hash;
+//     } catch (err) {
+//         console.error('Error encrypting password: ', err);
+//         return null;
+//     }
+// }
 
 async function postVeterinarian(req, res) {
     let { document, name, last_name, email, password, phone_number, specialty } = req.body;
+
+    //password = await encryptPassword(password);
 
     const sql = `
         INSERT INTO veterinarian (document, name, last_name, email, password, phone_number, specialty) VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -72,7 +90,7 @@ async function getVeterinarianBySpecialty(req, res) {
 }
 
 async function putVeterinarian(req, res) {
-    const { document, name, last_name, email, password, phone_number, specialty, oldDocument } = req.body;
+    let { document, name, last_name, email, password, phone_number, specialty, oldDocument } = req.body;
 
     const sql = `
         UPDATE veterinarian SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ?, specialty = ? WHERE document = ?
@@ -105,7 +123,7 @@ async function putVeterinarian(req, res) {
 }
 
 async function deleteVeterinarian(req, res) {
-    const { document } = req.body;
+    let { document } = req.body;
 
     const sql = `
         DELETE FROM veterinarian WHERE document = ?

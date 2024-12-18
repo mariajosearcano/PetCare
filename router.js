@@ -4,7 +4,6 @@ const router = Router();
 const pagesController = require('./src/controllers/pagesController');
 
 const appointmentController = require('./src/controllers/appointmentController');
-const administratorController = require('./src/controllers/administratorController');
 const medicalHistoryController = require('./src/controllers/medicalHistoryController');
 const medicalHistoryVaccineController = require('./src/controllers/medicalHistoryVaccineController');
 const petController = require('./src/controllers/petController');
@@ -19,8 +18,9 @@ const registermedicineController = require('./src/controllers/registermedicineCo
 const availableController = require('./src/controllers/availableController');
 const photoController = require('./src/controllers/photoController');
 
-
 const medicalRecord = require('./src/controllers/medicalRecord');
+
+
 
 // html
 
@@ -38,6 +38,7 @@ router.get('/petOwner', pagesController.getPetOwner);
 router.get('/managePet', pagesController.getManagePet);
 router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
 router.get('/medicalRecord', pagesController.getMedicalRecord);
+
 ////veterinarian
 router.get('/veterinarian', pagesController.getVeterinarians);
 router.get('/treatment', pagesController.getTreatment);
@@ -47,8 +48,6 @@ router.get('/scheduleAppointmentVeterinarian', pagesController.getScheduleAppoin
 
 // funcionalidades
 
-//// administrator
-router.get('/getAllAdministrators', administratorController.getAdministrators);
 
 //// pet owners
 router.post('/postPetOwner', petOwnerController.postPetOwner);

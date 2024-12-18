@@ -298,14 +298,6 @@ async function handlePutSubmitPetOwner(putFormDataPetOwner) {
         return;
     }
 
-    // putFormDataPetOwner = {
-    //     document: putDocumentPetOwner.value,
-    //     name: putNamePetOwner.value,
-    //     last_name: putLastNamePetOwner.value,
-    //     email: putEmailPetOwner.value,
-    //     password: putPasswordPetOwner.value,
-    //     phone_number: putPhoneNumberPetOwner.value
-    // };
     putFormDataPetOwner.document = putDocumentPetOwner.value;
     putFormDataPetOwner.name = putNamePetOwner.value;
     putFormDataPetOwner.last_name = putLastNamePetOwner.value;
@@ -433,7 +425,6 @@ async function deletePetOwner(data) {
         deleteErrorAlert();
     }
 }
-
 
 //// DELETE VETERINARIAN
 async function deleteVeterinarian(data) {
