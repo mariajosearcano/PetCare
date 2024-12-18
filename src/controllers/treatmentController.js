@@ -42,45 +42,26 @@ function getTreatment(req, res) {
   function getTreatmentForPet(req, res) {
     const medical_history_id = req.params.medical_history_id;
   
+    // Log del parámetro recibido
+    console.log('ID del historial médico recibido:', medical_history_id);
+  
     // Consulta SQL para obtener los datos adicionales (ejemplo: historial médico)
     const sql = 'SELECT * FROM medical_history WHERE medical_history_id = ?';
     connection.query(sql, [medical_history_id], (err, result) => {
       if (err) {
+        console.error('Error en la consulta SQL:', err);
         return res.status(500).send(err);
       }
+  
+      // Log del resultado de la consulta SQL
+      console.log('Resultado de la consulta SQL:', result);
+  
+      // Respuesta JSON al cliente
       res.json(result);
     });
-  };
+  }
+  
 
-  // app.get('/generatePDF/:id', async (req, res) => {
-  //   const { id } = req.params;
-  
-  //   try {
-  //     // Consulta a la base de datos para obtener los datos del ID
-  //     const [rows] = await pool.query('SELECT * FROM tu_tabla WHERE id = ?', [id]);
-  
-  //     if (rows.length === 0) {
-  //       return res.status(404).send('No se encontró información para el ID especificado');
-  //     }
-  
-  //     const data = rows[0]; // Suponiendo que solo hay un resultado
-  
-  //     // Crear el documento PDF
-  //     const doc = new pdfkit();
-  //     doc.text(`Datos para el ID ${id}`);
-  //     // Agregar el resto de los datos al PDF (personaliza según tu estructura)
-  //     doc.text(`Campo 1: ${data.campo1}`);
-  //     doc.text(`Campo 2: ${data.campo2}`);
-  
-  //     // Enviar el PDF como respuesta
-  //     doc.pipe(res);
-  //     doc.end();
-  //   } catch (error) {
-  //     console.error('Error al generar el PDF:', error);
-  //     res.status(500).send('Error interno del servidor');   
-  
-  //   }
-  // });
 
   
   
