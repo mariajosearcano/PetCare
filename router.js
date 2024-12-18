@@ -76,7 +76,7 @@ router.post('/postTreatment', treatmentController.postTreatment);
 router.get('/getTreatment', treatmentController.getTreatment);
 router.get('/postTreatment', treatmentController.postTreatment);
 router.get('/getPetsId', treatmentController.getPetsId);
-router.get('/getTreatmentForPet', treatmentController.getTreatmentForPet);
+router.get('/getTreatmentForPet/:medical_history_id',treatmentController.getTreatmentForPet);
 
 //// login
 router.post('/postLogin', loginController.login);
