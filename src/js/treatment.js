@@ -205,7 +205,7 @@ async function obtenerDatosDeMascotas(url) {
       const response = await fetch(url);
       const data = await response.json();
   
-      console.log('Datos recibidos:', data);
+      console.log('Data received:', data);
   
       // Transformar los datos de mascotas
       const mascotas = data.map(pet => ({
@@ -232,7 +232,7 @@ async function obtenerDatosDeMascotas(url) {
         const selectedOption = selectElement.options[selectElement.selectedIndex];
         if (selectedOption) {
           const medicalHistoryId = selectedOption.dataset.medicalHistoryId;
-          console.log('Medical History ID seleccionado:', medicalHistoryId);
+          console.log('Selected Medical History ID:', medicalHistoryId);
         }
       });
   
@@ -241,41 +241,72 @@ async function obtenerDatosDeMascotas(url) {
         const selectedOption = selectElement.options[selectElement.selectedIndex];
   
         if (!selectedOption) {
-          alert('Por favor selecciona una mascota.');
+          alert('Please select a pet.');
           return;
         }
   
         const medicalHistoryId = selectedOption.dataset.medicalHistoryId;
-        console.log('Historial médico seleccionado:', medicalHistoryId);
+        console.log('Selected medical history:', medicalHistoryId);
   
-        // Obtener datos adicionales usando medicalHistoryId
+        
         try {
           const datosAdicionales = await obtenerDatosAdicionales(medicalHistoryId);
           console.log('Datos adicionales:', datosAdicionales);
   
           // Mostrar los datos adicionales (ejemplo)
-          alert(`Datos adicionales recibidos: ${JSON.stringify(datosAdicionales)}`);
+          alert(`downloading pdf: ${JSON.stringify(datosAdicionales)}`);
         } catch (error) {
-          console.error('Error al obtener datos adicionales:', error);
+          console.error('Error getting additional data:', error);
         }
       });
     } catch (error) {
-      console.error('Error al obtener los datos de mascotas:', error);
+      console.error('Error getting pet data:', error);
     }
   }
   
 
-  async function obtenerDatosAdicionales(medicalHistoryId) {
-    const urlAdicionales = `/getTreatmentForPet/${medicalHistoryId}`;
+//   async function obtenerDatosAdicionales(medicalHistoryId) {
+//     const urlAdicionales = `/getTreatmentForPet/${medicalHistoryId}`;
 
+//     try {
+//         const response = await fetch(urlAdicionales);
+//         const data = await response.json();
+//         return data;
+//     } catch (error) {
+//         console.error('Error al obtener datos adicionales:', error);
+//     }
+//   }
+
+async function obtenerDatosAdicionales(medicalHistoryId) {
+    const urlAdicionales = `/getTreatmentForPet/${medicalHistoryId}`;
+  
     try {
-        const response = await fetch(urlAdicionales);
-        const data = await response.json();
-        return data;
+      const response = await fetch(urlAdicionales);
+  
+      if (!response.ok) {
+        throw new Error('Error en la petición al servidor');
+      }
+  
+      // Convertir la respuesta en un blob (archivo binario)
+      const blob = await response.blob();
+  
+      // Crear un enlace temporal para descargar el archivo
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `medical_history_${medicalHistoryId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+  
+      // Limpieza del enlace temporal
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      console.log('PDF descargado exitosamente');
     } catch (error) {
-        console.error('Error al obtener datos adicionales:', error);
+      console.error('Error al obtener datos adicionales:', error);
     }
   }
+  
 
   
 
