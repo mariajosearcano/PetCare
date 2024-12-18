@@ -2,6 +2,21 @@ const connection = require('../../db')
 
 
 
+// async function encryptPassword(password) {
+//     try {
+//       // Create a salt (a random string)
+//         const salt = crypto.randomBytes(16).toString('hex');
+//
+//       // Create a hash of the password and salt
+//         const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
+//
+//         return hash;
+//     } catch (err) {
+//         console.error('Error encrypting password: ', err);
+//         return null;
+//     }
+// }
+
 function login(req, res) {
     const { email, password } = req.body;
     console.log(email + password)
