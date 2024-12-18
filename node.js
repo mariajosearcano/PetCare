@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
         "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://cdnjs.cloudflare.com; " +
         "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
-        "img-src 'self' data: https: http: blob:"
+        "img-src 'self' data: https: http: blob: http://res.cloudinary.com/dieprtgzj/image/upload/ http://res.cloudinary.com/"
     );
     next();
 });

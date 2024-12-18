@@ -19,7 +19,6 @@ async function getAppointmentsByPetOwner(req, res) {
         return res.status(400).json({ error: 'Pet Owner document not found in cookies' });
     }
 
-    // Consulta con JOIN para obtener las citas relacionadas con las mascotas del dueño
     const sql = `
         SELECT 
             appointment.*,
@@ -37,6 +36,7 @@ async function getAppointmentsByPetOwner(req, res) {
             console.error(err);
             return res.status(500).json({ error: 'Error getting Appointments' });
         }
+        
         return res.json(results);
     });
 }

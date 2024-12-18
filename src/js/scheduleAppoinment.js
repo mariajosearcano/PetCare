@@ -387,20 +387,16 @@ function formatData(data){
 
 function populatePetFilter(data) {
     const petFilter = document.getElementById('pet-filter');
-    petFilter.innerHTML = ''; // Limpiar opciones existentes
+    petFilter.innerHTML = '';
 
-    // Agregar la opción "All" por defecto
     const defaultOption = document.createElement('option');
     defaultOption.textContent = "All";
     defaultOption.value = "All";
     defaultOption.selected = true;
     petFilter.appendChild(defaultOption);
 
-    // Extraer nombres únicos de mascotas
-    // const petNames = [...new Set(data.map(pet => pet.name))];
-    const petNames = data.map(pet => pet.name);
+    const petNames = [...new Set(data.map(pet => pet.name))];
 
-    // Agregar nombres de mascotas al filtro
     petNames.forEach(name => {
         const option = document.createElement('option');
         option.textContent = name;
@@ -433,7 +429,6 @@ function createTableRow(data) {
 
 function addEventListeners(data, row){
     const deleteButton = row.querySelector('.delete-btn');
-    //deleteButton.addEventListener('click', () => deleteUser(data));
     deleteButton.addEventListener('click', () => deleteCancelAlert(data));
 }
 
@@ -491,7 +486,6 @@ async function deleteAppointment(data) {
             deleteAlert(responseData.message);
         }
         else {
-            // Si hay un error, maneja el mensaje según la lógica del backend
             console.error("Error: " + responseData.error);
             if (responseData.error.includes("Cancellation must be made no more than 24 hours")) {
                 HoursAlert();

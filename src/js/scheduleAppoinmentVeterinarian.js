@@ -62,7 +62,7 @@ function populatePetFilter(data) {
     defaultOption.selected = true;
     petFilter.appendChild(defaultOption);
 
-    const petIds = data.map(pet => pet.pet_id);
+    const petIds = [...new Set(data.map(pet => pet.pet_id))];
 
     petIds.forEach(pet_id => {
         const option = document.createElement('option');
