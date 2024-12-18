@@ -15,6 +15,7 @@
     <!-- sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link rel="stylesheet" href="../css/treatment.css">
     <link rel="stylesheet" href="../css/whatsapp.css">
 </head>
 
@@ -176,14 +177,48 @@
                     <!-- collapse content treatment -->
 
                     <!-- collapse view treatment -->
-                    <div class="collapse" id="collapse-view-treatment">
-                        <div class="card card-body bg-info-subtle p-4">
-                          <label for="animalSelect" class="form-label">Select Pet :</label>
-                          <select id="animalSelect" class="form-select">
-                            </select>
+
+                    <div class="container mt-4">
+                        <!-- Card container -->
+                        <div class="collapse" id="collapse-view-treatment">
+                          <div class="card" style="background-color: #ccf9f9;">
+                            <!-- Card Header -->
+                            <div class="card-header bg-primary text-white text-center">
+                              <h5>Select a Pet</h5>
+                            </div>
+                            
+                            <!-- Card Body -->
+                            <div class="card-body">
+                              <!-- Select label and dropdown -->
+                              <div class="mb-3">
+                                <label for="animalSelect" class="form-label">Choose a pet from the list:</label>
+                                <select id="animalSelect" class="form-select" aria-label="Select Pet">
+                                  <option value="" disabled selected>Select a pet</option>
+                                  <!-- Options will be dynamically populated -->
+                                </select>
+                              </div>
+                      
+                              <!-- Button -->
+                              <div class="text-center">
+                                <button type="button" class="btn btn-primary btn-lg" id="btn-medical-history">
+                                  View Medical History
+                                </button>
+                              </div>
+                            </div>
+                            
+                            <!-- Card Footer -->
+                            <div class="card-footer text-muted text-center">
+                              Please select a pet to view its medical history.
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      
+                      
+                      
+                      
                     <!-- collapse view treatment -->
+                      
 
 
                 </div>

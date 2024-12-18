@@ -1,0 +1,33 @@
+.custom-card-body {
+    background-color: #ccf9f9; /* Fondo personalizado */
+  }
+
+  .custom-card-footer {
+    background-color: #ccf9f9; /* Fondo personalizado */
+    color: #333; /* Texto oscuro */
+  }
+
+  /* Personalización del select */
+  #animalSelect {
+    background-color: #ccf9f9; /* Fondo del select */
+    border-color: #0074D9; /* Borde azul */
+    color: #333; /* Texto oscuro */
+  }
+
+  #animalSelect:focus {
+    outline: none;
+    border-color: #005bb5; /* Azul más oscuro al enfocar */
+    box-shadow: 0 0 5px rgba(0, 91, 181, 0.5); /* Efecto de foco */
+  }
+
+  /* Personalización del botón */
+  #btn-medical-history {
+    background-color: #0074D9; /* Azul personalizado */
+    border-color: #0074D9;
+    color: white;
+  }
+
+  #btn-medical-history:hover {
+    background-color: #005bb5; /* Azul más oscuro al pasar el mouse */
+    border-color: #005bb5;
+  }
