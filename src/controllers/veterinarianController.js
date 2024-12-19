@@ -1,5 +1,4 @@
 const connection = require('../../db');
-const crypto = require("crypto");
 const {encryptPassword} = require("./passwordController");
 
 
@@ -13,7 +12,11 @@ async function postVeterinarian(req, res) {
 
      encryptPassword(password)
         .then(encryptedPassword => {
-            connection.query(sql, [document, name, last_name, email, password, phone_number, specialty], (err, result) => {
+            if (!encryptedPassword) {
+                return res.status(500).send('Error encrypting password');
+            }
+
+            connection.query(sql, [document, name, last_name, email, encryptedPassword, phone_number, specialty], (err, result) => {
                 if (err) {
                     if (err.code === 'ER_DUP_ENTRY') {
                         console.error('Duplicate entry:', err.message);
@@ -89,7 +92,11 @@ async function putVeterinarian(req, res) {
 
      encryptPassword(password)
         .then(encryptedPassword => {
-            connection.query(sql, [document, name, last_name, email, password, phone_number, specialty, oldDocument], (err, result) => {
+            if (!encryptedPassword) {
+                return res.status(500).send('Error encrypting password');
+            }
+
+            connection.query(sql, [document, name, last_name, email, encryptedPassword, phone_number, specialty, oldDocument], (err, result) => {
                 if (err) {
                     if (err.code === 'ER_DUP_ENTRY') {
                         console.error('Duplicate entry:', err.message);

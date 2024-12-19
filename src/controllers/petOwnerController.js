@@ -64,6 +64,10 @@ async function putPetOwner(req, res) {
 
     encryptPassword(password)
         .then(encryptedPassword => {
+            if (!encryptedPassword) {
+                return res.status(500).send('Error encrypting password');
+            }
+
             connection.query(sql, [document, name, last_name, email, encryptedPassword, phone_number, oldDocument], (err, result) => {
                 if (err) {
                     if (err.code === 'ER_DUP_ENTRY') {

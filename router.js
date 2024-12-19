@@ -17,6 +17,7 @@ const loginController = require('./src/controllers/loginController.js');
 const registermedicineController = require('./src/controllers/registermedicineController');
 const availableController = require('./src/controllers/availableController');
 const photoController = require('./src/controllers/photoController');
+const administratorController = require('./src/controllers/administratorController');
 
 const medicalRecord = require('./src/controllers/medicalRecord');
 
@@ -32,6 +33,7 @@ router.get('/admin', pagesController.getAdmin);
 router.get('/manageUsers', pagesController.getManageUsers);
 router.get('/manageMedicines', pagesController.getManageMedicines);
 router.get('/manageSchedules', pagesController.getManageSchedules);
+router.get('/changePasswordAdministrator', pagesController.getChangePasswordAdministrator);
 
 ////pet owner
 router.get('/petOwner', pagesController.getPetOwner);
@@ -117,6 +119,10 @@ router.get('/getAllmedicalHistoryVaccines', medicalHistoryVaccineController.getM
 
 //// vaccine
 router.get('/getAllvaccines', vaccineController.getVaccines);
+
+//// administrator
+router.get('/getAdministrator', administratorController.getAdministrator);
+router.put('/putPasswordAdministrator', administratorController.putPasswordAdministrator);
 
 
 

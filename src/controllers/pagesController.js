@@ -1,5 +1,7 @@
 const path = require('path');
 
+
+//general
 function getHome(req, res) {
     res.sendFile(path.join(__dirname, '../html/index.html'));
 }
@@ -20,6 +22,7 @@ function getPassword(req, res) {
     res.sendFile(path.join(__dirname, '../html/password.html'));
 }
 
+
 //administrator
 function getAdmin(req, res) {
     res.sendFile(path.join(__dirname, '../html/admin.html'));
@@ -36,6 +39,11 @@ function getManageMedicines(req, res) {
 function getManageSchedules(req, res) {
     res.sendFile(path.join(__dirname, '../html/manageSchedules.html'));
 }
+
+function getChangePasswordAdministrator(req, res) {
+    res.sendFile(path.join(__dirname, '../html/changePasswordAdministrator.html'));
+}
+
 
 // pet owner
 function getPetOwner(req, res) {
@@ -54,6 +62,7 @@ function getMedicalRecord(req, res) {
     res.sendFile(path.join(__dirname, '../html/medicalRecord.html'));
 }
 
+
 // veterinarian
 function getVeterinarians(req, res) {
     res.sendFile(path.join(__dirname, '../html/veterinarian.html'));
@@ -71,6 +80,8 @@ function getScheduleAppointmentVeterinarian(req, res) {
     res.sendFile(path.join(__dirname, '../html/scheduleAppointmentVeterinarian.html'));
 }
 
+
+
 module.exports = {
     getHome,
     getManageMedicinesVeterinarian,
@@ -82,6 +93,7 @@ module.exports = {
     getManageUsers,
     getManageMedicines,
     getManageSchedules,
+    getChangePasswordAdministrator,
     //pet owner
     getPetOwner,
     getManagePet,
