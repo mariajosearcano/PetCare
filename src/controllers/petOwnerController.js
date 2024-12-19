@@ -1,53 +1,47 @@
 const connection = require('../../db');
-const crypto = require ('crypto');
+const { encryptPassword } = require('./passwordController');
 
 
-
-// async function encryptPassword(password) {
-//     try {
-//       // Create a salt (a random string)
-//         const salt = crypto.randomBytes(16).toString('hex');
-//
-//       // Create a hash of the password and salt
-//         const hash = crypto.pbkdf2Sync(password, salt, 10000, 32, 'sha512').toString('hex');
-//
-//         return hash;
-//     } catch (err) {
-//         console.error('Error encrypting password: ', err);
-//         return null;
-//     }
-// }
 
 async function postPetOwner(req, res) {
     let { document, name, last_name, email, password, phone_number } = req.body;
-
-    //password = await encryptPassword(password);
 
     const sql = `
         INSERT INTO pet_owner (document, name, last_name, email, password, phone_number) VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-    connection.query(sql, [document, name, last_name, email, password, phone_number], (err, result) => {
-        if (err) {
-            if (err.code === 'ER_DUP_ENTRY') {
-                console.error('Duplicate entry:', err.message);
-                
-                if (err.message.includes('document')) {
-                    return res.status(409).json({ error: 'The document already exists' });
-                } else if (err.message.includes('email')) {
-                    return res.status(409).json({ error: 'The email already exists' });
+    encryptPassword(password)
+        .then(encryptedPassword => {
+            if (!encryptedPassword) {
+                return res.status(500).send('Error encrypting password');
+            }
+
+            connection.query(sql, [document, name, last_name, email, encryptedPassword, phone_number], (err, result) => {
+                if (err) {
+                    if (err.code === 'ER_DUP_ENTRY') {
+                        console.error('Duplicate entry:', err.message);
+
+                        if (err.message.includes('document')) {
+                            return res.status(409).json({error: 'The document already exists'});
+                        } else if (err.message.includes('email')) {
+                            return res.status(409).json({error: 'The email already exists'});
+                        }
+
+                        return res.status(409).json({error: 'Duplicate entry detected'});
+                    }
+
+                    console.error(err);
+                    return res.status(500).json({error: 'Error inserting Pet owner'});
                 }
 
-                return res.status(409).json({ error: 'Duplicate entry detected' });
-            }
-            
-            console.error(err);
-            return res.status(500).json({ error: 'Error inserting Pet owner' });
-        }
-
-        console.log('Pet Owner inserted successfully');
-        return res.status(201).json({ message: 'Pet owner created successfully' });
-    });
+                console.log('Pet Owner inserted successfully');
+                return res.status(201).json({message: 'Pet owner created successfully'});
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            res.status(500).send('Error creating Pet Owner');
+        });
 }
 
 async function getPetOwners(req, res) {
@@ -68,30 +62,37 @@ async function putPetOwner(req, res) {
         UPDATE pet_owner SET document = ?, name = ?, last_name = ?, email = ?, password = ?, phone_number = ? WHERE document = ?
     `;
 
-    connection.query(sql, [document, name, last_name, email, password, phone_number, oldDocument], (err, result) => {
-        if (err) {
-            if (err.code === 'ER_DUP_ENTRY') {
-                console.error('Duplicate entry:', err.message);
+    encryptPassword(password)
+        .then(encryptedPassword => {
+            connection.query(sql, [document, name, last_name, email, encryptedPassword, phone_number, oldDocument], (err, result) => {
+                if (err) {
+                    if (err.code === 'ER_DUP_ENTRY') {
+                        console.error('Duplicate entry:', err.message);
 
-                if (err.message.includes('document')) {
-                    return res.status(409).json({ error: 'The document already exists' });
-                } else if (err.message.includes({ error: 'email' })) {
-                    return res.status(409).json({ error: 'The email already exists' });
+                        if (err.message.includes('document')) {
+                            return res.status(409).json({error: 'The document already exists'});
+                        } else if (err.message.includes({error: 'email'})) {
+                            return res.status(409).json({error: 'The email already exists'});
+                        }
+
+                        return res.status(409).json({error: 'Duplicate entry detected'});
+                    }
+
+                    console.error(err);
+                    return res.status(500).json({error: 'Pet owner not updated'});
                 }
 
-                return res.status(409).json({ error: 'Duplicate entry detected' });
-            }
+                if (result.affectedRows === 0) {
+                    return res.status(404).json({error: 'Pet owner not found'});
+                }
 
-            console.error(err);
-            return res.status(500).json({ error: 'Pet owner not updated' });
-        }
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Pet owner not found' });
-        }
-
-        return res.json({ message: 'Pet owner updated successfully' });
-    });
+                return res.json({message: 'Pet owner updated successfully'});
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            res.status(500).send('Error updating Pet Owner');
+        });
 }
 
 async function deletePetOwner(req, res) {
