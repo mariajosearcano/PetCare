@@ -494,7 +494,7 @@ function postAlert(message){
         title: message || "User has been created",
         allowOutsideClick: false
     }).then((result) => {
-        if (result.isConfirmed) { // Se ejecuta cuando el usuario hace clic en "OK" o confirma el diálogo
+        if (result.isConfirmed) {
             location.reload(true);
         }
     });

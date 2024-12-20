@@ -36,7 +36,7 @@ async function postPetOwner(req, res) {
 
 
                 console.log('Pet Owner inserted successfully');
-return res.status(201).json({ message: 'Pet owner created successfully' });
+                return res.status(201).json({ message: 'Pet owner created successfully' });
 
             });
         })

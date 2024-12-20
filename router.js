@@ -42,11 +42,11 @@ router.get('/managePet', sessionController.getUserDocument, sessionController.ro
 router.get('/scheduleAppointment', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getScheduleAppointment);
 router.get('/medicalRecord', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getMedicalRecord);
 router.get('/changePasswordPetOwner', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getChangePasswordPetOwner);
+router.get('/registerPetOwner', pagesController.getregisterPetOwner);
 
 ////veterinarian
 router.get('/veterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getVeterinarians);
 router.get('/treatment', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getTreatment);
-router.get('/registerPetOwner', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getregisterPetOwner);
 router.get('/scheduleAppointmentVeterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getScheduleAppointmentVeterinarian);
 router.get('/changePasswordVeterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getChangePasswordVeterinarian);
 
