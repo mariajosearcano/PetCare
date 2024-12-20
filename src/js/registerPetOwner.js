@@ -35,12 +35,17 @@ form.addEventListener('submit', async (event) => {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Error al registrar el usuario');
+        throw new Error('Error registering user');
       }
       return response.json();
     })
     .then(data => {
-      console.log('Usuario registrado:', data);
+      console.log('Registered user:', data);
+      Swal.fire({
+        title: data.message || "User registered successfully",
+        icon: "success",
+        allowOutsideClick: false
+      });
     })
     .catch(error => {
       console.error('Error:', error);
@@ -59,12 +64,12 @@ function validateForm() {
   const errorMessagesDiv = document.getElementById('errorMessages');
 
   //Expresiones regulares
-  const documentRegex = /^[0-9]{8,10}$/; // 8 a 10 dígitos numéricos
-  const nameRegex = /^[A-ZÑa-zñ\s]+$/; // Solo letras y espacios
-  const lastNameRegex = /^[A-ZÑa-zñ\s]+$/; // Solo letras y espacios
+  const documentRegex = /^[0-9]{8,10}$/; 
+  const nameRegex = /^[A-ZÑa-zñ\s]+$/;
+  const lastNameRegex = /^[A-ZÑa-zñ\s]+$/; 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-  const passwordRegex = /^(?=.[A-Z])(?=.[a-z])(?=.\d)(?=.[!@#$%^&()_+])[A-Za-z\d!@#$%^&()_+]{8,}$/; // Mínimo 8 caracteres, al menos una mayúscula, una minúscula, un número y un símbolo
-  const phoneRegex = /^\d{10}$/; // 10 dígitos numéricos
+  const passwordRegex = /^(?=.[A-Z])(?=.[a-z])(?=.\d)(?=.[!@#$%^&()_+])[A-Za-z\d!@#$%^&()_+]{8,}$/; 
+  const phoneRegex = /^\d{10}$/; 
 
   // Reset error messages
   errorMessagesDiv.textContent = '';
@@ -74,7 +79,7 @@ function validateForm() {
     // ... (código existente para mostrar mensaje de error)
   } else if (!documentRegex.test(documentField.value)) {
     documentField.classList.add('is-invalid');
-    errorMessagesDiv.textContent += 'El documento debe tener entre 8 y 10 dígitos.\n';
+    errorMessagesDiv.textContent += 'The document must be between 8 and 10 digits.\n';
     return false;
   }
 
@@ -83,7 +88,7 @@ function validateForm() {
     // ... (código existente para mostrar mensaje de error)
   } else if (!nameRegex.test(nameField.value)) {
     nameField.classList.add('is-invalid');
-    errorMessagesDiv.textContent += 'El nombre solo puede contener letras y espacios.\n';
+    errorMessagesDiv.textContent += 'The name can only contain letters and spaces.\n';
     return false;
   }
 
@@ -92,7 +97,7 @@ function validateForm() {
     // ... (código existente para mostrar mensaje de error)
   } else if (!lastNameRegex.test(lastNameField.value)) {
     lastNameField.classList.add('is-invalid');
-    errorMessagesDiv.textContent += 'El nombre solo puede contener letras y espacios.\n';
+    errorMessagesDiv.textContent += 'The name can only contain letters and spaces.\n';
     return false;
   }
 
@@ -101,25 +106,17 @@ function validateForm() {
       // ... (código existente para mostrar mensaje de error)
     } else if (!emailRegex.test(emailField.value)) {
       emailField.classList.add('is-invalid');
-      errorMessagesDiv.textContent += 'La contraseña debe tener @.com.\n';
+      errorMessagesDiv.textContent += 'The password must have @.com.\n';
       return false;
     }
   
-    // Validación del campo password
-    if (!passwordField.value.trim()) {
-      // ... (código existente para mostrar mensaje de error)
-    } else if (!passwordRegex.test(passwordField.value)) {
-      passwordField.classList.add('is-invalid');
-      errorMessagesDiv.textContent += 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.\n';
-      return false;
-    }
 
     // Validación del campo phone_number
     if (!phoneNumberField.value.trim()) {
       // ... (código existente para mostrar mensaje de error)
     } else if (!phoneRegex.test(phoneNumberField.value)) {
       phoneNumberField.classList.add('is-invalid');
-      errorMessagesDiv.textContent += 'El número de teléfono debe tener 10 dígitos.\n';
+      errorMessagesDiv.textContent += 'The phone number must be 10 digits long.\n';
       return false;
     }
 
@@ -140,6 +137,13 @@ function postErrorAlert(error){
   Swal.fire({
       icon: "error",
       title: error || "Error creating user",
+      allowOutsideClick: false
+  });
+};
+
+function userCreated(){
+  Swal.fire({
+      title: "User created successfully",
       allowOutsideClick: false
   });
 };
