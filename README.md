@@ -6,15 +6,17 @@ This is the result of the final project of the subject "Software construction pr
 
 ## Table of contents
 
-- Demo
-- Features
-- Intallation Step
-- The process
-  - Built with
-  - Structure
-- Useful resources
-- License
-- Authors
+- [PetCare](#petcare)
+  - [Table of contents](#table-of-contents)
+  - [Demo](#demo)
+  - [Features](#features)
+  - [Installation steps](#installation-steps)
+  - [The process](#the-process)
+    - [Build with](#build-with)
+    - [Structure](#structure)
+  - [Useful resources](#useful-resources)
+  - [License](#license)
+  - [Authors](#authors)
 
 ## Demo
 
