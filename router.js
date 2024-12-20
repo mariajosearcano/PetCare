@@ -136,6 +136,9 @@ router.put('/putPasswordAdministrator', administratorController.putPasswordAdmin
 //change password
 router.put('/putPassword', passwordController.putPassword);
 
+//logOut
+router.get('/logOut', sessionController.logOut);
+
 
 
 module.exports = router;

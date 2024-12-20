@@ -39,9 +39,16 @@ function roleValidator(req, res, next){
     next();
 }
 
+function logOut(req, res){
+    res.clearCookie('document');
+    res.clearCookie('role');
+    return res.redirect('/home');
+}
+
 
 
 module.exports = {
     getUserDocument,
-    roleValidator
+    roleValidator,
+    logOut
 }
