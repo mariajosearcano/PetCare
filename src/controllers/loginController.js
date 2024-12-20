@@ -27,7 +27,8 @@ function login(req, res) {
                     res.status(500).send('Error al iniciar sesión');
                 } else if (results.length > 0) {
                     const user = results[0];
-                    res.cookie('document', user.document); // para la simulacion de autenticacion
+                    res.cookie('document', user.document, { maxAge: 60 * 60 * 1000 });
+                    res.cookie('role', user.source_table, { maxAge: 60 * 60 * 1000 });
                     console.log('Usuario encontrado:', user);
 
                     const tableName = user.source_table;

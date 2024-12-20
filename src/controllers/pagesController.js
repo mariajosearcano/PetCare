@@ -22,6 +22,10 @@ function getPassword(req, res) {
     res.sendFile(path.join(__dirname, '../html/password.html'));
 }
 
+function get404(req, res) {
+    res.sendFile(path.join(__dirname, '../html/404.html'));
+}
+
 
 //administrator
 function getAdmin(req, res) {
@@ -62,6 +66,10 @@ function getMedicalRecord(req, res) {
     res.sendFile(path.join(__dirname, '../html/medicalRecord.html'));
 }
 
+function getChangePasswordPetOwner(req, res) {
+    res.sendFile(path.join(__dirname, '../html/changePasswordPetOwner.html'));
+}
+
 
 // veterinarian
 function getVeterinarians(req, res) {
@@ -80,14 +88,20 @@ function getScheduleAppointmentVeterinarian(req, res) {
     res.sendFile(path.join(__dirname, '../html/scheduleAppointmentVeterinarian.html'));
 }
 
+function getChangePasswordVeterinarian(req, res) {
+    res.sendFile(path.join(__dirname, '../html/changePasswordVeterinarian.html'));
+}
+
 
 
 module.exports = {
+    //general
     getHome,
     getManageMedicinesVeterinarian,
     getLogin,
     getFormsPetOwner,
     getPassword,
+    get404,
     //administrator
     getAdmin,
     getManageUsers,
@@ -99,9 +113,11 @@ module.exports = {
     getManagePet,
     getScheduleAppointment,
     getMedicalRecord,
+    getChangePasswordPetOwner,
     //veterinarian
     getVeterinarians,
     getTreatment,
     getregisterPetOwner,
-    getScheduleAppointmentVeterinarian
+    getScheduleAppointmentVeterinarian,
+    getChangePasswordVeterinarian
 }

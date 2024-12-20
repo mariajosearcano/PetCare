@@ -18,8 +18,8 @@ const registermedicineController = require('./src/controllers/registermedicineCo
 const availableController = require('./src/controllers/availableController');
 const photoController = require('./src/controllers/photoController');
 const administratorController = require('./src/controllers/administratorController');
-
 const medicalRecord = require('./src/controllers/medicalRecord');
+const sessionController = require('./src/controllers/sessionController');
 
 
 
@@ -27,25 +27,28 @@ const medicalRecord = require('./src/controllers/medicalRecord');
 
 router.get('/home', pagesController.getHome);
 router.get('/login', pagesController.getLogin);
+router.get('/404', pagesController.get404);
 
 ////admin
-router.get('/admin', pagesController.getAdmin);
-router.get('/manageUsers', pagesController.getManageUsers);
-router.get('/manageMedicines', pagesController.getManageMedicines);
-router.get('/manageSchedules', pagesController.getManageSchedules);
-router.get('/changePasswordAdministrator', pagesController.getChangePasswordAdministrator);
+router.get('/admin', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getAdmin);
+router.get('/manageUsers', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getManageUsers);
+router.get('/manageMedicines', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getManageMedicines);
+router.get('/manageSchedules', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getManageSchedules);
+router.get('/changePasswordAdministrator', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getChangePasswordAdministrator);
 
 ////pet owner
-router.get('/petOwner', pagesController.getPetOwner);
-router.get('/managePet', pagesController.getManagePet);
-router.get('/scheduleAppointment', pagesController.getScheduleAppointment);
-router.get('/medicalRecord', pagesController.getMedicalRecord);
+router.get('/petOwner', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getPetOwner);
+router.get('/managePet', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getManagePet);
+router.get('/scheduleAppointment', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getScheduleAppointment);
+router.get('/medicalRecord', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getMedicalRecord);
+router.get('/changePasswordPetOwner', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getChangePasswordPetOwner);
 
 ////veterinarian
-router.get('/veterinarian', pagesController.getVeterinarians);
-router.get('/treatment', pagesController.getTreatment);
-router.get('/registerPetOwner', pagesController.getregisterPetOwner);
-router.get('/scheduleAppointmentVeterinarian', pagesController.getScheduleAppointmentVeterinarian);
+router.get('/veterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getVeterinarians);
+router.get('/treatment', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getTreatment);
+router.get('/registerPetOwner', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getregisterPetOwner);
+router.get('/scheduleAppointmentVeterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getScheduleAppointmentVeterinarian);
+router.get('/changePasswordVeterinarian', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getChangePasswordVeterinarian);
 
 
 // funcionalidades
