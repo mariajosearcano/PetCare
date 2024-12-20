@@ -4,9 +4,9 @@ const {encryptPassword} = require("./passwordController");
 
 
 function getAdministrator(req, res) {
-    const administrator_document = req.cookies.document;
+    let document = req.cookies.document;
 
-    if (!administrator_document) {
+    if (!document) {
         return res.status(400).json({ error: 'Missing Administrator document cookie' });
     }
 
@@ -14,7 +14,7 @@ function getAdministrator(req, res) {
         SELECT * FROM clinic_administrator WHERE document = ?
     `;
 
-    connection.query(sql, [administrator_document], (err, result) => {
+    connection.query(sql, [document], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Error getting Administrator' });

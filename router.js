@@ -57,6 +57,8 @@ router.get('/getPetOwners', petOwnerController.getPetOwners);
 router.put('/putPetOwner', petOwnerController.putPetOwner);
 router.delete('/deletePetOwner', petOwnerController.deletePetOwner);
 router.get('/getMedicalRecord', medicalRecord.getMedicalRecord);
+router.get('/getPetOwner', petOwnerController.getPetOwner);
+router.put('/putPasswordPetOwner', petOwnerController.putPasswordPetOwner);
 
 //// veterinarian
 router.post('/postVeterinarian', veterinarianController.postVeterinarian);
@@ -65,6 +67,8 @@ router.get('/getOneVeterinarian/:name', veterinarianController.getOneVeterinaria
 router.get('/getVeterinarian/:specialty/:day/:start_hour', veterinarianController.getVeterinarianBySpecialty);
 router.put('/putVeterinarian', veterinarianController.putVeterinarian);
 router.delete('/deleteVeterinarian', veterinarianController.deleteVeterinarian);
+router.get('/getVeterinarian', veterinarianController.getVeterinarian);
+router.put('/putPasswordVeterinarian', veterinarianController.putPasswordVeterinarian);
 
 //// medicine
 router.get('/getMedicines', medicineController.getMedicines);

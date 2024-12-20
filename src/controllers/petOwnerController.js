@@ -120,11 +120,68 @@ async function deletePetOwner(req, res) {
     });
 }
 
+function getPetOwner(req, res) {
+    const document = req.cookies.document;
+
+    if (!document) {
+        return res.status(400).json({ error: 'Missing Pet Owner document cookie' });
+    }
+
+    const sql = `
+        SELECT * FROM pet_owner WHERE document = ?
+    `;
+
+    connection.query(sql, [document], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error getting Pet Owner' });
+        }
+
+        return res.json(result[0]);
+    });
+}
+
+function putPasswordPetOwner(req, res) {
+    const { document, password } = req.body;
+
+    const sql = `
+        UPDATE pet_owner
+        SET password = ?
+        WHERE document = ?
+    `;
+
+    encryptPassword(password)
+        .then(encryptedPassword => {
+             if (!encryptedPassword) {
+                return res.status(500).send('Error encrypting password');
+            }
+
+            connection.query(sql, [encryptedPassword, document], (err, result) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({error: 'Error changing password'});
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(400).json({error: 'There was an error trying to change the password'});
+                }
+
+                return res.json({message: 'Password changed successfully'});
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            res.status(500).send('Error changing password');
+        });
+}
+
 
 
 module.exports = {
     postPetOwner,
     getPetOwners,
     putPetOwner,
-    deletePetOwner
+    deletePetOwner,
+    getPetOwner,
+    putPasswordPetOwner
 }
