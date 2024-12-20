@@ -14,7 +14,7 @@ This is the result of the final project of the subject "Software construction pr
   - Structure
 - Useful resources
 - License
-- Author
+- Authors
 
 ## Demo
 
@@ -90,3 +90,19 @@ Main modules:
 
 ### Structure
 
+![structure](assets/structure.png)
+
+## Useful resources
+
+- [Figma](https://www.figma.com/files/team/1408666051855170706/recents-and-sharing?fuid=1232352955593394028) - Used to create graphics
+- [Cloudinary](https://cloudinary.com) - SaaS cloud
+
+## License
+
+Without license
+
+## Authors
+
+- Manuela Diaz Arboleda
+- Maria Jose Arcila
+- David Correa Posada
