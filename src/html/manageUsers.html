@@ -25,26 +25,27 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/admin">
-                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh" class="d-inline-block align-text-top">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh"
+                        class="d-inline-block align-text-top">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="/manageUsers">Manage Users</a>
+                        <a class="nav-link active"  href="/manageUsers">Manage Users</a>
                         <a class="nav-link" href="/manageMedicines">Manage Medicines</a>
                         <a class="nav-link" href="/manageSchedules">Manage Schedules</a>
-                        <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
-                        <a class="nav-link" href="/generateReports">Reports</a>
-                        <a class="nav-link" href="/logOut">Administrator</a>
-                        <a class="nav-link" href="/home">
-                            <img src="/assets/exit.png" alt="Exit" width="30" height="30">
-                        </a>
+                        <div class="collapse navbar-collapse" id="navbarExample01">
+                            <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30"
+                                    height="30"></a>
+                        </div>
                     </div>
                 </div>
             </div>
-          </nav>
+        </nav>
 
         <!-- Jumbotron -->
         <div class="p-5 text-center bg-body-tertiary"
@@ -63,8 +64,8 @@
                     <!-- carousel -->
                     <div id="carousel" class="carousel slide small-carousel">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
@@ -152,13 +153,15 @@
                     <!-- collapse content register Users -->
                     <div class="collapse envelope" id="collapsePostPetOwner">
                         <div class="text-start p-5">
-                            <form class="row g-3 needs-validation" id="postFormPetOwner" onsubmit="return false" novalidate>
+                            <form class="row g-3 needs-validation" id="postFormPetOwner" onsubmit="return false"
+                                novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postDocumentPetOwner" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="postDocumentPetOwner" aria-describedby="postDocumentHelp" name="document" required
+                                    <input type="text" class="form-control" id="postDocumentPetOwner"
+                                        aria-describedby="postDocumentHelp" name="document" required
                                         placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid document ID (only numbers, 6-20 digits)
@@ -166,39 +169,46 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postNamePetOwner" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="postNamePetOwner" aria-describedby="postNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="postNamePetOwner"
+                                        aria-describedby="postNameHelp" name="name" required placeholder="Enter Name"
+                                        minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postLastNamePetOwner" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="postLastNamePetOwner" aria-describedby="postlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="postLastNamePetOwner"
+                                        aria-describedby="postlastNameHelp" name="last_name" required
+                                        placeholder="Enter Last Name" minlength="2" maxlength="50"
+                                        pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid last name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="postEmailPetOwner" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="postEmailPetOwner" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
+                                    <input type="email" class="form-control" id="postEmailPetOwner"
+                                        aria-describedby="postEmailHelp" name="email" required placeholder="Enter Email"
+                                        pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="postPasswordPetOwner" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="postPasswordPetOwner" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
+                                    <input type="password" class="form-control" id="postPasswordPetOwner"
+                                        name="password" required placeholder="Enter Password"
+                                        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
+                                        Password must be 8 to 20 characters long and must have at least one uppercase
+                                        letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="postPhoneNumberPetOwner" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="postPhoneNumberPetOwner" aria-describedby="postPhoneHelp" name="phone_number" required
+                                    <input type="tel" class="form-control" id="postPhoneNumberPetOwner"
+                                        aria-describedby="postPhoneHelp" name="phone_number" required
                                         placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid phone number (10-15 digits)
@@ -206,7 +216,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="postInvalidCheckPetOwner" required>
+                                        <input class="form-check-input" type="checkbox" id="postInvalidCheckPetOwner"
+                                            required>
                                         <label class="form-check-label" for="postInvalidCheckPetOwner">
                                             * Agree to terms and conditions
                                         </label>
@@ -216,12 +227,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButtonPetOwner" onclick="handlePostSubmitPetOwner()">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false"
+                                        id="postButtonPetOwner" onclick="handlePostSubmitPetOwner()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePostPetOwner" aria-expanded="false"
-                                        aria-controls="collapsePostPetOwner" id="cancelPostButtonPetOwner" onclick="postCancelAlert()">
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsePostPetOwner"
+                                        aria-expanded="false" aria-controls="collapsePostPetOwner"
+                                        id="cancelPostButtonPetOwner" onclick="postCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -233,13 +246,15 @@
 
                     <div class="collapse envelope" id="collapsePostVeterinarian">
                         <div class="text-start p-5">
-                            <form class="row g-3 needs-validation" id="postFormVeterinarian" onsubmit="return false" novalidate>
+                            <form class="row g-3 needs-validation" id="postFormVeterinarian" onsubmit="return false"
+                                novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postDocumentVeterinarian" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="postDocumentVeterinarian" aria-describedby="postDocumentHelp" name="document" required
+                                    <input type="text" class="form-control" id="postDocumentVeterinarian"
+                                        aria-describedby="postDocumentHelp" name="document" required
                                         placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid document ID (only numbers, 6-20 digits)
@@ -247,39 +262,46 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postNameVeterinarian" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="postNameVeterinarian" aria-describedby="postNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="postNameVeterinarian"
+                                        aria-describedby="postNameHelp" name="name" required placeholder="Enter Name"
+                                        minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="postLastNameVeterinarian" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="postLastNameVeterinarian" aria-describedby="postlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="postLastNameVeterinarian"
+                                        aria-describedby="postlastNameHelp" name="last_name" required
+                                        placeholder="Enter Last Name" minlength="2" maxlength="50"
+                                        pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid last name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="postEmailVeterinarian" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="postEmailVeterinarian" aria-describedby="postEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
+                                    <input type="email" class="form-control" id="postEmailVeterinarian"
+                                        aria-describedby="postEmailHelp" name="email" required placeholder="Enter Email"
+                                        pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="postPasswordVeterinarian" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="postPasswordVeterinarian" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
+                                    <input type="password" class="form-control" id="postPasswordVeterinarian"
+                                        name="password" required placeholder="Enter Password"
+                                        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
+                                        Password must be 8 to 20 characters long and must have at least one uppercase
+                                        letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="postPhoneNumberVeterinarian" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="postPhoneNumberVeterinarian" aria-describedby="postPhoneHelp" name="phone_number" required
+                                    <input type="tel" class="form-control" id="postPhoneNumberVeterinarian"
+                                        aria-describedby="postPhoneHelp" name="phone_number" required
                                         placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid phone number (10-15 digits)
@@ -296,12 +318,13 @@
                                         <option value="neurologist">Neurologist</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                      Please select a valid specialty
+                                        Please select a valid specialty
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="postInvalidCheckVeterinarian" required>
+                                        <input class="form-check-input" type="checkbox"
+                                            id="postInvalidCheckVeterinarian" required>
                                         <label class="form-check-label" for="postInvalidCheckVeterinarian">
                                             * Agree to terms and conditions
                                         </label>
@@ -311,12 +334,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="postButtonVeterinarian" onclick="handlePostSubmitVeterinarian()">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false"
+                                        id="postButtonVeterinarian" onclick="handlePostSubmitVeterinarian()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePostVeterinarian" aria-expanded="false"
-                                        aria-controls="collapsePostVeterinarian" id="cancelPostButtonVeterinarian" onclick="postCancelAlert()">
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsePostVeterinarian"
+                                        aria-expanded="false" aria-controls="collapsePostVeterinarian"
+                                        id="cancelPostButtonVeterinarian" onclick="postCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -330,18 +355,18 @@
                         <div class="text-start p-5">
                             <table class="table table-striped">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">Document</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Last name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone number</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Document</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Last name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone number</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
                                 </thead>
                                 <tbody id="petOwnerTableBody">
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -351,19 +376,19 @@
                         <div class="text-start p-5">
                             <table class="table table-striped">
                                 <thead>
-                                  <tr>
-                                      <th scope="col">Document</th>
-                                      <th scope="col">Name</th>
-                                      <th scope="col">Last name</th>
-                                      <th scope="col">Email</th>
-                                      <th scope="col">Phone number</th>
-                                      <th scope="col">Specialty</th>
-                                      <th scope="col"></th>
-                                      <th scope="col"></th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Document</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Last name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone number</th>
+                                        <th scope="col">Specialty</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
                                 </thead>
                                 <tbody id="veterinarianTableBody">
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -374,13 +399,15 @@
                     <div class="collapse envelope" id="collapsePutPetOwner">
                         <div class="text-start p-5">
                             <!-- form register Users -->
-                            <form class="row g-3 needs-validation" id="putFormPetOwner" onsubmit="return false" novalidate>
+                            <form class="row g-3 needs-validation" id="putFormPetOwner" onsubmit="return false"
+                                novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putDocumentPetOwner" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="putDocumentPetOwner" aria-describedby="putDocumentHelp" name="document" required
+                                    <input type="text" class="form-control" id="putDocumentPetOwner"
+                                        aria-describedby="putDocumentHelp" name="document" required
                                         placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid document ID (only numbers, 6-20 digits)
@@ -388,39 +415,46 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putNamePetOwner" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="putNamePetOwner" aria-describedby="putNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="putNamePetOwner"
+                                        aria-describedby="putNameHelp" name="name" required placeholder="Enter Name"
+                                        minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putLastNamePetOwner" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="putLastNamePetOwner" aria-describedby="putlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="putLastNamePetOwner"
+                                        aria-describedby="putlastNameHelp" name="last_name" required
+                                        placeholder="Enter Last Name" minlength="2" maxlength="50"
+                                        pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid last name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="putEmailPetOwner" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="putEmailPetOwner" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
+                                    <input type="email" class="form-control" id="putEmailPetOwner"
+                                        aria-describedby="putEmailHelp" name="email" required placeholder="Enter Email"
+                                        pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="putPasswordPetOwner" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="putPasswordPetOwner" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
+                                    <input type="password" class="form-control" id="putPasswordPetOwner" name="password"
+                                        required placeholder="Enter Password"
+                                        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
+                                        Password must be 8 to 20 characters long and must have at least one uppercase
+                                        letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="putPhoneNumberPetOwner" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="putPhoneNumberPetOwner" aria-describedby="putPhoneHelp" name="phone_number" required
+                                    <input type="tel" class="form-control" id="putPhoneNumberPetOwner"
+                                        aria-describedby="putPhoneHelp" name="phone_number" required
                                         placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid phone number (10-15 digits)
@@ -428,7 +462,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="putInvalidCheckPetOwner" required>
+                                        <input class="form-check-input" type="checkbox" id="putInvalidCheckPetOwner"
+                                            required>
                                         <label class="form-check-label" for="putInvalidCheckPetOwner">
                                             * Agree to terms and conditions
                                         </label>
@@ -438,12 +473,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putButtonPetOwner" onclick="handlePutSubmitPetOwner()">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false"
+                                        id="putButtonPetOwner" onclick="handlePutSubmitPetOwner()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePutPetOwner" aria-expanded="false"
-                                        aria-controls="collapsePutPetOwner" id="cancelPutButtonPetOwner" onclick="putCancelAlert()">
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsePutPetOwner"
+                                        aria-expanded="false" aria-controls="collapsePutPetOwner"
+                                        id="cancelPutButtonPetOwner" onclick="putCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -455,13 +492,15 @@
                     <div class="collapse envelope" id="collapsePutVeterinarian">
                         <div class="text-start p-5">
                             <!-- form register Users -->
-                            <form class="row g-3 needs-validation" id="putFormVeterinarian" onsubmit="return false" novalidate>
+                            <form class="row g-3 needs-validation" id="putFormVeterinarian" onsubmit="return false"
+                                novalidate>
                                 <div class="form-text">
                                     <em>* Required Fields</em>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putDocumentVeterinarian" class="form-label">* Document</label>
-                                    <input type="text" class="form-control" id="putDocumentVeterinarian" aria-describedby="putDocumentHelp" name="document" required
+                                    <input type="text" class="form-control" id="putDocumentVeterinarian"
+                                        aria-describedby="putDocumentHelp" name="document" required
                                         placeholder="Enter Document ID" minlength="6" maxlength="20" pattern="^[0-9]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid document ID (only numbers, 6-20 digits)
@@ -469,39 +508,46 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putNameVeterinarian" class="form-label">* Name</label>
-                                    <input type="text" class="form-control" id="putNameVeterinarian" aria-describedby="putNameHelp" name="name" required
-                                        placeholder="Enter Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="putNameVeterinarian"
+                                        aria-describedby="putNameHelp" name="name" required placeholder="Enter Name"
+                                        minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="putLastNameVeterinarian" class="form-label">* Last name</label>
-                                    <input type="text" class="form-control" id="putLastNameVeterinarian" aria-describedby="putlastNameHelp" name="last_name" required
-                                        placeholder="Enter Last Name" minlength="2" maxlength="50" pattern="^[A-Za-z\s]+$">
+                                    <input type="text" class="form-control" id="putLastNameVeterinarian"
+                                        aria-describedby="putlastNameHelp" name="last_name" required
+                                        placeholder="Enter Last Name" minlength="2" maxlength="50"
+                                        pattern="^[A-Za-z\s]+$">
                                     <div class="invalid-feedback">
                                         Please enter a valid last name (only letters, 2-50 characters)
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="putEmailVeterinarian" class="form-label">* Email address</label>
-                                    <input type="email" class="form-control" id="putEmailVeterinarian" aria-describedby="putEmailHelp" name="email" required
-                                        placeholder="Enter Email" pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
+                                    <input type="email" class="form-control" id="putEmailVeterinarian"
+                                        aria-describedby="putEmailHelp" name="email" required placeholder="Enter Email"
+                                        pattern="^[A-Za-z0-9._\+\-]+@[A-Za-z0-9._\+\-]+\.[A-Za-z]{2,}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="putPasswordVeterinarian" class="form-label">* Password</label>
-                                    <input type="password" class="form-control" id="putPasswordVeterinarian" name="password" required
-                                        placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
+                                    <input type="password" class="form-control" id="putPasswordVeterinarian"
+                                        name="password" required placeholder="Enter Password"
+                                        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\+._\-])(?=.*[0-9])[A-Za-z\d!@#$%&\+._\-]{8,20}$">
                                     <div class="invalid-feedback">
-                                        Password must be 8 to 20 characters long and must have at least one uppercase letter, one lowercase letter, one number and one special character
+                                        Password must be 8 to 20 characters long and must have at least one uppercase
+                                        letter, one lowercase letter, one number and one special character
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="putPhoneNumberVeterinarian" class="form-label">* Phone number</label>
-                                    <input type="tel" class="form-control" id="putPhoneNumberVeterinarian" aria-describedby="putPhoneHelp" name="phone_number" required
+                                    <input type="tel" class="form-control" id="putPhoneNumberVeterinarian"
+                                        aria-describedby="putPhoneHelp" name="phone_number" required
                                         placeholder="Enter Phone Number" pattern="^[0-9]{10,15}$">
                                     <div class="invalid-feedback">
                                         Please enter a valid phone number (10-15 digits)
@@ -518,12 +564,13 @@
                                         <option value="neurologist">Neurologist</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                      Please select a valid specialty
+                                        Please select a valid specialty
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="putInvalidCheckVeterinarian" required>
+                                        <input class="form-check-input" type="checkbox" id="putInvalidCheckVeterinarian"
+                                            required>
                                         <label class="form-check-label" for="putInvalidCheckVeterinarian">
                                             * Agree to terms and conditions
                                         </label>
@@ -533,12 +580,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false" id="putButtonVeterinarian" onclick="handlePutSubmitVeterinarian()">
+                                    <button class="btn btn-info btn-lg edit-btn" type="button" aria-expanded="false"
+                                        id="putButtonVeterinarian" onclick="handlePutSubmitVeterinarian()">
                                         Submit
                                     </button>
-                                    <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapsePutVeterinarian" aria-expanded="false"
-                                        aria-controls="collapsePutVeterinarian" id="cancelPutButtonVeterinarian" onclick="putCancelAlert()">
+                                    <button class="btn btn-danger btn-lg edit-btn" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsePutVeterinarian"
+                                        aria-expanded="false" aria-controls="collapsePutVeterinarian"
+                                        id="cancelPutButtonVeterinarian" onclick="putCancelAlert()">
                                         Cancel
                                     </button>
                                 </div>
@@ -554,7 +603,7 @@
 
         <button id="whatsapp-icon">
             <a href="https://wa.link/3spfot">
-              <img src="/assets/whatsapp-icon.jpg" alt="">
+                <img src="/assets/whatsapp-icon.jpg" alt="">
             </a>
         </button>
 

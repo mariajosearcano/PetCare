@@ -25,19 +25,23 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/admin">
-                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh" class="d-inline-block align-text-top">
+                    <img src="/assets/circle-logo.png" alt="Logo" width="50vw" height="50vh"
+                        class="d-inline-block align-text-top">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                    <a class="nav-link" href="/manageUsers">Manage Users</a>
-                    <a class="nav-link active" aria-current="page" href="/manageMedicines">Manage Medicines</a>
-                    <a class="nav-link" href="/manageAppointments">Manage Appointments</a>
-                    <a class="nav-link" href="/generateReports">Reports</a>
-                    <a class="nav-link" href="/logOut">Administrator</a>
-                    <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30" height="30"></a>
+                        <a class="nav-link" href="/manageUsers">Manage Users</a>
+                        <a class="nav-link active" href="/manageMedicines">Manage Medicines</a>
+                        <a class="nav-link" href="/manageSchedules">Manage Schedules</a>
+                        <div class="collapse navbar-collapse" id="navbarExample01">
+                            <a class="nav-link" href="/home"><img src="/assets/exit.png" alt="Exit" width="30"
+                                    height="30"></a>
+                        </div>
 
                     </div>
                 </div>
@@ -61,8 +65,8 @@
                     <!-- carousel -->
                     <div id="carousel" class="carousel slide small-carousel">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
                                 aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
@@ -115,8 +119,8 @@
                     <!-- collapse button register User -->
                     <p class="d-inline-flex gap-1">
                         <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseRegisterMedicine" aria-expanded="false"
-                                aria-controls="collapseRegisterMedicine" onclick="get('medicines')">
+                            data-bs-target="#collapseRegisterMedicine" aria-expanded="false"
+                            aria-controls="collapseRegisterMedicine" onclick="get('medicines')">
                             Register Medicine
                         </button>
                     </p>
@@ -131,7 +135,7 @@
                     </p>
 
                     <!-- collapse button delete Medicines -->
-                                         <!-- <p class="d-inline-flex gap-1">
+                    <!-- <p class="d-inline-flex gap-1">
                                             <button class="btn btn-info btn-lg" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseDeleteMedicine" aria-expanded="false"
                                                 aria-controls="collapseDeleteMedicine" onclick="deleteMedicine ('/deleteMedicine')">
@@ -150,42 +154,45 @@
                     </p>
 
                     <!-- collapse content register Medicine -->
-                    <div class="collapse envelope id="collapseRegisterMedicine">
+                    <div class="collapse envelope id=" collapseRegisterMedicine">
                         <div class="text-start p-5">
-                            <form action="/postMedicine" method="POST">                            <div class="col-md-4">
-                              <label for="inputName" class="form-label">* Medicine name</label>
-                              <input type="text" class="form-control" id="inputName" name="name" required
-                                     pattern="[a-zA-Z0-9\s]+" title="Only letters, numbers, and spaces are allowed">
-                              <div class="invalid-feedback">
-                                Please enter a valid medicine name.
-                              </div>
-                            </div>
+                            <form action="/postMedicine" method="POST">
+                                <div class="col-md-4">
+                                    <label for="inputName" class="form-label">* Medicine name</label>
+                                    <input type="text" class="form-control" id="inputName" name="name" required
+                                        pattern="[a-zA-Z0-9\s]+" title="Only letters, numbers, and spaces are allowed">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid medicine name.
+                                    </div>
+                                </div>
 
-                            <div class="col-md-4">
-                              <label for="inputStock" class="form-label">Stock</label>
-                              <input type="number" class="form-control" id="inputStock" name="stock" required min="0">
-                              <div class="invalid-feedback">
-                                Please enter a valid stock quantity.
-                              </div>
-                            </div>
+                                <div class="col-md-4">
+                                    <label for="inputStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="inputStock" name="stock" required
+                                        min="0">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid stock quantity.
+                                    </div>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary">Register</button>
-                            <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
+                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button class="btn btn-danger btn-lg edit-btn" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapsePostUser" aria-expanded="false"
                                     aria-controls="collapsePostUser" id="cancelPostButton" onclick="postCancelAlert()">
-                              Cancel
-                            </button>
+                                    Cancel
+                                </button>
 
-                          </form>
+                            </form>
                         </div>
-                      </div>
+                    </div>
 
-                      <!-- collapse content view Medicine -->
+                    <!-- collapse content view Medicine -->
 
-                      <div class="collapse table-collapse envelope" id="collapseGetMedicines">
+                    <div class="collapse table-collapse envelope" id="collapseGetMedicines">
                         <div class="d-inline-flex align-items-center">
                             <label for="stock-filter" class="form-label">Filter by Stock Status</label>
-                            <select class="form-select form-select-sm mx-1" aria-label="stock-filter" id="stock-filter" style="width: 150px;" onchange="filterTable()">
+                            <select class="form-select form-select-sm mx-1" aria-label="stock-filter" id="stock-filter"
+                                style="width: 150px;" onchange="filterTable()">
                                 <option selected value="all">All</option>
                                 <option value="with-stock">With Stock</option>
                                 <option value="without-stock">Without Stock</option>
@@ -231,63 +238,63 @@
                     <!-- collapse content search Medicine -->
                     <div class="collapse" id="collapseDeleteMedicine">
                         <div class="card card-body">
-                          <form id="deleteMedicineForm" action="/deleteMedicine" method="DELETE">
-                            <label for="medicineId">ID medicine:</label>
-                            <input type="text" id="medicineId" name="medicineId" required>
-                            <button type="submit">Delete</button>
-                          </form>
-                          <div id="message"></div>
+                            <form id="deleteMedicineForm" action="/deleteMedicine" method="DELETE">
+                                <label for="medicineId">ID medicine:</label>
+                                <input type="text" id="medicineId" name="medicineId" required>
+                                <button type="submit">Delete</button>
+                            </form>
+                            <div id="message"></div>
                         </div>
-                      </div>
+                    </div>
 
 
 
-                      <div class="collapse table-collapse envelope" id="collapseGetPutMedicines">
+                    <div class="collapse table-collapse envelope" id="collapseGetPutMedicines">
                         <div class="d-inline-flex align-items-center">
-                          <div class="text-start p-5">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>ID Medicamento</th>
-                                  <th>Nombre</th>
-                                  <th>Stock</th>
-                                  <th>Acciones</th>
-                                </tr>
-                              </thead>
-                              <tbody id="medicineTableBody">
-                                <script>
-                                  
-async function eliminarMedicamento(medicineId) {
-              if (confirm(`¿Estás seguro de eliminar el medicamento con ID ${medicineId}?`)) {
-                try {
-                    const response = await fetch('/deleteMedicine'); {
-                    method: 'DELETE'
-                  };
+                            <div class="text-start p-5">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Medicamento</th>
+                                            <th>Nombre</th>
+                                            <th>Stock</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="medicineTableBody">
+                                        <script>
 
-                  if (response.ok) {
-                    const row = document.querySelector(`tr[data-medicine-id="${medicineId}"]`);
-                    row.remove();
-                    alert('Medicamento eliminado correctamente');
-                  } else {
-                    alert('Error al eliminar el medicamento');
-                  }
-                } catch (error) {
-                  console.error('Error:', error);
-                }
-              }
-            }
-             // **Función para obtener y mostrar medicamentos**
-            async function getMedicines() {
-              try {
-                const response = await fetch('/getMedicineVet');
-                const data = await response.json();
+                                            async function eliminarMedicamento(medicineId) {
+                                                if (confirm(`¿Estás seguro de eliminar el medicamento con ID ${medicineId}?`)) {
+                                                    try {
+                                                        const response = await fetch('/deleteMedicine'); {
+                                                            method: 'DELETE'
+                                                        };
 
-                const tableBody = document.getElementById('medicineTableBody');
-                tableBody.innerHTML = '';
+                                                        if (response.ok) {
+                                                            const row = document.querySelector(`tr[data-medicine-id="${medicineId}"]`);
+                                                            row.remove();
+                                                            alert('Medicamento eliminado correctamente');
+                                                        } else {
+                                                            alert('Error al eliminar el medicamento');
+                                                        }
+                                                    } catch (error) {
+                                                        console.error('Error:', error);
+                                                    }
+                                                }
+                                            }
+                                            // **Función para obtener y mostrar medicamentos**
+                                            async function getMedicines() {
+                                                try {
+                                                    const response = await fetch('/getMedicineVet');
+                                                    const data = await response.json();
 
-                data.forEach(medicine => {
-                  const row = document.createElement('tr');
-                  row.innerHTML = `
+                                                    const tableBody = document.getElementById('medicineTableBody');
+                                                    tableBody.innerHTML = '';
+
+                                                    data.forEach(medicine => {
+                                                        const row = document.createElement('tr');
+                                                        row.innerHTML = `
                     <td>${medicine.medicine_id}</td>
                     <td>${medicine.name}</td>
                     <td>${medicine.stock}</td>
@@ -296,45 +303,45 @@ async function eliminarMedicamento(medicineId) {
                       <button class="btn btn-danger btn-sm delete-btn" data-medicine-id="${medicine.medicine_id}">Eliminar</button>
                     </td>
                   `;
-                  row.setAttribute('data-medicine-id', medicine.medicine_id);
-                  tableBody.appendChild(row);
-                });
-              } catch (error) {
-                console.error('Error fetching medicines:', error);
-                alert('Error al cargar los medicamentos. Por favor, inténtalo de nuevo más tarde.');
-              }
-            }
+                                                        row.setAttribute('data-medicine-id', medicine.medicine_id);
+                                                        tableBody.appendChild(row);
+                                                    });
+                                                } catch (error) {
+                                                    console.error('Error fetching medicines:', error);
+                                                    alert('Error al cargar los medicamentos. Por favor, inténtalo de nuevo más tarde.');
+                                                }
+                                            }
 
-            // **Agregar event listener a los botones "Eliminar"**
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(button => {
-              button.addEventListener('click',   
- () => {
-                const   
- medicineId = button.dataset.medicineId;
-                eliminarMedicamento(medicineId);
-              });
-            });
+                                            // **Agregar event listener a los botones "Eliminar"**
+                                            const deleteButtons = document.querySelectorAll('.delete-btn');
+                                            deleteButtons.forEach(button => {
+                                                button.addEventListener('click',
+                                                    () => {
+                                                        const
+                                                            medicineId = button.dataset.medicineId;
+                                                        eliminarMedicamento(medicineId);
+                                                    });
+                                            });
 
-            // **Llama a la función getMedicines para cargar los datos**
-            getMedicines();
-          </script>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>                     
-                      
-                               
+                                            // **Llama a la función getMedicines para cargar los datos**
+                                            getMedicines();
+                                        </script>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
 
 
 
-        <button id="whatsapp-icon">
-            <a href="https://wa.link/3spfot">
-              <img src="/assets/whatsapp-icon.jpg" alt="">
-            </a>
-        </button>
+
+
+                    <button id="whatsapp-icon">
+                        <a href="https://wa.link/3spfot">
+                            <img src="/assets/whatsapp-icon.jpg" alt="">
+                        </a>
+                    </button>
 
     </main>
 
@@ -428,4 +435,3 @@ async function eliminarMedicamento(medicineId) {
 </body>
 
 </html>
-
