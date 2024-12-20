@@ -197,6 +197,11 @@ function withoutStockAlert() {
 
 };
 
+// descargar receta
+
+
+
+
 
 // Función asíncrona para obtener los datos de mascotas y manejar eventos
 async function obtenerDatosDeMascotas(url) {
