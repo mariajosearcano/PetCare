@@ -34,8 +34,10 @@ async function postPetOwner(req, res) {
                     return res.status(500).json({error: 'Error inserting Pet owner'});
                 }
 
+
                 console.log('Pet Owner inserted successfully');
-                return res.status(201).json({message: 'Pet owner created successfully'});
+return res.status(201).json({ message: 'Pet owner created successfully' });
+
             });
         })
         .catch(error => {
