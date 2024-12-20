@@ -50,9 +50,15 @@ The pet owner is able to:
 
 1. clone the repository
 2. open the project with your favorite IDE
-3. type "npm start" in the CLI, to start the server
-4. open the website <http://localhost:3007/home> in your browser
-5. enjoy the app
+3. type "npm install" in the CLI to download the necessary modules
+4. type "node node.js" in the CLI, to start the server
+5. open the website <http://localhost:3007/home> in your browser
+6. enjoy the app
+
+Requirements:
+
+- node 12.22.12 or later <https://nodejs.org/es/download/package-manager>
+- npm 6.14.16 or later
 
 ## The process
 
