@@ -26,6 +26,10 @@ function get404(req, res) {
     res.sendFile(path.join(__dirname, '../html/404.html'));
 }
 
+function getChangePassword(req, res) {
+    res.sendFile(path.join(__dirname, '../html/changePassword.html'));
+}
+
 
 //administrator
 function getAdmin(req, res) {
@@ -102,6 +106,7 @@ module.exports = {
     getFormsPetOwner,
     getPassword,
     get404,
+    getChangePassword,
     //administrator
     getAdmin,
     getManageUsers,

@@ -20,6 +20,7 @@ const photoController = require('./src/controllers/photoController');
 const administratorController = require('./src/controllers/administratorController');
 const medicalRecord = require('./src/controllers/medicalRecord');
 const sessionController = require('./src/controllers/sessionController');
+const passwordController = require('./src/controllers/passwordController');
 
 
 
@@ -28,6 +29,7 @@ const sessionController = require('./src/controllers/sessionController');
 router.get('/home', pagesController.getHome);
 router.get('/login', pagesController.getLogin);
 router.get('/404', pagesController.get404);
+router.get('/getChangePassword', pagesController.getChangePassword);
 
 ////admin
 router.get('/admin', sessionController.getUserDocument, sessionController.roleValidator, pagesController.getAdmin);
@@ -130,6 +132,9 @@ router.get('/getAllvaccines', vaccineController.getVaccines);
 //// administrator
 router.get('/getAdministrator', administratorController.getAdministrator);
 router.put('/putPasswordAdministrator', administratorController.putPasswordAdministrator);
+
+//change password
+router.put('/putPassword', passwordController.putPassword);
 
 
 

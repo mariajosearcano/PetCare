@@ -9,7 +9,8 @@ const connection = mysql.createConnection({
     port: process.env.PORT || '50251',
     user: process.env.MYSQLUSER || 'root',
     password: process.env.MYSQL_ROOT_PASSWORD || 'gSaORPcztMEEDuVUhVWDzTtqBJmNajZv',
-    database: process.env.MYSQL_DATABASE || 'railway'
+    database: process.env.MYSQL_DATABASE || 'railway',
+    multipleStatements: true
 });
 
 // establecer la conexión
