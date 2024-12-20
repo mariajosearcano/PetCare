@@ -196,6 +196,11 @@ function withoutStockAlert() {
 
 };
 
+// descargar receta
+
+
+
+
 
 //   async function obtenerDatosDeMascotas(url) {
 //     try {
